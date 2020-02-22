@@ -31,7 +31,7 @@ public class StartActivity extends Activity {
 
                 Log.d(TAG, "StartActivity: Launch screen");
                 //Run the app
-                Intent runApp = new Intent(getApplicationContext(), MainActivity.class);
+                Intent runApp = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(runApp);
                 finish();
 
