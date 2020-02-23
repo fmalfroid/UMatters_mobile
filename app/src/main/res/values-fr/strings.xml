@@ -5,17 +5,8 @@
     <string name="title_activity_tags_setup">TagsSetupActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Paramètres</string>
-
-    <string name="menu_home">Accueil</string>
-    <string name="menu_gallery">Gallerie</string>
-    <string name="menu_slideshow">Diaporama</string>
-    <string name="menu_tools">Outils</string>
-    <string name="menu_share">Partager</string>
-    <string name="menu_send">Envoyer</string>
 
     <string name="pref_previously_started">Previously started</string>
 
@@ -42,4 +33,11 @@
         <item>Philosophie et lettres</item>
         <item>AGE</item>
     </string-array>
+
+    <string name="menu_profile">Profil</string>
+    <string name="menu_subscriptions">Abonnements</string>
+    <string name="menu_tags">Tags</string>
+    <string name="menu_interets">Intérêts</string>
+    <string name="menu_notifications">Push notifications</string>
+    <string name="menu_settings">Paramètres</string>
 </resources>
