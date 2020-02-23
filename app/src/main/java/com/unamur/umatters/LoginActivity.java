@@ -2,6 +2,8 @@ package com.unamur.umatters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +28,24 @@ public class LoginActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent runApp = new Intent(getApplicationContext(), MainActivity.class);
+                Intent runApp;
+
+                //If the previouslyStarted preference is already initialised then launch the MainActivity.
+                //If it isn't, it is the first time opening the app, launch the tags setup activity.
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
+                //App started for the first time
+                if(!previouslyStarted) {
+                    SharedPreferences.Editor edit = prefs.edit();
+                    edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
+                    edit.apply();
+                    runApp = new Intent(getApplicationContext(), TagsSetupActivity.class);
+                }
+                //Not the first time
+                else {
+                    runApp = new Intent(getApplicationContext(), MainActivity.class);
+                }
+
                 startActivity(runApp);
                 //finish();
             }

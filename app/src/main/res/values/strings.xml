@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">UMatters</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_tags_setup">TagsSetupActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -14,9 +15,25 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="pref_previously_started">Previously started</string>
+
     <string name="unamur_logo">unamur logo</string>
     <string name="umatters">UMatters</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
+
+    <string name="tags_setup">Tags setup</string>
+    <string name="tags_setup_explanation">Please choose the tags that interest you the most.\nThis will personalize your user experience.</string>
+    <string-array name="tags_choices">
+        <item>General</item>
+        <item>Computer Science</item>
+        <item>Law</item>
+        <item>Medicine</item>
+        <item>Sciences</item>
+        <item>Economics</item>
+        <item>Arts</item>
+        <item>AGE</item>
+    </string-array>
 </resources>
