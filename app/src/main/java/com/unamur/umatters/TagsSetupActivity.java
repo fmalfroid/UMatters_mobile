@@ -61,7 +61,7 @@ public class TagsSetupActivity extends AppCompatActivity {
                 selectedTags.add(spinner_choice_2.getSelectedItem().toString());
                 selectedTags.add(spinner_choice_3.getSelectedItem().toString());
                 //Save selected tags into BD
-                //TODO
+                //TODO : save tags in DB
                 Toast.makeText(TagsSetupActivity.this, selectedTags.toString(), Toast.LENGTH_SHORT).show();
                 //Run the main activity
                 Intent runMain = new Intent(getApplicationContext(), MainActivity.class);
