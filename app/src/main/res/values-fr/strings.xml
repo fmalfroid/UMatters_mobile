@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">UMatters</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_tags_setup">TagsSetupActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -15,9 +16,30 @@
     <string name="menu_tools">Outils</string>
     <string name="menu_share">Partager</string>
     <string name="menu_send">Envoyer</string>
+
+    <string name="pref_previously_started">Previously started</string>
+
     <string name="unamur_logo">unamur logo</string>
     <string name="umatters">UMatters</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="remember_me">Se souvenir de moi</string>
+    <string name="tags_setup">Initialisation des tags</string>
+    <string name="tags_setup_explanation">Veuillez choisir les tags vous intéressant le plus.\nCela personnalisera votre expérience utilisateur.</string>
+    <string name="name">Nom</string>
+    <string name="date">Date</string>
+    <string name="tags">Tags</string>
+    <string name="question">Question</string>
+    <string name="nb_likes">nb j\'aime</string>
+    <string name="text">Texte</string>
+    <string-array name="tags_choices">
+        <item>Général</item>
+        <item>Informatique</item>
+        <item>Droit</item>
+        <item>Médecine</item>
+        <item>Sciences</item>
+        <item>Économie</item>
+        <item>Philosophie et lettres</item>
+        <item>AGE</item>
+    </string-array>
 </resources>
