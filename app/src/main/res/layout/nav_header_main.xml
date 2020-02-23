@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Fullname"
+        android:text="@string/fullname"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -33,6 +33,6 @@
         android:id="@+id/txt_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Level ..." />
+        android:text="@string/level" />
 
 </LinearLayout>

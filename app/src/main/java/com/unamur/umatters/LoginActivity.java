@@ -1,6 +1,5 @@
 package com.unamur.umatters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -12,7 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
     private FloatingActionButton loginButton;
 

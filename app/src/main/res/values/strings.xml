@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">UMatters</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_tags_setup">TagsSetupActivity</string>
+    <string name="app_name" translatable="false">UMatters</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
+    <string name="title_activity_tags_setup" translatable="false">TagsSetupActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -10,7 +10,7 @@
     <string name="pref_previously_started">Previously started</string>
 
     <string name="unamur_logo">unamur logo</string>
-    <string name="umatters">UMatters</string>
+    <string name="umatters" translatable="false">UMatters</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
@@ -40,4 +40,7 @@
     <string name="menu_interets">Interests</string>
     <string name="menu_notifications">Push notifications</string>
     <string name="menu_settings">Settings</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+    <string name="fullname">Fullname</string>
+    <string name="level">Level ...</string>
 </resources>

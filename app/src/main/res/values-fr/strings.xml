@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">UMatters</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_tags_setup">TagsSetupActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
+    <string name="navigation_drawer_close">Fermer le menu de navigation</string>
+    <string name="nav_header_desc">Entête de navigation</string>
     <string name="action_settings">Paramètres</string>
 
-    <string name="pref_previously_started">Previously started</string>
+    <string name="pref_previously_started">précédemment démarrée</string>
 
     <string name="unamur_logo">unamur logo</string>
-    <string name="umatters">UMatters</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="remember_me">Se souvenir de moi</string>
@@ -38,6 +34,8 @@
     <string name="menu_subscriptions">Abonnements</string>
     <string name="menu_tags">Tags</string>
     <string name="menu_interets">Intérêts</string>
-    <string name="menu_notifications">Push notifications</string>
+    <string name="menu_notifications">Notifications push</string>
     <string name="menu_settings">Paramètres</string>
+    <string name="fullname">Nom complet</string>
+    <string name="level">Niveau ...</string>
 </resources>
