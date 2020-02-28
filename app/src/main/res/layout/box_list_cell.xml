@@ -71,46 +71,56 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
-            android:paddingTop="16dp"
-            android:paddingBottom="10dp">
+            android:padding="10dp"
+            >
 
-            <ImageView
-                android:id="@+id/box_cell_like_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_favorite_grey" />
+                <ToggleButton
+                    android:id="@+id/button_favorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/button_favorite"
+                    android:checked="false"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn=""
+                    />
 
-            <TextView
-                android:id="@+id/box_cell_nb_like"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:text="@string/nb_likes"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/box_cell_nb_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nb_likes"
+                    android:textSize="14sp"
+                    android:layout_marginStart="3dp"
+                    />
 
-            <ImageView
-                android:id="@+id/box_cell_interest_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_interested_grey" />
+
+                <ToggleButton
+                    android:id="@+id/button_interested"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/button_interested"
+                    android:checked="false"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn=""
+                    android:layout_marginStart="10dp"
+                    />
 
             <ImageView
                 android:id="@+id/box_cell_comment_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_comment" />
+                android:src="@drawable/ic_comment"
+                android:layout_gravity="end"
+                />
+
+
         </LinearLayout>
 
     </LinearLayout>
