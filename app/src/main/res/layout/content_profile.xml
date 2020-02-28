@@ -48,7 +48,7 @@
                     <ImageView
                         android:layout_width="22dp"
                         android:layout_height="22dp"
-                        android:src="@drawable/role_student"
+                        android:src="@drawable/role_etudiant"
                         android:layout_gravity="center"
                         />
 

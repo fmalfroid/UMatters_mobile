@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -31,9 +32,10 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box("poll", "Patrick Heymans", "28-02-2020", "Professeur", 60, (List<String>) Arrays.asList("#info", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
-        new Box("yes_no", "Anonyme", "28-02-2020", "Etudiant", 23, (List<String>) Arrays.asList("#Général", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
-        new Box("text", "Florian Malfroid", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#info", "#Matériel"), "Changer les souris du i21", null)
+        new Box("poll", "Patrick Heymans", "28-02-2020", "Academique", 60, (List<String>) Arrays.asList("#info", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
+        new Box("yes_no", "Anonyme", "28-02-2020", "Recteur", 23, (List<String>) Arrays.asList("#Général", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
+        new Box("text", "Florian Malfroid", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#info", "#Matériel"), "Changer les souris du i21", null),
+        new Box("text", "Joséphine AngeGardien", "27-02-2020", "Personnel", 56, (List<String>) Arrays.asList("#Général", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", null)
     );
 
     @Override
@@ -57,6 +59,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
     public class BoxViewHolder extends RecyclerView.ViewHolder {
 
         //Elements
+        private final ImageView role;
         private final TextView name;
         private final TextView date;
         private final LinearLayout tagList;
@@ -72,6 +75,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             super(itemView);
 
             //Recuperation des elements avec leur id
+            role = itemView.findViewById(R.id.img_role);
             name = itemView.findViewById(R.id.box_cell_name);
             date = itemView.findViewById(R.id.box_cell_date);
             tagList = itemView.findViewById(R.id.box_cell_tag_list);
@@ -85,6 +89,21 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
         public void display(Box box) {
             currentBox = box;
+
+            switch (box.getRole()){
+                case "Etudiant":
+                    role.setImageResource(R.drawable.role_etudiant);
+                    break;
+                case "Academique":
+                    role.setImageResource(R.drawable.role_academic);
+                    break;
+                case "Recteur":
+                    role.setImageResource(R.drawable.role_recteur);
+                    break;
+                case "Personnel":
+                    role.setImageResource(R.drawable.role_personnel);
+                    break;
+            }
 
             //Nom de l'utilisateur ayant créé la box
             name.setText(box.getName());

@@ -17,8 +17,20 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp">
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="3dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_role"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/role_etudiant"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="7dp"
+                />
 
             <TextView
                 android:id="@+id/box_cell_name"
@@ -35,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -77,6 +90,8 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:padding="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             >
 
                 <ToggleButton
@@ -113,7 +128,7 @@
                     />
 
             <Space
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
