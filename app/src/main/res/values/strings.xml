@@ -45,4 +45,6 @@
     <string name="title_activity_login" translatable="false">LoginActivity</string>
     <string name="fullname">Fullname</string>
     <string name="level">Level ...</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

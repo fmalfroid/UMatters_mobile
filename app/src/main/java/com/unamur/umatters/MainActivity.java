@@ -7,6 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,6 +37,11 @@ public class MainActivity extends AppCompatActivity
         //Init
         initFAB();
         initNavDrawer(toolbar);
+
+        //Init of the recyclerView
+        final RecyclerView rv = findViewById(R.id.box_list);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(new BoxListAdapter());
     }
 
     @Override

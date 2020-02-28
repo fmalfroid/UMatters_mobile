@@ -90,12 +90,15 @@
                         android:id="@+id/cell_box_nb_vote_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="nb_votes" />
+                        android:layout_weight="1"
+                        android:text="nb_votes"
+                        android:textAlignment="textEnd" />
 
                     <CheckBox
                         android:id="@+id/cell_box_choice_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Choice1" />
 
                 </LinearLayout>
