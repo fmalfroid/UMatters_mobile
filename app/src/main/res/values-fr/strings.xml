@@ -30,6 +30,7 @@
         <item>AGE</item>
     </string-array>
 
+    <string name="menu_home">Home</string>
     <string name="menu_profile">Profil</string>
     <string name="menu_subscriptions">Abonnements</string>
     <string name="menu_tags">Tags</string>
