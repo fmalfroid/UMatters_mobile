@@ -9,12 +9,12 @@
     tools:showIn="@layout/app_bar_popular"
     tools:context=".PopularActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="12dp"
         android:elevation="3dp"
         >
 
@@ -25,28 +25,36 @@
             android:layout_gravity="start"
             android:src="@drawable/ic_arrow_back" />
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/populars"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="5dp"
-            />
+            android:orientation="vertical"
+            >
 
-        <com.unamur.umatters.SpinnerWrapContent
-            android:id="@+id/council_choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:layout_gravity="center_horizontal"
-            style="@android:style/Widget.Holo.Light.Spinner"
-            />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/populars"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                />
 
-    </LinearLayout>
+            <com.unamur.umatters.SpinnerWrapContent
+                android:id="@+id/council_choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_gravity="center_horizontal"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/popular_box_list"
