@@ -48,4 +48,25 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="search">Search</string>
+    <string name="generalTag">#General</string>
+    <string name="CSTag">#Computer Science</string>
+    <string name="LawTag">#Law</string>
+    <string name="medicineTag">#Medicine</string>
+    <string name="scienceTag">#Sciences</string>
+    <string name="EconomicsTag">#Economics</string>
+    <string name="artsTag">#Arts</string>
+    <string name="AGETag">#AGE</string>
+    <string name="populars">Populars</string>
+    <string name="title_activity_popular" translatable="false">PopularActivity</string>
+
+    <string-array name="council_choices">
+        <item>Administration council</item>
+        <item>Computer Science</item>
+        <item>Law</item>
+        <item>Medicine</item>
+        <item>Sciences</item>
+        <item>Economics</item>
+        <item>Arts</item>
+        <item>Political Chamber</item>
+    </string-array>
 </resources>

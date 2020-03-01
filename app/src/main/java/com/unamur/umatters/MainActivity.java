@@ -22,6 +22,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -29,6 +30,8 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ImageView popularbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,15 @@ public class MainActivity extends AppCompatActivity
         initNavDrawer(toolbar);
         initRecyclerView();
 
+        //Popular button
+        popularbtn = findViewById(R.id.btn_popular);
+        popularbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent runApp = new Intent(getApplicationContext(), PopularActivity.class);
+                startActivity(runApp);
+            }
+        });
     }
 
     @Override

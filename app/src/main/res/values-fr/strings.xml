@@ -42,4 +42,24 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="search">Rechercher</string>
+    <string name="generalTag">#Général</string>
+    <string name="AGETag">#AGE</string>
+    <string name="CSTag">#Informatique</string>
+    <string name="EconomicsTag">#Economie</string>
+    <string name="LawTag">#Droit</string>
+    <string name="artsTag">#Philo et lettres</string>
+    <string name="scienceTag">#Sciences</string>
+    <string name="medicineTag">#Médecine</string>
+    <string name="populars">Populaires</string>
+
+    <string-array name="council_choices">
+        <item>Conseil d\'administration</item>
+        <item>Informatique</item>
+        <item>Droit</item>
+        <item>Médecine</item>
+        <item>Sciences</item>
+        <item>Économie</item>
+        <item>Philosophie et lettres</item>
+        <item>Chambre politique</item>
+    </string-array>
 </resources>

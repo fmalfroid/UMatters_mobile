@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewHolder> {
@@ -32,10 +34,10 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box("poll", "Patrick Heymans", "28-02-2020", "Academique", 60, (List<String>) Arrays.asList("#info", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
-        new Box("yes_no", "Anonyme", "28-02-2020", "Recteur", 23, (List<String>) Arrays.asList("#Général", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
-        new Box("text", "Florian Malfroid", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#info", "#Matériel"), "Changer les souris du i21", null),
-        new Box("text", "Joséphine AngeGardien", "27-02-2020", "Personnel", 56, (List<String>) Arrays.asList("#Général", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", null)
+        new Box("poll", "Patrick Heymans", "28-02-2020", "Academique", 60, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
+        new Box("yes_no", "Anonyme", "28-02-2020", "Recteur", 23, (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
+        new Box("text", "Florian Malfroid", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", null),
+        new Box("text", "Joséphine AngeGardien", "27-02-2020", "Personnel", 56, (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", null)
     );
 
     @Override
@@ -88,6 +90,28 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
 
         public void display(Box box) {
+
+            List<String> typesTags = Arrays.asList(
+                "#General",
+                "#Computer Science",
+                "#Law",
+                "#Medicine",
+                "#Sciences",
+                "#Economics",
+                "#Arts",
+                "#AGE"
+            );
+
+            HashMap<String, String> tagTranslation = new HashMap<String, String>();
+            tagTranslation.put("#General", context.getString(R.string.generalTag));
+            tagTranslation.put("#Computer Science", context.getString(R.string.CSTag));
+            tagTranslation.put("#Law", context.getString(R.string.LawTag));
+            tagTranslation.put("#Medicine", context.getString(R.string.medicineTag));
+            tagTranslation.put("#Sciences", context.getString(R.string.scienceTag));
+            tagTranslation.put("#Economics", context.getString(R.string.EconomicsTag));
+            tagTranslation.put("#Arts", context.getString(R.string.artsTag));
+            tagTranslation.put("#AGE", context.getString(R.string.AGETag));
+
             currentBox = box;
 
             switch (box.getRole()){
@@ -115,7 +139,13 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 TextView tag = new TextView(context);
                 tag.setTextSize(12);
                 tag.setText(box.getTags().get(i));
-                tag.setPadding(0,0,5,0);
+                tag.setPadding(0,0,10,0);
+                if (typesTags.contains(box.getTags().get(i))) {
+                    tag.setTextColor(0xFFff6600);
+                    tag.setText(tagTranslation.get(box.getTags().get(i)));
+                } else {
+                    tag.setTextColor(0xFF0066ff);
+                }
 
                 tagList.addView(tag);
                 tagList.invalidate();
