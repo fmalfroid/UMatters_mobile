@@ -13,15 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
 
         <ImageView
             android:id="@+id/pop_go_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"
+            android:layout_gravity="start"
             android:src="@drawable/ic_arrow_back" />
 
         <TextView
@@ -32,14 +32,18 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
 
         <Spinner
             android:id="@+id/council_choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:gravity="end"
+            android:layout_gravity="center_horizontal"
+            />
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

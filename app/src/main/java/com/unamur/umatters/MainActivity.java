@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity
         rv.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-                if ((dy<0 && !fab.isShown()) || dy == RecyclerView.SCROLL_STATE_IDLE) {
+                if (dy<0 && !fab.isShown()) {
                     fab.show();
 
                     search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1)).start();
