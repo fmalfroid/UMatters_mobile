@@ -1,30 +1,23 @@
 package com.unamur.umatters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 public class SpinnerWrapContentAdapter extends BaseAdapter implements SpinnerAdapter {
 
     private List<String> choices;
-    private SpinnerWrapContent spinner;
     private Context context;
 
-    public SpinnerWrapContentAdapter(Context context, SpinnerWrapContent spinner, List<String> choices) {
+    public SpinnerWrapContentAdapter(Context context, List<String> choices) {
         this.choices = choices;
-        this.spinner = spinner;
         this.context = context;
     }
 

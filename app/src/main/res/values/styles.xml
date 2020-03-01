@@ -21,8 +21,4 @@
         <item name="colorControlActivated">@color/darkGreen</item>
     </style>
 
-    <style name="Spinner" parent="android:Widget.Holo.Spinner">
-        <item name="backgroundTint">@color/lightLightGrey</item>
-    </style>
-
 </resources>

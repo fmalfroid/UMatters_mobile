@@ -52,13 +52,8 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
 
         //Init of the spinner
         SpinnerWrapContent council_choice = (SpinnerWrapContent) findViewById(R.id.council_choice);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.council_choices, android.R.layout.simple_spinner_item);
         List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.council_choices)));
-        SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, council_choice, data);
-        // Specify the layout to use when the list of choices appears
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
+        SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
         council_choice.setAdapter(adapter);
 
         //Init of the recyclerView
