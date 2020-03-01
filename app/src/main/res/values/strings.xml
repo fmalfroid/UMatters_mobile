@@ -56,7 +56,7 @@
     <string name="EconomicsTag">#Economics</string>
     <string name="artsTag">#Arts</string>
     <string name="AGETag">#AGE</string>
-    <string name="populars">Populars</string>
+    <string name="populars">Popular</string>
     <string name="title_activity_popular" translatable="false">PopularActivity</string>
 
     <string-array name="council_choices">

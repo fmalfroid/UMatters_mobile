@@ -15,6 +15,7 @@
         android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="10dp"
+        android:elevation="3dp"
         >
 
         <ImageView
@@ -33,15 +34,16 @@
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             />
 
-        <Spinner
+        <com.unamur.umatters.SpinnerWrapContent
             android:id="@+id/council_choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:layout_gravity="center_horizontal"
+            style="@android:style/Widget.Holo.Light.Spinner"
             />
 
     </LinearLayout>
