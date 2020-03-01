@@ -1,5 +1,7 @@
 package com.unamur.umatters;
 
+import android.animation.Animator;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +22,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,11 +44,8 @@ public class MainActivity extends AppCompatActivity
         //Init
         initFAB();
         initNavDrawer(toolbar);
+        initRecyclerView();
 
-        //Init of the recyclerView
-        final RecyclerView rv = findViewById(R.id.box_list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new BoxListAdapter());
     }
 
     @Override
@@ -127,5 +131,79 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+    }
+
+    private void initRecyclerView(){
+
+        final RecyclerView rv = findViewById(R.id.box_list);
+
+        //Init the layout and the adapter of the recycler view
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(new BoxListAdapter());
+
+        //Link the scroll of the recycler view to the fab and the search bar
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        final LinearLayout search_bar = findViewById(R.id.search_bar);
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                if ((dy<0 && !fab.isShown()) || dy == RecyclerView.SCROLL_STATE_IDLE) {
+                    fab.show();
+
+                    search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1)).start();
+                    showViews(search_bar);
+                }
+
+                else if (dy>0 && fab.isShown()) {
+                    fab.hide();
+
+                    hideViews(search_bar);
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+    }
+
+    private void showViews(final LinearLayout search_bar) {
+        // TODO uncomment this Hide Footer in android when Scrolling
+        search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1.4f)).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                search_bar.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                search_bar.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
+    }
+
+    private void hideViews(final LinearLayout search_bar) {
+        // TODO (+mToolbar)  plus means  2 view forward ho jaye or not visible to user
+        search_bar.animate().alpha(0f).translationY(+search_bar.getHeight()).setInterpolator(new AccelerateInterpolator(1.4f)).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                search_bar.setVisibility(View.GONE);
+            }
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
     }
 }

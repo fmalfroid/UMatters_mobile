@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
 
-    <include layout="@layout/search_bar" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/box_list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightLightGrey">
+        android:orientation="vertical"
+        >
 
-    </android.support.v7.widget.RecyclerView>
+        <include layout="@layout/search_bar" />
 
-</LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/box_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/lightLightGrey">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <!-- Floating Button -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/colorPrimary"
+        app:rippleColor="@color/colorPrimaryDark"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
