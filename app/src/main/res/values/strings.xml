@@ -58,6 +58,7 @@
     <string name="AGETag">#AGE</string>
     <string name="populars">Popular</string>
     <string name="title_activity_popular" translatable="false">PopularActivity</string>
+    <string name="title_activity_create_box" translatable="false">CreateBoxActivity</string>
 
     <string-array name="council_choices">
         <item>Administration council</item>
