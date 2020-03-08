@@ -81,6 +81,9 @@
         <item name="#age">#AGE</item>
     </string-array>
     <string name="otherTags">Autres tags :</string>
+    <string name="tooManyChoices">Trop de choix.</string>
+    <string name="choice">Choix</string>
+    <string name="new_choice">Nouveau choix</string>
     <string name="tooManyOtherTags">Trop de tags.</string>
 
     <string name="modify_a_box">Modifier une box</string>

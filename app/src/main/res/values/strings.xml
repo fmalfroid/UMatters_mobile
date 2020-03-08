@@ -58,7 +58,7 @@
     <string name="populars">Popular</string>
     <string name="title_activity_popular" translatable="false">PopularActivity</string>
     <string name="title_activity_create_box" translatable="false">CreateBoxActivity</string>
-    <string name="title_activity_modify_box">title_activity_modify_box</string>
+    <string name="title_activity_modify_box" translatable="false">title_activity_modify_box</string>
 
     <string-array name="council_choices">
         <item>Administration council</item>
@@ -90,6 +90,9 @@
         <item name="#age">#AGE</item>
     </string-array>
     <string name="otherTags">Other tags :</string>
+    <string name="tooManyChoices">Too many choices.</string>
+    <string name="choice">Choice</string>
+    <string name="new_choice">New choice</string>
     <string name="tooManyOtherTags">Too many tags.</string>
 
     <string name="modify_a_box">Modify a box</string>

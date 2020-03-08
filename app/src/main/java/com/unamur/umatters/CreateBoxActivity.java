@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -29,6 +30,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CreateBoxActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    LinearLayout ll_multiple_choices;
+    ImageButton addChoice;
 
     LinearLayout ll_other_tags;
     ImageButton addOtherTag;
@@ -64,6 +68,9 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                 onBackPressed();
             }
         });
+
+        //Init radiogroup box type
+        initBoxTypes();
 
         //Init multiple choice poll
         initMultipleChoice();
@@ -158,8 +165,90 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void initMultipleChoice(){
+    private void initBoxTypes(){
 
+        final LinearLayout multiple_choice_view = findViewById(R.id.multiple_choice_view);
+
+        RadioButton rdbtn_textual = findViewById(R.id.rdbtn_textual);
+        RadioButton rdbtn_yes_no = findViewById(R.id.rdbtn_yes_no);
+        RadioButton rdbtn_multiple_choice = findViewById(R.id.rdbtn_multiple_choice);
+
+        //Textual
+        rdbtn_textual.setChecked(true);
+        rdbtn_textual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                multiple_choice_view.setVisibility(View.GONE);
+            }
+        });
+
+        //Yes-no
+        rdbtn_yes_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                multiple_choice_view.setVisibility(View.GONE);
+            }
+        });
+
+        //Multiple choice
+        rdbtn_multiple_choice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                multiple_choice_view.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void initMultipleChoice(){
+        ll_multiple_choices = findViewById(R.id.ll_multiple_choices);
+        addChoice = findViewById(R.id.imgbtn_add_choice);
+
+        EditText first_choice = findViewById(R.id.first_choice);
+        first_choice.setHint(getString(R.string.choice) + " 1");
+        EditText second_choice = findViewById(R.id.second_choice);
+        second_choice.setHint(getString(R.string.choice) + " 2");
+
+        addChoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //If there is less than 5 choice, you can create a new field
+                if (ll_multiple_choices.getChildCount() < 8){
+
+                    final LinearLayout ll_choice = new LinearLayout(CreateBoxActivity.this);
+                    ll_choice.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    ll_choice.setOrientation(LinearLayout.HORIZONTAL);
+
+                    EditText new_edit_txt = new EditText(CreateBoxActivity.this);
+                    new_edit_txt.setHint(getString(R.string.new_choice));
+                    new_edit_txt.setTextSize(15);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+                    new_edit_txt.setLayoutParams(params);
+
+                    ImageView img_remove = new ImageView(CreateBoxActivity.this);
+                    LinearLayout.LayoutParams params_img = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params_img.gravity = Gravity.CENTER;
+                    img_remove.setLayoutParams(params_img);
+                    img_remove.setImageResource(R.drawable.ic_remove);
+
+                    img_remove.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ll_multiple_choices.removeView(ll_choice);
+                        }
+                    });
+
+                    ll_choice.addView(new_edit_txt);
+                    ll_choice.addView(img_remove);
+                    ll_multiple_choices.addView(ll_choice);
+                }
+                //Else tell the user he has too many choices
+                else {
+                    Toast.makeText(CreateBoxActivity.this, R.string.tooManyChoices, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     private void initOtherTags(){
@@ -216,4 +305,5 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
             }
         });
     }
+
 }

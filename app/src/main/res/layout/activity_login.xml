@@ -70,7 +70,7 @@
             android:inputType="textPassword"
             android:importantForAutofill="no" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:id="@+id/login_activity_rememberme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,8 +81,8 @@
             android:paddingTop="10dp"
             android:text="@string/remember_me"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:theme="@style/SwitchTheme" />
+            android:textSize="20sp"
+            />
 
         <FrameLayout
             android:layout_width="match_parent"

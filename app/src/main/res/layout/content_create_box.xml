@@ -96,10 +96,12 @@
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 >
 
                 <RadioButton
+                    android:id="@+id/rdbtn_textual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/textual"
@@ -107,6 +109,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/rdbtn_yes_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yesNoPoll"
@@ -114,6 +117,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/rdbtn_multiple_choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/multipleChoicePoll"
@@ -121,6 +125,50 @@
                     />
 
             </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/multiple_choice_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_multiple_choices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <EditText
+                        android:id="@+id/first_choice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/second_choice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/imgbtn_add_choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    android:layout_gravity="end"
+                    />
+
+            </LinearLayout>
+
 
             <Space
                 android:layout_width="match_parent"
