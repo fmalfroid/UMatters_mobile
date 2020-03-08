@@ -75,7 +75,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:maxLength="160"
                 />
             
@@ -103,18 +103,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/textual"
+                    android:textSize="15sp"
                     />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yesNoPoll"
+                    android:textSize="15sp"
                     />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/multipleChoicePoll"
+                    android:textSize="15sp"
                     />
 
             </RadioGroup>
@@ -137,8 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 >
 
                 <LinearLayout
@@ -152,7 +155,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/typeTag"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="#000"
                         android:layout_gravity="center_vertical"
@@ -184,7 +187,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/otherTags"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="#000"
                         android:layout_marginTop="10dp"
@@ -196,18 +199,29 @@
                         android:orientation="vertical"
                         >
 
-                        <EditText
+                        <LinearLayout
+                            android:id="@+id/ll_other_tags"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="#tag"
-                            android:textSize="14sp"
-                            />
+                            android:orientation="vertical"
+                            >
 
-                        <EditText
-                            android:layout_width="match_parent"
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="#tag"
+                                android:textSize="15sp"
+                                android:layout_marginStart="10dp"
+                                />
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/imgbtn_add_other_tag"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="#tag"
-                            android:textSize="14sp"
+                            android:src="@drawable/ic_add"
+                            android:layout_gravity="end"
                             />
 
                     </LinearLayout>

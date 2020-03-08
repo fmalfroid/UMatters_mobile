@@ -1,6 +1,7 @@
 package com.unamur.umatters;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -10,16 +11,27 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CreateBoxActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    LinearLayout ll_other_tags;
+    ImageButton addOtherTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +65,18 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
             }
         });
 
+        //Init multiple choice poll
+        initMultipleChoice();
+
         //Init of the spinner
         SpinnerWrapContent typeTag = (SpinnerWrapContent) findViewById(R.id.typeTag);
         List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.typeTags)));
         SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
         typeTag.setAdapter(adapter);
+
+        //Init other tags fields
+        initOtherTags();
+
 
     }
 
@@ -137,5 +156,64 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void initMultipleChoice(){
+
+    }
+
+    private void initOtherTags(){
+        ll_other_tags = findViewById(R.id.ll_other_tags);
+        addOtherTag = findViewById(R.id.imgbtn_add_other_tag);
+        addOtherTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //If there is less than 5 other tag, you can create a new field
+                if (ll_other_tags.getChildCount() < 5){
+
+                    final LinearLayout ll_field = new LinearLayout(CreateBoxActivity.this);
+                    ll_field.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    ll_field.setOrientation(LinearLayout.HORIZONTAL);
+
+                    EditText new_edit_txt = new EditText(CreateBoxActivity.this);
+                    new_edit_txt.setHint("#tag");
+                    new_edit_txt.setTextSize(15);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+                    //Get px value of dp
+                    Resources r = CreateBoxActivity.this.getResources();
+                    int px = (int) TypedValue.applyDimension(
+                            TypedValue.COMPLEX_UNIT_DIP,
+                            10,
+                            r.getDisplayMetrics()
+                    );
+                    params.setMargins(px,0,0,0);
+                    new_edit_txt.setLayoutParams(params);
+
+
+                    ImageView img_remove = new ImageView(CreateBoxActivity.this);
+                    LinearLayout.LayoutParams params_img = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params_img.gravity = Gravity.CENTER;
+                    img_remove.setLayoutParams(params_img);
+                    img_remove.setImageResource(R.drawable.ic_remove);
+
+                    img_remove.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ll_other_tags.removeView(ll_field);
+                        }
+                    });
+
+                    ll_field.addView(new_edit_txt);
+                    ll_field.addView(img_remove);
+                    ll_other_tags.addView(ll_field);
+                }
+                //Else tell the user he has too many tags
+                else {
+                    Toast.makeText(CreateBoxActivity.this, R.string.tooManyOtherTags, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 }

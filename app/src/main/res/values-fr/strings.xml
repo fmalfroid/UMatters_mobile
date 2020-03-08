@@ -81,4 +81,5 @@
         <item name="#age">#AGE</item>
     </string-array>
     <string name="otherTags">Autres tags :</string>
+    <string name="tooManyOtherTags">Trop de tags.</string>
 </resources>
