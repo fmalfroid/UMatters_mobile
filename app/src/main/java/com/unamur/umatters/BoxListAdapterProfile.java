@@ -69,7 +69,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof BoxViewHolder) {
             BoxViewHolder BoxHolder = (BoxViewHolder) holder;
-            Box box = boxList.get(position);
+            Box box = boxList.get(position - 1);
             BoxHolder.display(box);
         } else if (holder instanceof HeaderViewHolder) {
             //cast holder to VHHeader and set data for header.
