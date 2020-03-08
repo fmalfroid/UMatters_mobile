@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity
 
         //Link the scroll of the recycler view to the fab and the search bar
         final FloatingActionButton fab = findViewById(R.id.fab);
-        final LinearLayout search_bar = findViewById(R.id.search_bar);
+        //final LinearLayout search_bar = findViewById(R.id.search_bar);
 
         rv.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
@@ -170,11 +170,11 @@ public class MainActivity extends AppCompatActivity
                         fab.show();
 
                         //search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1)).start();
-                        showViews(search_bar);
+                        //showViews(search_bar);
                     } else {
                         fab.hide();
 
-                        hideViews(search_bar);
+                        //hideViews(search_bar);
                     }
                 } catch (Exception e){
                     //nothing
@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    /*
     private void showViews(final LinearLayout search_bar) {
         // TODO uncomment this Hide Footer in android when Scrolling
         search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1.4f)).setListener(new Animator.AnimatorListener() {
@@ -226,4 +227,5 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+    */
 }
