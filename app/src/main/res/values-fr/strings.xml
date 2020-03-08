@@ -82,4 +82,6 @@
     </string-array>
     <string name="otherTags">Autres tags :</string>
     <string name="tooManyOtherTags">Trop de tags.</string>
+
+    <string name="modify_a_box">Modifier une box</string>
 </resources>

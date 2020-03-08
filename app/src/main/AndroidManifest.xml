@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unamur.umatters">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,6 +11,10 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ModifyBoxActivity"
+            android:label="@string/title_activity_modify_box"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".CreateBoxActivity"
             android:label="@string/title_activity_create_box"

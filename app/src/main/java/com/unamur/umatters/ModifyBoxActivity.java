@@ -1,39 +1,30 @@
 package com.unamur.umatters;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ImageView;
 
-import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ModifyBoxActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
-        //Init of the recyclerView
-        final RecyclerView rv = findViewById(R.id.profle_box_list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new BoxListAdapterProfile());
+        setContentView(R.layout.activity_modify_box);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -53,6 +44,20 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             }
         });
 
+        //Go back button
+        ImageView img_arrowback = findViewById(R.id.pop_go_back);
+        img_arrowback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        //Init of the spinner
+        SpinnerWrapContent typeTag = (SpinnerWrapContent) findViewById(R.id.typeTag);
+        List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.typeTags)));
+        SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
+        typeTag.setAdapter(adapter);
     }
 
     @Override
@@ -99,6 +104,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             startActivity(runMain);
             finish();
 
+        } else if (id == R.id.nav_profile) {
+
+            Intent runProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(runProfile);
+            finish();
+
         } else if (id == R.id.nav_tags) {
 
         } else if (id == R.id.nav_subscriptions) {
@@ -119,12 +130,11 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         //Setup nav drawer system
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(1).setChecked(true);
     }
 }
