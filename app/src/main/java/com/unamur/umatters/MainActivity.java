@@ -156,20 +156,28 @@ public class MainActivity extends AppCompatActivity
         //Link the scroll of the recycler view to the fab and the search bar
         final FloatingActionButton fab = findViewById(R.id.fab);
         final LinearLayout search_bar = findViewById(R.id.search_bar);
+
         rv.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-                if (dy<0 && !fab.isShown()) {
-                    fab.show();
+                super.onScrolled(recyclerView, dx, dy);
 
-                    search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1)).start();
-                    showViews(search_bar);
-                }
+                LinearLayoutManager layoutManager = ((LinearLayoutManager) recyclerView.getLayoutManager());
+                try {
+                    int position = layoutManager.findFirstCompletelyVisibleItemPosition();
 
-                else if (dy>0 && fab.isShown()) {
-                    fab.hide();
+                    if(position==0){
+                        fab.show();
 
-                    hideViews(search_bar);
+                        //search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1)).start();
+                        showViews(search_bar);
+                    } else {
+                        fab.hide();
+
+                        hideViews(search_bar);
+                    }
+                } catch (Exception e){
+                    //nothing
                 }
             }
 
