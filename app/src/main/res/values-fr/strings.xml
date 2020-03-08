@@ -15,7 +15,6 @@
     <string name="tags_setup_explanation">Veuillez choisir les tags vous intéressant le plus.\nCela personnalisera votre expérience utilisateur.</string>
     <string name="name">Nom</string>
     <string name="date">Date</string>
-    <string name="tags">Tags</string>
     <string name="question">Question</string>
     <string name="nb_likes">nb j\'aime</string>
     <string name="text">Texte</string>
@@ -62,4 +61,24 @@
         <item>Philosophie et lettres</item>
         <item>Chambre politique</item>
     </string-array>
+
+    <string name="createBox">Créer une box</string>
+    <string name="texte">Texte</string>
+    <string name="typeBox">Type de box</string>
+    <string name="textual">Textuelle</string>
+    <string name="yesNoPoll">Sondage oui-non</string>
+    <string name="multipleChoicePoll">Sondage à choix multiples</string>
+    <string name="tags">Tags</string>
+    <string name="typeTag">Tag de type :</string>
+    <string-array name="typeTags">
+        <item name="#general">#Général</item>
+        <item name="#info">#Informatique</item>
+        <item name="#law">#Droit</item>
+        <item name="#medicine">#Médecine</item>
+        <item name="#sciences">#Sciences</item>
+        <item name="#economics">#Économie</item>
+        <item name="#arts">#Philosophie et lettres</item>
+        <item name="#age">#AGE</item>
+    </string-array>
+    <string name="otherTags">Autres tags :</string>
 </resources>

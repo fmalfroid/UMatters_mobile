@@ -20,7 +20,6 @@
     <string name="tags_setup_explanation">Please choose the tags that interest you the most.\nThis will personalize your user experience.</string>
     <string name="name">Name</string>
     <string name="date">Date</string>
-    <string name="tags">Tags</string>
     <string name="question">Question</string>
     <string name="nb_likes">nb likes</string>
     <string name="text">Text</string>
@@ -49,7 +48,7 @@
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="generalTag">#General</string>
-    <string name="CSTag">#Computer Science</string>
+    <string name="CSTag">#ComputerScience</string>
     <string name="LawTag">#Law</string>
     <string name="medicineTag">#Medicine</string>
     <string name="scienceTag">#Sciences</string>
@@ -70,4 +69,24 @@
         <item>Arts</item>
         <item>Political Chamber</item>
     </string-array>
+
+    <string name="createBox">Create a box</string>
+    <string name="texte">Text</string>
+    <string name="typeBox">Box type</string>
+    <string name="textual">Textual</string>
+    <string name="yesNoPoll">Yes-no poll</string>
+    <string name="multipleChoicePoll">Multiple choice poll</string>
+    <string name="tags">Tags</string>
+    <string name="typeTag">Type tag</string>
+    <string-array name="typeTags">
+        <item name="#general">#General</item>
+        <item name="#info">#ComputerScience</item>
+        <item name="#law">#Law</item>
+        <item name="#medicine">#Medicine</item>
+        <item name="#sciences">#Sciences</item>
+        <item name="#economics">#Economics</item>
+        <item name="#arts">#Arts</item>
+        <item name="#age">#AGE</item>
+    </string-array>
+    <string name="otherTags">Other tags :</string>
 </resources>

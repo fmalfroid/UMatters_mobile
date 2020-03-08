@@ -13,6 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CreateBoxActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,6 +43,21 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
 
             }
         });
+
+        //Go back button
+        ImageView img_arrowback = findViewById(R.id.pop_go_back);
+        img_arrowback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        //Init of the spinner
+        SpinnerWrapContent typeTag = (SpinnerWrapContent) findViewById(R.id.typeTag);
+        List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.typeTags)));
+        SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
+        typeTag.setAdapter(adapter);
 
     }
 
