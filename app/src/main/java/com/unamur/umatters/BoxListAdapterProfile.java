@@ -18,7 +18,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class BoxListAdapterProfile extends RecyclerView.Adapter<BoxListAdapterProfile.BoxViewHolder> {
+public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
 
     //Exemple de choix de sondage
     private final List<Pair<String, Integer>> choixTmp = Arrays.asList(
@@ -42,20 +45,50 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<BoxListAdapterPr
 
     @Override
     public int getItemCount() {
-        return boxList.size();
+        return boxList.size()+1;
     }
 
     @Override
-    public BoxViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.box_list_cell_profile, parent, false);
-        return new BoxViewHolder(view);
+        if (viewType == TYPE_ITEM) {
+            //inflate your layout and pass it to view holder
+            View view = inflater.inflate(R.layout.box_list_cell_profile, parent, false);
+            return new BoxViewHolder(view);
+        } else if (viewType == TYPE_HEADER) {
+            //inflate your layout and pass it to view holder
+            View view = inflater.inflate(R.layout.header_profile, parent, false);
+            return new HeaderViewHolder(view);
+        }
+
+        throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
     }
 
     @Override
-    public void onBindViewHolder(BoxViewHolder holder, int position) {
-        Box box = boxList.get(position);
-        holder.display(box);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof BoxViewHolder) {
+            BoxViewHolder BoxHolder = (BoxViewHolder) holder;
+            Box box = boxList.get(position);
+            BoxHolder.display(box);
+        } else if (holder instanceof HeaderViewHolder) {
+            //cast holder to VHHeader and set data for header.
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == TYPE_HEADER) {
+            return TYPE_HEADER;
+        }
+
+        return TYPE_ITEM;
+    }
+
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 
     public class BoxViewHolder extends RecyclerView.ViewHolder {

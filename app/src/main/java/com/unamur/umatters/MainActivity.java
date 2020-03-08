@@ -29,8 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ImageView popularbtn;
     private String json;
@@ -61,8 +60,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        AsyncJsonData task = new AsyncJsonData(MainActivity.this);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users");
+        //AsyncJsonData task = new AsyncJsonData(MainActivity.this);
+        //task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users");
+
     }
 
     @Override
