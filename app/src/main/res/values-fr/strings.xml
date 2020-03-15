@@ -87,4 +87,6 @@
     <string name="tooManyOtherTags">Trop de tags.</string>
 
     <string name="modify_a_box">Modifier une box</string>
+    <string name="delete_dialog_text">Voulez-vous vraiment supprimer cette box?</string>
+    <string name="delete_dialog_title">Supprimer la box?</string>
 </resources>

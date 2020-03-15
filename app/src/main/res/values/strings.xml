@@ -96,4 +96,6 @@
     <string name="tooManyOtherTags">Too many tags.</string>
 
     <string name="modify_a_box">Modify a box</string>
+    <string name="delete_dialog_title">Delete the box?</string>
+    <string name="delete_dialog_text">Do you really want to delete this box?</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.unamur.umatters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.Gravity;
@@ -37,10 +39,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box("poll", "Patrick Heymans", "28-02-2020", "Academique", 60, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
-        new Box("yes_no", "Anonyme", "28-02-2020", "Recteur", 23, (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
-        new Box("text", "Florian Malfroid", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", null),
-        new Box("text", "Joséphine AngeGardien", "27-02-2020", "Personnel", 56, (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", null)
+        new Box("poll", "Anthony Etienne", "28-02-2020", "Etudiant", 60, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
+        new Box("yes_no", "Anthony Etienne", "28-02-2020", "Etudiant", 23, (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
+        new Box("text", "Anthony Etienne", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", null),
+        new Box("text", "Anthony Etienne", "27-02-2020", "Etudiant", 56, (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", null)
     );
 
     @Override
@@ -133,6 +135,35 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 public void onClick(View view) {
                     Intent runApp = new Intent(context, ModifyBoxActivity.class);
                     context.startActivity(runApp);
+                }
+            });
+
+            deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Afficher l'alertDialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+
+                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+
+                    builder.setMessage(R.string.delete_dialog_text).setTitle(R.string.delete_dialog_title);
+
+                    AlertDialog dialog = builder.create();
+
+                    dialog.show();
+
                 }
             });
 
