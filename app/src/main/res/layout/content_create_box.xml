@@ -57,220 +57,228 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="#fff"
-            android:padding="25dp"
-            android:orientation="vertical"
+            android:background="@color/lightLightGrey"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/texte"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:maxLength="160"
-                />
-            
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/typeBox"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginBottom="10dp"
-                />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                >
-
-                <RadioButton
-                    android:id="@+id/rdbtn_textual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/textual"
-                    android:textSize="15sp"
-                    />
-
-                <RadioButton
-                    android:id="@+id/rdbtn_yes_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/yesNoPoll"
-                    android:textSize="15sp"
-                    />
-
-                <RadioButton
-                    android:id="@+id/rdbtn_multiple_choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/multipleChoicePoll"
-                    android:textSize="15sp"
-                    />
-
-            </RadioGroup>
-
             <LinearLayout
-                android:id="@+id/multiple_choice_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#fff"
+                android:padding="25dp"
                 android:orientation="vertical"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
                 >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/texte"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:maxLength="160"
+                    />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/typeBox"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_textual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/textual"
+                        android:textSize="15sp"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_yes_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yesNoPoll"
+                        android:textSize="15sp"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_multiple_choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/multipleChoicePoll"
+                        android:textSize="15sp"
+                        />
+
+                </RadioGroup>
 
                 <LinearLayout
-                    android:id="@+id/ll_multiple_choices"
+                    android:id="@+id/multiple_choice_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="20dp"
+                    android:visibility="gone"
                     >
-
-                    <EditText
-                        android:id="@+id/first_choice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        />
-
-                    <EditText
-                        android:id="@+id/second_choice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        />
-
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/imgbtn_add_choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_add"
-                    android:layout_gravity="end"
-                    />
-
-            </LinearLayout>
-
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tags"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginBottom="10dp"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/typeTag"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:textColor="#000"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                    <com.unamur.umatters.SpinnerWrapContent
-                        android:id="@+id/typeTag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_gravity="center_horizontal"
-                        style="@android:style/Widget.Holo.Light.Spinner"
-                        android:layout_marginStart="10dp"
-                        app:backgroundTint="#FF6600"
-                        >
-
-                    </com.unamur.umatters.SpinnerWrapContent>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/otherTags"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:textColor="#000"
-                        android:layout_marginTop="10dp"
-                        />
 
                     <LinearLayout
+                        android:id="@+id/ll_multiple_choices"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         >
 
+                        <EditText
+                            android:id="@+id/first_choice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            />
+
+                        <EditText
+                            android:id="@+id/second_choice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/imgbtn_add_choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_add"
+                        android:layout_gravity="end"
+                        />
+
+                </LinearLayout>
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tags"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="27dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/typeTag"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_gravity="center_vertical"
+                            />
+
+                        <com.unamur.umatters.SpinnerWrapContent
+                            android:id="@+id/typeTag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_gravity="center_horizontal"
+                            style="@android:style/Widget.Holo.Light.Spinner"
+                            android:layout_marginStart="10dp"
+                            app:backgroundTint="#FF6600"
+                            >
+
+                        </com.unamur.umatters.SpinnerWrapContent>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/otherTags"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginTop="10dp"
+                            />
+
                         <LinearLayout
-                            android:id="@+id/ll_other_tags"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             >
 
-                            <EditText
+                            <LinearLayout
+                                android:id="@+id/ll_other_tags"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="#tag"
-                                android:textSize="15sp"
-                                android:layout_marginStart="10dp"
+                                android:orientation="vertical"
+                                >
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="#tag"
+                                    android:textSize="15sp"
+                                    android:layout_marginStart="10dp"
+                                    />
+
+                            </LinearLayout>
+
+                            <ImageButton
+                                android:id="@+id/imgbtn_add_other_tag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_add"
+                                android:layout_gravity="end"
                                 />
 
                         </LinearLayout>
-
-                        <ImageButton
-                            android:id="@+id/imgbtn_add_other_tag"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_add"
-                            android:layout_gravity="end"
-                            />
 
                     </LinearLayout>
 

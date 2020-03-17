@@ -137,19 +137,6 @@
                 android:layout_marginStart="3dp"
                 />
 
-
-            <ToggleButton
-                android:id="@+id/button_interested"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/button_interested"
-                android:checked="false"
-                android:text=""
-                android:textOff=""
-                android:textOn=""
-                android:layout_marginStart="10dp"
-                />
-
             <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

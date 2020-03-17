@@ -48,7 +48,7 @@
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="generalTag">#General</string>
-    <string name="CSTag">#ComputerScience</string>
+    <string name="CSTag">#CS</string>
     <string name="LawTag">#Law</string>
     <string name="medicineTag">#Medicine</string>
     <string name="scienceTag">#Sciences</string>
@@ -59,10 +59,11 @@
     <string name="title_activity_popular" translatable="false">PopularActivity</string>
     <string name="title_activity_create_box" translatable="false">CreateBoxActivity</string>
     <string name="title_activity_modify_box" translatable="false">title_activity_modify_box</string>
+    <string name="title_activity_filter" translatable="false">title_activity_filter</string>
 
     <string-array name="council_choices">
         <item>Administration council</item>
-        <item>Computer Science</item>
+        <item>CS</item>
         <item>Law</item>
         <item>Medicine</item>
         <item>Sciences</item>
@@ -99,7 +100,24 @@
     <string name="delete_dialog_title">Delete the box?</string>
     <string name="delete_dialog_text">Do you really want to delete this box?</string>
 
+    <!-- Box menu -->
     <string name="box_menu_delete"><font fgcolor='#FF1400'>Delete</font></string>
     <string name="box_menu_report"><font fgcolor='#FF1400'>Report</font></string>
     <string name="box_menu_unsubscribe">Unsubscribe</string>
+
+    <!-- Activity filter -->
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="unselect_all">Unselect all</string>
+    <string name="creation_date">Creation date</string>
+    <string name="popularity">Popularity</string>
+    <string name="participation_level">Participation level</string>
+    <string name="category">Category</string>
+    <string name="roles">Roles :</string>
+    <string name="ATG" translatable="false">ATG</string>
+    <string name="students">Students</string>
+    <string name="academics">Academics</string>
+    <string name="scientists">Scientists</string>
+    <string name="typeTags">Type tags :</string>
+    <string name="my_tags">My tags</string>
 </resources>

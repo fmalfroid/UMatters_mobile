@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,6 +74,8 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
         private final TextView nb_likes;
         private final LinearLayout poll;
         private final TextView box_menu;
+        private final ToggleButton btn_favorite;
+        private final ToggleButton btn_interested;
 
         private Context context;
 
@@ -86,6 +91,9 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             nb_likes = itemView.findViewById(R.id.box_cell_nb_like);
             poll = itemView.findViewById(R.id.box_cell_poll);
             box_menu = itemView.findViewById(R.id.box_menu);
+            btn_favorite = itemView.findViewById(R.id.button_favorite);
+            btn_interested = itemView.findViewById(R.id.button_interested);
+
             context = itemView.getContext();
 
         }
@@ -113,6 +121,34 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             tagTranslation.put("#Economics", context.getString(R.string.EconomicsTag));
             tagTranslation.put("#Arts", context.getString(R.string.artsTag));
             tagTranslation.put("#AGE", context.getString(R.string.AGETag));
+
+            //Favorite button
+            btn_favorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Set bounce animation
+                    final Animation anim_bounce = AnimationUtils.loadAnimation(context, R.anim.anim_button_bounce);
+                    // Use bounce interpolator with amplitude 0.2 and frequency 20
+                    ButtonBounceInterpolator interpolator = new ButtonBounceInterpolator(0.15, 20);
+                    anim_bounce.setInterpolator(interpolator);
+                    btn_favorite.startAnimation(anim_bounce);
+                    //TODO : add/remove from favorite
+                }
+            });
+
+            //Interested button
+            btn_interested.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Set bounce animation
+                    final Animation anim_bounce = AnimationUtils.loadAnimation(context, R.anim.anim_button_bounce);
+                    // Use bounce interpolator with amplitude 0.2 and frequency 20
+                    ButtonBounceInterpolator interpolator = new ButtonBounceInterpolator(0.15, 20);
+                    anim_bounce.setInterpolator(interpolator);
+                    btn_interested.startAnimation(anim_bounce);
+                    //TODO : add/remove from interested
+                }
+            });
 
             //box menu
             box_menu.setOnClickListener(new View.OnClickListener() {

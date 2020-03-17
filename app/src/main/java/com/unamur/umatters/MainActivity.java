@@ -31,7 +31,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ImageView popularbtn;
+    private ImageView btn_filter;
+    private ImageView btn_popular;
     private String json;
 
     @Override
@@ -51,11 +52,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initRecyclerView();
 
         //Popular button
-        popularbtn = findViewById(R.id.btn_popular);
-        popularbtn.setOnClickListener(new View.OnClickListener() {
+        btn_popular = findViewById(R.id.btn_popular);
+        btn_popular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent runApp = new Intent(getApplicationContext(), PopularActivity.class);
+                startActivity(runApp);
+            }
+        });
+
+        //Filter button
+        btn_filter = findViewById(R.id.btn_filter);
+        btn_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent runApp = new Intent(getApplicationContext(), FilterActivity.class);
                 startActivity(runApp);
             }
         });

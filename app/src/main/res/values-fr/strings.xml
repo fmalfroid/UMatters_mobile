@@ -90,7 +90,23 @@
     <string name="delete_dialog_text">Voulez-vous vraiment supprimer cette box?</string>
     <string name="delete_dialog_title">Supprimer la box?</string>
 
+    <!-- Box menu -->
     <string name="box_menu_delete"><font fgcolor='#FF1400'>Delete</font></string>
     <string name="box_menu_report"><font fgcolor='#FF1400'>Signaler</font></string>
     <string name="box_menu_unsubscribe">Se désabonner</string>
+
+    <!-- Activity filter -->
+    <string name="filter">Filtrer</string>
+    <string name="sort">Trier</string>
+    <string name="unselect_all">Tout déselectionner</string>
+    <string name="creation_date">Date d\'ajout</string>
+    <string name="popularity">Popularité</string>
+    <string name="participation_level">Niveau de participation</string>
+    <string name="category">Catégorie</string>
+    <string name="roles">Rôles :</string>
+    <string name="students">Étudiants</string>
+    <string name="academics">Académiques</string>
+    <string name="scientists">Scientifiques</string>
+    <string name="typeTags">Tags de type :</string>
+    <string name="my_tags">Mes tags</string>
 </resources>
