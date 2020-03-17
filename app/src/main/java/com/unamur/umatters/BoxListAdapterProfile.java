@@ -4,17 +4,21 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -103,12 +107,9 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         private final TextView text;
         private final TextView nb_likes;
         private final LinearLayout poll;
-        private final ImageView editBtn;
-        private final ImageView deleteBtn;
+        private final TextView box_menu;
 
         private Context context;
-
-        private Box currentBox;
 
         public BoxViewHolder(final View itemView) {
             super(itemView);
@@ -121,51 +122,13 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             text = itemView.findViewById(R.id.box_cell_poll_text);
             nb_likes = itemView.findViewById(R.id.box_cell_nb_like);
             poll = itemView.findViewById(R.id.box_cell_poll);
-            editBtn = itemView.findViewById(R.id.editBtn);
-            deleteBtn = itemView.findViewById(R.id.deleteBtn);
+            box_menu = itemView.findViewById(R.id.box_menu_profile);
             context = itemView.getContext();
 
         }
 
 
         public void display(Box box) {
-
-            editBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent runApp = new Intent(context, ModifyBoxActivity.class);
-                    context.startActivity(runApp);
-                }
-            });
-
-            deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Afficher l'alertDialog
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-
-                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-
-                    builder.setMessage(R.string.delete_dialog_text).setTitle(R.string.delete_dialog_title);
-
-                    AlertDialog dialog = builder.create();
-
-                    dialog.show();
-
-                }
-            });
 
             List<String> typesTags = Arrays.asList(
                 "#General",
@@ -188,7 +151,60 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             tagTranslation.put("#Arts", context.getString(R.string.artsTag));
             tagTranslation.put("#AGE", context.getString(R.string.AGETag));
 
-            currentBox = box;
+            //box menu
+            box_menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, box_menu);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.box_menu_profile);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.btn_delete:
+
+                                    //open delete dialog
+                                    final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                                    LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                                    View mView = inflater.inflate(R.layout.dialog_delete_box, null);
+                                    mBuilder.setView(mView);
+                                    final AlertDialog dialog = mBuilder.create();
+
+                                    Button btn_cancel = mView.findViewById(R.id.btn_cancel);
+                                    Button btn_delete = mView.findViewById(R.id.btn_delete);
+
+                                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    btn_delete.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            //TODO : Delete the box
+                                            Toast.makeText(context, "This box has been deleted.", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    dialog.show();
+
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+                }
+            });
 
             switch (box.getRole()){
                 case "Etudiant":

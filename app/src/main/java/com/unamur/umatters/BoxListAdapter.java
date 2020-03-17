@@ -1,10 +1,12 @@
 package com.unamur.umatters;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -68,10 +70,9 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
         private final TextView text;
         private final TextView nb_likes;
         private final LinearLayout poll;
+        private final TextView box_menu;
 
         private Context context;
-
-        private Box currentBox;
 
         public BoxViewHolder(final View itemView) {
             super(itemView);
@@ -84,6 +85,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             text = itemView.findViewById(R.id.box_cell_poll_text);
             nb_likes = itemView.findViewById(R.id.box_cell_nb_like);
             poll = itemView.findViewById(R.id.box_cell_poll);
+            box_menu = itemView.findViewById(R.id.box_menu);
             context = itemView.getContext();
 
         }
@@ -112,7 +114,35 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             tagTranslation.put("#Arts", context.getString(R.string.artsTag));
             tagTranslation.put("#AGE", context.getString(R.string.AGETag));
 
-            currentBox = box;
+            //box menu
+            box_menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, box_menu);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.box_menu);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.btn_unsubscribe:
+                                    //handle menu1 click
+                                    return true;
+                                case R.id.btn_report:
+                                    //handle menu2 click
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+                }
+            });
 
             switch (box.getRole()){
                 case "Etudiant":

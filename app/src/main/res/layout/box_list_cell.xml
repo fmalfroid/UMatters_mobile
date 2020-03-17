@@ -43,21 +43,46 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/box_cell_date"
+                android:id="@+id/box_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:textSize="12sp" />
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:text="&#8942;"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textAppearance="?android:textAppearanceLarge" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/box_cell_tag_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/box_cell_tag_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/box_cell_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="12sp"
+                />
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

@@ -42,18 +42,15 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/editBtn"
+            <TextView
+                android:id="@+id/box_menu_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="10dp"
-                app:srcCompat="@drawable/ic_edit" />
-
-            <ImageView
-                android:id="@+id/deleteBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_delete" />
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:text="&#8942;"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textAppearance="?android:textAppearanceLarge" />
 
         </LinearLayout>
 

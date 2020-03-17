@@ -8,4 +8,8 @@
     <color name="lightLightGrey">#CCCCCC</color>
     <color name="lightGrey">#B3B3B3</color>
     <color name="darkGrey">#8C8C8C</color>
+    <color name="red">#EB0000</color>
+
+    <color name="transparent20">#20000000</color>
+    <color name="transparent">#00000000</color>
 </resources>
