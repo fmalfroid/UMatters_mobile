@@ -25,29 +25,16 @@ import java.util.List;
 
 public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewHolder> {
 
-    //Exemple de choix de sondage
-    private final List<Pair<String, Integer>> choixTmp = Arrays.asList(
-        Pair.create("3e étage", 10),
-        Pair.create("4e étage", 7)
-    );
-
-    //Exemple de choix oui/non
-    private final List<Pair<String, Integer>> choixOuiNon = Arrays.asList(
-        Pair.create("yes", 85),
-        Pair.create("no", 15)
-    );
-
-    //Exemples de box
-    private final List<Box> boxList = Arrays.asList(
-        new Box("poll", "Patrick Heymans", "28-02-2020", "Academique", 60, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
-        new Box("yes_no", "Anonyme", "28-02-2020", "Recteur", 23, (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
-        new Box("text", "Florian Malfroid", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", null),
-        new Box("text", "Joséphine AngeGardien", "27-02-2020", "Personnel", 56, (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", null)
-    );
+    private final ArrayList<Box> boxList = new ArrayList<>();
 
     @Override
     public int getItemCount() {
         return boxList.size();
+    }
+
+    public void addData(Box box) {
+        boxList.add(box);
+        notifyDataSetChanged();
     }
 
     @Override
