@@ -43,10 +43,10 @@
     <string name="search">Rechercher</string>
     <string name="generalTag">#Général</string>
     <string name="AGETag">#AGE</string>
-    <string name="CSTag">#Informatique</string>
-    <string name="EconomicsTag">#Economie</string>
+    <string name="CSTag">#Info</string>
+    <string name="EconomicsTag">#Économie</string>
     <string name="LawTag">#Droit</string>
-    <string name="artsTag">#Philo et lettres</string>
+    <string name="artsTag">#Philo\u0026Lettres</string>
     <string name="scienceTag">#Sciences</string>
     <string name="medicineTag">#Médecine</string>
     <string name="populars">Populaires</string>
@@ -72,12 +72,12 @@
     <string name="typeTag">Tag de type :</string>
     <string-array name="typeTags">
         <item name="#general">#Général</item>
-        <item name="#info">#Informatique</item>
+        <item name="#info">#Info</item>
         <item name="#law">#Droit</item>
         <item name="#medicine">#Médecine</item>
         <item name="#sciences">#Sciences</item>
         <item name="#economics">#Économie</item>
-        <item name="#arts">#Philosophie et lettres</item>
+        <item name="#arts">#Philo\u0026Lettres</item>
         <item name="#age">#AGE</item>
     </string-array>
     <string name="otherTags">Autres tags :</string>
@@ -109,4 +109,8 @@
     <string name="scientists">Scientifiques</string>
     <string name="typeTags">Tags de type :</string>
     <string name="my_tags">Mes tags</string>
+
+    <!-- Profile -->
+    <string name="followers">Abonnés</string>
+    <string name="following">Abonnements</string>
 </resources>

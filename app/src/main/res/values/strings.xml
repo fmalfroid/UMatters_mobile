@@ -79,10 +79,10 @@
     <string name="yesNoPoll">Yes-no poll</string>
     <string name="multipleChoicePoll">Multiple choice poll</string>
     <string name="tags">Tags</string>
-    <string name="typeTag">Type tag</string>
+    <string name="typeTag">Type tag :</string>
     <string-array name="typeTags">
         <item name="#general">#General</item>
-        <item name="#info">#ComputerScience</item>
+        <item name="#info">#CS</item>
         <item name="#law">#Law</item>
         <item name="#medicine">#Medicine</item>
         <item name="#sciences">#Sciences</item>
@@ -120,4 +120,8 @@
     <string name="scientists">Scientists</string>
     <string name="typeTags">Type tags :</string>
     <string name="my_tags">My tags</string>
+
+    <!-- Profile -->
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
 </resources>
