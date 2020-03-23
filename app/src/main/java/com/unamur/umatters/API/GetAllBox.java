@@ -170,7 +170,7 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             creator = createUserFromJson(json.getJSONObject("creator"));
 
             //Date
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
             Date dateNF = dateFormat.parse(json.getString("date_cration"));
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             date = formatter.format(dateNF);

@@ -8,6 +8,7 @@
     <string name="title_activity_create_box" translatable="false">CreateBoxActivity</string>
     <string name="title_activity_modify_box" translatable="false">title_activity_modify_box</string>
     <string name="title_activity_filter" translatable="false">title_activity_filter</string>
+    <string name="title_activity_tags" translatable="false">title_activity_tags</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

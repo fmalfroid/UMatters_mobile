@@ -126,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_tags) {
 
+            Intent runMain = new Intent(getApplicationContext(), TagsActivity.class);
+            startActivity(runMain);
+            finish();
+
         } else if (id == R.id.nav_subscriptions) {
 
         } else if (id == R.id.nav_interets) {

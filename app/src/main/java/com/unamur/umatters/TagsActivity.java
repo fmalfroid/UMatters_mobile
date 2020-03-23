@@ -13,15 +13,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-public class FilterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
+import static com.unamur.umatters.TagsSetupActivity.selectedItems;
+
+public class TagsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    public Spinner spinner_choice_1;
+    public Spinner spinner_choice_2;
+    public Spinner spinner_choice_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter);
+        setContentView(R.layout.activity_tags);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -49,6 +63,41 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
                 onBackPressed();
             }
         });
+
+        //Init hashmap and get spinners
+        //< spinner number, selected item number >
+        selectedItems.put(1,0);
+        selectedItems.put(2,1);
+        selectedItems.put(3,2);
+
+        spinner_choice_1 = findViewById(R.id.spinner_choice_1);
+        spinner_choice_2 = findViewById(R.id.spinner_choice_2);
+        spinner_choice_3 = findViewById(R.id.spinner_choice_3);
+
+        //get data to populate the spinners
+        List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.tags_choices)));
+
+        //Init spinners and their adapters
+        List<Spinner> spinners = new ArrayList<>();
+        spinners.add(spinner_choice_1);
+        spinners.add(spinner_choice_2);
+        spinners.add(spinner_choice_3);
+        initSpinners(spinners, data);
+
+        ImageView tag_validation_button = findViewById(R.id.ok_btn);
+        tag_validation_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Get the selected tags
+                ArrayList<String> selectedTags = new ArrayList<>();
+                selectedTags.add(spinner_choice_1.getSelectedItem().toString());
+                selectedTags.add(spinner_choice_2.getSelectedItem().toString());
+                selectedTags.add(spinner_choice_3.getSelectedItem().toString());
+                //Save selected tags into BD
+                //TODO : save tags in DB
+                Toast.makeText(TagsActivity.this, selectedTags.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -57,7 +106,9 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent runMain = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(runMain);
+            finish();
         }
     }
 
@@ -101,12 +152,6 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
             startActivity(runProfile);
             finish();
 
-        } else if (id == R.id.nav_tags) {
-
-            Intent runMain = new Intent(getApplicationContext(), TagsActivity.class);
-            startActivity(runMain);
-            finish();
-
         } else if (id == R.id.nav_subscriptions) {
 
         } else if (id == R.id.nav_interets) {
@@ -131,5 +176,45 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(1).setChecked(true);
+    }
+
+    private void initSpinners(List<Spinner> spinners, List<String> data){
+
+        for (final Spinner spinner : spinners){
+
+            //Create the adapter and set it
+            XORSpinnerAdapter adapter = new XORSpinnerAdapter(this, spinner, data);
+            spinner.setAdapter(adapter);
+            //Init the default value for each spinner
+            //TODO : init tags value
+            if (spinner == spinner_choice_1){
+                spinner_choice_1.setSelection(0);
+            } else if (spinner == spinner_choice_2){
+                spinner_choice_2.setSelection(1);
+            } else {
+                spinner_choice_3.setSelection(2);
+            }
+
+            //For each spinner on item selected :
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    //Update the selected item of the spinner (saved in the hash map)
+                    if (spinner == spinner_choice_1){
+                        selectedItems.put(1,position);
+                    } else if (spinner == spinner_choice_2){
+                        selectedItems.put(2,position);
+                    } else {
+                        selectedItems.put(3,position);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
     }
 }
