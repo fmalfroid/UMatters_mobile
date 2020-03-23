@@ -3,11 +3,16 @@
     <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="title_activity_tags_setup" translatable="false">TagsSetupActivity</string>
     <string name="title_activity_profile" translatable="false">ProfileActivity</string>
+    <string name="title_activity_archives" translatable="false">ArchivesActivity</string>
+    <string name="title_activity_popular" translatable="false">PopularActivity</string>
+    <string name="title_activity_create_box" translatable="false">CreateBoxActivity</string>
+    <string name="title_activity_modify_box" translatable="false">title_activity_modify_box</string>
+    <string name="title_activity_filter" translatable="false">title_activity_filter</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="pref_previously_started">Previously started</string>
 
     <string name="unamur_logo">unamur logo</string>
@@ -56,10 +61,6 @@
     <string name="artsTag">#Arts</string>
     <string name="AGETag">#AGE</string>
     <string name="populars">Popular</string>
-    <string name="title_activity_popular" translatable="false">PopularActivity</string>
-    <string name="title_activity_create_box" translatable="false">CreateBoxActivity</string>
-    <string name="title_activity_modify_box" translatable="false">title_activity_modify_box</string>
-    <string name="title_activity_filter" translatable="false">title_activity_filter</string>
 
     <string-array name="council_choices">
         <item>Administration council</item>
@@ -120,6 +121,12 @@
     <string name="scientists">Scientists</string>
     <string name="typeTags">Type tags :</string>
     <string name="my_tags">My tags</string>
+
+    <!-- Activity archives -->
+    <string name="archives">Archives</string>
+    <string name="archives_accepted">Accepted</string>
+    <string name="archives_pending">Pending</string>
+    <string name="archives_refused">Refused</string>
 
     <!-- Profile -->
     <string name="followers">Followers</string>

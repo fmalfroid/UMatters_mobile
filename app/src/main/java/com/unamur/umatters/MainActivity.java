@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ImageView btn_filter;
     private ImageView btn_popular;
+    private ImageView btn_archives;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(runApp);
             }
         });
+
+        //Archives button
+        btn_archives = findViewById(R.id.btn_archive);
+        btn_archives.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent runApp = new Intent(getApplicationContext(), ArchivesActivity.class);
+                startActivity(runApp);
+            }
+        });
+
 
         GetAllBox task = new GetAllBox(adapter);
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
