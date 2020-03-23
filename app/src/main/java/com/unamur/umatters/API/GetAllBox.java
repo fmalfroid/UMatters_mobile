@@ -95,11 +95,9 @@ public class GetAllBox extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        adapter.addData(testbox1);
-        adapter.addData(testBox2);
+        /*adapter.addData(testBox2);
         adapter.addData(testBox3);
-        adapter.addData(testBox4);
-        System.out.println(adapter.getItemCount());
+        adapter.addData(testBox4);*/
         try {
             JSONObject jsonObj = new JSONObject(result);  // crée le json
             Log.d("Success: ", String.valueOf(jsonObj.getBoolean("succes")));
@@ -108,7 +106,7 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             // TODO : Pour toutes les box dans data: créer la box et l'ajouter à l'adapter
             JSONArray data = jsonObj.getJSONArray("data");
             for(int i=0; i<data.length(); i++) {
-                createBoxFromJson(data.getJSONObject(i));
+                adapter.addData(createBoxFromJson(data.getJSONObject(i)));
             }
         } catch (JSONException e) {
             e.printStackTrace(); // Si la transformation du result en json n'a pas fonctionné
@@ -117,10 +115,87 @@ public class GetAllBox extends AsyncTask<String, String, String> {
         }
     }
 
+    private List<Choice> createChoiceListFromJson(JSONObject json) {
+        ArrayList<Choice> choices = new ArrayList<Choice>();
+        choices.add(new Choice());
+
+        return Arrays.asList(new Choice());
+    }
+
+    private User createUserFromJson(JSONObject json) {
+        String id;
+        String name;
+        String role;
+
+        try {
+            id = json.getString("id_user");
+            name = json.getString("firstname");
+            role = json.getString("role");
+
+            return new User(id, name, role);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return new User();
+    }
+
     private Box createBoxFromJson(JSONObject json) {
         Log.d("data element: ", json.toString());
 
-        return testbox1;
+        int id;
+        List<Choice> choices;
+        User creator;
+        String date;
+        ArrayList<User> likes;
+        List<String> tags;
+        String title;
+        String type;
+
+        try {
+            id = json.getInt("id_box");
+
+            //Choices
+            if (!json.isNull("choix")) {
+                choices = createChoiceListFromJson(json.getJSONObject("choix"));
+            } else {
+                choices = Arrays.asList(new Choice());
+            }
+
+            //Creator
+            creator = createUserFromJson(json.getJSONObject("creator"));
+
+            date = json.getString("date_cration");
+
+            //likes
+            likes = new ArrayList<User>();
+            JSONArray jArrayLikes = json.getJSONArray("like");
+            if (jArrayLikes != null) {
+                for (int i=0;i<jArrayLikes.length();i++){
+                    likes.add(createUserFromJson(jArrayLikes.getJSONObject(i)));
+                }
+            }
+
+            //Tags
+            tags = new ArrayList<String>();
+            JSONArray jArrayTags = json.getJSONArray("tag");
+            if (jArrayTags != null) {
+                for (int i=0;i<jArrayTags.length();i++){
+                    tags.add(jArrayTags.getString(i));
+                }
+            }
+
+            title = json.getString("titre");
+
+            type = json.getString("type");
+
+            return new Box(id, choices,creator, date, likes, tags, title, type);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

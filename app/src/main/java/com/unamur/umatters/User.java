@@ -3,12 +3,18 @@ package com.unamur.umatters;
 public class User {
 
     private String id;
-    private String firstname;
+    private String name;
     private String role;
 
-    public User(String id, String firstname, String role) {
+    public User() {
+        this.id = "1";
+        this.name = "User test";
+        this.role = "Etudiant";
+    }
+
+    public User(String id, String name, String role) {
         this.id = id;
-        this.firstname = firstname;
+        this.name = name;
         this.role = role;
     }
 
@@ -17,7 +23,7 @@ public class User {
     }
 
     public String getName() {
-        return firstname;
+        return name;
     }
 
     public String getRole() {
