@@ -171,13 +171,13 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 case "Etudiant":
                     role.setImageResource(R.drawable.role_etudiant);
                     break;
-                case "Academique":
+                case "Académique":
                     role.setImageResource(R.drawable.role_academic);
                     break;
-                case "Recteur":
+                case "Scientifique":
                     role.setImageResource(R.drawable.role_recteur);
                     break;
-                case "Personnel":
+                case "ATG":
                     role.setImageResource(R.drawable.role_personnel);
                     break;
             }
@@ -205,9 +205,9 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             }
 
             //Texte de la box ou question du sondage
-            text.setText(box.getText());
+            text.setText(box.getTitle());
             //Nombre de likes de la box
-            nb_likes.setText(String.valueOf(box.getNb_likes()));
+            nb_likes.setText(String.valueOf(box.getLikes().size()));
 
             if (box.getType().equals("poll")) {
                 //Pour tous les choix possibles du sondage
@@ -217,13 +217,13 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
                     //Nombre de vote pour le choix
                     TextView nb_votes = new TextView(context);
-                    nb_votes.setText(String.valueOf(box.getChoices().get(i).second));
+                    nb_votes.setText(String.valueOf(box.getChoices().get(i).getUsers().size()));
                     nb_votes.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 4));
                     nb_votes.setGravity(Gravity.END);
 
                     //Checkbox et Texte représentant le choix
                     CheckBox choice = new CheckBox(context);
-                    choice.setText(box.getChoices().get(i).first);
+                    choice.setText(box.getChoices().get(i).getName());
                     choice.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 5));
 
                     //Ajout du nombre de vote et de la checkbox à un LinearLayout
@@ -242,12 +242,12 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 float nb_yes;
                 float nb_no;
 
-                if (box.getChoices().get(0).first.equals("yes")) {
-                    nb_yes = (box.getChoices().get(0).second);
-                    nb_no = (box.getChoices().get(1).second);
+                if (box.getChoices().get(0).getName().equals("yes")) {
+                    nb_yes = (box.getChoices().get(0).getUsers().size());
+                    nb_no = (box.getChoices().get(1).getUsers().size());
                 } else {
-                    nb_yes = (box.getChoices().get(1).second);
-                    nb_no = (box.getChoices().get(0).second);
+                    nb_yes = (box.getChoices().get(1).getUsers().size());
+                    nb_no = (box.getChoices().get(0).getUsers().size());
                 }
 
                 //Calcule le pourcentage de Oui et de Non

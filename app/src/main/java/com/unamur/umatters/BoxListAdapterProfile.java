@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -46,10 +47,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box("poll", "Anthony Etienne", "28-02-2020", "Etudiant", 60, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", choixTmp),
-        new Box("yes_no", "Anthony Etienne", "28-02-2020", "Etudiant", 23, (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser la BUMP ouverte jusque 18h le vendredi?", choixOuiNon),
-        new Box("text", "Anthony Etienne", "28-02-2020", "Etudiant", 42, (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", null),
-        new Box("text", "Anthony Etienne", "27-02-2020", "Etudiant", 56, (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", null)
+        new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<User>()), new Choice("4e étage", new ArrayList<User>())), new User("1", "Patrick Heymans", "Academic"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Info", "Matériel"), "Où ajouter une machine à café?", "poll"),
+        new Box(2, (List<Choice>) Arrays.asList(new Choice("yes", new ArrayList<User>()), new Choice("no", new ArrayList<User>())), new User("2", "Anthony Etienne", "Student"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Général", "BUMP", "Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "yes_no"),
+        new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Florian Malfroid", "Student"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Info", "Matériel"), "Changer les souris du i21", "text"),
+        new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Joséphine AngeGardien", "ATG"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Général", "Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "text")
     );
 
     @Override
@@ -230,13 +231,13 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 case "Etudiant":
                     role.setImageResource(R.drawable.role_etudiant);
                     break;
-                case "Academique":
+                case "Académique":
                     role.setImageResource(R.drawable.role_academic);
                     break;
-                case "Recteur":
+                case "Scientifique":
                     role.setImageResource(R.drawable.role_recteur);
                     break;
-                case "Personnel":
+                case "ATG":
                     role.setImageResource(R.drawable.role_personnel);
                     break;
             }
@@ -264,9 +265,9 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             }
 
             //Texte de la box ou question du sondage
-            text.setText(box.getText());
+            text.setText(box.getTitle());
             //Nombre de likes de la box
-            nb_likes.setText(String.valueOf(box.getNb_likes()));
+            nb_likes.setText(String.valueOf(box.getLikes().size()));
 
             if (box.getType().equals("poll")) {
                 //Pour tous les choix possibles du sondage
@@ -276,13 +277,13 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
                     //Nombre de vote pour le choix
                     TextView nb_votes = new TextView(context);
-                    nb_votes.setText(String.valueOf(box.getChoices().get(i).second));
+                    nb_votes.setText(String.valueOf(box.getChoices().get(i).getUsers().size()));
                     nb_votes.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 4));
                     nb_votes.setGravity(Gravity.END);
 
                     //Checkbox et Texte représentant le choix
                     CheckBox choice = new CheckBox(context);
-                    choice.setText(box.getChoices().get(i).first);
+                    choice.setText(box.getChoices().get(i).getName());
                     choice.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 5));
 
                     //Ajout du nombre de vote et de la checkbox à un LinearLayout
@@ -301,12 +302,12 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 float nb_yes;
                 float nb_no;
 
-                if (box.getChoices().get(0).first.equals("yes")) {
-                    nb_yes = (box.getChoices().get(0).second);
-                    nb_no = (box.getChoices().get(1).second);
+                if (box.getChoices().get(0).getName().equals("yes")) {
+                    nb_yes = (box.getChoices().get(0).getUsers().size());
+                    nb_no = (box.getChoices().get(1).getUsers().size());
                 } else {
-                    nb_yes = (box.getChoices().get(1).second);
-                    nb_no = (box.getChoices().get(0).second);
+                    nb_yes = (box.getChoices().get(1).getUsers().size());
+                    nb_no = (box.getChoices().get(0).getUsers().size());
                 }
 
                 //Calcule le pourcentage de Oui et de Non
