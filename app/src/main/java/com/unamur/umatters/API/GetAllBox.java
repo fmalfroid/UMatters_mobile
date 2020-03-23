@@ -20,8 +20,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class GetAllBox extends AsyncTask<String, String, String> {
@@ -165,7 +169,11 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             //Creator
             creator = createUserFromJson(json.getJSONObject("creator"));
 
-            date = json.getString("date_cration");
+            //Date
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            Date dateNF = dateFormat.parse(json.getString("date_cration"));
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            date = formatter.format(dateNF);
 
             //likes
             likes = new ArrayList<User>();
@@ -192,6 +200,8 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             return new Box(id, choices,creator, date, likes, tags, title, type);
 
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
