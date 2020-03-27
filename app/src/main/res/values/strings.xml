@@ -102,6 +102,8 @@
     <string name="modify_a_box">Modify a box</string>
     <string name="delete_dialog_title">Delete the box?</string>
     <string name="delete_dialog_text">Do you really want to delete this box?</string>
+    <string name="title">Title</string>
+    <string name="title_comment_activity" translatable="false">CommentActivity</string>
 
     <!-- Box menu -->
     <string name="box_menu_delete"><font fgcolor='#FF1400'>Delete</font></string>
@@ -133,10 +135,13 @@
     <!-- Profile -->
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="description">Description</string>
 
     <!-- Activity subscriptions -->
     <string name="unsubscribe">Unsubscribe</string>
     <string name="subscribe">Subscribe</string>
     <string name="my_subscriptions">My subscriptions</string>
     <string name="subscriptions_box">Subscriptions box</string>
+    <string name="reply">Reply</string>
+    <string name="replies">replies</string>
 </resources>

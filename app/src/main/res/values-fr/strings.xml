@@ -89,6 +89,8 @@
     <string name="modify_a_box">Modifier une box</string>
     <string name="delete_dialog_text">Voulez-vous vraiment supprimer cette box?</string>
     <string name="delete_dialog_title">Supprimer la box?</string>
+    <string name="description">Description</string>
+    <string name="title">Titre</string>
 
     <!-- Box menu -->
     <string name="box_menu_delete"><font fgcolor='#FF1400'>Delete</font></string>
@@ -125,4 +127,6 @@
     <string name="subscribe">S\'abonner</string>
     <string name="my_subscriptions">Mes abonnements</string>
     <string name="subscriptions_box">Boîtes d\'abonnements</string>
+    <string name="replies">" réponses"</string>
+    <string name="reply">Répondre</string>
 </resources>

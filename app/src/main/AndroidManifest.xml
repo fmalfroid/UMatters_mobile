@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CommentActivity"
+            android:label="@string/title_comment_activity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SubscriptionsActivity"
             android:label="@string/title_activity_subscriptions"

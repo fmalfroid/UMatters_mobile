@@ -1,6 +1,7 @@
 package com.unamur.umatters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -111,6 +112,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         private final LinearLayout poll;
         private final TextView box_menu;
         private final ToggleButton btn_favorite;
+        private final ImageView btn_comment;
 
         private Context context;
 
@@ -127,6 +129,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             poll = itemView.findViewById(R.id.box_cell_poll);
             box_menu = itemView.findViewById(R.id.box_menu_profile);
             btn_favorite = itemView.findViewById(R.id.button_favorite);
+            btn_comment = itemView.findViewById(R.id.box_cell_comment_btn);
 
             context = itemView.getContext();
 
@@ -167,6 +170,14 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                     anim_bounce.setInterpolator(interpolator);
                     btn_favorite.startAnimation(anim_bounce);
                     //TODO : add/remove from favorite
+                }
+            });
+
+            btn_comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent runApp = new Intent(context, CommentActivity.class);
+                    context.startActivity(runApp);
                 }
             });
 
