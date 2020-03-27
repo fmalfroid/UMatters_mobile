@@ -1,5 +1,6 @@
 package com.unamur.umatters;
 
+import android.content.res.Resources;
 import android.widget.ArrayAdapter;
 
 import android.app.Activity;
@@ -47,13 +48,32 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
         TextView name = (TextView) rowView.findViewById(R.id.txt_name);
         TextView faculty = (TextView) rowView.findViewById(R.id.txt_faculty);
         ToggleButton subscription = (ToggleButton) rowView.findViewById(R.id.tgbtn_subscription);
+        TextView level = (TextView) rowView.findViewById(R.id.txt_level);
+        ImageView role = (ImageView) rowView.findViewById(R.id.img_role);
 
         SubscriptionsPerson current_person = all_subscriptions_person.get(position);
+
         image.setImageBitmap(current_person.getImage());
         String full_name = current_person.getFirstname() + " " + current_person.getSurname();
         name.setText(full_name);
         faculty.setText(current_person.getFaculty());
         subscription.setChecked(current_person.isSubscribed());
+        String str_level = getContext().getResources().getString(R.string.level) + " " + current_person.getLevel();
+        level.setText(str_level);
+        switch (current_person.getRole()){
+            case "student":
+                role.setImageResource(R.drawable.ic_role_student);
+                break;
+            case "academic":
+                role.setImageResource(R.drawable.ic_role_academic);
+                break;
+            case "scientist":
+                role.setImageResource(R.drawable.ic_role_scientist);
+                break;
+            case "ATG":
+                role.setImageResource(R.drawable.ic_role_personnel);
+                break;
+        }
 
         return rowView;
 

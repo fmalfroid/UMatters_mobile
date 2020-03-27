@@ -168,16 +168,16 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
             switch (box.getRole()){
                 case "Etudiant":
-                    role.setImageResource(R.drawable.role_etudiant);
+                    role.setImageResource(R.drawable.ic_role_student);
                     break;
                 case "Académique":
-                    role.setImageResource(R.drawable.role_academic);
+                    role.setImageResource(R.drawable.ic_role_academic);
                     break;
                 case "Scientifique":
-                    role.setImageResource(R.drawable.role_recteur);
+                    role.setImageResource(R.drawable.ic_role_scientist);
                     break;
                 case "ATG":
-                    role.setImageResource(R.drawable.role_personnel);
+                    role.setImageResource(R.drawable.ic_role_personnel);
                     break;
             }
 

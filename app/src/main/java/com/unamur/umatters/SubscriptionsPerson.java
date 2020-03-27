@@ -9,13 +9,33 @@ public class SubscriptionsPerson {
     private String surname;
     private String faculty;
     private boolean subscribed;
+    private String role;
+    private int level;
 
-    public SubscriptionsPerson(Bitmap image, String firstname, String surname, String faculty, boolean subscribed) {
+    public SubscriptionsPerson(Bitmap image, String firstname, String surname, String faculty, boolean subscribed, String role, int level) {
         this.image = image;
         this.firstname = firstname;
         this.surname = surname;
         this.faculty = faculty;
         this.subscribed = subscribed;
+        this.role = role;
+        this.level = level;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public Bitmap getImage() {

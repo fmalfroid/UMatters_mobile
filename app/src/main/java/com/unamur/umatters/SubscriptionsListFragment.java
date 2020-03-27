@@ -29,10 +29,10 @@ public class SubscriptionsListFragment extends Fragment {
         //test data
         ArrayList<SubscriptionsPerson> all_subscriptions_person = new ArrayList<>();
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.student_pic);
-        SubscriptionsPerson person1 = new SubscriptionsPerson(bitmap, "René", "Dupuis", "Droit", true);
-        SubscriptionsPerson person2 = new SubscriptionsPerson(bitmap, "Maxence", "Fermier", "Sciences", true);
-        SubscriptionsPerson person3 = new SubscriptionsPerson(bitmap, "Matthieu", "Louis", "Philosophie et lettres", true);
-        SubscriptionsPerson person4 = new SubscriptionsPerson(bitmap, "Florian", "Malfroid", "Informatique", true);
+        SubscriptionsPerson person1 = new SubscriptionsPerson(bitmap, "René", "Dupuis", "Droit", true, "student", 3);
+        SubscriptionsPerson person2 = new SubscriptionsPerson(bitmap, "Maxence", "Fermier", "Sciences", true, "ATG", 5);
+        SubscriptionsPerson person3 = new SubscriptionsPerson(bitmap, "Matthieu", "Louis", "Philosophie et lettres", true, "academic", 2);
+        SubscriptionsPerson person4 = new SubscriptionsPerson(bitmap, "Florian", "Malfroid", "Informatique", true, "scientist", 1);
         all_subscriptions_person.add(person1);
         all_subscriptions_person.add(person2);
         all_subscriptions_person.add(person3);
