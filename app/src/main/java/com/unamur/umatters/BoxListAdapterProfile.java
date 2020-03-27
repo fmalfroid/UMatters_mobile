@@ -47,10 +47,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<User>()), new Choice("4e étage", new ArrayList<User>())), new User("1", "Patrick Heymans", "Academic"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Info", "Matériel"), "Où ajouter une machine à café?", "poll"),
-        new Box(2, (List<Choice>) Arrays.asList(new Choice("yes", new ArrayList<User>()), new Choice("no", new ArrayList<User>())), new User("2", "Anthony Etienne", "Student"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Général", "BUMP", "Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "yes_no"),
-        new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Florian Malfroid", "Student"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Info", "Matériel"), "Changer les souris du i21", "text"),
-        new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Joséphine AngeGardien", "ATG"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("Général", "Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "text")
+        new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "poll"),
+        new Box(2, (List<Choice>) Arrays.asList(new Choice("yes", new ArrayList<String>()), new Choice("no", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "yes_no"),
+        new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "text"),
+        new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "text")
     );
 
     @Override

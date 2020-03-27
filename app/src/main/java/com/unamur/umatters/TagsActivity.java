@@ -176,7 +176,7 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(1).setChecked(true);
+        navigationView.getMenu().getItem(2).setChecked(true);
     }
 
     private void initSpinners(List<Spinner> spinners, List<String> data){

@@ -8,12 +8,12 @@ public class Box {
     private List<Choice> choices;
     private User creator;
     private String date;
-    private ArrayList<User> likes;
+    private ArrayList<String> likes;
     private List<String> tags;
     private String title;
     private String type;
 
-    public Box(int id, List<Choice> choices, User creator, String date, ArrayList<User> likes, List<String> tags, String title, String type) {
+    public Box(int id, List<Choice> choices, User creator, String date, ArrayList<String> likes, List<String> tags, String title, String type) {
         this.id = id;
         this.choices = choices;
         this.creator = creator;
@@ -41,7 +41,7 @@ public class Box {
         return date;
     }
 
-    public ArrayList<User> getLikes() {
+    public ArrayList<String> getLikes() {
         return likes;
     }
 

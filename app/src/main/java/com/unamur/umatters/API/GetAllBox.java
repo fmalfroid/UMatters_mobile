@@ -33,10 +33,10 @@ public class GetAllBox extends AsyncTask<String, String, String> {
     private BoxListAdapter adapter = null;
 
 
-    public Box testbox1 = new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<User>()), new Choice("4e étage", new ArrayList<User>())), new User("1", "Patrick Heymans", "Académique"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "poll");
-    public Box testBox2 = new Box(2, (List<Choice>) Arrays.asList(new Choice("yes", new ArrayList<User>()), new Choice("no", new ArrayList<User>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "yes_no");
-    public Box testBox3 = new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Florian Malfroid", "Etudiant"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "text");
-    public Box testBox4 = new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Joséphine AngeGardien", "ATG"), "28-02-2020", new ArrayList<User>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "text");
+    public Box testbox1 = new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Patrick Heymans", "Académique"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "poll");
+    public Box testBox2 = new Box(2, (List<Choice>) Arrays.asList(new Choice("yes", new ArrayList<String>()), new Choice("no", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "yes_no");
+    public Box testBox3 = new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Florian Malfroid", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "text");
+    public Box testBox4 = new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Joséphine AngeGardien", "ATG"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "text");
 
     public GetAllBox(){
         //set context variables if required
@@ -99,12 +99,13 @@ public class GetAllBox extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        /*adapter.addData(testBox2);
+        adapter.addData(testbox1);
+        adapter.addData(testBox2);
         adapter.addData(testBox3);
-        adapter.addData(testBox4);*/
+        adapter.addData(testBox4);
         try {
             JSONObject jsonObj = new JSONObject(result);  // crée le json
-            Log.d("Success: ", String.valueOf(jsonObj.getBoolean("succes")));
+            Log.d("Success: ", String.valueOf(jsonObj.getBoolean("success")));
             Log.d("Count: ", String.valueOf(jsonObj.getInt("count")));
             Log.d("Data: ", jsonObj.getJSONArray("data").toString()); // récupère un champ du json
             // TODO : Pour toutes les box dans data: créer la box et l'ajouter à l'adapter
@@ -123,7 +124,9 @@ public class GetAllBox extends AsyncTask<String, String, String> {
         ArrayList<Choice> choices = new ArrayList<Choice>();
         choices.add(new Choice());
 
-        return Arrays.asList(new Choice());
+        //json.
+
+        return choices;
     }
 
     private User createUserFromJson(JSONObject json) {
@@ -151,7 +154,7 @@ public class GetAllBox extends AsyncTask<String, String, String> {
         List<Choice> choices;
         User creator;
         String date;
-        ArrayList<User> likes;
+        ArrayList<String> likes;
         List<String> tags;
         String title;
         String type;
@@ -167,20 +170,22 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             }
 
             //Creator
-            creator = createUserFromJson(json.getJSONObject("creator"));
+            creator = createUserFromJson(json.getJSONObject("createur"));
 
             //Date
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-            Date dateNF = dateFormat.parse(json.getString("date_cration"));
+            Date dateNF = dateFormat.parse(json.getString("date_creation"));
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             date = formatter.format(dateNF);
 
             //likes
-            likes = new ArrayList<User>();
-            JSONArray jArrayLikes = json.getJSONArray("like");
-            if (jArrayLikes != null) {
-                for (int i=0;i<jArrayLikes.length();i++){
-                    likes.add(createUserFromJson(jArrayLikes.getJSONObject(i)));
+            likes = new ArrayList<String>();
+            if (!json.isNull("like")) {
+                JSONArray jArrayLikes = json.getJSONArray("like");
+                if (jArrayLikes != null) {
+                    for (int i = 0; i < jArrayLikes.length(); i++) {
+                        likes.add(jArrayLikes.getString(i));
+                    }
                 }
             }
 

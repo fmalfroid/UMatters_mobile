@@ -6,14 +6,14 @@ import java.util.List;
 public class Choice {
 
     private String name;
-    private ArrayList<User> users;
+    private ArrayList<String> users;
 
     public  Choice() {
         this.name = "null";
-        this.users = new ArrayList<User>();
+        this.users = new ArrayList<String>();
     }
 
-    public Choice(String name, ArrayList<User> users) {
+    public Choice(String name, ArrayList<String> users) {
         this.name = name;
         this.users = users;
     }
@@ -22,7 +22,7 @@ public class Choice {
         return name;
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<String> getUsers() {
         return users;
     }
 }

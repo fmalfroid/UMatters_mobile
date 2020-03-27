@@ -46,6 +46,6 @@ public class CallAPIPost extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+        System.out.println(result);
     }
 }
