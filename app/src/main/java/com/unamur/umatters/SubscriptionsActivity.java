@@ -3,25 +3,33 @@ package com.unamur.umatters;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-public class FilterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
+public class SubscriptionsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter);
+        setContentView(R.layout.activity_subscriptions);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -37,18 +45,18 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
                 Intent runMain = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(runMain);
                 finish();
-
             }
         });
 
-        //Go back button
-        ImageView img_arrowback = findViewById(R.id.pop_go_back);
-        img_arrowback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        /*
+        //Init of the recyclerView
+        final RecyclerView rv = findViewById(R.id.archives_box_list);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(new BoxListAdapter());
+        */
+
+        //Init tabs
+        initTabs();
     }
 
     @Override
@@ -107,12 +115,6 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
             startActivity(runMain);
             finish();
 
-        } else if (id == R.id.nav_subscriptions) {
-
-            Intent runMain = new Intent(getApplicationContext(), SubscriptionsActivity.class);
-            startActivity(runMain);
-            finish();
-
         } else if (id == R.id.nav_interets) {
 
         } else if (id == R.id.nav_share) {
@@ -135,5 +137,31 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void initTabs(){
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_box));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_abonnements));
+
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final SubscriptionsPagerAdapter adapter = new SubscriptionsPagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
     }
 }

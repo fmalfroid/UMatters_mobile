@@ -119,4 +119,10 @@
     <!-- Profile -->
     <string name="followers">Abonnés</string>
     <string name="following">Abonnements</string>
+
+    <!-- Activity subscriptions -->
+    <string name="unsubscribe">Se désabonner</string>
+    <string name="subscribe">S\'abonner</string>
+    <string name="my_subscriptions">Mes abonnements</string>
+    <string name="subscriptions_box">Boîtes d\'abonnements</string>
 </resources>

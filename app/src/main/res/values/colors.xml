@@ -9,7 +9,11 @@
     <color name="lightGrey">#B3B3B3</color>
     <color name="darkGrey">#8C8C8C</color>
     <color name="red">#EB0000</color>
+    <color name="darkRed">#cc0000</color>
     <color name="light_green">#5dbc29</color>
+
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
 
     <color name="transparent20">#20000000</color>
     <color name="transparent">#00000000</color>

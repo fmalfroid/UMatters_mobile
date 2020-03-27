@@ -31,15 +31,6 @@ public class ArchivesRefusedFragment extends Fragment {
         SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(getContext(), data);
         council_choice.setAdapter(adapter);
 
-        //Go back button
-        ImageView img_arrowback = v.findViewById(R.id.pop_go_back);
-        img_arrowback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
-
         return v;
     }
 

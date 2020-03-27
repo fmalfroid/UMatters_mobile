@@ -1,0 +1,61 @@
+package com.unamur.umatters;
+
+import android.widget.ArrayAdapter;
+
+import android.app.Activity;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import java.util.ArrayList;
+
+public class SubscriptionsListAdapter extends ArrayAdapter<String> {
+
+    private final Activity context;
+    private final ArrayList<SubscriptionsPerson> all_subscriptions_person;
+
+    public SubscriptionsListAdapter(Activity context, ArrayList<SubscriptionsPerson> all_subscriptions_person) {
+        super(context, R.layout.subscriptions_list_item);
+
+        this.context=context;
+        this.all_subscriptions_person = all_subscriptions_person;
+
+    }
+
+    @Override
+    public int getCount() {
+        return all_subscriptions_person.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public View getView(int position,View rowView,ViewGroup parent) {
+
+        if (rowView== null){
+            LayoutInflater inflater=context.getLayoutInflater();
+            rowView=inflater.inflate(R.layout.subscriptions_list_item, null,true);
+        }
+
+        ImageView image = (ImageView) rowView.findViewById(R.id.img);
+        TextView name = (TextView) rowView.findViewById(R.id.txt_name);
+        TextView faculty = (TextView) rowView.findViewById(R.id.txt_faculty);
+        ToggleButton subscription = (ToggleButton) rowView.findViewById(R.id.tgbtn_subscription);
+
+        SubscriptionsPerson current_person = all_subscriptions_person.get(position);
+        image.setImageBitmap(current_person.getImage());
+        String full_name = current_person.getFirstname() + " " + current_person.getSurname();
+        name.setText(full_name);
+        faculty.setText(current_person.getFaculty());
+        subscription.setChecked(current_person.isSubscribed());
+
+        return rowView;
+
+    }
+}

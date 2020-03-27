@@ -9,6 +9,7 @@
     <string name="title_activity_modify_box" translatable="false">title_activity_modify_box</string>
     <string name="title_activity_filter" translatable="false">title_activity_filter</string>
     <string name="title_activity_tags" translatable="false">title_activity_tags</string>
+    <string name="title_activity_subscriptions" translatable="false">title_activity_subscriptions</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -132,4 +133,10 @@
     <!-- Profile -->
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+
+    <!-- Activity subscriptions -->
+    <string name="unsubscribe">Unsubscribe</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="my_subscriptions">My subscriptions</string>
+    <string name="subscriptions_box">Subscriptions box</string>
 </resources>

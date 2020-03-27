@@ -130,6 +130,10 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
 
         } else if (id == R.id.nav_subscriptions) {
 
+            Intent runMain = new Intent(getApplicationContext(), SubscriptionsActivity.class);
+            startActivity(runMain);
+            finish();
+
         } else if (id == R.id.nav_interets) {
 
         } else if (id == R.id.nav_share) {

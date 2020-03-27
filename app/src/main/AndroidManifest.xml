@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SubscriptionsActivity"
+            android:label="@string/title_activity_subscriptions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".TagsActivity"
             android:label="@string/title_activity_tags"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -154,6 +154,10 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_subscriptions) {
 
+            Intent runMain = new Intent(getApplicationContext(), SubscriptionsActivity.class);
+            startActivity(runMain);
+            finish();
+
         } else if (id == R.id.nav_interets) {
 
         } else if (id == R.id.nav_share) {
