@@ -3,7 +3,6 @@ package com.unamur.umatters;
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -209,7 +208,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             //Nombre de likes de la box
             nb_likes.setText(String.valueOf(box.getLikes().size()));
 
-            if (box.getType().equals("poll")) {
+            if (box.getType().equals("choix_multiple")) {
                 //Pour tous les choix possibles du sondage
                 for (int i=0; i<box.getChoices().size(); i++) {
                     LinearLayout ll = new LinearLayout(context);
@@ -235,14 +234,14 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     poll.addView(ll);
                     poll.invalidate();
                 }
-            } else if (box.getType().equals("yes_no")) {
+            } else if (box.getType().equals("oui_non")) {
                 float pct_yes;
                 float pct_no;
 
                 float nb_yes;
                 float nb_no;
 
-                if (box.getChoices().get(0).getName().equals("yes")) {
+                if (box.getChoices().get(0).getName().equals("oui")) {
                     nb_yes = (box.getChoices().get(0).getUsers().size());
                     nb_no = (box.getChoices().get(1).getUsers().size());
                 } else {

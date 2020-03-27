@@ -1,8 +1,6 @@
 package com.unamur.umatters;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -47,10 +45,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "poll"),
-        new Box(2, (List<Choice>) Arrays.asList(new Choice("yes", new ArrayList<String>()), new Choice("no", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "yes_no"),
-        new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "text"),
-        new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "text")
+        new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple"),
+        new Box(2, (List<Choice>) Arrays.asList(new Choice("oui", new ArrayList<String>()), new Choice("non", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "oui_non"),
+        new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "textuelle"),
+        new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle")
     );
 
     @Override
@@ -269,7 +267,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             //Nombre de likes de la box
             nb_likes.setText(String.valueOf(box.getLikes().size()));
 
-            if (box.getType().equals("poll")) {
+            if (box.getType().equals("choix_multiple")) {
                 //Pour tous les choix possibles du sondage
                 for (int i=0; i<box.getChoices().size(); i++) {
                     LinearLayout ll = new LinearLayout(context);
@@ -295,14 +293,14 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                     poll.addView(ll);
                     poll.invalidate();
                 }
-            } else if (box.getType().equals("yes_no")) {
+            } else if (box.getType().equals("oui_non")) {
                 float pct_yes;
                 float pct_no;
 
                 float nb_yes;
                 float nb_no;
 
-                if (box.getChoices().get(0).getName().equals("yes")) {
+                if (box.getChoices().get(0).getName().equals("oui")) {
                     nb_yes = (box.getChoices().get(0).getUsers().size());
                     nb_no = (box.getChoices().get(1).getUsers().size());
                 } else {

@@ -1,10 +1,8 @@
 package com.unamur.umatters.API;
 
 import android.os.AsyncTask;
-
-import java.io.BufferedOutputStream;
+import android.util.Log;
 import java.io.BufferedWriter;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,25 +20,28 @@ public class CallAPIPost extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        String urlString = params[0]; // URL to call
-        String data = params[1]; //data to post
-        OutputStream out = null;
-
         try {
-            URL url = new URL(urlString);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            out = new BufferedOutputStream(urlConnection.getOutputStream());
+            URL url = new URL(params[0]);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-            writer.write(data);
-            writer.flush();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Accept", "*/*");
+
+            connection.setDoOutput(true);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+            writer.write(params[1]);
             writer.close();
-            out.close();
 
-            urlConnection.connect();
+            connection.connect();
+
+            // Response: 400
+            Log.e("Response", connection.getResponseMessage() + "");
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Log.e(e.toString(), "Something with request");
         }
+
         return null;
     }
 
