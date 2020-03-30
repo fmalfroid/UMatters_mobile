@@ -1,7 +1,19 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.unamur.umatters.R;
+import com.unamur.umatters.TagsSetupActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,10 +25,12 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class CallAPIPost extends AsyncTask<String, String, String> {
+public class Login extends AsyncTask<String, String, String> {
 
-    public CallAPIPost(){
-        //set context variables if required
+    private Context context = null;
+
+    public Login(Context context){
+        this.context = context;
     }
 
     @Override
@@ -28,6 +42,7 @@ public class CallAPIPost extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         String JsonResponse = null;
         String JsonDATA = params[1];
+        System.out.println(params[1]);
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -101,5 +116,24 @@ public class CallAPIPost extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         System.out.println(result);
+        TextView loginError = ((Activity) context).findViewById(R.id.login_error);
+        if (result == null) {
+            Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                JSONObject jsonObj = new JSONObject(result);
+                boolean success = jsonObj.getBoolean("success");
+                String message = jsonObj.getString("message");
+                if (success) {
+                    Intent runApp = new Intent(context, TagsSetupActivity.class);
+                    context.startActivity(runApp);
+                    ((Activity) context).finish();
+                } else {
+                    loginError.setVisibility(View.VISIBLE);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

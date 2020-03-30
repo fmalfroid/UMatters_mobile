@@ -144,4 +144,6 @@
     <string name="subscriptions_box">Subscriptions box</string>
     <string name="reply">Reply</string>
     <string name="replies">replies</string>
+    <string name="email_address">Email address</string>
+    <string name="login_error">Email or password incorrect</string>
 </resources>

@@ -129,4 +129,6 @@
     <string name="subscriptions_box">Boîtes d\'abonnements</string>
     <string name="replies">" réponses"</string>
     <string name="reply">Répondre</string>
+    <string name="email_address">Adresse Email</string>
+    <string name="login_error">Email ou mot de passe incorrecte</string>
 </resources>
