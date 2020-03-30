@@ -29,8 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.login_activity_email);
         password = findViewById(R.id.login_activity_password);
-        loginError = findViewById(R.id.login_error);
-        loginError.setVisibility(View.INVISIBLE);
 
         loginButton = findViewById(R.id.login_button);
 

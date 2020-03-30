@@ -46,16 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" />
 
-        <TextView
-            android:id="@+id/login_error"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:text="@string/login_error"
-            android:textAlignment="center"
-            android:textColor="#FF0000" />
-
         <EditText
             android:id="@+id/login_activity_email"
             android:layout_width="match_parent"

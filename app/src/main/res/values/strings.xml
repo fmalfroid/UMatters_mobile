@@ -146,4 +146,9 @@
     <string name="replies">replies</string>
     <string name="email_address">Email address</string>
     <string name="login_error">Email or password incorrect</string>
+
+    <!-- Error message -->
+    <string name="error_email">Incorrect email address.</string>
+    <string name="error_password">Incorrect password.</string>
+    <string name="error_empty_field">Please fill every fields.</string>
 </resources>

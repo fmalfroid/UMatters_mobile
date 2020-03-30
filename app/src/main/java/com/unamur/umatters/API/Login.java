@@ -116,20 +116,35 @@ public class Login extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         System.out.println(result);
-        TextView loginError = ((Activity) context).findViewById(R.id.login_error);
+
         if (result == null) {
             Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
         } else {
             try {
+                //Recuperation de la reponse de l'API sous forme de json
                 JSONObject jsonObj = new JSONObject(result);
                 boolean success = jsonObj.getBoolean("success");
                 String message = jsonObj.getString("message");
+
+                //Login succeed
                 if (success) {
                     Intent runApp = new Intent(context, TagsSetupActivity.class);
                     context.startActivity(runApp);
                     ((Activity) context).finish();
-                } else {
-                    loginError.setVisibility(View.VISIBLE);
+                }
+                //Login failed
+                else {
+                    switch(message){
+                        case "Utilisateur incorrect":
+                            Toast.makeText(context, R.string.error_email, Toast.LENGTH_SHORT).show();
+                            break;
+                        case "Mot de passe incorrect":
+                            Toast.makeText(context, R.string.error_password, Toast.LENGTH_SHORT).show();
+                            break;
+                        case "ResponseError: Key may not be empty":
+                            Toast.makeText(context, R.string.error_empty_field, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -53,8 +53,8 @@
 
                     <ImageView
                         android:id="@+id/img_role"
-                        android:layout_width="27dp"
-                        android:layout_height="27dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_role_student"
                         android:layout_gravity="top|center_horizontal"
                         />
@@ -69,6 +69,7 @@
                         android:singleLine="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
+                        android:textStyle="bold"
                         />
 
                 </LinearLayout>

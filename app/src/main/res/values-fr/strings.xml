@@ -131,4 +131,9 @@
     <string name="reply">Répondre</string>
     <string name="email_address">Adresse Email</string>
     <string name="login_error">Email ou mot de passe incorrecte</string>
+
+    <!-- Error message -->
+    <string name="error_email">Adresse email incorrecte.</string>
+    <string name="error_password">Mot de passe incorrecte.</string>
+    <string name="error_empty_field">S\'il vous plaît, remplissez tous les champs.</string>
 </resources>
