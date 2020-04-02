@@ -22,6 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.DeleteBox;
+import com.unamur.umatters.API.Login;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -136,7 +142,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
 
-        public void display(Box box) {
+        public void display(final Box box) {
 
             List<String> typesTags = Arrays.asList(
                 "#General",
@@ -217,8 +223,17 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                                     btn_delete.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            //TODO : Delete the box
-                                            Toast.makeText(context, "This box has been deleted.", Toast.LENGTH_SHORT).show();
+
+                                            JSONObject loginJson = new JSONObject();
+                                            try {
+                                                loginJson.put("id", String.valueOf(box.getId()));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                            DeleteBox deleteBox = new DeleteBox(context);
+                                            deleteBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/delete", String.valueOf(loginJson));
+
                                             dialog.dismiss();
                                         }
                                     });

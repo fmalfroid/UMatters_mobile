@@ -147,8 +147,12 @@
     <string name="email_address">Email address</string>
     <string name="login_error">Email or password incorrect</string>
 
+    <!-- Success message -->
+    <string name="success_delete_box">Box successfully deleted.</string>
+
     <!-- Error message -->
     <string name="error_email">Incorrect email address.</string>
     <string name="error_password">Incorrect password.</string>
     <string name="error_empty_field">Please fill every fields.</string>
+    <string name="error_delete_box">Error while deleting this box.</string>
 </resources>
