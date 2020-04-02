@@ -43,6 +43,10 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                CurrentUser user = CurrentUser.getCurrentUser();
+                user.setEmail(email.getText().toString());
+                user.setPassword(password.getText().toString());
+
                 Login login = new Login(LoginActivity.this);
                 login.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/connect", String.valueOf(loginJson));
 
