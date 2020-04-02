@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unamur.umatters.CurrentUser;
 import com.unamur.umatters.R;
 import com.unamur.umatters.TagsSetupActivity;
 
@@ -128,6 +129,15 @@ public class Login extends AsyncTask<String, String, String> {
 
                 //Login succeed
                 if (success) {
+
+                    CurrentUser user = CurrentUser.getCurrentUser();
+                    String email = user.getEmail();
+
+                    //JSONObject jsonEmail = new JSONObject();
+                    //jsonEmail.put("email", email);
+                    SetCurrentUser setUser = new SetCurrentUser();
+                    setUser.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/email?email=" + email);
+
                     Intent runApp = new Intent(context, TagsSetupActivity.class);
                     context.startActivity(runApp);
                     ((Activity) context).finish();
