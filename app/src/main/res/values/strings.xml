@@ -155,4 +155,7 @@
     <string name="error_password">Incorrect password.</string>
     <string name="error_empty_field">Please fill every fields.</string>
     <string name="error_delete_box">Error while deleting this box.</string>
+    <string name="error_box_empty_title">Title should not be empty.</string>
+    <string name="error_box_empty_description">Description should not be empty.</string>
+    <string name="error_at_least_2_multiple_choice">Multiple choice box must have at least 2 choices specified.</string>
 </resources>

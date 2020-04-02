@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -36,6 +37,15 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
 
     LinearLayout ll_other_tags;
     ImageButton addOtherTag;
+
+    private EditText edtxt_title;
+    private EditText edtxt_description;
+    private LinearLayout multiple_choice_view;
+    private RadioButton rdbtn_textual;
+    private RadioButton rdbtn_yes_no;
+    private RadioButton rdbtn_multiple_choice;
+    private RadioGroup rdgrp_box_type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +70,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
             }
         });
 
-        //Go back button
+        //Init
         ImageView img_arrowback = findViewById(R.id.pop_go_back);
         img_arrowback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +78,15 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                 onBackPressed();
             }
         });
+        ImageView img_ok = findViewById(R.id.ok_btn);
+        edtxt_title = findViewById(R.id.edtxt_title);
+        edtxt_description = findViewById(R.id.edtxt_description);
+        multiple_choice_view = findViewById(R.id.multiple_choice_view);
+        rdgrp_box_type = findViewById(R.id.rdgrp_box_type);
+        rdbtn_textual = findViewById(R.id.rdbtn_textual);
+        rdbtn_yes_no = findViewById(R.id.rdbtn_yes_no);
+        rdbtn_multiple_choice = findViewById(R.id.rdbtn_multiple_choice);
+
 
         //Init radiogroup box type
         initBoxTypes();
@@ -76,7 +95,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         initMultipleChoice();
 
         //Init of the spinner
-        SpinnerWrapContent typeTag = (SpinnerWrapContent) findViewById(R.id.typeTag);
+        SpinnerWrapContent typeTag = (SpinnerWrapContent) findViewById(R.id.spinner_main_tag);
         List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.typeTags)));
         SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
         typeTag.setAdapter(adapter);
@@ -84,7 +103,64 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         //Init other tags fields
         initOtherTags();
 
+        //Create box
+        img_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Check entered fields
+                boolean everythingOK = checkBoxInput();
+                //If everything ok than create box
+                if (everythingOK){
 
+                }
+            }
+        });
+    }
+
+    private boolean checkBoxInput(){
+
+        //Check title
+        String title = edtxt_title.getText().toString();
+        boolean titleAtLeastOne = title.matches(".*[a-zA-Z0-9]+.*");
+        //--Field is empty or only spaces
+        if (!(titleAtLeastOne && title.length() != 0)) {
+            Toast.makeText(CreateBoxActivity.this, R.string.error_box_empty_title, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        //Check description
+        String description = edtxt_description.getText().toString();
+        boolean descriptionAtLeastOne = title.matches(".*[a-zA-Z0-9]+.*");
+        //--Field is empty or only spaces
+        if (!(descriptionAtLeastOne && description.length() != 0)) {
+            Toast.makeText(CreateBoxActivity.this, R.string.error_box_empty_description, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        //Check box type
+        //--If box type is multiple choice, at least 2 choice have to be specified.
+        if (rdgrp_box_type.getCheckedRadioButtonId() == R.id.rdbtn_multiple_choice){
+            int nbr_choice = ll_multiple_choices.getChildCount();
+
+            //Verifier que les 2 premiers choix sont remplis
+            EditText choice1 = findViewById(R.id.first_choice);
+            EditText choice2 = findViewById(R.id.second_choice);
+            boolean choice1AtLeastOne = choice1.getText().toString().matches(".*[a-zA-Z0-9]+.*");
+            boolean choice2AtLeastOne = choice2.getText().toString().matches(".*[a-zA-Z0-9]+.*");
+            if (!(choice1AtLeastOne && choice2AtLeastOne && choice1.length()!= 0 && choice2.length()!=0)){
+                Toast.makeText(CreateBoxActivity.this, R.string.error_at_least_2_multiple_choice, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            //Pour chaque edittext choix ajouté en plus, vérifier s'ils ne sont pas vide.
+            //Bon là compliqué vu qu'ils n'ont pas d'id... Mais j'ai leur nombre que j'ai récupérer plus haut.
+
+        }
+
+
+        //Check main tag
+        //Check optional tag
+        return true;
     }
 
     @Override
@@ -174,12 +250,6 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void initBoxTypes(){
-
-        final LinearLayout multiple_choice_view = findViewById(R.id.multiple_choice_view);
-
-        RadioButton rdbtn_textual = findViewById(R.id.rdbtn_textual);
-        RadioButton rdbtn_yes_no = findViewById(R.id.rdbtn_yes_no);
-        RadioButton rdbtn_multiple_choice = findViewById(R.id.rdbtn_multiple_choice);
 
         //Textual
         rdbtn_textual.setChecked(true);

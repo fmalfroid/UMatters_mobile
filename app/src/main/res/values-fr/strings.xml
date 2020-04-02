@@ -140,4 +140,8 @@
     <string name="error_password">Mot de passe incorrecte.</string>
     <string name="error_empty_field">S\'il vous plaît, remplissez tous les champs.</string>
     <string name="error_delete_box">Erreur lors de la suppression de la box.</string>
+    <string name="error_box_empty_title">Le titre ne doit pas être vide.</string>
+    <string name="error_box_empty_description">La description ne doit pas être vide.</string>
+    <string name="error_at_least_2_multiple_choice">Les box de type choix multiples doivent avoir au moins 2 choix spécifiés.</string>
+
 </resources>
