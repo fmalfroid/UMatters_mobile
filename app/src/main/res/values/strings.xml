@@ -158,4 +158,7 @@
     <string name="error_box_empty_title">Title should not be empty.</string>
     <string name="error_box_empty_description">Description should not be empty.</string>
     <string name="error_at_least_2_multiple_choice">Multiple choice box must have at least 2 choices specified.</string>
+    <string name="error_box_choice_empty">Choice should not be empty.</string>
+    <string name="error_type_tag_empty">Type tag is mandatory.</string>
+    <string name="error_optional_tag_empty">Tag should not be empty.</string>
 </resources>

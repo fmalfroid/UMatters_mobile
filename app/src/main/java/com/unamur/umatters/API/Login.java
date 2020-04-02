@@ -136,7 +136,7 @@ public class Login extends AsyncTask<String, String, String> {
                     //JSONObject jsonEmail = new JSONObject();
                     //jsonEmail.put("email", email);
                     SetCurrentUser setUser = new SetCurrentUser();
-                    setUser.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/email?email=" + email);
+                    setUser.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/" + email);
 
                     Intent runApp = new Intent(context, TagsSetupActivity.class);
                     context.startActivity(runApp);

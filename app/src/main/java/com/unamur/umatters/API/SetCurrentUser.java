@@ -77,37 +77,53 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         System.out.println(result);
         CurrentUser user = CurrentUser.getCurrentUser();
-        try {
-            JSONObject jsonResultObj = new JSONObject(result);
-            if (jsonResultObj.getBoolean("success")) {
-                JSONObject jsonObj = jsonResultObj.getJSONArray("data").getJSONObject(0);
+        if (result == null) {
+            System.out.println("An Error Occurred");
+        } else {
+            try {
+                JSONObject jsonResultObj = new JSONObject(result);
+                if (jsonResultObj.getBoolean("success")) {
+                    JSONObject jsonObj = jsonResultObj.getJSONArray("data").getJSONObject(0);
 
-                String email = jsonObj.getString("email");
-                String firstname = jsonObj.getString("firstname");
-                String lastname = jsonObj.getString("lastname");
-                String role = jsonObj.getString("role");
-                int participation = jsonObj.getInt("participation");
-                ArrayList<String> box = new ArrayList<>();
-                JSONArray jArrayBox = jsonObj.getJSONArray("box");
-                if (jArrayBox != null) {
-                    for (int i = 0; i < jArrayBox.length(); i++) {
-                        box.add(jArrayBox.getString(i));
+                    String email = jsonObj.getString("email");
+                    String firstname = jsonObj.getString("firstname");
+                    String lastname = jsonObj.getString("lastname");
+                    String role = jsonObj.getString("role");
+                    int participation = jsonObj.getInt("participation");
+                    ArrayList<String> box = new ArrayList<>();
+                    if (!jsonObj.isNull("box")) {
+                        JSONArray jArrayBox = jsonObj.getJSONArray("box");
+                        if (jArrayBox != null) {
+                            for (int i = 0; i < jArrayBox.length(); i++) {
+                                box.add(jArrayBox.getString(i));
+                            }
+                        }
                     }
-                }
-                JSONObject notifications = jsonObj.getJSONObject("notif");
-                JSONObject sanctions = jsonObj.getJSONObject("sanctions");
+                    JSONObject notifications;
+                    if (!jsonObj.isNull("notif")) {
+                        notifications = jsonObj.getJSONObject("notif");
+                    } else {
+                        notifications = new JSONObject();
+                    }
+                    JSONObject sanctions;
+                    if (!jsonObj.isNull("sanctions")) {
+                        sanctions = jsonObj.getJSONObject("sanctions");
+                    } else {
+                        sanctions = new JSONObject();
+                    }
 
-                user.setEmail(email);
-                user.setFirstname(firstname);
-                user.setLastname(lastname);
-                user.setRole(role);
-                user.setParticipation(participation);
-                user.setBox(box);
-                user.setNotifications(notifications);
-                user.setSanctions(sanctions);
+                    user.setEmail(email);
+                    user.setFirstname(firstname);
+                    user.setLastname(lastname);
+                    user.setRole(role);
+                    user.setParticipation(participation);
+                    user.setBox(box);
+                    user.setNotifications(notifications);
+                    user.setSanctions(sanctions);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 }

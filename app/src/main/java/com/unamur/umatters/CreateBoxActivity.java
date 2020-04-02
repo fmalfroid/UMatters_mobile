@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -45,7 +46,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
     private RadioButton rdbtn_yes_no;
     private RadioButton rdbtn_multiple_choice;
     private RadioGroup rdgrp_box_type;
-
+    private SpinnerWrapContent typeTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +96,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         initMultipleChoice();
 
         //Init of the spinner
-        SpinnerWrapContent typeTag = (SpinnerWrapContent) findViewById(R.id.spinner_main_tag);
+        typeTag = (SpinnerWrapContent) findViewById(R.id.spinner_main_tag);
         List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.typeTags)));
         SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
         typeTag.setAdapter(adapter);
@@ -130,7 +131,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
 
         //Check description
         String description = edtxt_description.getText().toString();
-        boolean descriptionAtLeastOne = title.matches(".*[a-zA-Z0-9]+.*");
+        boolean descriptionAtLeastOne = description.matches(".*[a-zA-Z0-9]+.*");
         //--Field is empty or only spaces
         if (!(descriptionAtLeastOne && description.length() != 0)) {
             Toast.makeText(CreateBoxActivity.this, R.string.error_box_empty_description, Toast.LENGTH_SHORT).show();
@@ -154,12 +155,56 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
 
             //Pour chaque edittext choix ajouté en plus, vérifier s'ils ne sont pas vide.
             //Bon là compliqué vu qu'ils n'ont pas d'id... Mais j'ai leur nombre que j'ai récupérer plus haut.
+            for (int i=0; i<nbr_choice; i++) {
+                if (ll_multiple_choices.getChildAt(i) instanceof LinearLayout) {
+                    LinearLayout ll_choice = (LinearLayout) ll_multiple_choices.getChildAt(i);
+                    EditText edtxt_choice = (EditText) ll_choice.getChildAt(0);
+
+                    String choice = edtxt_choice.getText().toString();
+                    boolean choiceAtLeastOne = choice.matches(".*[a-zA-Z0-9]+.*");
+                    //--Field is empty or only spaces
+                    if (!(choiceAtLeastOne && choice.length() != 0)) {
+                        Toast.makeText(CreateBoxActivity.this, R.string.error_box_choice_empty, Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
 
         }
 
-
         //Check main tag
+        String type_tag = typeTag.getSelectedItem().toString();
+        boolean tagAtLeastOne = type_tag.matches(".*[a-zA-Z0-9]+.*");
+        //--Field is empty or only spaces
+        if (!(tagAtLeastOne && type_tag.length() != 0)) {
+            Toast.makeText(CreateBoxActivity.this, R.string.error_type_tag_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         //Check optional tag
+        int nbr_tags = ll_other_tags.getChildCount();
+        EditText tag1 = findViewById(R.id.optional_tag_1);
+        boolean tag1AtLeastOne = tag1.getText().toString().matches(".*[a-zA-Z0-9]+.*");
+        if (!(tag1AtLeastOne && tag1.length()!= 0)){
+            Toast.makeText(CreateBoxActivity.this, R.string.error_optional_tag_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        for (int i=0; i<nbr_tags; i++) {
+            if (ll_other_tags.getChildAt(i) instanceof LinearLayout) {
+                LinearLayout ll_tag = (LinearLayout) ll_other_tags.getChildAt(i);
+                EditText edtxt_tag = (EditText) ll_tag.getChildAt(0);
+
+                String tag = edtxt_tag.getText().toString();
+                boolean optTagAtLeastOne = tag.matches(".*[a-zA-Z0-9]+.*");
+                //--Field is empty or only spaces
+                if (!(optTagAtLeastOne && tag.length() != 0)) {
+                    Toast.makeText(CreateBoxActivity.this, R.string.error_optional_tag_empty, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 

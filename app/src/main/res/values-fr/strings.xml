@@ -143,5 +143,8 @@
     <string name="error_box_empty_title">Le titre ne doit pas être vide.</string>
     <string name="error_box_empty_description">La description ne doit pas être vide.</string>
     <string name="error_at_least_2_multiple_choice">Les box de type choix multiples doivent avoir au moins 2 choix spécifiés.</string>
+    <string name="error_box_choice_empty">Le choix ne doit pas être vide.</string>
+    <string name="error_type_tag_empty">Le tag de type est obligatoire.</string>
+    <string name="error_optional_tag_empty">Le tag ne doit pas etre vide.</string>
 
 </resources>
