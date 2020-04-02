@@ -148,12 +148,14 @@
     <string name="login_error">Email or password incorrect</string>
 
     <!-- Success message -->
+    <string name="success_add_box">Box successfully added.</string>
     <string name="success_delete_box">Box successfully deleted.</string>
 
     <!-- Error message -->
     <string name="error_email">Incorrect email address.</string>
     <string name="error_password">Incorrect password.</string>
     <string name="error_empty_field">Please fill every fields.</string>
+    <string name="error_add_box">Error while adding this box.</string>
     <string name="error_delete_box">Error while deleting this box.</string>
     <string name="error_box_empty_title">Title should not be empty.</string>
     <string name="error_box_empty_description">Description should not be empty.</string>

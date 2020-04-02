@@ -224,15 +224,15 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                                         @Override
                                         public void onClick(View view) {
 
-                                            JSONObject loginJson = new JSONObject();
+                                            JSONObject boxDeleteJson = new JSONObject();
                                             try {
-                                                loginJson.put("id", String.valueOf(box.getId()));
+                                                boxDeleteJson.put("id", String.valueOf(box.getId()));
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
 
                                             DeleteBox deleteBox = new DeleteBox(context);
-                                            deleteBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/delete", String.valueOf(loginJson));
+                                            deleteBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/delete", String.valueOf(boxDeleteJson));
 
                                             dialog.dismiss();
                                         }

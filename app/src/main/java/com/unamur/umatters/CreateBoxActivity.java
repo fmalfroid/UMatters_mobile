@@ -27,6 +27,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unamur.umatters.API.AddBox;
+import com.unamur.umatters.API.Login;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -112,6 +120,102 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                 boolean everythingOK = checkBoxInput();
                 //If everything ok than create box
                 if (everythingOK){
+
+                    //Get tags
+                    String main_tag = typeTag.getSelectedItem().toString();
+
+                    //Get other tag
+                    JSONArray tag_array = new JSONArray();
+                    int nbr_tags = ll_other_tags.getChildCount();
+                    EditText tag1 = findViewById(R.id.optional_tag_1);
+                    tag_array.put(tag1.getText().toString());
+
+                    for (int i=0; i<nbr_tags; i++) {
+                        if (ll_other_tags.getChildAt(i) instanceof LinearLayout) {
+                            LinearLayout ll_tag = (LinearLayout) ll_other_tags.getChildAt(i);
+                            EditText edtxt_optional_tag = (EditText) ll_tag.getChildAt(0);
+                            tag_array.put(edtxt_optional_tag.getText().toString());
+                        }
+                    }
+
+                    //Get box type and choices
+                    JSONObject choicesJSON = null;
+                    JSONArray empty_choice = new JSONArray();
+                    String type = "";
+                    switch (rdgrp_box_type.getCheckedRadioButtonId()){
+                        case R.id.rdbtn_textual:
+                            type = "textuelle";
+                            break;
+                        case R.id.rdbtn_yes_no:
+                            type = "oui_non";
+                            choicesJSON = new JSONObject();
+                            try {
+                                choicesJSON.put("oui", empty_choice);
+                                choicesJSON.put("non", empty_choice);
+                            } catch (JSONException e){
+                                e.printStackTrace();
+                            }
+                            break;
+
+                        case R.id.rdbtn_multiple_choice:
+                            type = "choix_multiple";
+                            choicesJSON = new JSONObject();
+                            //Get 2 first choices
+                            EditText choice1 = findViewById(R.id.first_choice);
+                            EditText choice2 = findViewById(R.id.second_choice);
+                            try {
+                                choicesJSON.put(choice1.getText().toString(), empty_choice);
+                                choicesJSON.put(choice2.getText().toString(), empty_choice);
+                            } catch (JSONException e){
+                                e.printStackTrace();
+                            }
+                            //Get other choices
+                            int nbr_choice = ll_multiple_choices.getChildCount();
+                            for (int i=0; i<nbr_choice; i++) {
+                                if (ll_multiple_choices.getChildAt(i) instanceof LinearLayout) {
+                                    LinearLayout ll_choice = (LinearLayout) ll_multiple_choices.getChildAt(i);
+                                    EditText edtxt_choice = (EditText) ll_choice.getChildAt(0);
+
+                                    String choice_text = edtxt_choice.getText().toString();
+                                    try {
+                                        choicesJSON.put(choice_text, empty_choice);
+                                    } catch (JSONException e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                            break;
+                    }
+
+                    //Get createur
+                    JSONObject userJSON = new JSONObject();
+                    CurrentUser user = CurrentUser.getCurrentUser();
+                    String email = user.getEmail();
+                    String firstname = user.getFirstname();
+                    String role = user.getRole();
+                    try{
+                        userJSON.put("email", email);
+                        userJSON.put("firstname", firstname);
+                        userJSON.put("role", role);
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+
+                    JSONObject createBoxJson = new JSONObject();
+                    try {
+                        createBoxJson.put("titre", edtxt_title.getText().toString());
+                        createBoxJson.put("description", edtxt_description.getText().toString());
+                        createBoxJson.put("tag", tag_array);
+                        createBoxJson.put("type", type);
+                        createBoxJson.put("createur", userJSON);
+                        createBoxJson.put("choix", choicesJSON);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    AddBox addBox = new AddBox(CreateBoxActivity.this);
+                    addBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box", String.valueOf(createBoxJson));
 
                 }
             }
