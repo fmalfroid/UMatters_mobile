@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.unamur.umatters.API.GetAllBox;
 
@@ -35,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Drawable drw_notif = ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_notifications);
-        toolbar.setOverflowIcon(drw_notif);
 
         //Init
         initFAB();
@@ -104,8 +103,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        //Open notification activity
+        if (id == R.id.action_notifications) {
+
+            Intent runNotifications = new Intent(getApplicationContext(), NotificationsActivity.class);
+            startActivity(runNotifications);
+
             return true;
         }
 

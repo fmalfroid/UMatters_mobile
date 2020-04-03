@@ -63,8 +63,6 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
-        Drawable drw_notif = ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_notifications);
-        toolbar.setOverflowIcon(drw_notif);
         setSupportActionBar(toolbar);
         initNavDrawer(toolbar);
 
@@ -338,8 +336,12 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        //Open notification activity
+        if (id == R.id.action_notifications) {
+
+            Intent runNotifications = new Intent(getApplicationContext(), NotificationsActivity.class);
+            startActivity(runNotifications);
+
             return true;
         }
 
@@ -377,8 +379,6 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
             finish();
 
         } else if (id == R.id.nav_interets) {
-
-        } else if (id == R.id.nav_share) {
 
         }
 

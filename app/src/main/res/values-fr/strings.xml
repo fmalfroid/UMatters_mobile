@@ -15,6 +15,7 @@
     <string name="tags_setup_explanation">Veuillez choisir les tags vous intéressant le plus.\nCela personnalisera votre expérience utilisateur.</string>
     <string name="name">Nom</string>
     <string name="date">Date</string>
+    <string name="hour">Heure</string>
     <string name="question">Question</string>
     <string name="nb_likes">nb j\'aime</string>
     <string name="text">Texte</string>

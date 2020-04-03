@@ -10,6 +10,7 @@
     <string name="title_activity_filter" translatable="false">title_activity_filter</string>
     <string name="title_activity_tags" translatable="false">title_activity_tags</string>
     <string name="title_activity_subscriptions" translatable="false">title_activity_subscriptions</string>
+    <string name="title_activity_notifications" translatable="false">title_notifications_activity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -27,6 +28,7 @@
     <string name="tags_setup_explanation">Please choose the tags that interest you the most.\nThis will personalize your user experience.</string>
     <string name="name">Name</string>
     <string name="date">Date</string>
+    <string name="hour">Hour</string>
     <string name="question">Question</string>
     <string name="nb_likes">nb likes</string>
     <string name="text">Text</string>
@@ -149,6 +151,9 @@
     <string name="replies">replies</string>
     <string name="email_address">Email address</string>
     <string name="login_error">Email or password incorrect</string>
+
+    <!-- Activity Notifications -->
+    <string name="notifications" translatable="false">Notifications</string>
 
     <!-- Success message -->
     <string name="success_add_box">Box successfully added.</string>

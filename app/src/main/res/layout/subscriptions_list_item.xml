@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Jean-Yves Marchal"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="#000"
                         android:singleLine="true"
                         android:layout_gravity="center_vertical"
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Informatique"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/darkGrey"
                     android:singleLine="true"
                     />
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Level 3"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/darkGrey"
                     />
 
@@ -100,13 +100,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:minHeight="30dp"
+                android:minHeight="0dp"
                 android:textOff="@string/subscribe"
                 android:textOn="@string/unsubscribe"
                 android:background="@drawable/button_subscriptions"
                 android:textAllCaps="false"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:padding="5dp"
+                android:textSize="11sp"
                 />
 
         </LinearLayout>

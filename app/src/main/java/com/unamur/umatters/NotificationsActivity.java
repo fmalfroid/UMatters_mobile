@@ -17,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-public class CommentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class NotificationsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment);
+        setContentView(R.layout.activity_notifications);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -40,16 +42,7 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
             }
         });
 
-        //Init of the recyclerView
-        final RecyclerView rv = findViewById(R.id.comment_list);
-        CommentListAdapter adapter = new CommentListAdapter();
-        adapter.addData(new Comment());
-        adapter.addData(new Comment());
-        adapter.addData(new Comment());
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter);
-
-        //Go back button
+        //Init
         ImageView img_arrowback = findViewById(R.id.pop_go_back);
         img_arrowback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +50,20 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
                 onBackPressed();
             }
         });
+
+        //Init recyclerview
+        NotificationsAdapter adapter = new NotificationsAdapter();
+        rv = findViewById(R.id.notifications_list);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(adapter);
+
+        //test data
+        Notif notif1 = new Notif("Le conseil d'administration de la faculté de droit c'est réuni. De nouvelles réponses sont disponibles.", "20:00", "28-02-2020", null);
+        Notif notif2 = new Notif("Patrick Heymans a répondu à votre commentaire.", "20:00", "28-02-2020", null);
+
+        //test data
+        adapter.addData(notif1);
+        adapter.addData(notif2);
     }
 
     @Override
@@ -85,10 +92,6 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
 
         //Open notification activity
         if (id == R.id.action_notifications) {
-
-            Intent runNotifications = new Intent(getApplicationContext(), NotificationsActivity.class);
-            startActivity(runNotifications);
-
             return true;
         }
 
@@ -121,9 +124,11 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
 
         } else if (id == R.id.nav_subscriptions) {
 
-        } else if (id == R.id.nav_interets) {
+            Intent runMain = new Intent(getApplicationContext(), SubscriptionsActivity.class);
+            startActivity(runMain);
+            finish();
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_interets) {
 
         }
 
@@ -137,7 +142,7 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         //Setup nav drawer system
         drawer.addDrawerListener(toggle);

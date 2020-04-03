@@ -18,7 +18,6 @@ public class LoginActivity extends AppCompatActivity {
     private FloatingActionButton loginButton;
     private EditText email;
     private EditText password;
-    private TextView loginError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
