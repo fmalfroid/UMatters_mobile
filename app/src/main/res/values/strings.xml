@@ -59,14 +59,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="search">Search</string>
-    <string name="generalTag">#General</string>
-    <string name="CSTag">#CS</string>
-    <string name="LawTag">#Law</string>
-    <string name="medicineTag">#Medicine</string>
-    <string name="scienceTag">#Sciences</string>
-    <string name="EconomicsTag">#Economics</string>
-    <string name="artsTag">#Arts</string>
-    <string name="AGETag">#AGE</string>
+    <string name="generalTag" translatable="false">#Général</string>
+    <string name="CSTag" translatable="false">#Info</string>
+    <string name="LawTag" translatable="false">#Droit</string>
+    <string name="medicineTag" translatable="false">#Médecine</string>
+    <string name="scienceTag" translatable="false">#Sciences</string>
+    <string name="EconomicsTag" translatable="false">#Economie</string>
+    <string name="artsTag">#Philo\u0026Lettres</string>
+    <string name="AGETag" translatable="false">#AGE</string>
     <string name="populars">Popular</string>
 
     <string-array name="council_choices">
@@ -89,13 +89,13 @@
     <string name="tags">Tags</string>
     <string name="typeTag">Type tag :</string>
     <string-array name="typeTags">
-        <item name="#general">#General</item>
-        <item name="#info">#CS</item>
-        <item name="#law">#Law</item>
-        <item name="#medicine">#Medicine</item>
+        <item name="#general">#Général</item>
+        <item name="#info">#Info</item>
+        <item name="#law">#Droit</item>
+        <item name="#medicine">#Médecine</item>
         <item name="#sciences">#Sciences</item>
-        <item name="#economics">#Economics</item>
-        <item name="#arts">#Arts</item>
+        <item name="#economics">#Economie</item>
+        <item name="#arts">#Philo\u0026Lettres</item>
         <item name="#age">#AGE</item>
     </string-array>
     <string name="otherTags">Other tags :</string>

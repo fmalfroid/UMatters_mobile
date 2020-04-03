@@ -44,14 +44,7 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="search">Rechercher</string>
-    <string name="generalTag">#Général</string>
-    <string name="AGETag">#AGE</string>
-    <string name="CSTag">#Informatique</string>
-    <string name="EconomicsTag">#Économie</string>
-    <string name="LawTag">#Droit</string>
     <string name="artsTag">#Philo\u0026Lettres</string>
-    <string name="scienceTag">#Sciences</string>
-    <string name="medicineTag">#Médecine</string>
     <string name="populars">Populaires</string>
 
     <string-array name="council_choices">
@@ -73,16 +66,6 @@
     <string name="multipleChoicePoll">Sondage à choix multiples</string>
     <string name="tags">Tags</string>
     <string name="typeTag">Tag de type :</string>
-    <string-array name="typeTags">
-        <item name="#general">#Général</item>
-        <item name="#info">#Info</item>
-        <item name="#law">#Droit</item>
-        <item name="#medicine">#Médecine</item>
-        <item name="#sciences">#Sciences</item>
-        <item name="#economics">#Économie</item>
-        <item name="#arts">#Philo\u0026Lettres</item>
-        <item name="#age">#AGE</item>
-    </string-array>
     <string name="otherTags">Autres tags :</string>
     <string name="tooManyChoices">Trop de choix.</string>
     <string name="choice">Choix</string>
