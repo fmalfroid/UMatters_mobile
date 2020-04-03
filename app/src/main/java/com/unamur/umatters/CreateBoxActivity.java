@@ -120,10 +120,11 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                 if (everythingOK){
 
                     //Get tags
+                    JSONArray tag_array = new JSONArray();
                     String main_tag = typeTag.getSelectedItem().toString();
+                    tag_array.put(main_tag);
 
                     //Get other tag
-                    JSONArray tag_array = new JSONArray();
                     int nbr_tags = ll_other_tags.getChildCount();
                     EditText tag1 = findViewById(R.id.optional_tag_1);
                     tag_array.put(tag1.getText().toString());
@@ -139,6 +140,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                     //Get box type and choices
                     JSONObject choicesJSON = null;
                     JSONArray empty_choice = new JSONArray();
+                    empty_choice.put("");
                     String type = "";
                     switch (rdgrp_box_type.getCheckedRadioButtonId()){
                         case R.id.rdbtn_textual:
