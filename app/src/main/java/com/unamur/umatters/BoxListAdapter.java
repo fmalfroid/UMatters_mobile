@@ -95,25 +95,15 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
         public void display(Box box) {
 
             List<String> typesTags = Arrays.asList(
-                "#General",
-                "#Computer Science",
-                "#Law",
-                "#Medicine",
+                "#Général",
+                "#Info",
+                "#Droit",
+                "#Médecine",
                 "#Sciences",
-                "#Economics",
-                "#Arts",
+                "#Economie",
+                "#Philo&Lettres",
                 "#AGE"
             );
-
-            HashMap<String, String> tagTranslation = new HashMap<String, String>();
-            tagTranslation.put("#General", context.getString(R.string.generalTag));
-            tagTranslation.put("#Computer Science", context.getString(R.string.CSTag));
-            tagTranslation.put("#Law", context.getString(R.string.LawTag));
-            tagTranslation.put("#Medicine", context.getString(R.string.medicineTag));
-            tagTranslation.put("#Sciences", context.getString(R.string.scienceTag));
-            tagTranslation.put("#Economics", context.getString(R.string.EconomicsTag));
-            tagTranslation.put("#Arts", context.getString(R.string.artsTag));
-            tagTranslation.put("#AGE", context.getString(R.string.AGETag));
 
             //Favorite button
             btn_favorite.setOnClickListener(new View.OnClickListener() {
@@ -209,7 +199,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 tag.setPadding(0,0,10,0);
                 if (typesTags.contains(box.getTags().get(i))) {
                     tag.setTextColor(0xFFff6600);
-                    tag.setText(tagTranslation.get(box.getTags().get(i)));
+                    tag.setText(box.getTags().get(i));
                 } else {
                     tag.setTextColor(0xFF0066ff);
                 }

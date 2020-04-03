@@ -52,10 +52,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box("1", (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple", ""),
-        new Box("2", (List<Choice>) Arrays.asList(new Choice("oui", new ArrayList<String>()), new Choice("non", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "oui_non", ""),
-        new Box("3", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "textuelle", ""),
-        new Box("4", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle", "")
+        new Box("1", (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple", ""),
+        new Box("2", (List<Choice>) Arrays.asList(new Choice("oui", new ArrayList<String>()), new Choice("non", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Général", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "oui_non", ""),
+        new Box("3", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Changer les souris du i21", "textuelle", ""),
+        new Box("4", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Général", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle", "")
     );
 
     @Override
@@ -145,25 +145,15 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         public void display(final Box box) {
 
             List<String> typesTags = Arrays.asList(
-                "#General",
-                "#Computer Science",
-                "#Law",
-                "#Medicine",
+                "#Général",
+                "#Info",
+                "#Droit",
+                "#Médecine",
                 "#Sciences",
-                "#Economics",
-                "#Arts",
+                "#Economie",
+                "#Philo&Lettres",
                 "#AGE"
             );
-
-            HashMap<String, String> tagTranslation = new HashMap<String, String>();
-            tagTranslation.put("#General", context.getString(R.string.generalTag));
-            tagTranslation.put("#Computer Science", context.getString(R.string.CSTag));
-            tagTranslation.put("#Law", context.getString(R.string.LawTag));
-            tagTranslation.put("#Medicine", context.getString(R.string.medicineTag));
-            tagTranslation.put("#Sciences", context.getString(R.string.scienceTag));
-            tagTranslation.put("#Economics", context.getString(R.string.EconomicsTag));
-            tagTranslation.put("#Arts", context.getString(R.string.artsTag));
-            tagTranslation.put("#AGE", context.getString(R.string.AGETag));
 
             //Favorite button
             btn_favorite.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +269,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 tag.setPadding(0,0,10,0);
                 if (typesTags.contains(box.getTags().get(i))) {
                     tag.setTextColor(0xFFff6600);
-                    tag.setText(tagTranslation.get(box.getTags().get(i)));
+                    tag.setText(box.getTags().get(i));
                 } else {
                     tag.setTextColor(0xFF0066ff);
                 }
