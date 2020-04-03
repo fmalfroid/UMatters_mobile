@@ -106,10 +106,139 @@
                 android:textSize="14sp" />
 
             <LinearLayout
+                android:id="@+id/ll_oui_non"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:visibility="gone"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/percent_oui"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="60%"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/percent_non"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="40%"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/black"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:background="@color/lightLightGrey"
+                    android:weightSum="100"
+                    >
+
+                    <View
+                        android:id="@+id/line_oui"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/light_green"
+                        android:layout_weight="60"
+                        />
+
+                    <View
+                        android:id="@+id/line_non"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/darkRed"
+                        android:layout_weight="40"
+                        android:layout_gravity="end"
+                        />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/votes_oui"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="33 votes"
+                        android:layout_alignParentStart="true"
+                        android:textSize="11sp"
+                        android:textColor="@color/darkGrey"
+                        />
+
+                    <TextView
+                        android:id="@+id/votes_non"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10 votes"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="11sp"
+                        android:textColor="@color/darkGrey"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <ToggleButton
+                        android:id="@+id/btn_oui"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_toggle_border_selector"
+                        android:textOn="Oui"
+                        android:textOff="Oui"
+                        android:textAllCaps="false"
+                        android:minHeight="0dp"
+                        android:padding="5dp"
+                        android:layout_alignParentStart="true"
+                        android:textSize="13sp"
+                        />
+
+                    <ToggleButton
+                        android:id="@+id/btn_non"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_toggle_border_selector"
+                        android:textOn="Non"
+                        android:textOff="Non"
+                        android:textAllCaps="false"
+                        android:minHeight="0dp"
+                        android:padding="5dp"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="13sp"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/box_cell_poll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
             </LinearLayout>
 
@@ -118,7 +247,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            >
+
+            <ToggleButton
+                android:id="@+id/description_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textOff="@string/show_more"
+                android:textOn="@string/hide"
+                android:textColor="@color/darkGrey"
+                android:textSize="11sp"
+                android:textAllCaps="false"
+                style="?android:attr/borderlessButtonStyle"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="5dp"
+                />
+
+            <TextView
+                android:id="@+id/box_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/description"
+                android:textAlignment="center"
+                android:textColor="@color/darkDarkGrey"
+                android:textSize="13sp"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="10dp"
             android:layout_marginStart="5dp"

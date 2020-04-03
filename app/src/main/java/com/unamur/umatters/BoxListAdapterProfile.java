@@ -124,8 +124,19 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         private final TextView box_menu;
         private final ToggleButton btn_favorite;
         private final ImageView btn_comment;
+        private final ToggleButton btn_description;
+        private final TextView description;
 
         private Context context;
+
+        //Elements sondage oui_non
+        private LinearLayout ll_oui_non;
+        private TextView percent_oui;
+        private TextView percent_non;
+        private View line_oui;
+        private View line_non;
+        private TextView votes_oui;
+        private TextView votes_non;
 
         public BoxViewHolder(final View itemView) {
             super(itemView);
@@ -141,8 +152,20 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             box_menu = itemView.findViewById(R.id.box_menu_profile);
             btn_favorite = itemView.findViewById(R.id.button_favorite);
             btn_comment = itemView.findViewById(R.id.box_cell_comment_btn);
+            btn_description = itemView.findViewById(R.id.description_btn);
+            description = itemView.findViewById(R.id.box_description);
 
             context = itemView.getContext();
+
+
+            //Elements sondage oui_non
+            ll_oui_non = itemView.findViewById(R.id.ll_oui_non);
+            percent_oui = itemView.findViewById(R.id.percent_oui);
+            percent_non = itemView.findViewById(R.id.percent_non);
+            line_oui = itemView.findViewById(R.id.line_oui);
+            line_non = itemView.findViewById(R.id.line_non);
+            votes_oui = itemView.findViewById(R.id.votes_oui);
+            votes_non = itemView.findViewById(R.id.votes_non);
 
         }
 
@@ -289,6 +312,21 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
             //Texte de la box ou question du sondage
             text.setText(box.getTitle());
+            //Description de la box
+            description.setText(box.getDescription());
+            //handle description visibility
+            btn_description.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (btn_description.isChecked()){
+                        description.setVisibility(View.VISIBLE);
+                    } else {
+                        description.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+
             //Nombre de likes de la box
             nb_likes.setText(String.valueOf(box.getLikes().size()));
 
@@ -319,8 +357,8 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                     poll.invalidate();
                 }
             } else if (box.getType().equals("oui_non")) {
-                float pct_yes;
-                float pct_no;
+                int pct_yes;
+                int pct_no;
 
                 float nb_yes;
                 float nb_no;
@@ -332,6 +370,29 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                     nb_yes = (box.getChoices().get(1).getUsers().size());
                     nb_no = (box.getChoices().get(0).getUsers().size());
                 }
+
+                //Calcule le pourcentage de Oui et de Non
+                pct_yes = (int)( (nb_yes/(nb_yes + nb_no))*100);
+                pct_no = (int)( (nb_no/(nb_yes + nb_no))*100);
+
+                ll_oui_non.setVisibility(View.VISIBLE);
+
+                String str_percent_oui = (pct_yes) + "%";
+                String str_percent_non = (pct_no) + "%";
+                percent_oui.setText(str_percent_oui);
+                percent_non.setText(str_percent_non);
+
+                LinearLayout.LayoutParams layoutParams_oui = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, pct_yes);
+                LinearLayout.LayoutParams layoutParams_non = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, pct_no);
+                line_oui.setLayoutParams(layoutParams_oui);
+                line_non.setLayoutParams(layoutParams_non);
+
+                String str_votes_oui = pct_yes + " votes";
+                String str_votes_non = pct_no + " votes";
+                votes_oui.setText(str_votes_oui);
+                votes_non.setText(str_votes_non);
+
+                /*
 
                 //Calcule le pourcentage de Oui et de Non
                 pct_yes = (nb_yes/(nb_yes + nb_no))*100;
@@ -406,6 +467,8 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 //ajout du sondage à la box
                 poll.addView(ll);
                 poll.invalidate();
+
+                */
 
             }
 
