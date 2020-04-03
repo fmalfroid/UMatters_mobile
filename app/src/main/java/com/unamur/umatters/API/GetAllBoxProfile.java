@@ -122,7 +122,9 @@ public class GetAllBoxProfile extends AsyncTask<String, String, String> {
                 ArrayList<String> users = new ArrayList<String>();
                 if (jArrayUsers != null) {
                     for (int i=0;i<jArrayUsers.length();i++){
-                        users.add(jArrayUsers.getString(i));
+                        if (!jArrayUsers.getString(i).equals("")) {
+                            users.add(jArrayUsers.getString(i));
+                        }
                     }
                     choices.add(new Choice(key, users));
                 }
