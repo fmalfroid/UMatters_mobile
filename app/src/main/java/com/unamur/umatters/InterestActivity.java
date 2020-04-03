@@ -15,22 +15,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
-public class PopularActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private ImageView goBackBtn;
+public class InterestActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_popular);
+        setContentView(R.layout.activity_interest);
+
+        //Init of the recyclerView
+        final RecyclerView rv = findViewById(R.id.interests_list);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(new BoxListAdapter());
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -47,27 +44,6 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
 
             }
         });
-
-        //Init of the spinner
-        SpinnerWrapContent council_choice = (SpinnerWrapContent) findViewById(R.id.council_choice);
-        List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.council_choices)));
-        SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
-        council_choice.setAdapter(adapter);
-
-        //Init of the recyclerView
-        final RecyclerView rv = findViewById(R.id.popular_box_list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new BoxListAdapter());
-
-        //Go back button
-        goBackBtn = findViewById(R.id.pop_go_back);
-        goBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
     }
 
     @Override
@@ -136,14 +112,6 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
             startActivity(runMain);
             finish();
 
-        } else if (id == R.id.nav_interets) {
-
-            Intent runMain = new Intent(getApplicationContext(), InterestActivity.class);
-            startActivity(runMain);
-            finish();
-
-        } else if (id == R.id.nav_share) {
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -162,5 +130,6 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(4).setChecked(true);
     }
 }

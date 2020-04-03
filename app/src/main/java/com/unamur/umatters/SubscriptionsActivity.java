@@ -119,6 +119,10 @@ public class SubscriptionsActivity extends AppCompatActivity implements Navigati
 
         } else if (id == R.id.nav_interets) {
 
+            Intent runMain = new Intent(getApplicationContext(), InterestActivity.class);
+            startActivity(runMain);
+            finish();
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

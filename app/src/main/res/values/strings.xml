@@ -171,4 +171,8 @@
     <string name="error_box_choice_empty">Choice should not be empty.</string>
     <string name="error_type_tag_empty">Type tag is mandatory.</string>
     <string name="error_optional_tag_empty">Tag should not be empty.</string>
+    <string name="title_activity_write_comment">WriteCommentActivity</string>
+    <string name="write_a_comment">Write a comment</string>
+    <string name="comment">Comment</string>
+    <string name="interests">Interests</string>
 </resources>

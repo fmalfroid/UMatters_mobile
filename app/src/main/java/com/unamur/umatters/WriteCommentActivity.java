@@ -1,6 +1,7 @@
 package com.unamur.umatters;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -10,32 +11,23 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
-import static com.unamur.umatters.TagsSetupActivity.selectedItems;
-
-public class TagsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
-    public Spinner spinner_choice_1;
-    public Spinner spinner_choice_2;
-    public Spinner spinner_choice_3;
+public class WriteCommentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tags);
+        setContentView(R.layout.activity_write_comment);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -53,7 +45,6 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        //Go back button
         ImageView img_arrowback = findViewById(R.id.pop_go_back);
         img_arrowback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,40 +53,6 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        //Init hashmap and get spinners
-        //< spinner number, selected item number >
-        selectedItems.put(1,0);
-        selectedItems.put(2,1);
-        selectedItems.put(3,2);
-
-        spinner_choice_1 = findViewById(R.id.spinner_choice_1);
-        spinner_choice_2 = findViewById(R.id.spinner_choice_2);
-        spinner_choice_3 = findViewById(R.id.spinner_choice_3);
-
-        //get data to populate the spinners
-        List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.tags_choices)));
-
-        //Init spinners and their adapters
-        List<Spinner> spinners = new ArrayList<>();
-        spinners.add(spinner_choice_1);
-        spinners.add(spinner_choice_2);
-        spinners.add(spinner_choice_3);
-        initSpinners(spinners, data);
-
-        ImageView tag_validation_button = findViewById(R.id.ok_btn);
-        tag_validation_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Get the selected tags
-                ArrayList<String> selectedTags = new ArrayList<>();
-                selectedTags.add(spinner_choice_1.getSelectedItem().toString());
-                selectedTags.add(spinner_choice_2.getSelectedItem().toString());
-                selectedTags.add(spinner_choice_3.getSelectedItem().toString());
-                //Save selected tags into BD
-                //TODO : save tags in DB
-                Toast.makeText(TagsActivity.this, selectedTags.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -104,9 +61,7 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Intent runMain = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(runMain);
-            finish();
+            super.onBackPressed();
         }
     }
 
@@ -154,6 +109,12 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
             startActivity(runProfile);
             finish();
 
+        } else if (id == R.id.nav_tags) {
+
+            Intent runMain = new Intent(getApplicationContext(), TagsActivity.class);
+            startActivity(runMain);
+            finish();
+
         } else if (id == R.id.nav_subscriptions) {
 
             Intent runMain = new Intent(getApplicationContext(), SubscriptionsActivity.class);
@@ -178,51 +139,12 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         //Setup nav drawer system
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(2).setChecked(true);
     }
 
-    private void initSpinners(List<Spinner> spinners, List<String> data){
-
-        for (final Spinner spinner : spinners){
-
-            //Create the adapter and set it
-            XORSpinnerAdapter adapter = new XORSpinnerAdapter(this, spinner, data);
-            spinner.setAdapter(adapter);
-            //Init the default value for each spinner
-            //TODO : init tags value
-            if (spinner == spinner_choice_1){
-                spinner_choice_1.setSelection(0);
-            } else if (spinner == spinner_choice_2){
-                spinner_choice_2.setSelection(1);
-            } else {
-                spinner_choice_3.setSelection(2);
-            }
-
-            //For each spinner on item selected :
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    //Update the selected item of the spinner (saved in the hash map)
-                    if (spinner == spinner_choice_1){
-                        selectedItems.put(1,position);
-                    } else if (spinner == spinner_choice_2){
-                        selectedItems.put(2,position);
-                    } else {
-                        selectedItems.put(3,position);
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-        }
-    }
 }

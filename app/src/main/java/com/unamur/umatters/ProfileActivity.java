@@ -115,6 +115,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
         } else if (id == R.id.nav_interets) {
 
+            Intent runMain = new Intent(getApplicationContext(), InterestActivity.class);
+            startActivity(runMain);
+            finish();
+
         } else if (id == R.id.nav_share) {
 
         }

@@ -2,6 +2,7 @@ package com.unamur.umatters;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -39,6 +40,8 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
 
             }
         });
+
+        initFAB();
 
         //Init of the recyclerView
         final RecyclerView rv = findViewById(R.id.comment_list);
@@ -121,7 +124,15 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
 
         } else if (id == R.id.nav_subscriptions) {
 
+            Intent runMain = new Intent(getApplicationContext(), SubscriptionsActivity.class);
+            startActivity(runMain);
+            finish();
+
         } else if (id == R.id.nav_interets) {
+
+            Intent runMain = new Intent(getApplicationContext(), InterestActivity.class);
+            startActivity(runMain);
+            finish();
 
         } else if (id == R.id.nav_share) {
 
@@ -143,5 +154,17 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void initFAB(){
+        //Floating action button
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent runApp = new Intent(getApplicationContext(), WriteCommentActivity.class);
+                startActivity(runApp);
+            }
+        });
     }
 }
