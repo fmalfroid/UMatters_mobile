@@ -35,6 +35,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
+    /*
     //Exemple de choix de sondage
     private final List<Pair<String, Integer>> choixTmp = Arrays.asList(
         Pair.create("3e étage", 10),
@@ -54,10 +55,17 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         new Box("3", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Changer les souris du i21", "textuelle", ""),
         new Box("4", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Général", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle", "")
     );
+    */
+    private final ArrayList<Box> boxList = new ArrayList<>();
 
     @Override
     public int getItemCount() {
         return boxList.size()+1;
+    }
+
+    public void addData(Box box) {
+        boxList.add(box);
+        notifyDataSetChanged();
     }
 
     @Override

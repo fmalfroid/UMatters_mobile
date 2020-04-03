@@ -21,6 +21,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unamur.umatters.API.GetAllBox;
+import com.unamur.umatters.API.GetAllBoxProfile;
+
 import java.lang.reflect.Field;
 
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -31,9 +34,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_profile);
 
         //Init of the recyclerView
+        BoxListAdapterProfile adapter = new BoxListAdapterProfile();
         final RecyclerView rv = findViewById(R.id.profle_box_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new BoxListAdapterProfile());
+        rv.setAdapter(adapter);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -50,6 +54,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
             }
         });
+
+        GetAllBoxProfile task = new GetAllBoxProfile(adapter);
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
 
     }
 
