@@ -201,7 +201,6 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                         e.printStackTrace();
                     }
 
-
                     JSONObject createBoxJson = new JSONObject();
                     try {
                         createBoxJson.put("titre", edtxt_title.getText().toString());
@@ -234,6 +233,10 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
             Toast.makeText(CreateBoxActivity.this, R.string.error_box_empty_title, Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (title.length() < 5){
+            Toast.makeText(CreateBoxActivity.this, R.string.error_box_too_small_title, Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         //Check description
         String description = edtxt_description.getText().toString();
@@ -241,6 +244,10 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         //--Field is empty or only spaces
         if (!(descriptionAtLeastOne && description.length() != 0)) {
             Toast.makeText(CreateBoxActivity.this, R.string.error_box_empty_description, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (description.length() < 10){
+            Toast.makeText(CreateBoxActivity.this, R.string.error_box_too_small_description, Toast.LENGTH_SHORT).show();
             return false;
         }
 

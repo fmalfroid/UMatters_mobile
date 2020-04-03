@@ -44,7 +44,6 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="search">Rechercher</string>
-    <string name="artsTag">#Philo\u0026Lettres</string>
     <string name="populars">Populaires</string>
 
     <string-array name="council_choices">
@@ -66,6 +65,16 @@
     <string name="multipleChoicePoll">Sondage à choix multiples</string>
     <string name="tags">Tags</string>
     <string name="typeTag">Tag de type :</string>
+    <string-array name="typeTags">
+        <item name="#general">#Général</item>
+        <item name="#info">#Info</item>
+        <item name="#law">#Droit</item>
+        <item name="#medicine">#Médecine</item>
+        <item name="#sciences">#Sciences</item>
+        <item name="#economics">#Économie</item>
+        <item name="#arts">#Philo\u0026Lettres</item>
+        <item name="#age">#AGE</item>
+    </string-array>
     <string name="otherTags">Autres tags :</string>
     <string name="tooManyChoices">Trop de choix.</string>
     <string name="choice">Choix</string>
@@ -143,6 +152,8 @@
     <string name="error_box_choice_empty">Le choix ne doit pas être vide.</string>
     <string name="error_type_tag_empty">Le tag de type est obligatoire.</string>
     <string name="error_optional_tag_empty">Le tag ne doit pas etre vide.</string>
+    <string name="error_box_too_small_title">Le titre doit contenir au moins 5 caractères.</string>
+    <string name="error_box_too_small_description">La description doit contenir au moins 10 caractères.</string>
 
 
 </resources>

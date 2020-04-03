@@ -65,7 +65,7 @@
     <string name="medicineTag" translatable="false">#Médecine</string>
     <string name="scienceTag" translatable="false">#Sciences</string>
     <string name="EconomicsTag" translatable="false">#Economie</string>
-    <string name="artsTag">#Philo\u0026Lettres</string>
+    <string name="artsTag" translatable="false">#Philo\u0026Lettres</string>
     <string name="AGETag" translatable="false">#AGE</string>
     <string name="populars">Popular</string>
 
@@ -180,5 +180,7 @@
     <string name="error_box_choice_empty">Choice should not be empty.</string>
     <string name="error_type_tag_empty">Type tag is mandatory.</string>
     <string name="error_optional_tag_empty">Tag should not be empty.</string>
+    <string name="error_box_too_small_title">Title should not be smaller than 5 characters.</string>
+    <string name="error_box_too_small_description">Description should not be smaller than 10 characters.</string>
 
 </resources>
