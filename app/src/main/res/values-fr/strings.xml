@@ -18,6 +18,8 @@
     <string name="question">Question</string>
     <string name="nb_likes">nb j\'aime</string>
     <string name="text">Texte</string>
+    <string name="show_more">Afficher la suite...</string>
+    <string name="hide">Réduire</string>
     <string-array name="tags_choices">
         <item>Général</item>
         <item>Informatique</item>
@@ -111,6 +113,7 @@
     <string name="scientists">Scientifiques</string>
     <string name="typeTags">Tags de type :</string>
     <string name="my_tags">Mes tags</string>
+    <string name="boxTypes">Types de box :</string>
 
     <!-- Activity archives -->
     <string name="archives">Archives</string>

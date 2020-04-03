@@ -64,6 +64,8 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
         private final ToggleButton btn_favorite;
         private final ToggleButton btn_interested;
         private final ImageView btn_comment;
+        private final ToggleButton btn_description;
+        private final TextView description;
 
         private Context context;
 
@@ -82,6 +84,8 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             btn_favorite = itemView.findViewById(R.id.button_favorite);
             btn_interested = itemView.findViewById(R.id.button_interested);
             btn_comment = itemView.findViewById(R.id.box_cell_comment_btn);
+            btn_description = itemView.findViewById(R.id.description_btn);
+            description = itemView.findViewById(R.id.box_description);
 
             context = itemView.getContext();
 
@@ -216,6 +220,20 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
             //Texte de la box ou question du sondage
             text.setText(box.getTitle());
+            //Description de la box
+            description.setText(box.getDescription());
+            //handle description visibility
+            btn_description.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (btn_description.isChecked()){
+                        description.setVisibility(View.VISIBLE);
+                    } else {
+                        description.setVisibility(View.GONE);
+                    }
+                }
+            });
+
             //Nombre de likes de la box
             nb_likes.setText(String.valueOf(box.getLikes().size()));
 

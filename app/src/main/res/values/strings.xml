@@ -30,6 +30,8 @@
     <string name="question">Question</string>
     <string name="nb_likes">nb likes</string>
     <string name="text">Text</string>
+    <string name="show_more">Show more...</string>
+    <string name="hide">Hide</string>
     <string-array name="tags_choices">
         <item>General</item>
         <item>Computer Science</item>
@@ -125,6 +127,7 @@
     <string name="scientists">Scientists</string>
     <string name="typeTags">Type tags :</string>
     <string name="my_tags">My tags</string>
+    <string name="boxTypes">Box types:</string>
 
     <!-- Activity archives -->
     <string name="archives">Archives</string>
