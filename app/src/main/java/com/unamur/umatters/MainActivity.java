@@ -188,9 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
 
-        //Link the scroll of the recycler view to the fab and the search bar
         final FloatingActionButton fab = findViewById(R.id.fab);
-        //final LinearLayout search_bar = findViewById(R.id.search_bar);
 
         rv.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
@@ -203,16 +201,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     if(position==0){
                         fab.show();
-
-                        //search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1)).start();
-                        //showViews(search_bar);
                     } else {
                         fab.hide();
-
-                        //hideViews(search_bar);
                     }
                 } catch (Exception e){
-                    //nothing
+                    e.printStackTrace();
                 }
             }
 
@@ -222,46 +215,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
-    /*
-    private void showViews(final LinearLayout search_bar) {
-        // TODO uncomment this Hide Footer in android when Scrolling
-        search_bar.animate().alpha(1.0f).translationY(0).setInterpolator(new DecelerateInterpolator(1.4f)).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                search_bar.setVisibility(View.VISIBLE);
-            }
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                search_bar.setVisibility(View.VISIBLE);
-            }
-            @Override
-            public void onAnimationCancel(Animator animation) {
-            }
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-            }
-        });
-    }
-
-    private void hideViews(final LinearLayout search_bar) {
-        // TODO (+mToolbar)  plus means  2 view forward ho jaye or not visible to user
-        search_bar.animate().alpha(0f).translationY(+search_bar.getHeight()).setInterpolator(new AccelerateInterpolator(1.4f)).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-            }
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                search_bar.setVisibility(View.GONE);
-            }
-            @Override
-            public void onAnimationCancel(Animator animation) {
-            }
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-            }
-        });
-    }
-    */
-
 }

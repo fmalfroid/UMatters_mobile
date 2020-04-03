@@ -94,6 +94,10 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
         public void display(Box box) {
 
+            //Remove all views because it launch this function when the box is too far in the scroll so it duplicates
+            tagList.removeAllViews();
+            poll.removeAllViews();
+
             List<String> typesTags = Arrays.asList(
                 "#Général",
                 "#Informatique",

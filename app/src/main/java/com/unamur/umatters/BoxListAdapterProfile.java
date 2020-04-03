@@ -149,6 +149,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
         public void display(final Box box) {
 
+            //Remove all views because it launch this function when the box is too far in the scroll so it duplicates
+            tagList.removeAllViews();
+            poll.removeAllViews();
+
             List<String> typesTags = Arrays.asList(
                 "#Général",
                 "#Informatique",
