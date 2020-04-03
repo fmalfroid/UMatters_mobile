@@ -52,7 +52,9 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent runMain = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(runMain);
+            finish();
         }
     }
 

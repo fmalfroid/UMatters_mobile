@@ -19,18 +19,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.unamur.umatters.API.DeleteBox;
-import com.unamur.umatters.API.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -73,7 +70,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             return new BoxViewHolder(view);
         } else if (viewType == TYPE_HEADER) {
             //inflate your layout and pass it to view holder
-            View view = inflater.inflate(R.layout.header_profile, parent, false);
+            View view = inflater.inflate(R.layout.profile_header, parent, false);
             return new HeaderViewHolder(view);
         }
 

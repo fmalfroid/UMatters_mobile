@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,17 +50,12 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         adapter.addData(new Comment());
         adapter.addData(new Comment());
         adapter.addData(new Comment());
+        adapter.addData(new Comment());
+        adapter.addData(new Comment());
+        adapter.addData(new Comment());
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
 
-        //Go back button
-        ImageView img_arrowback = findViewById(R.id.pop_go_back);
-        img_arrowback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
     }
 
     @Override

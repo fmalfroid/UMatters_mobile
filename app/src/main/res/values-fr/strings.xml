@@ -136,6 +136,14 @@
     <string name="email_address">Adresse Email</string>
     <string name="login_error">Email ou mot de passe incorrecte</string>
 
+    <!-- Activity comments -->
+    <string name="write_a_comment">Ecrire un commentaire</string>
+    <string name="comment">Commentaire</string>
+    <string name="comments">Commentaires</string>
+
+    <!--Activity interests -->
+    <string name="interests">Intérêts</string>
+
     <!-- Success message -->
     <string name="success_add_box">Box successfully added.</string>
     <string name="success_delete_box">Box supprimée avec succès.</string>
@@ -152,9 +160,6 @@
     <string name="error_box_choice_empty">Le choix ne doit pas être vide.</string>
     <string name="error_type_tag_empty">Le tag de type est obligatoire.</string>
     <string name="error_optional_tag_empty">Le tag ne doit pas etre vide.</string>
-    <string name="title_activity_write_comment">WriteCommentActivity</string>
-    <string name="write_a_comment">Ecrire un commentaire</string>
-    <string name="comment">Commentaire</string>
-    <string name="interests">Intérêts</string>
+
 
 </resources>

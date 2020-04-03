@@ -11,6 +11,7 @@
     <string name="title_activity_tags" translatable="false">title_activity_tags</string>
     <string name="title_activity_subscriptions" translatable="false">title_activity_subscriptions</string>
     <string name="title_activity_notifications" translatable="false">title_notifications_activity</string>
+    <string name="title_activity_write_comment" translatable="false">WriteCommentActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -148,12 +149,20 @@
     <string name="my_subscriptions">My subscriptions</string>
     <string name="subscriptions_box">Subscriptions box</string>
     <string name="reply">Reply</string>
-    <string name="replies">replies</string>
+    <string name="replies">" replies"</string>
     <string name="email_address">Email address</string>
     <string name="login_error">Email or password incorrect</string>
 
     <!-- Activity Notifications -->
     <string name="notifications" translatable="false">Notifications</string>
+
+    <!-- Activity comments -->
+    <string name="write_a_comment">Write a comment</string>
+    <string name="comment">Comment</string>
+    <string name="comments">Comments</string>
+
+    <!--Activity interests -->
+    <string name="interests">Interests</string>
 
     <!-- Success message -->
     <string name="success_add_box">Box successfully added.</string>
@@ -171,8 +180,5 @@
     <string name="error_box_choice_empty">Choice should not be empty.</string>
     <string name="error_type_tag_empty">Type tag is mandatory.</string>
     <string name="error_optional_tag_empty">Tag should not be empty.</string>
-    <string name="title_activity_write_comment">WriteCommentActivity</string>
-    <string name="write_a_comment">Write a comment</string>
-    <string name="comment">Comment</string>
-    <string name="interests">Interests</string>
+
 </resources>
