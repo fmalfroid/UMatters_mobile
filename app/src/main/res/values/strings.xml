@@ -60,7 +60,7 @@
     <string name="no">No</string>
     <string name="search">Search</string>
     <string name="generalTag" translatable="false">#Général</string>
-    <string name="CSTag" translatable="false">#Info</string>
+    <string name="CSTag" translatable="false">#Informatique</string>
     <string name="LawTag" translatable="false">#Droit</string>
     <string name="medicineTag" translatable="false">#Médecine</string>
     <string name="scienceTag" translatable="false">#Sciences</string>
@@ -90,7 +90,7 @@
     <string name="typeTag">Type tag :</string>
     <string-array name="typeTags">
         <item name="#general">#Général</item>
-        <item name="#info">#Info</item>
+        <item name="#info">#Informatique</item>
         <item name="#law">#Droit</item>
         <item name="#medicine">#Médecine</item>
         <item name="#sciences">#Sciences</item>

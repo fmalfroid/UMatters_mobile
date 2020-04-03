@@ -143,7 +143,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
             List<String> typesTags = Arrays.asList(
                 "#Général",
-                "#Info",
+                "#Informatique",
                 "#Droit",
                 "#Médecine",
                 "#Sciences",

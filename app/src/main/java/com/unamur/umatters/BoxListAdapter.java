@@ -96,7 +96,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
             List<String> typesTags = Arrays.asList(
                 "#Général",
-                "#Info",
+                "#Informatique",
                 "#Droit",
                 "#Médecine",
                 "#Sciences",
