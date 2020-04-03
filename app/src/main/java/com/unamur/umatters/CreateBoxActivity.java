@@ -214,6 +214,8 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                         e.printStackTrace();
                     }
 
+                    System.out.println(createBoxJson);
+
                     AddBox addBox = new AddBox(CreateBoxActivity.this);
                     addBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box", String.valueOf(createBoxJson));
 

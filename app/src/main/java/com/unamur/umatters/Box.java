@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Box {
-    private int id;
+    private String id;
     private List<Choice> choices;
     private User creator;
     private String date;
@@ -12,8 +12,9 @@ public class Box {
     private List<String> tags;
     private String title;
     private String type;
+    private String description;
 
-    public Box(int id, List<Choice> choices, User creator, String date, ArrayList<String> likes, List<String> tags, String title, String type) {
+    public Box(String id, List<Choice> choices, User creator, String date, ArrayList<String> likes, List<String> tags, String title, String type, String description) {
         this.id = id;
         this.choices = choices;
         this.creator = creator;
@@ -22,10 +23,11 @@ public class Box {
         this.tags = tags;
         this.title = title;
         this.type = type;
+        this.description = description;
     }
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -67,5 +69,41 @@ public class Box {
 
     public String getName() {
         return this.creator.getName();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setChoices(List<Choice> choices) {
+        this.choices = choices;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setLikes(ArrayList<String> likes) {
+        this.likes = likes;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

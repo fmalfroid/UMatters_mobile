@@ -52,10 +52,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
     //Exemples de box
     private final List<Box> boxList = Arrays.asList(
-        new Box(1, (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple"),
-        new Box(2, (List<Choice>) Arrays.asList(new Choice("oui", new ArrayList<String>()), new Choice("non", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "oui_non"),
-        new Box(3, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "textuelle"),
-        new Box(4, (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle")
+        new Box("1", (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple", ""),
+        new Box("2", (List<Choice>) Arrays.asList(new Choice("oui", new ArrayList<String>()), new Choice("non", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "oui_non", ""),
+        new Box("3", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Computer Science", "#Matériel"), "Changer les souris du i21", "textuelle", ""),
+        new Box("4", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#General", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle", "")
     );
 
     @Override
@@ -226,7 +226,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
                                             JSONObject boxDeleteJson = new JSONObject();
                                             try {
-                                                boxDeleteJson.put("id", String.valueOf(box.getId()));
+                                                boxDeleteJson.put("id", box.getId());
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
