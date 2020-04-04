@@ -192,10 +192,12 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                     CurrentUser user = CurrentUser.getCurrentUser();
                     String email = user.getEmail();
                     String firstname = user.getFirstname();
+                    String lastname = user.getLastname();
                     String role = user.getRole();
                     try{
                         userJSON.put("email", email);
                         userJSON.put("firstname", firstname);
+                        userJSON.put("lastname", lastname);
                         userJSON.put("role", role);
                     } catch (JSONException e){
                         e.printStackTrace();
