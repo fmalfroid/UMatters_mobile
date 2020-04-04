@@ -310,18 +310,18 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 //Pour tous les choix possibles du sondage
                 for (int i=0; i<box.getChoices().size(); i++) {
                     LinearLayout ll = new LinearLayout(context);
-                    ll.setGravity(Gravity.CENTER_HORIZONTAL);
+                    ll.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
 
                     //Nombre de vote pour le choix
                     TextView nb_votes = new TextView(context);
                     nb_votes.setText(String.valueOf(box.getChoices().get(i).getUsers().size()));
-                    nb_votes.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 4));
+                    nb_votes.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
                     nb_votes.setGravity(Gravity.END);
 
                     //Checkbox et Texte représentant le choix
                     CheckBox choice = new CheckBox(context);
                     choice.setText(box.getChoices().get(i).getName());
-                    choice.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 5));
+                    choice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
 
                     //Ajout du nombre de vote et de la checkbox à un LinearLayout
                     ll.addView(nb_votes);
