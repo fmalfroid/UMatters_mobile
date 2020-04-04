@@ -181,7 +181,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             final String email = user.getEmail();
 
             if (box.getCreator().getId().equals(email)) {
-                box_menu.setVisibility(View.INVISIBLE);
+                box_menu.setVisibility(View.GONE);
+            } else {
+                box_menu.setVisibility(View.VISIBLE);
             }
 
             List<String> typesTags = Arrays.asList(
