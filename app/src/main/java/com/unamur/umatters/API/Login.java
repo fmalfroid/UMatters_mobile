@@ -133,8 +133,6 @@ public class Login extends AsyncTask<String, String, String> {
                     CurrentUser user = CurrentUser.getCurrentUser();
                     String email = user.getEmail();
 
-                    //JSONObject jsonEmail = new JSONObject();
-                    //jsonEmail.put("email", email);
                     SetCurrentUser setUser = new SetCurrentUser();
                     setUser.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/" + email);
 

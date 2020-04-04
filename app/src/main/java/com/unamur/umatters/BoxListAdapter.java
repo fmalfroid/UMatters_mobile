@@ -30,7 +30,7 @@ import java.util.List;
 
 public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewHolder> {
 
-    private final ArrayList<Box> boxList = new ArrayList<>();
+    private ArrayList<Box> boxList = new ArrayList<>();
 
     @Override
     public int getItemCount() {

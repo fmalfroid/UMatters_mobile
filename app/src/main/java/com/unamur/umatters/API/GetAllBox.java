@@ -137,15 +137,17 @@ public class GetAllBox extends AsyncTask<String, String, String> {
 
     private User createUserFromJson(JSONObject json) {
         String id;
-        String name;
+        String firstname;
+        String lastname;
         String role;
 
         try {
             id = json.getString("email");
-            name = json.getString("firstname") + " " + json.getString("lastname");
+            firstname = json.getString("firstname");
+            lastname = json.getString("lastname");
             role = json.getString("role");
 
-            return new User(id, name, role);
+            return new User(id, firstname, lastname, role);
         } catch (JSONException e) {
             e.printStackTrace();
         }

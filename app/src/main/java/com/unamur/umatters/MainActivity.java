@@ -75,9 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        GetAllBox task = new GetAllBox(adapter);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
-
     }
 
     @Override

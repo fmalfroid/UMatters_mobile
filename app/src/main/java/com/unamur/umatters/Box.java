@@ -68,7 +68,7 @@ public class Box {
     }
 
     public String getName() {
-        return this.creator.getName();
+        return (this.creator.getName());
     }
 
     public String getDescription() {
