@@ -28,6 +28,7 @@ public class SubscriptionsBoxFragment extends Fragment {
         RecyclerView rv = v.findViewById(R.id.subscription_box_list);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);
+
         GetAllBox task = new GetAllBox(adapter);
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
 

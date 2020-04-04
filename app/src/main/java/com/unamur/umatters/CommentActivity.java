@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.unamur.umatters.API.GetAllComOfBox;
+
 public class CommentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Box currentBox;
@@ -60,6 +62,10 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
 
+        /*
+        GetAllComOfBox task = new GetAllComOfBox(adapter, currentBox.getId());
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/message");
+        */
     }
 
     @Override

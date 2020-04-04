@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 public class SubscriptionsPerson {
 
     private Bitmap image;
+    private String email;
     private String firstname;
     private String surname;
     private String faculty;
@@ -12,14 +13,23 @@ public class SubscriptionsPerson {
     private String role;
     private int level;
 
-    public SubscriptionsPerson(Bitmap image, String firstname, String surname, String faculty, boolean subscribed, String role, int level) {
+    public SubscriptionsPerson(Bitmap image, String email, String firstname, String surname, String faculty, boolean subscribed, String role, int level) {
         this.image = image;
+        this.email = email;
         this.firstname = firstname;
         this.surname = surname;
         this.faculty = faculty;
         this.subscribed = subscribed;
         this.role = role;
         this.level = level;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRole() {

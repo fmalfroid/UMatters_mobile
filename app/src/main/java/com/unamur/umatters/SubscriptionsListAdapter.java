@@ -27,6 +27,11 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
     }
 
+    public void addData(SubscriptionsPerson sub){
+        all_subscriptions_person.add(sub);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return all_subscriptions_person.size();
@@ -53,10 +58,12 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
         SubscriptionsPerson current_person = all_subscriptions_person.get(position);
 
-        image.setImageBitmap(current_person.getImage());
+        //TODO set image and faculty
+        //image.setImageBitmap(current_person.getImage());
+        //faculty.setText(current_person.getFaculty());
+
         String full_name = current_person.getFirstname() + " " + current_person.getSurname();
         name.setText(full_name);
-        faculty.setText(current_person.getFaculty());
         subscription.setChecked(current_person.isSubscribed());
         String str_level = getContext().getResources().getString(R.string.level) + " " + current_person.getLevel();
         level.setText(str_level);
