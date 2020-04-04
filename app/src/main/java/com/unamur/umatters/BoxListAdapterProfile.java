@@ -2,6 +2,7 @@ package com.unamur.umatters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -116,11 +117,12 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof BoxViewHolder) {
-            BoxViewHolder BoxHolder = (BoxViewHolder) holder;
+            BoxViewHolder boxHolder = (BoxViewHolder) holder;
             Box box = boxList.get(position - 1);
-            BoxHolder.display(box);
+            boxHolder.display(box);
         } else if (holder instanceof HeaderViewHolder) {
-            //cast holder to VHHeader and set data for header.
+            HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
+            headerHolder.display();
         }
     }
 
@@ -134,8 +136,57 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+        private Context context;
+
+        private ImageView img_picture;
+        private ImageView img_role;
+        private TextView txt_name;
+        private TextView txt_faculty;
+        private TextView txt_level;
+
         public HeaderViewHolder(View itemView) {
             super(itemView);
+
+            //get elements
+            img_picture = itemView.findViewById(R.id.img_picture);
+            img_role = itemView.findViewById(R.id.img_role);
+            txt_name = itemView.findViewById(R.id.txt_name);
+            txt_faculty = itemView.findViewById(R.id.txt_faculty);
+            txt_level = itemView.findViewById(R.id.txt_level);
+
+            context = itemView.getContext();
+        }
+
+        public void display(){
+            CurrentUser user = CurrentUser.getCurrentUser();
+
+            //TODO: get user picture, faculty, nbr followers and nbr following
+
+            String firstname = user.getFirstname();
+            String lastname = user.getLastname();
+            String role = user.getRole();
+            int level = user.getParticipation();
+
+            //Set values
+            String fullname = firstname + " " + lastname;
+            txt_name.setText(fullname);
+            switch (role){
+                case "Etudiant":
+                    img_role.setImageResource(R.drawable.ic_role_student);
+                    break;
+                case "Academique":
+                    img_role.setImageResource(R.drawable.ic_role_academic);
+                    break;
+                case "ATG":
+                    img_role.setImageResource(R.drawable.ic_role_personnel);
+                    break;
+                case "Scientifique":
+                    img_role.setImageResource(R.drawable.ic_role_scientist);
+                    break;
+            }
+            String full_level = context.getResources().getString(R.string.level) + " " + level;
+            txt_level.setText(full_level);
         }
     }
 

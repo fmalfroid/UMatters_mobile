@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -127,13 +128,19 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                     //Get other tag
                     int nbr_tags = ll_other_tags.getChildCount();
                     EditText tag1 = findViewById(R.id.optional_tag_1);
-                    tag_array.put(tag1.getText().toString());
+                    boolean FirstOptTagAtLeastOne = tag1.getText().toString().matches(".*[a-zA-Z0-9]+.*");
+                    if (FirstOptTagAtLeastOne){
+                        tag_array.put(tag1.getText().toString());
+                    }
 
                     for (int i=0; i<nbr_tags; i++) {
                         if (ll_other_tags.getChildAt(i) instanceof LinearLayout) {
                             LinearLayout ll_tag = (LinearLayout) ll_other_tags.getChildAt(i);
                             EditText edtxt_optional_tag = (EditText) ll_tag.getChildAt(0);
-                            tag_array.put(edtxt_optional_tag.getText().toString());
+                            boolean atLeastOne = edtxt_optional_tag.getText().toString().matches(".*[a-zA-Z0-9]+.*");
+                            if (atLeastOne){
+                                tag_array.put(edtxt_optional_tag.getText().toString());
+                            }
                         }
                     }
 
@@ -294,30 +301,6 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
         if (!(tagAtLeastOne && type_tag.length() != 0)) {
             Toast.makeText(CreateBoxActivity.this, R.string.error_type_tag_empty, Toast.LENGTH_SHORT).show();
             return false;
-        }
-
-        //Check optional tag
-        int nbr_tags = ll_other_tags.getChildCount();
-        EditText tag1 = findViewById(R.id.optional_tag_1);
-        boolean tag1AtLeastOne = tag1.getText().toString().matches(".*[a-zA-Z0-9]+.*");
-        if (!(tag1AtLeastOne && tag1.length()!= 0)){
-            Toast.makeText(CreateBoxActivity.this, R.string.error_optional_tag_empty, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        for (int i=0; i<nbr_tags; i++) {
-            if (ll_other_tags.getChildAt(i) instanceof LinearLayout) {
-                LinearLayout ll_tag = (LinearLayout) ll_other_tags.getChildAt(i);
-                EditText edtxt_tag = (EditText) ll_tag.getChildAt(0);
-
-                String tag = edtxt_tag.getText().toString();
-                boolean optTagAtLeastOne = tag.matches(".*[a-zA-Z0-9]+.*");
-                //--Field is empty or only spaces
-                if (!(optTagAtLeastOne && tag.length() != 0)) {
-                    Toast.makeText(CreateBoxActivity.this, R.string.error_optional_tag_empty, Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            }
         }
 
         return true;
@@ -512,6 +495,11 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                     EditText new_edit_txt = new EditText(CreateBoxActivity.this);
                     new_edit_txt.setHint("#tag");
                     new_edit_txt.setTextSize(15);
+                    //--set max length to 15
+                    InputFilter[] filterArray = new InputFilter[1];
+                    filterArray[0] = new InputFilter.LengthFilter(15);
+                    new_edit_txt.setFilters(filterArray);
+
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                     //Get px value of dp
                     Resources r = CreateBoxActivity.this.getResources();

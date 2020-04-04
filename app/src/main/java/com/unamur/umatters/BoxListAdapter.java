@@ -217,14 +217,21 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             });
 
             //box menu
+            //--The creator of the box is the current user (remove the menu)
+            if (box.getCreator().getId().equals(user.getEmail())){
+                box_menu.setVisibility(View.GONE);
+            } else {
+                box_menu.setVisibility(View.VISIBLE);
+            }
+            //--on menu click
             box_menu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     //creating a popup menu
                     PopupMenu popup = new PopupMenu(context, box_menu);
-                    //inflating menu from xml resource
                     popup.inflate(R.menu.box_menu);
+
                     //adding click listener
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
