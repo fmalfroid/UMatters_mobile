@@ -47,6 +47,7 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         //Init of the recyclerView
         final RecyclerView rv = findViewById(R.id.comment_list);
         CommentListAdapter adapter = new CommentListAdapter();
+        adapter.linkBox((Box) getIntent().getSerializableExtra("box"));
         adapter.addData(new Comment());
         adapter.addData(new Comment());
         adapter.addData(new Comment());

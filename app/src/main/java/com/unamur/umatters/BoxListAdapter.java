@@ -2,6 +2,7 @@ package com.unamur.umatters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -23,6 +24,7 @@ import com.unamur.umatters.API.LikeBox;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -209,6 +211,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 @Override
                 public void onClick(View view) {
                     Intent runApp = new Intent(context, CommentActivity.class);
+                    runApp.putExtra("box", box);
                     context.startActivity(runApp);
                 }
             });

@@ -1,9 +1,10 @@
 package com.unamur.umatters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Box {
+public class Box implements Serializable {
     private String id;
     private List<Choice> choices;
     private User creator;

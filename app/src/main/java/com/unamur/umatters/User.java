@@ -1,6 +1,8 @@
 package com.unamur.umatters;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String id;
     private String firstname;
