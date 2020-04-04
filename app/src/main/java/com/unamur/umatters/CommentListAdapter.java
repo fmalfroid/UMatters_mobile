@@ -180,6 +180,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             final CurrentUser user = CurrentUser.getCurrentUser();
             final String email = user.getEmail();
 
+            if (box.getCreator().getId().equals(email)) {
+                box_menu.setVisibility(View.INVISIBLE);
+            }
+
             List<String> typesTags = Arrays.asList(
                 "#Général",
                 "#Informatique",
