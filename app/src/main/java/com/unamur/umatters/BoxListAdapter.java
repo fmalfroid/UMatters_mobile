@@ -18,6 +18,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.LikeBox;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +39,19 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
     public void addData(Box box) {
         boxList.add(box);
+        notifyDataSetChanged();
+    }
+
+    public void toggleFavorite(String id_box, String email){
+        for (Box box : boxList){
+            if (box.getId().equals(id_box)){
+                if (box.getLikes().contains(email)){
+                    box.getLikes().remove(email);
+                } else {
+                    box.getLikes().add(email);
+                }
+            }
+        }
         notifyDataSetChanged();
     }
 
@@ -112,11 +130,16 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
         }
 
 
-        public void display(Box box) {
+        public void display(final Box box) {
 
             //Remove all views because it launch this function when the box is too far in the scroll so it duplicates
             tagList.removeAllViews();
             poll.removeAllViews();
+            ll_oui_non.setVisibility(View.GONE);
+
+            //Current user
+            final CurrentUser user = CurrentUser.getCurrentUser();
+            final String email = user.getEmail();
 
             List<String> typesTags = Arrays.asList(
                 "#Général",
@@ -130,6 +153,13 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             );
 
             //Favorite button
+            //--init value
+            if (box.getLikes().contains(email)){
+                btn_favorite.setChecked(true);
+            } else {
+                btn_favorite.setChecked(false);
+            }
+            //--change value
             btn_favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -139,9 +169,22 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     ButtonBounceInterpolator interpolator = new ButtonBounceInterpolator(0.15, 20);
                     anim_bounce.setInterpolator(interpolator);
                     btn_favorite.startAnimation(anim_bounce);
-                    //TODO : add/remove from favorite
+
+                    //Add / remove to favorite in API (works like a toggle)
+                    JSONObject likeBoxJson = new JSONObject();
+                    try {
+                        likeBoxJson.put("email", email);
+                        likeBoxJson.put("id_box", box.getId());
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    LikeBox likeBox = new LikeBox(context, BoxListAdapter.this, box.getId(), email);
+                    likeBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
                 }
             });
+            //Nombre de likes de la box
+            nb_likes.setText(String.valueOf(box.getLikes().size()));
 
             //Interested button
             btn_interested.setOnClickListener(new View.OnClickListener() {
@@ -247,9 +290,6 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     }
                 }
             });
-
-            //Nombre de likes de la box
-            nb_likes.setText(String.valueOf(box.getLikes().size()));
 
             if (box.getType().equals("choix_multiple")) {
                 //Pour tous les choix possibles du sondage
@@ -393,5 +433,4 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
         }
     }
-
 }

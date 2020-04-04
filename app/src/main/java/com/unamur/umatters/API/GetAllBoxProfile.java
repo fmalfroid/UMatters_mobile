@@ -6,6 +6,7 @@ import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.BoxListAdapterProfile;
 import com.unamur.umatters.Choice;
+import com.unamur.umatters.CurrentUser;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,10 +99,15 @@ public class GetAllBoxProfile extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         try {
+            CurrentUser current_user = CurrentUser.getCurrentUser();
             JSONObject jsonObj = new JSONObject(result);
             JSONArray data = jsonObj.getJSONArray("data");
             for(int i=0; i<data.length(); i++) {
-                adapter.addData(createBoxFromJson(data.getJSONObject(i)));
+                //Get all box created by the current user
+                Box box = createBoxFromJson(data.getJSONObject(i));
+                if (box.getCreator().getId().equals(current_user.getEmail())){
+                    adapter.addData(box);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.unamur.umatters.API.DeleteBox;
+import com.unamur.umatters.API.LikeBox;
+import com.unamur.umatters.API.LikeBoxProfile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,6 +67,32 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
     public void addData(Box box) {
         boxList.add(box);
+        notifyDataSetChanged();
+    }
+
+    public void deleteBox(String id_box){
+        Box boxToRemove = null;
+        for (Box box : boxList){
+            if (box.getId().equals(id_box)){
+                boxToRemove = box;
+            }
+        }
+        if (boxToRemove!=null){
+            boxList.remove(boxToRemove);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void toggleFavorite(String id_box, String email){
+        for (Box box : boxList){
+            if (box.getId().equals(id_box)){
+                if (box.getLikes().contains(email)){
+                    box.getLikes().remove(email);
+                } else {
+                    box.getLikes().add(email);
+                }
+            }
+        }
         notifyDataSetChanged();
     }
 
@@ -175,6 +203,11 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             //Remove all views because it launch this function when the box is too far in the scroll so it duplicates
             tagList.removeAllViews();
             poll.removeAllViews();
+            ll_oui_non.setVisibility(View.GONE);
+
+            //Current user
+            final CurrentUser user = CurrentUser.getCurrentUser();
+            final String email = user.getEmail();
 
             List<String> typesTags = Arrays.asList(
                 "#Général",
@@ -188,6 +221,13 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             );
 
             //Favorite button
+            //--init value
+            if (box.getLikes().contains(email)){
+                btn_favorite.setChecked(true);
+            } else {
+                btn_favorite.setChecked(false);
+            }
+            //--change value
             btn_favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -197,9 +237,22 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                     ButtonBounceInterpolator interpolator = new ButtonBounceInterpolator(0.15, 20);
                     anim_bounce.setInterpolator(interpolator);
                     btn_favorite.startAnimation(anim_bounce);
-                    //TODO : add/remove from favorite
+
+                    //Add / remove to favorite in API (works like a toggle)
+                    JSONObject likeBoxJson = new JSONObject();
+                    try {
+                        likeBoxJson.put("email", email);
+                        likeBoxJson.put("id_box", box.getId());
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    LikeBoxProfile likeBoxProfile = new LikeBoxProfile(context, BoxListAdapterProfile.this, box.getId(), email);
+                    likeBoxProfile.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
                 }
             });
+            //Nombre de likes de la box
+            nb_likes.setText(String.valueOf(box.getLikes().size()));
 
             btn_comment.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -253,7 +306,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                                                 e.printStackTrace();
                                             }
 
-                                            DeleteBox deleteBox = new DeleteBox(context);
+                                            DeleteBox deleteBox = new DeleteBox(context, BoxListAdapterProfile.this, box.getId());
                                             deleteBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/delete", String.valueOf(boxDeleteJson));
 
                                             dialog.dismiss();

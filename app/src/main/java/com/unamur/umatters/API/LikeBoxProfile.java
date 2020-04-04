@@ -1,15 +1,12 @@
 package com.unamur.umatters.API;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.BoxListAdapterProfile;
-import com.unamur.umatters.R;
-import com.unamur.umatters.TagsSetupActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,16 +21,18 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class DeleteBox extends AsyncTask<String, String, String> {
+public class LikeBoxProfile extends AsyncTask<String, String, String> {
 
-    private Context context;
     private BoxListAdapterProfile boxListAdapterProfile;
     private String id_box;
+    private String user_email;
+    private Context context;
 
-    public DeleteBox(Context context, BoxListAdapterProfile boxListAdapterProfile, String id_box){
+    public LikeBoxProfile(Context context, BoxListAdapterProfile boxListAdapterProfile, String id_box, String user_email){
         this.context = context;
         this.boxListAdapterProfile = boxListAdapterProfile;
         this.id_box = id_box;
+        this.user_email = user_email;
     }
 
     @Override
@@ -117,8 +116,6 @@ public class DeleteBox extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        System.out.println(result);
-
         if (result == null) {
             Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
         } else {
@@ -129,16 +126,15 @@ public class DeleteBox extends AsyncTask<String, String, String> {
 
                 //Delete succeed
                 if (success) {
-                    Toast.makeText(context, R.string.success_delete_box, Toast.LENGTH_SHORT).show();
-                    boxListAdapterProfile.deleteBox(id_box);
+                    boxListAdapterProfile.toggleFavorite(id_box, user_email);
                 }
                 //Delete failed
                 else {
-                    Toast.makeText(context, R.string.error_delete_box, Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
     }
 }
