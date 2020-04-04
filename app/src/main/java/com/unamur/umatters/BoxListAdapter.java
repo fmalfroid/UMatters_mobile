@@ -42,6 +42,11 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
         notifyDataSetChanged();
     }
 
+    public void removeAllData() {
+        boxList.clear();
+        notifyDataSetChanged();
+    }
+
     public void toggleFavorite(String id_box, String email){
         for (Box box : boxList){
             if (box.getId().equals(id_box)){

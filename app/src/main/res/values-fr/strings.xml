@@ -65,16 +65,6 @@
     <string name="multipleChoicePoll">Sondage à choix multiples</string>
     <string name="tags">Tags</string>
     <string name="typeTag">Tag de type :</string>
-    <string-array name="typeTags">
-        <item name="#general">#Général</item>
-        <item name="#info">#Info</item>
-        <item name="#law">#Droit</item>
-        <item name="#medicine">#Médecine</item>
-        <item name="#sciences">#Sciences</item>
-        <item name="#economics">#Économie</item>
-        <item name="#arts">#Philo\u0026Lettres</item>
-        <item name="#age">#AGE</item>
-    </string-array>
     <string name="otherTags">Autres tags :</string>
     <string name="tooManyChoices">Trop de choix.</string>
     <string name="choice">Choix</string>

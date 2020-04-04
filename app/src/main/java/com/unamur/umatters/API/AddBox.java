@@ -1,5 +1,6 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -120,6 +121,7 @@ public class AddBox extends AsyncTask<String, String, String> {
                 //Delete succeed
                 if (success) {
                     Toast.makeText(context, R.string.success_add_box, Toast.LENGTH_SHORT).show();
+                    ((Activity) context).onBackPressed();
                 }
                 //Delete failed
                 else {

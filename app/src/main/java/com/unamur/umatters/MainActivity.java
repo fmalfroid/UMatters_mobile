@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView btn_filter;
     private ImageView btn_popular;
     private ImageView btn_archives;
+    private BoxListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Init
         initFAB();
         initNavDrawer(toolbar);
-        BoxListAdapter adapter = new BoxListAdapter();
+        adapter = new BoxListAdapter();
         initRecyclerView(adapter);
 
         //Popular button
@@ -77,6 +78,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GetAllBox task = new GetAllBox(adapter);
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.removeAllData();
+        GetAllBox task = new GetAllBox(adapter);
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
     }
 
     @Override
