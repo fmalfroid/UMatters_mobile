@@ -2,8 +2,8 @@ package com.unamur.umatters;
 
 import java.util.ArrayList;
 
-class Comment {
-    private int id;
+public class Comment {
+    private String id;
     private User creator;
     private String date;
     private String text;
@@ -11,7 +11,7 @@ class Comment {
     private ArrayList<String> replies;
 
     public Comment() {
-        this.id = 1;
+        this.id = "1";
         this.creator = new User();
         this.date = "27-03-2020";
         this.text = "Commentaire test";
@@ -19,7 +19,7 @@ class Comment {
         this.replies = new ArrayList<>();
     }
 
-    public Comment(int id, User creator, String date, String text, ArrayList<String> likes, ArrayList<String> replies) {
+    public Comment(String id, User creator, String date, String text, ArrayList<String> likes, ArrayList<String> replies) {
         this.id = id;
         this.creator = creator;
         this.date = date;
@@ -28,7 +28,7 @@ class Comment {
         this.replies = replies;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

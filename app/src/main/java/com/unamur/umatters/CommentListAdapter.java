@@ -426,6 +426,21 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
         public void display(Comment comment) {
+
+            switch (comment.getCreator().getRole()){
+                case "Etudiant":
+                    role.setImageResource(R.drawable.ic_role_student);
+                    break;
+                case "ATG":
+                    role.setImageResource(R.drawable.ic_role_personnel);
+                    break;
+                case "Scientifique":
+                    role.setImageResource(R.drawable.ic_role_scientist);
+                    break;
+                case "Academique":
+                    role.setImageResource(R.drawable.ic_role_academic);
+                    break;
+            }
             name.setText(comment.getCreator().getName());
             date.setText(comment.getDate());
             text.setText(comment.getText());
@@ -445,8 +460,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     //TODO : add/remove comment from favorite
                 }
             });
-
-            //TODO Changer l'image du role
         }
     }
 

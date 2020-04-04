@@ -309,6 +309,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 @Override
                 public void onClick(View view) {
                     Intent runApp = new Intent(context, CommentActivity.class);
+                    runApp.putExtra("box", box);
                     context.startActivity(runApp);
                 }
             });

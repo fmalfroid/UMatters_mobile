@@ -24,6 +24,7 @@ import com.unamur.umatters.API.GetAllComOfBox;
 public class CommentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Box currentBox;
+    private CommentListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +50,45 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         initFAB();
 
         //Init of the recyclerView
+        initRecyclerView();
+
+        GetAllComOfBox task = new GetAllComOfBox(adapter, currentBox.getId());
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages");
+
+    }
+
+    public void initRecyclerView(){
         final RecyclerView rv = findViewById(R.id.comment_list);
-        CommentListAdapter adapter = new CommentListAdapter();
+        adapter = new CommentListAdapter();
         currentBox = (Box) getIntent().getSerializableExtra("box");
         adapter.linkBox(currentBox);
-        adapter.addData(new Comment());
-        adapter.addData(new Comment());
-        adapter.addData(new Comment());
-        adapter.addData(new Comment());
-        adapter.addData(new Comment());
-        adapter.addData(new Comment());
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                super.onScrolled(recyclerView, dx, dy);
 
-        /*
-        GetAllComOfBox task = new GetAllComOfBox(adapter, currentBox.getId());
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/message");
-        */
+                LinearLayoutManager layoutManager = ((LinearLayoutManager) recyclerView.getLayoutManager());
+                try {
+                    int position = layoutManager.findFirstCompletelyVisibleItemPosition();
+
+                    if(position==0){
+                        fab.show();
+                    } else {
+                        fab.hide();
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
     }
 
     @Override

@@ -5,12 +5,12 @@ import android.util.Log;
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.Choice;
+import com.unamur.umatters.Comment;
 import com.unamur.umatters.CommentListAdapter;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Comment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -100,7 +100,10 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
             JSONObject jsonObj = new JSONObject(result);
             JSONArray data = jsonObj.getJSONArray("data");
             for(int i=0; i<data.length(); i++) {
-                createBoxFromJson(data.getJSONObject(i));
+                com.unamur.umatters.Comment com = createComFromJson(data.getJSONObject(i));
+                if (com!=null){
+                    adapter.addData(com);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -109,94 +112,54 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
         }
     }
 
-    private User createUserFromJson(JSONObject json) {
-        String id;
-        String firstname;
-        String lastname;
-        String role;
+    private com.unamur.umatters.Comment createComFromJson(JSONObject json) {
+        Log.d("comment data: ", json.toString());
 
-        try {
-            id = json.getString("email");
-            firstname = json.getString("firstname");
-            lastname = json.getString("lastname");
-            role = json.getString("role");
+        com.unamur.umatters.Comment comment = null;
 
-            return new User(id, firstname, lastname, role);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        try{
 
-        return new User();
-    }
+            //Get comment elements
 
-    private void createBoxFromJson(JSONObject json) {
-        Log.d("data element: ", json.toString());
+            String id_box = json.getString("id_box");
+            String id_message = json.getString("message_id");
+            String content = json.getString("content");
 
-        /*
-        String id;
-        User creator;
-        String date;
-        String text;
-        ArrayList<String> likes;
-        ArrayList<String> replies;
+            JSONObject object_creator = json.getJSONObject("auteur");
+            String email = object_creator.getString("email");
+            String firstname = object_creator.getString("firstname");
+            String lastname = object_creator.getString("lastname");
+            String role = object_creator.getString("role");
+            User creator = new User(email, firstname, lastname, role);
 
-        try {
-            id = json.getString("id_box");
-
-            //Choices
-            if (!json.isNull("choix")) {
-                choices = createChoiceListFromJson(json.getJSONObject("choix"));
-            } else {
-                choices = Arrays.asList(new Choice());
-            }
-
-            //Creator
-            creator = createUserFromJson(json.getJSONObject("createur"));
-
-            //Date
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-            Date dateNF = dateFormat.parse(json.getString("date_creation"));
-            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            date = formatter.format(dateNF);
-
-            //likes
-            likes = new ArrayList<String>();
+            ArrayList<String> likes = new ArrayList<>();
             if (!json.isNull("like")) {
-                JSONArray jArrayLikes = json.getJSONArray("like");
-                if (jArrayLikes != null) {
-                    for (int i = 0; i < jArrayLikes.length(); i++) {
-                        likes.add(jArrayLikes.getString(i));
+                JSONArray array_likes = json.getJSONArray("like");
+                if (array_likes != null) {
+                    for (int i = 0; i < array_likes.length(); i++) {
+                        likes.add(array_likes.getString(i));
                     }
                 }
             }
 
-            //Tags
-            tags = new ArrayList<String>();
-            JSONArray jArrayTags = json.getJSONArray("tag");
-            if (jArrayTags != null) {
-                for (int i=0;i<jArrayTags.length();i++){
-                    tags.add(jArrayTags.getString(i));
+            ArrayList<String> replies = new ArrayList<>();
+            if (!json.isNull("msg_rep")) {
+                JSONArray array_replies = json.getJSONArray("msg_rep");
+                if (array_replies != null) {
+                    for (int i = 0; i < array_replies.length(); i++) {
+                        replies.add(array_replies.getString(i));
+                    }
                 }
             }
 
-            title = json.getString("titre");
+            //create comment object
+            //TODO get date of comment (pas encore dans l'api)
+            comment = new Comment(id_message, creator, "", content, likes, replies);
 
-            type = json.getString("type");
-
-            description = json.getString("description");
-
-            return new Box(id, choices,creator, date, likes, tags, title, type, description);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (JSONException e){
             e.printStackTrace();
         }
 
-        return null;
-        */
-
-
+        return comment;
     }
-
 }
