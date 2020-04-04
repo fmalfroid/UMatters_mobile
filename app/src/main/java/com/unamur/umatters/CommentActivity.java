@@ -21,6 +21,8 @@ import android.widget.ImageView;
 
 public class CommentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Box currentBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,8 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         //Init of the recyclerView
         final RecyclerView rv = findViewById(R.id.comment_list);
         CommentListAdapter adapter = new CommentListAdapter();
-        adapter.linkBox((Box) getIntent().getSerializableExtra("box"));
+        currentBox = (Box) getIntent().getSerializableExtra("box");
+        adapter.linkBox(currentBox);
         adapter.addData(new Comment());
         adapter.addData(new Comment());
         adapter.addData(new Comment());
@@ -160,6 +163,7 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
             @Override
             public void onClick(View view) {
                 Intent runApp = new Intent(getApplicationContext(), WriteCommentActivity.class);
+                runApp.putExtra("box", currentBox);
                 startActivity(runApp);
             }
         });

@@ -20,9 +20,19 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unamur.umatters.API.AddComment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class WriteCommentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Box currentBox;
+    private TextView text;
+    private ImageView ok_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +60,34 @@ public class WriteCommentActivity extends AppCompatActivity implements Navigatio
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        text = findViewById(R.id.edtxt_comment);
+
+        currentBox = (Box) getIntent().getSerializableExtra("box");
+
+        ok_btn = findViewById(R.id.ok_btn);
+        ok_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CurrentUser user = CurrentUser.getCurrentUser();
+                JSONObject jsonObj = new JSONObject();
+                JSONObject jsonUser = new JSONObject();
+                try {
+                    jsonUser.put("email", user.getEmail());
+                    jsonUser.put("firstname", user.getFirstname());
+                    jsonUser.put("lastname", user.getLastname());
+                    jsonUser.put("role", user.getRole());
+                    jsonObj.put("id_box", currentBox.getId());
+                    jsonObj.put("content", text.getText().toString());
+                    jsonObj.put("auteur", jsonUser);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                AddComment task = new AddComment(WriteCommentActivity.this);
+                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages", String.valueOf(jsonObj));
             }
         });
 

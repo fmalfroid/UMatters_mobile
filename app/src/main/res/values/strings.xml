@@ -167,6 +167,7 @@
     <!-- Success message -->
     <string name="success_add_box">Box successfully added.</string>
     <string name="success_delete_box">Box successfully deleted.</string>
+    <string name="success_add_comment">Comment successfully added.</string>
 
     <!-- Error message -->
     <string name="error_email">Incorrect email address.</string>
@@ -182,5 +183,6 @@
     <string name="error_optional_tag_empty">Tag should not be empty.</string>
     <string name="error_box_too_small_title">Title should not be smaller than 5 characters.</string>
     <string name="error_box_too_small_description">Description should not be smaller than 10 characters.</string>
+    <string name="error_add_comment">Error while adding this comment.</string>
 
 </resources>

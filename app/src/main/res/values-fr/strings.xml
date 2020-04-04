@@ -127,8 +127,9 @@
     <string name="interests">Intérêts</string>
 
     <!-- Success message -->
-    <string name="success_add_box">Box successfully added.</string>
+    <string name="success_add_box">Box ajoutée avec succès.</string>
     <string name="success_delete_box">Box supprimée avec succès.</string>
+    <string name="success_add_comment">Commentaire ajouté avec succès.</string>
 
     <!-- Error message -->
     <string name="error_email">Adresse email incorrecte.</string>
@@ -144,6 +145,7 @@
     <string name="error_optional_tag_empty">Le tag ne doit pas etre vide.</string>
     <string name="error_box_too_small_title">Le titre doit contenir au moins 5 caractères.</string>
     <string name="error_box_too_small_description">La description doit contenir au moins 10 caractères.</string>
+    <string name="error_add_comment">Erreur lors de l\'ajout du commentaire.</string>
 
 
 </resources>
