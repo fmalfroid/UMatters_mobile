@@ -71,7 +71,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         notifyDataSetChanged();
     }
 
-    public void toggleFavorite(String id_comment, String email){
+    public void toggleComFavorite(String id_comment, String email){
         for (Comment comment : commentList){
             if (comment.getId().equals(id_comment)){
                 if (comment.getLikes().contains(email)){

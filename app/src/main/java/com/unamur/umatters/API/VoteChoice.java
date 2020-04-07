@@ -1,12 +1,12 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.unamur.umatters.BoxListAdapter;
-import com.unamur.umatters.CommentListAdapter;
 import com.unamur.umatters.R;
 
 import org.json.JSONException;
@@ -22,20 +22,12 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LikeCom extends AsyncTask<String, String, String> {
+public class VoteChoice extends AsyncTask<String, String, String> {
 
-    private CommentListAdapter commentListAdapter;
-    private String id_comment;
-    private String id_box;
-    private String user_email;
     private Context context;
 
-    public LikeCom(Context context, CommentListAdapter commentListAdapter, String id_comment, String id_box, String user_email){
+    public VoteChoice(Context context){
         this.context = context;
-        this.id_comment = id_comment;
-        this.commentListAdapter = commentListAdapter;
-        this.id_box = id_box;
-        this.user_email = user_email;
     }
 
     @Override
@@ -129,10 +121,11 @@ public class LikeCom extends AsyncTask<String, String, String> {
 
                 //Delete succeed
                 if (success) {
-                    commentListAdapter.toggleComFavorite(id_comment, user_email);
+                    Toast.makeText(context, "success vote", Toast.LENGTH_SHORT).show();
                 }
                 //Delete failed
                 else {
+                    Toast.makeText(context, "error vote", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
