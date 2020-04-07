@@ -421,8 +421,8 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     });
                 }
             } else if (box.getType().equals("oui_non")) {
-                int pct_yes;
-                int pct_no;
+                float pct_yes;
+                float pct_no;
 
                 float nb_yes;
                 float nb_no;
@@ -436,13 +436,15 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 }
 
                 //Calcule le pourcentage de Oui et de Non
-                pct_yes = (int)( (nb_yes/(nb_yes + nb_no))*100);
-                pct_no = (int)( (nb_no/(nb_yes + nb_no))*100);
+                pct_yes = (nb_yes/(nb_yes + nb_no))*100;
+                pct_no = (nb_no/(nb_yes + nb_no))*100;
 
                 ll_oui_non.setVisibility(View.VISIBLE);
 
-                String str_percent_oui = (pct_yes) + "%";
-                String str_percent_non = (pct_no) + "%";
+                float rounded_pct_yes = (float) (Math.round(pct_yes * 10.0) / 10.0);
+                float rounded_pct_no = (float) (Math.round(pct_no * 10.0) / 10.0);
+                String str_percent_oui = (rounded_pct_yes) + "%";
+                String str_percent_non = (rounded_pct_no) + "%";
                 percent_oui.setText(str_percent_oui);
                 percent_non.setText(str_percent_non);
 
@@ -459,20 +461,20 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 //Gestion des votes oui-non
                 //--init value
                 //User voted for this choice
-                Choice vote_non = box.getChoices().get(0);
-                Choice vote_oui = box.getChoices().get(1);
+                final Choice vote_non = box.getChoices().get(0);
+                final Choice vote_oui = box.getChoices().get(1);
                 //Pas voter oui ni non
-                if (!(vote_non.getUsers().contains(user.getEmail()) && vote_oui.getUsers().contains(user.getEmail()))){
+                if ((!vote_non.getUsers().contains(user.getEmail()) && !vote_oui.getUsers().contains(user.getEmail()))){
                     btn_oui.setChecked(false);
                     btn_non.setChecked(false);
                 }
                 //voter juste non
                 else if (vote_non.getUsers().contains(user.getEmail())){
-                    btn_oui.setChecked(false);
                     btn_non.setChecked(true);
+                    btn_oui.setChecked(false);
                 }
                 //voter juste oui
-                else {
+                else if (vote_oui.getUsers().contains(user.getEmail())){
                     btn_oui.setChecked(true);
                     btn_non.setChecked(false);
                 }
@@ -489,13 +491,16 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     @Override
                     public void onClick(View view) {
 
+                        if (vote_non.getUsers().contains(user.getEmail())){
+                            toggleChoice(box.getId(), user.getEmail(), "Non");
+                        }
+                        toggleChoice(box.getId(), user.getEmail(), "Oui");
+
                         try{
                             voteJson.put("key", "Oui");
                         } catch (JSONException e){
                             e.printStackTrace();
                         }
-
-                        toggleChoice(box.getId(), user.getEmail(), "Oui");
 
                         //Vote oui (garde le non pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le non)
                         Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
@@ -512,6 +517,9 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                             e.printStackTrace();
                         }
 
+                        if (vote_oui.getUsers().contains(user.getEmail())){
+                            toggleChoice(box.getId(), user.getEmail(), "Oui");
+                        }
                         toggleChoice(box.getId(), user.getEmail(), "Non");
 
                         //Vote non (garde le oui pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le oui)
