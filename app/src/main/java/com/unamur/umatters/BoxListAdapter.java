@@ -495,6 +495,8 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                             e.printStackTrace();
                         }
 
+                        toggleChoice(box.getId(), user.getEmail(), "Oui");
+
                         //Vote oui (garde le non pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le non)
                         Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                         VoteChoice task = new VoteChoice(context);
@@ -509,6 +511,8 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                         } catch (JSONException e){
                             e.printStackTrace();
                         }
+
+                        toggleChoice(box.getId(), user.getEmail(), "Non");
 
                         //Vote non (garde le oui pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le oui)
                         Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
