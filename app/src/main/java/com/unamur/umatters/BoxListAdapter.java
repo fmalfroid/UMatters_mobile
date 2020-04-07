@@ -423,8 +423,8 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                 line_oui.setLayoutParams(layoutParams_oui);
                 line_non.setLayoutParams(layoutParams_non);
 
-                String str_votes_oui = pct_yes + " votes";
-                String str_votes_non = pct_no + " votes";
+                String str_votes_oui = (int) nb_yes + " votes";
+                String str_votes_non = (int) nb_no + " votes";
                 votes_oui.setText(str_votes_oui);
                 votes_non.setText(str_votes_non);
 
