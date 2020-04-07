@@ -15,6 +15,7 @@ public class CurrentUser {
     private ArrayList<String> box;
     private JSONObject notifications;
     private JSONObject sanctions;
+    private ArrayList<String> interest;
 
     private CurrentUser() {}
 
@@ -73,6 +74,10 @@ public class CurrentUser {
         return password;
     }
 
+    public ArrayList<String> getInterest() {
+        return interest;
+    }
+
     public void setBox(ArrayList<String> box) {
         this.box = box;
     }
@@ -107,5 +112,9 @@ public class CurrentUser {
 
     public void setSanctions(JSONObject sanctions) {
         this.sanctions = sanctions;
+    }
+
+    public void setInterest(ArrayList<String> interest) {
+        this.interest = interest;
     }
 }

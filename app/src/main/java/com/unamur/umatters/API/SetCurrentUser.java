@@ -120,6 +120,8 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     user.setBox(box);
                     user.setNotifications(notifications);
                     user.setSanctions(sanctions);
+                    //TODO RECUPERER LES INTERETS ( pas encore dans la db )
+                    user.setInterest(new ArrayList<String>());
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

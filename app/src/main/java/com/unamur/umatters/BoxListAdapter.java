@@ -20,6 +20,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.AddInterest;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.VoteChoice;
 
@@ -80,6 +81,16 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     }
                 }
             }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void toggleInterest(String id_box, String email){
+        CurrentUser user = CurrentUser.getCurrentUser();
+        if (user.getInterest().contains(id_box)) {
+            user.getInterest().remove(id_box);
+        } else {
+            user.getInterest().add(id_box);
         }
         notifyDataSetChanged();
     }
@@ -220,6 +231,13 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             nb_likes.setText(String.valueOf(box.getLikes().size()));
 
             //Interested button
+            //--init value
+            if (user.getInterest().contains(box.getId())){
+                btn_interested.setChecked(true);
+            } else {
+                btn_interested.setChecked(false);
+            }
+            //--change value
             btn_interested.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -229,7 +247,17 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     ButtonBounceInterpolator interpolator = new ButtonBounceInterpolator(0.15, 20);
                     anim_bounce.setInterpolator(interpolator);
                     btn_interested.startAnimation(anim_bounce);
-                    //TODO : add/remove from interested
+
+                    JSONObject interestBoxJson = new JSONObject();
+                    try {
+                        interestBoxJson.put("email", email);
+                        interestBoxJson.put("id_box", box.getId());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    AddInterest addInterest = new AddInterest(context, BoxListAdapter.this, box.getId(), email);
+                    addInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet", String.valueOf(interestBoxJson));
                 }
             });
 
