@@ -22,6 +22,7 @@ import android.widget.ToggleButton;
 
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxComment;
+import com.unamur.umatters.API.LikeCom;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,6 +68,19 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void removeAllData() {
         commentList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void toggleFavorite(String id_comment, String email){
+        for (Comment comment : commentList){
+            if (comment.getId().equals(id_comment)){
+                if (comment.getLikes().contains(email)){
+                    comment.getLikes().remove(email);
+                } else {
+                    comment.getLikes().add(email);
+                }
+            }
+        }
         notifyDataSetChanged();
     }
 
@@ -233,7 +247,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     likeBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
                 }
             });
-            //Nombre de likes de la box
+            //Nombre de likes du com
             nb_likes.setText(String.valueOf(box.getLikes().size()));
 
             //Interested button
@@ -430,7 +444,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
 
-        public void display(Comment comment) {
+        public void display(final Comment comment) {
+
+            //Current user
+            final CurrentUser user = CurrentUser.getCurrentUser();
+            final String email = user.getEmail();
 
             switch (comment.getCreator().getRole()){
                 case "Etudiant":
@@ -453,6 +471,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             nb_replies.setText(String.valueOf(comment.getReplies().size()));
 
             //Favorite button
+            //--init value
+            if (comment.getLikes().contains(email)){
+                btn_favorite.setChecked(true);
+            } else {
+                btn_favorite.setChecked(false);
+            }
+            //--change value
             btn_favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -462,7 +487,21 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     ButtonBounceInterpolator interpolator = new ButtonBounceInterpolator(0.15, 20);
                     anim_bounce.setInterpolator(interpolator);
                     btn_favorite.startAnimation(anim_bounce);
-                    //TODO : add/remove comment from favorite
+
+
+
+                    //Add / remove to favorite in API (works like a toggle)
+                    JSONObject likeComJson = new JSONObject();
+                    try {
+                        likeComJson.put("email", email);
+                        likeComJson.put("id_box", current_box.getId());
+                        likeComJson.put("id_msg", comment.getId());
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    LikeCom likeCom = new LikeCom(context, CommentListAdapter.this, comment.getId(),current_box.getId(), email);
+                    likeCom.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/like", String.valueOf(likeComJson));
                 }
             });
         }
