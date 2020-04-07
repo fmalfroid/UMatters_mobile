@@ -48,6 +48,8 @@ public class SubscriptionsListFragment extends Fragment {
 
         CurrentUser user = CurrentUser.getCurrentUser();
         String email = user.getEmail();
+
+        Log.d("SubListFragment :", "GET http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement/"+ email);
         GetAllSubscriptions task = new GetAllSubscriptions(adapter);
         String url = "http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement/" + email;
         task.execute(url);

@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -86,6 +87,7 @@ public class WriteCommentActivity extends AppCompatActivity implements Navigatio
                     e.printStackTrace();
                 }
 
+                Log.d("WriteCommentActivity :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/messages with :" + jsonObj.toString());
                 AddComment task = new AddComment(WriteCommentActivity.this);
                 task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages", String.valueOf(jsonObj));
             }

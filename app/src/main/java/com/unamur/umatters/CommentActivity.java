@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,9 +53,18 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         //Init of the recyclerView
         initRecyclerView();
 
+        Log.d("Comment activity :", "GET http://mdl-std01.info.fundp.ac.be/api/v1/messages/" + currentBox.getId());
         GetAllComOfBox task = new GetAllComOfBox(adapter, currentBox.getId());
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.removeAllData();
+        GetAllComOfBox task = new GetAllComOfBox(adapter, currentBox.getId());
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages");
     }
 
     public void initRecyclerView(){

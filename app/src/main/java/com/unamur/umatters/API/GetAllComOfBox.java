@@ -125,6 +125,17 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
             String id_message = json.getString("message_id");
             String content = json.getString("content");
 
+            //Date
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+            String date = "";
+            try {
+                Date dateNF = dateFormat.parse(json.getString("date"));
+                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                date = formatter.format(dateNF);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+
             JSONObject object_creator = json.getJSONObject("auteur");
             String email = object_creator.getString("email");
             String firstname = object_creator.getString("firstname");
@@ -153,8 +164,7 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
             }
 
             //create comment object
-            //TODO get date of comment (pas encore dans l'api)
-            comment = new Comment(id_message, creator, "", content, likes, replies);
+            comment = new Comment(id_message, creator, date, content, likes, replies);
 
         } catch (JSONException e){
             e.printStackTrace();

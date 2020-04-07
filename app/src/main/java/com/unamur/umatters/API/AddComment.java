@@ -110,6 +110,7 @@ public class AddComment extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+
         if (result == null) {
             Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
         } else {
