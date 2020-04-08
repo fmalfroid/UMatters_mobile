@@ -408,7 +408,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 float nb_yes;
                 float nb_no;
 
-                if (box.getChoices().get(0).getName().equals("oui")) {
+                if (box.getChoices().get(0).getName().equals("Oui")) {
                     nb_yes = (box.getChoices().get(0).getUsers().size());
                     nb_no = (box.getChoices().get(1).getUsers().size());
                 } else {
