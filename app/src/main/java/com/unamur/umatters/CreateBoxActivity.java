@@ -157,8 +157,8 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                             type = "oui_non";
                             choicesJSON = new JSONObject();
                             try {
-                                choicesJSON.put("oui", empty_choice);
-                                choicesJSON.put("non", empty_choice);
+                                choicesJSON.put("Oui", empty_choice);
+                                choicesJSON.put("Non", empty_choice);
                             } catch (JSONException e){
                                 e.printStackTrace();
                             }
