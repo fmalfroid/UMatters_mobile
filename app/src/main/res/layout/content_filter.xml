@@ -89,10 +89,18 @@
                     >
 
                     <RadioButton
-                        android:id="@+id/rdbtn_date_ajout"
+                    android:id="@+id/rdbtn_lastest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/latest"
+                    android:textSize="15sp"
+                    />
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_oldest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/creation_date"
+                        android:text="@string/oldest"
                         android:textSize="15sp"
                         />
 

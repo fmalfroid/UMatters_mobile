@@ -86,7 +86,8 @@
     <string name="filter">Filtrer</string>
     <string name="sort">Trier</string>
     <string name="unselect_all">Tout déselectionner</string>
-    <string name="creation_date">Date d\'ajout</string>
+    <string name="oldest">Plus ancien d\'abord</string>
+    <string name="latest">Plus récent d\'abord</string>
     <string name="popularity">Popularité</string>
     <string name="participation_level">Niveau de participation</string>
     <string name="category">Catégorie</string>

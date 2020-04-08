@@ -119,7 +119,8 @@
     <string name="filter">Filter</string>
     <string name="sort">Sort</string>
     <string name="unselect_all">Unselect all</string>
-    <string name="creation_date">Creation date</string>
+    <string name="oldest">Older first</string>
+    <string name="latest">Latest first</string>
     <string name="popularity">Popularity</string>
     <string name="participation_level">Participation level</string>
     <string name="category">Category</string>
