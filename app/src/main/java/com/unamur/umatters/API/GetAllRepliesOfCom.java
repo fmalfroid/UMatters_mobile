@@ -28,18 +28,20 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class GetAllComOfBox extends AsyncTask<String, String, String> {
+public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
 
-    private CommentListAdapter adapter = null;
+    private ArrayList<Comment> replies;
     private String id_box;
+    private String id_msg;
 
-    public GetAllComOfBox(){
+    public GetAllRepliesOfCom(){
         //set context variables if required
     }
 
-    public GetAllComOfBox(CommentListAdapter adapter, String id_box) {
-        this.adapter = adapter;
+    public GetAllRepliesOfCom(ArrayList<Comment> replies, String id_box, String id_msg) {
+        this.replies = replies;
         this.id_box = id_box;
+        this.id_msg = id_msg;
     }
 
     protected void onPreExecute() {
@@ -54,7 +56,7 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
         BufferedReader reader = null;
 
         try {
-            String str_url = params[0] + "/" + id_box;
+            String str_url = params[0] + "/" + id_box + "&" + id_msg;
             URL url = new URL(str_url);
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
@@ -102,7 +104,7 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
             for(int i=0; i<data.length(); i++) {
                 com.unamur.umatters.Comment com = createComFromJson(data.getJSONObject(i));
                 if (com!=null){
-                    adapter.addData(com);
+                    replies.add(com);
                 }
             }
         } catch (JSONException e) {
@@ -154,24 +156,9 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
             }
 
             ArrayList<Comment> replies = new ArrayList<>();
-            /*if (!json.isNull("msg_rep")) {
-                JSONArray array_replies = json.getJSONArray("msg_rep");
-                if (array_replies != null) {
-                    for (int i = 0; i < array_replies.length(); i++) {
-                        replies.add(array_replies.getString(i));
-                    }
-                }
-            }*/
-
-            GetAllRepliesOfCom getReplies = new GetAllRepliesOfCom(replies, id_box, id_message);
-            getReplies.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/repondre");
 
             //create comment object
             comment = new Comment(id_message, creator, date, content, likes, replies);
-
-            if (!json.isNull("parent")) {
-                return null;
-            }
 
         } catch (JSONException e){
             e.printStackTrace();

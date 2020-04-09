@@ -1,14 +1,15 @@
 package com.unamur.umatters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Comment {
+public class Comment implements Serializable {
     private String id;
     private User creator;
     private String date;
     private String text;
     private ArrayList<String> likes;
-    private ArrayList<String> replies;
+    private ArrayList<Comment> replies;
 
     public Comment() {
         this.id = "1";
@@ -19,7 +20,7 @@ public class Comment {
         this.replies = new ArrayList<>();
     }
 
-    public Comment(String id, User creator, String date, String text, ArrayList<String> likes, ArrayList<String> replies) {
+    public Comment(String id, User creator, String date, String text, ArrayList<String> likes, ArrayList<Comment> replies) {
         this.id = id;
         this.creator = creator;
         this.date = date;
@@ -48,7 +49,7 @@ public class Comment {
         return text;
     }
 
-    public ArrayList<String> getReplies() {
+    public ArrayList<Comment> getReplies() {
         return replies;
     }
 }

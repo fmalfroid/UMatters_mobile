@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -452,6 +453,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private TextView nb_likes;
         private TextView nb_replies;
         private ToggleButton btn_favorite;
+        private Button btn_reply;
+        private LinearLayout ll_replies;
 
         private Context context;
 
@@ -466,6 +469,8 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             nb_likes = itemView.findViewById(R.id.cell_nb_like);
             nb_replies = itemView.findViewById(R.id.nb_replies);
             btn_favorite = itemView.findViewById(R.id.button_favorite);
+            btn_reply = itemView.findViewById(R.id.reply_button);
+            ll_replies = itemView.findViewById(R.id.ll_replies);
 
             context = itemView.getContext();
 
@@ -530,6 +535,26 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                     LikeCom likeCom = new LikeCom(context, CommentListAdapter.this, comment.getId(),current_box.getId(), email);
                     likeCom.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/like", String.valueOf(likeComJson));
+                }
+            });
+
+            btn_reply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent runApp = new Intent(context, ReplyActivity.class);
+                    runApp.putExtra("box", current_box);
+                    runApp.putExtra("comment", comment);
+                    context.startActivity(runApp);
+                }
+            });
+
+            ll_replies.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent runApp = new Intent(context, RepliesListActivity.class);
+                    runApp.putExtra("box", current_box);
+                    runApp.putExtra("comment", comment);
+                    context.startActivity(runApp);
                 }
             });
         }
