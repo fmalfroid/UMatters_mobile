@@ -7,10 +7,30 @@
 
     <string name="pref_previously_started">précédemment démarrée</string>
 
+    <!-- Login activity -->
+    <string name="login">Connexion</string>
     <string name="unamur_logo">unamur logo</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="remember_me">Se souvenir de moi</string>
+    <string name="register">S\'inscrire</string>
+    <string name="email_address">Adresse mail UNamur</string>
+    <string name="login_error">Email ou mot de passe incorrecte</string>
+
+    <!-- Register activity -->
+    <string name="title_email_adress">Adresse mail UNamur :</string>
+    <string name="title_password">Mot de passe :</string>
+    <string name="title_password_confirmation">Confirmation mot de passe :</string>
+    <string name="title_firstname">Prénom :</string>
+    <string name="title_lastname">Nom :</string>
+    <string name="title_role">Rôle :</string>
+    <string-array name="roles">
+        <item>Etudiant</item>
+        <item>Académique</item>
+        <item>Scientifique</item>
+        <item>ATG</item>
+    </string-array>
+
     <string name="tags_setup">Initialisation des tags</string>
     <string name="tags_setup_explanation">Veuillez choisir les tags vous intéressant le plus.\nCela personnalisera votre expérience utilisateur.</string>
     <string name="name">Nom</string>
@@ -116,8 +136,6 @@
     <string name="subscriptions_box">Boîtes d\'abonnements</string>
     <string name="replies">" réponses"</string>
     <string name="reply">Répondre</string>
-    <string name="email_address">Adresse Email</string>
-    <string name="login_error">Email ou mot de passe incorrecte</string>
 
     <!-- Activity comments -->
     <string name="write_a_comment">Ecrire un commentaire</string>
@@ -131,8 +149,18 @@
     <string name="success_add_box">Box ajoutée avec succès.</string>
     <string name="success_delete_box">Box supprimée avec succès.</string>
     <string name="success_add_comment">Commentaire ajouté avec succès.</string>
+    <string name="success_register">Bienvenue sur UMatters!</string>
 
     <!-- Error message -->
+    <string name="error_register">Erreur lors de l\'inscription à cette application</string>
+    <string name="error_invalid_email">Cette adresse email n\'est pas valide</string>
+    <string name="error_empty_email">Adresse email est un champ obligatoire</string>
+    <string name="error_empty_password">Mot de passe est un champ obligatoire</string>
+    <string name="error_empty_confirm_password">Confirmation mot de passe est un champ obligatoire</string>
+    <string name="error_difference_password_confirm_password">Mot de passe et confirmation du mot de passe sont différent</string>
+    <string name="error_min_length_password">Mot de passe contient moins de 6 caractères</string>
+    <string name="error_empty_firstname">Prénom est un champ obligatoire</string>
+    <string name="error_empty_lastname">Nom est un champ obligatoire</string>
     <string name="error_email">Adresse email incorrecte.</string>
     <string name="error_password">Mot de passe incorrecte.</string>
     <string name="error_empty_field">S\'il vous plaît, remplissez tous les champs.</string>

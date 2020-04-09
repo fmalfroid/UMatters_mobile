@@ -11,9 +11,14 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InterestActivity"
-            android:label="InterestActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".InterestActivity"
+            android:label="@string/title_activity_interest"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".WriteCommentActivity"
             android:label="@string/title_activity_write_comment"

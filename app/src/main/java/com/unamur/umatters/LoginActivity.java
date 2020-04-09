@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.unamur.umatters.API.Login;
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private FloatingActionButton loginButton;
     private EditText email;
     private EditText password;
+    private Button btn_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,15 @@ public class LoginActivity extends AppCompatActivity {
                 //startActivity(runApp);
                 //TODO : Open tags setup if first time, else open main
                 //finish();
+            }
+        });
+
+        btn_register = findViewById(R.id.btn_register);
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent runRegister = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(runRegister);
             }
         });
 

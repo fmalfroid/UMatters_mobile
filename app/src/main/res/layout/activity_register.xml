@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FAFAFA"
+        android:gravity="center"
+        android:weightSum="3">
+
+        <ImageView
+            android:id="@+id/login_activity_unamur_logo"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_weight="2"
+            android:contentDescription="@string/unamur_logo"
+            android:src="@drawable/umatters_banderole" />
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:paddingBottom ="40dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/register"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="@color/transparent20"
+                android:padding="3dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_email_adress"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edtxt_email_adress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:importantForAutofill="no"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_password"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edtxt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:importantForAutofill="no"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_password_confirmation"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edtxt_password_confirmation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:importantForAutofill="no"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_firstname"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edtxt_firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_lastname"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    />
+
+                <EditText
+                    android:id="@+id/edtxt_lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_role"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    />
+
+                <Spinner
+                    android:id="@+id/spinner_role"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:entries="@array/roles"
+                    >
+                </Spinner>
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/register"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_white_border_selector"
+                    android:minHeight="37dp"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

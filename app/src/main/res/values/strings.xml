@@ -12,6 +12,8 @@
     <string name="title_activity_subscriptions" translatable="false">title_activity_subscriptions</string>
     <string name="title_activity_notifications" translatable="false">title_notifications_activity</string>
     <string name="title_activity_write_comment" translatable="false">WriteCommentActivity</string>
+    <string name="title_activity_interest" translatable="false">InterestActivity</string>
+    <string name="title_activity_register" translatable="false">RegisterActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -19,11 +21,31 @@
     <string name="action_settings">Settings</string>
     <string name="pref_previously_started">Previously started</string>
 
+    <!-- Login activity -->
+    <string name="login">Login</string>
     <string name="unamur_logo">unamur logo</string>
     <string name="umatters" translatable="false">UMatters</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
+    <string name="register">Register</string>
+    <string name="email_address">UNamur email address</string>
+    <string name="login_error">Email or password incorrect</string>
+
+    <!-- Register activity -->
+    <string name="title_email_adress">UNamur email address :</string>
+    <string name="title_password">Password :</string>
+    <string name="title_password_confirmation">Password confirmation :</string>
+    <string name="title_firstname">Firstname :</string>
+    <string name="title_lastname">Lastname :</string>
+    <string name="title_role">Role :</string>
+    <string-array name="roles">
+        <item>Student</item>
+        <item>Academic</item>
+        <item>Scientist</item>
+        <item>ATG</item>
+    </string-array>
+
 
     <string name="tags_setup">Tags setup</string>
     <string name="tags_setup_explanation">Please choose the tags that interest you the most.\nThis will personalize your user experience.</string>
@@ -151,8 +173,6 @@
     <string name="subscriptions_box">Subscriptions box</string>
     <string name="reply">Reply</string>
     <string name="replies">" replies"</string>
-    <string name="email_address">Email address</string>
-    <string name="login_error">Email or password incorrect</string>
 
     <!-- Activity Notifications -->
     <string name="notifications" translatable="false">Notifications</string>
@@ -169,8 +189,18 @@
     <string name="success_add_box">Box successfully added.</string>
     <string name="success_delete_box">Box successfully deleted.</string>
     <string name="success_add_comment">Comment successfully added.</string>
+    <string name="success_register">Welcome to UMatters!</string>
 
     <!-- Error message -->
+    <string name="error_register">Error while registering to this app</string>
+    <string name="error_invalid_email">This email is not valid</string>
+    <string name="error_empty_email">Email is a required field</string>
+    <string name="error_empty_password">Password is a required field</string>
+    <string name="error_empty_confirm_password">Confirmation password is a required field</string>
+    <string name="error_difference_password_confirm_password">Your password and confirmation password are different</string>
+    <string name="error_min_length_password">Your password contains less than 6 characters</string>
+    <string name="error_empty_firstname">Firstname is a required field</string>
+    <string name="error_empty_lastname">Lastname is a required field</string>
     <string name="error_email">Incorrect email address.</string>
     <string name="error_password">Incorrect password.</string>
     <string name="error_empty_field">Please fill every fields.</string>
