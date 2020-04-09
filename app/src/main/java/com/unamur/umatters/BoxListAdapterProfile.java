@@ -175,7 +175,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 case "Etudiant":
                     img_role.setImageResource(R.drawable.ic_role_student);
                     break;
-                case "Academique":
+                case "Académique":
                     img_role.setImageResource(R.drawable.ic_role_academic);
                     break;
                 case "ATG":
