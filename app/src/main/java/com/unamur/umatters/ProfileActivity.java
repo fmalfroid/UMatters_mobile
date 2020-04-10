@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         });
 
         GetAllBoxProfile task = new GetAllBoxProfile(adapter);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + CurrentUser.getCurrentUser().getEmail());
 
     }
 

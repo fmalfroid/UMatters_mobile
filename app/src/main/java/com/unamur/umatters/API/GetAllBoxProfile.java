@@ -105,9 +105,7 @@ public class GetAllBoxProfile extends AsyncTask<String, String, String> {
             for(int i=0; i<data.length(); i++) {
                 //Get all box created by the current user
                 Box box = createBoxFromJson(data.getJSONObject(i));
-                if (box.getCreator().getId().equals(current_user.getEmail())){
-                    adapter.addData(box);
-                }
+                adapter.addData(box);
             }
         } catch (JSONException e) {
             e.printStackTrace();
