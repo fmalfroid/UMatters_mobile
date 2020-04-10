@@ -120,8 +120,16 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     user.setBox(box);
                     user.setNotifications(notifications);
                     user.setSanctions(sanctions);
-                    //TODO RECUPERER LES INTERETS ( pas encore dans la db )
-                    user.setInterest(new ArrayList<String>());
+                    ArrayList<String> interet = new ArrayList<>();
+                    if (!jsonObj.isNull("interet")) {
+                        JSONArray jArrayInteret = jsonObj.getJSONArray("interet");
+                        if (jArrayInteret != null) {
+                            for (int i = 0; i < jArrayInteret.length(); i++) {
+                                interet.add(jArrayInteret.getString(i));
+                            }
+                        }
+                    }
+                    user.setInterest(interet);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

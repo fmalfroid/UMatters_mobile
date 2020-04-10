@@ -7,6 +7,7 @@ import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.Choice;
 import com.unamur.umatters.Comment;
 import com.unamur.umatters.CommentListAdapter;
+import com.unamur.umatters.RepliesListAdapter;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,7 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
     private ArrayList<Comment> replies;
     private String id_box;
     private String id_msg;
+    private RepliesListAdapter adapter;
 
     public GetAllRepliesOfCom(){
         //set context variables if required
@@ -42,6 +44,14 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
         this.replies = replies;
         this.id_box = id_box;
         this.id_msg = id_msg;
+        this.adapter = null;
+    }
+
+    public GetAllRepliesOfCom(ArrayList<Comment> replies, String id_box, String id_msg, RepliesListAdapter adapter) {
+        this.replies = replies;
+        this.id_box = id_box;
+        this.id_msg = id_msg;
+        this.adapter = adapter;
     }
 
     protected void onPreExecute() {
@@ -111,6 +121,10 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
             e.printStackTrace();
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }
+
+        if (adapter != null) {
+            adapter.notifyChange();
         }
     }
 

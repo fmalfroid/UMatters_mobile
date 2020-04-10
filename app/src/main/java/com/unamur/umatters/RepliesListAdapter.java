@@ -41,6 +41,10 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         notifyDataSetChanged();
     }
 
+    public void notifyChange() {
+        notifyDataSetChanged();
+    }
+
     public void toggleComFavorite(String id_comment, String email){
         for (Comment comment : commentList){
             if (comment.getId().equals(id_comment)){

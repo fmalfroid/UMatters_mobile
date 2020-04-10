@@ -11,9 +11,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.unamur.umatters.API.GetAllComOfBox;
+import com.unamur.umatters.API.GetAllRepliesOfCom;
 
 public class RepliesListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,6 +50,14 @@ public class RepliesListActivity extends AppCompatActivity implements Navigation
 
         //Init of the recyclerView
         initRecyclerView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        currentComment.getReplies().clear();
+        GetAllRepliesOfCom task = new GetAllRepliesOfCom(currentComment.getReplies(), currentBox.getId(), currentComment.getId(), adapter);
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages");
     }
 
     public void initRecyclerView(){

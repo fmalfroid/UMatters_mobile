@@ -17,7 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.unamur.umatters.API.GetInterestById;
+
 public class InterestActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private BoxListAdapter adapter = new BoxListAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +31,7 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
         //Init of the recyclerView
         final RecyclerView rv = findViewById(R.id.interests_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new BoxListAdapter());
+        rv.setAdapter(adapter);
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -44,6 +48,21 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
 
             }
         });
+    }
+
+    public void getAllInterest() {
+        adapter.removeAllData();
+        CurrentUser user = CurrentUser.getCurrentUser();
+        for (String id_box : user.getInterest()) {
+            GetInterestById getInterest = new GetInterestById(adapter, id_box);
+            getInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllInterest();
     }
 
     @Override
