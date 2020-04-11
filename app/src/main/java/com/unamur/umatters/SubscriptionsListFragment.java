@@ -31,15 +31,6 @@ public class SubscriptionsListFragment extends Fragment {
         //TODO : get subscriptions info
         //test data
         ArrayList<SubscriptionsPerson> all_subscriptions_person = new ArrayList<>();
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.student_pic);
-        SubscriptionsPerson person1 = new SubscriptionsPerson(bitmap, "email","René", "Dupuis", "Droit", true, "student", 3);
-        SubscriptionsPerson person2 = new SubscriptionsPerson(bitmap, "email","Maxence", "Fermier", "Sciences", true, "ATG", 5);
-        SubscriptionsPerson person3 = new SubscriptionsPerson(bitmap, "email","Matthieu", "Louis", "Philosophie et lettres", true, "academic", 2);
-        SubscriptionsPerson person4 = new SubscriptionsPerson(bitmap, "email","Florian", "Malfroid", "Informatique", true, "scientist", 1);
-        all_subscriptions_person.add(person1);
-        all_subscriptions_person.add(person2);
-        all_subscriptions_person.add(person3);
-        all_subscriptions_person.add(person4);
 
         //Set adapter
         SubscriptionsListAdapter adapter=new SubscriptionsListAdapter(getActivity(), all_subscriptions_person);

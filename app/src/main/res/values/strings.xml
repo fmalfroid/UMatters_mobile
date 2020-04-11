@@ -14,6 +14,7 @@
     <string name="title_activity_write_comment" translatable="false">WriteCommentActivity</string>
     <string name="title_activity_interest" translatable="false">InterestActivity</string>
     <string name="title_activity_register" translatable="false">RegisterActivity</string>
+    <string name="title_activity_users_profile" translatable="false">UsersProfileActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -173,6 +174,7 @@
     <string name="subscriptions_box">Subscriptions box</string>
     <string name="reply">Reply</string>
     <string name="replies">" replies"</string>
+    <string name="no_sub">No subscription</string>
 
     <!-- Activity Notifications -->
     <string name="notifications" translatable="false">Notifications</string>

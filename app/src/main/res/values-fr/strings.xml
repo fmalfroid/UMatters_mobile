@@ -136,6 +136,7 @@
     <string name="subscriptions_box">Boîtes d\'abonnements</string>
     <string name="replies">" réponses"</string>
     <string name="reply">Répondre</string>
+    <string name="no_sub">Aucun abonnements</string>
 
     <!-- Activity comments -->
     <string name="write_a_comment">Ecrire un commentaire</string>

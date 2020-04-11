@@ -324,6 +324,16 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
             //Nom de l'utilisateur ayant créé la box
             name.setText(box.getName());
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent runUserProfile = new Intent(context, UsersProfileActivity.class);
+                    runUserProfile.putExtra("user_email", box.getCreator().getId());
+                    context.startActivity(runUserProfile);
+
+                }
+            });
             //Date à laquelle la box a été crée
             date.setText(box.getDate());
 

@@ -154,7 +154,7 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             lastname = json.getString("lastname");
             role = json.getString("role");
 
-            return new User(id, firstname, lastname, role);
+            return new User(id, firstname, lastname, role, null, "", 0);
         } catch (JSONException e) {
             e.printStackTrace();
         }

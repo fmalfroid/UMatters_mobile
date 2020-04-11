@@ -1,18 +1,17 @@
 package com.unamur.umatters.API;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
-import com.unamur.umatters.BoxListAdapterProfile;
+import com.unamur.umatters.BoxListAdapterUsersProfile;
 import com.unamur.umatters.Choice;
-import com.unamur.umatters.CurrentUser;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,21 +27,17 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class GetAllBoxProfile extends AsyncTask<String, String, String> {
+public class GetUserAllBox extends AsyncTask<String, String, String> {
 
-    private BoxListAdapterProfile adapter = null;
+    private BoxListAdapterUsersProfile adapter = null;
+    private Context context;
 
-
-    //public Box testbox1 = new Box("1", (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Patrick Heymans", "Académique"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple", "");
-    //public Box testBox2 = new Box("2", (List<Choice>) Arrays.asList(new Choice("oui", new ArrayList<String>()), new Choice("non", new ArrayList<String>())), new User("2", "Anthony Etienne", "Scientifique"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Général", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "oui_non", "");
-    //public Box testBox3 = new Box("3", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Florian Malfroid", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Changer les souris du i21", "textuelle", "");
-    //public Box testBox4 = new Box("4", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Joséphine AngeGardien", "ATG"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Général", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle", "");
-
-    public GetAllBoxProfile(){
+    public GetUserAllBox(){
         //set context variables if required
     }
 
-    public GetAllBoxProfile(BoxListAdapterProfile adapter) {
+    public GetUserAllBox(Context context, BoxListAdapterUsersProfile adapter) {
+        this.context = context;
         this.adapter = adapter;
     }
 
@@ -63,13 +58,7 @@ public class GetAllBoxProfile extends AsyncTask<String, String, String> {
             connection.connect();
 
 
-            InputStream stream;
-
-            try {
-                stream = connection.getInputStream();
-            } catch (FileNotFoundException e) {
-                stream = connection.getErrorStream();
-            }
+            InputStream stream = connection.getInputStream();
 
             reader = new BufferedReader(new InputStreamReader(stream));
 
@@ -106,13 +95,10 @@ public class GetAllBoxProfile extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         try {
-            CurrentUser current_user = CurrentUser.getCurrentUser();
             JSONObject jsonObj = new JSONObject(result);
             JSONArray data = jsonObj.getJSONArray("data");
             for(int i=0; i<data.length(); i++) {
-                //Get all box created by the current user
-                Box box = createBoxFromJson(data.getJSONObject(i));
-                adapter.addData(box);
+                adapter.addData(createBoxFromJson(data.getJSONObject(i)));
             }
         } catch (JSONException e) {
             e.printStackTrace();

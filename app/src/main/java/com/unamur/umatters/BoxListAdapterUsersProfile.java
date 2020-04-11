@@ -21,11 +21,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxProfile;
+import com.unamur.umatters.API.SubToUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,33 +36,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
-    /*
-    //Exemple de choix de sondage
-    private final List<Pair<String, Integer>> choixTmp = Arrays.asList(
-        Pair.create("3e étage", 10),
-        Pair.create("4e étage", 7)
-    );
-
-    //Exemple de choix oui/non
-    private final List<Pair<String, Integer>> choixOuiNon = Arrays.asList(
-        Pair.create("yes", 85),
-        Pair.create("no", 15)
-    );
-
-    //Exemples de box
-    private final List<Box> boxList = Arrays.asList(
-        new Box("1", (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple", ""),
-        new Box("2", (List<Choice>) Arrays.asList(new Choice("oui", new ArrayList<String>()), new Choice("non", new ArrayList<String>())), new User("2", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Général", "#BUMP", "#Horaire"), "Laisser les BUMP ouverte jusque 18h le vendredi?", "oui_non", ""),
-        new Box("3", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Changer les souris du i21", "textuelle", ""),
-        new Box("4", (List<Choice>) Arrays.asList(new Choice()), new User("1", "Anthony Etienne", "Etudiant"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Général", "#Arsenal"), "Je propose de rajouter du bouillon au poulet avec le riz de jeudi. Vous en pensez quoi?", "textuelle", "")
-    );
-    */
     private final ArrayList<Box> boxList = new ArrayList<>();
+    private static User user_profile = new User();
+
+    private ToggleButton btn_subscription;
 
     @Override
     public int getItemCount() {
@@ -72,16 +56,12 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }
 
-    public void deleteBox(String id_box){
-        Box boxToRemove = null;
-        for (Box box : boxList){
-            if (box.getId().equals(id_box)){
-                boxToRemove = box;
-            }
-        }
-        if (boxToRemove!=null){
-            boxList.remove(boxToRemove);
-            notifyDataSetChanged();
+    public void toggleSub(){
+        boolean current_value = btn_subscription.isChecked();
+        if (current_value){
+            btn_subscription.setChecked(false);
+        } else {
+            btn_subscription.setChecked(true);
         }
     }
 
@@ -98,6 +78,10 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }
 
+    public void setUser(User user){
+        user_profile = user;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -108,7 +92,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             return new BoxViewHolder(view);
         } else if (viewType == TYPE_HEADER) {
             //inflate your layout and pass it to view holder
-            View view = inflater.inflate(R.layout.profile_header, parent, false);
+            View view = inflater.inflate(R.layout.profile_users_header, parent, false);
             return new HeaderViewHolder(view);
         }
 
@@ -155,19 +139,42 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             txt_name = itemView.findViewById(R.id.txt_name);
             txt_faculty = itemView.findViewById(R.id.txt_faculty);
             txt_level = itemView.findViewById(R.id.txt_level);
+            btn_subscription = itemView.findViewById(R.id.tgbtn_subscriptions);
 
             context = itemView.getContext();
         }
 
         public void display(){
-            CurrentUser user = CurrentUser.getCurrentUser();
+
+            final CurrentUser user = CurrentUser.getCurrentUser();
 
             //TODO: get user picture, faculty, nbr followers and nbr following
 
-            String firstname = user.getFirstname();
-            String lastname = user.getLastname();
-            String role = user.getRole();
-            int level = user.getParticipation();
+            String firstname = user_profile.getFirstname();
+            String lastname = user_profile.getLastname();
+            String role = user_profile.getRole();
+            int level = user_profile.getParticipation();
+
+            //Sub button
+            //--init value
+            //TODO verifier que l'utilisateur est abonné à l'utilisateur à qui appartient ce profil pour init le boutton subscription
+            //--change value
+            btn_subscription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    JSONObject subToUserJson = new JSONObject();
+                    try {
+                        subToUserJson.put("abonner", user);
+                        subToUserJson.put("user_ab", user_profile.getId());
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                    SubToUser task = new SubToUser(context, BoxListAdapterUsersProfile.this);
+                    task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson));
+
+                }
+            });
 
             //Set values
             String fullname = firstname + " " + lastname;
@@ -262,15 +269,16 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             final String email = user.getEmail();
 
             List<String> typesTags = Arrays.asList(
-                "#Général",
-                "#Informatique",
-                "#Droit",
-                "#Médecine",
-                "#Sciences",
-                "#Economie",
-                "#Philo&Lettres",
-                "#AGE"
+                    "#Général",
+                    "#Informatique",
+                    "#Droit",
+                    "#Médecine",
+                    "#Sciences",
+                    "#Economie",
+                    "#Philo&Lettres",
+                    "#AGE"
             );
+
 
             //Favorite button
             //--init value
@@ -299,8 +307,11 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                         e.printStackTrace();
                     }
 
-                    LikeBoxProfile likeBoxProfile = new LikeBoxProfile(context, BoxListAdapterProfile.this, box.getId(), email);
+                    //TODO like a box on a user profile
+                    /*
+                    LikeBoxProfile likeBoxProfile = new LikeBoxProfile(context, BoxListAdapterUsersProfile.this, box.getId(), email);
                     likeBoxProfile.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
+                    */
                 }
             });
             //Nombre de likes de la box
@@ -323,51 +334,14 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                     //creating a popup menu
                     PopupMenu popup = new PopupMenu(context, box_menu);
                     //inflating menu from xml resource
-                    popup.inflate(R.menu.box_menu_profile);
+                    popup.inflate(R.menu.box_menu_user_profile);
                     //adding click listener
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
-                                case R.id.btn_delete:
-
-                                    //open delete dialog
-                                    final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-                                    LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-                                    View mView = inflater.inflate(R.layout.dialog_delete_box, null);
-                                    mBuilder.setView(mView);
-                                    final AlertDialog dialog = mBuilder.create();
-
-                                    Button btn_cancel = mView.findViewById(R.id.btn_cancel);
-                                    Button btn_delete = mView.findViewById(R.id.btn_delete);
-
-                                    btn_cancel.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-
-                                    btn_delete.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-
-                                            JSONObject boxDeleteJson = new JSONObject();
-                                            try {
-                                                boxDeleteJson.put("id", box.getId());
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            DeleteBox deleteBox = new DeleteBox(context, BoxListAdapterProfile.this, box.getId());
-                                            deleteBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/delete", String.valueOf(boxDeleteJson));
-
-                                            dialog.dismiss();
-                                        }
-                                    });
-
-                                    dialog.show();
-
+                                case R.id.btn_report:
+                                    //report
                                     return true;
                                 default:
                                     return false;

@@ -1,5 +1,7 @@
 package com.unamur.umatters;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -8,19 +10,52 @@ public class User implements Serializable {
     private String firstname;
     private String lastname;
     private String role;
+    private Bitmap image;
+    private String faculty;
+    private int participation;
 
     public User() {
-        this.id = "1";
-        this.firstname = "User";
-        this.lastname = "Test";
-        this.role = "Etudiant";
+        this.id = "";
+        this.firstname = "";
+        this.lastname = "";
+        this.role = "";
+        this.image = null;
+        this.faculty = "";
+        this.participation = 0;
     }
 
-    public User(String id, String firstname, String lastname, String role) {
+    public User(String id, String firstname, String lastname, String role, Bitmap image, String faculty, int participation) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
+        this.image = image;
+        this.faculty = faculty;
+        this.participation = participation;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public int getParticipation() {
+        return participation;
+    }
+
+    public void setParticipation(int participation) {
+        this.participation = participation;
     }
 
     public String getId() {

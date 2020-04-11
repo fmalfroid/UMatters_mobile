@@ -22,15 +22,13 @@ public class SubscriptionsBoxFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_subscriptions_box, container, false);
 
-        //TODO : get every box of my subscriptions and sort them by date
         //test data (j'ai juste affiché l'ensemble des box que l'on a)
         BoxListAdapter adapter = new BoxListAdapter();
         RecyclerView rv = v.findViewById(R.id.subscription_box_list);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);
 
-        GetAllBox task = new GetAllBox(adapter);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
+        //TODO get all subscriptions box
 
         return v;
     }

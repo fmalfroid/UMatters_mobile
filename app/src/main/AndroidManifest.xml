@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".UsersProfileActivity"
+            android:label="@string/title_activity_users_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />

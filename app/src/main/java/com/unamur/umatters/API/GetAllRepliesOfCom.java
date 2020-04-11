@@ -187,7 +187,7 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
             String firstname = object_creator.getString("firstname");
             String lastname = object_creator.getString("lastname");
             String role = object_creator.getString("role");
-            User creator = new User(email, firstname, lastname, role);
+            User creator = new User(email, firstname, lastname, role, null, "", 0);
 
             ArrayList<String> likes = new ArrayList<>();
             if (!json.isNull("like")) {

@@ -1,5 +1,7 @@
 package com.unamur.umatters;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import org.json.JSONObject;
 
@@ -10,6 +12,8 @@ public class CurrentUser {
     private String firstname;
     private String lastname;
     private String role;
+    private Bitmap image;
+    private String faculty;
     private String password;
     private int participation;
     private ArrayList<String> box;
@@ -26,16 +30,35 @@ public class CurrentUser {
         return currentUser;
     }
 
-    public void setCurrentUser(String email, String firstname, String lastname, String role, String password, int participation, ArrayList<String> box, JSONObject notifications, JSONObject sanctions) {
+    public CurrentUser(String email, String firstname, String lastname, String role, Bitmap image, String faculty, String password, int participation, ArrayList<String> box, JSONObject notifications, JSONObject sanctions, ArrayList<String> interest) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
+        this.image = image;
+        this.faculty = faculty;
         this.password = password;
         this.participation = participation;
         this.box = box;
         this.notifications = notifications;
         this.sanctions = sanctions;
+        this.interest = interest;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
     public String getRole() {

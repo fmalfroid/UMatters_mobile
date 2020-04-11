@@ -5,7 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SubscriptionsListFragment"
     android:orientation="vertical"
+    android:background="@color/lightLightGrey"
     >
+
+    <TextView
+        android:id="@+id/txt_no_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_sub"
+        android:textColor="@color/darkDarkGrey"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        />
 
     <ListView
         android:id="@+id/subscriptions_list_view"
