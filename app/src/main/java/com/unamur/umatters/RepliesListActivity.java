@@ -57,7 +57,7 @@ public class RepliesListActivity extends AppCompatActivity implements Navigation
         super.onResume();
         currentComment.getReplies().clear();
         GetAllRepliesOfCom task = new GetAllRepliesOfCom(currentComment.getReplies(), currentBox.getId(), currentComment.getId(), adapter);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages");
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/repondre");
     }
 
     public void initRecyclerView(){

@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -60,7 +61,13 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             connection.connect();
 
 
-            InputStream stream = connection.getInputStream();
+            InputStream stream;
+
+            try {
+                stream = connection.getInputStream();
+            } catch (FileNotFoundException e) {
+                stream = connection.getErrorStream();
+            }
 
             reader = new BufferedReader(new InputStreamReader(stream));
 

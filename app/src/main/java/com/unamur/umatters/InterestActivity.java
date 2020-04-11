@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.unamur.umatters.API.GetAllBox;
 import com.unamur.umatters.API.GetInterestById;
 
 public class InterestActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -63,6 +64,8 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
     protected void onResume() {
         super.onResume();
         getAllInterest();
+        //GetAllBox getInterest = new GetAllBox(adapter);
+        //getInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet/" + CurrentUser.getCurrentUser().getEmail());
     }
 
     @Override

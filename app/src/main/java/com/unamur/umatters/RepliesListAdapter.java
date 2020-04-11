@@ -41,7 +41,8 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         notifyDataSetChanged();
     }
 
-    public void notifyChange() {
+    public void addData(Comment com) {
+        commentList.add(com);
         notifyDataSetChanged();
     }
 

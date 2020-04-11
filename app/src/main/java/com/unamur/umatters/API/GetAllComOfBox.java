@@ -154,16 +154,8 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
             }
 
             ArrayList<Comment> replies = new ArrayList<>();
-            /*if (!json.isNull("msg_rep")) {
-                JSONArray array_replies = json.getJSONArray("msg_rep");
-                if (array_replies != null) {
-                    for (int i = 0; i < array_replies.length(); i++) {
-                        replies.add(array_replies.getString(i));
-                    }
-                }
-            }*/
 
-            GetAllRepliesOfCom getReplies = new GetAllRepliesOfCom(replies, id_box, id_message);
+            GetAllRepliesOfCom getReplies = new GetAllRepliesOfCom(replies, id_box, id_message, adapter);
             getReplies.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/repondre");
 
             //create comment object

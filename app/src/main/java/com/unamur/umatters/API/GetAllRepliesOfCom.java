@@ -1,6 +1,7 @@
 package com.unamur.umatters.API;
 
 import android.os.AsyncTask;
+import android.provider.Settings;
 import android.util.Log;
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
@@ -14,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,7 +36,8 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
     private ArrayList<Comment> replies;
     private String id_box;
     private String id_msg;
-    private RepliesListAdapter adapter;
+    private RepliesListAdapter rAdapter;
+    private CommentListAdapter cAdapter;
 
     public GetAllRepliesOfCom(){
         //set context variables if required
@@ -44,14 +47,24 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
         this.replies = replies;
         this.id_box = id_box;
         this.id_msg = id_msg;
-        this.adapter = null;
+        this.rAdapter = null;
+        this.cAdapter = null;
     }
 
     public GetAllRepliesOfCom(ArrayList<Comment> replies, String id_box, String id_msg, RepliesListAdapter adapter) {
         this.replies = replies;
         this.id_box = id_box;
         this.id_msg = id_msg;
-        this.adapter = adapter;
+        this.rAdapter = adapter;
+        this.cAdapter = null;
+    }
+
+    public GetAllRepliesOfCom(ArrayList<Comment> replies, String id_box, String id_msg, CommentListAdapter adapter) {
+        this.replies = replies;
+        this.id_box = id_box;
+        this.id_msg = id_msg;
+        this.rAdapter = null;
+        this.cAdapter = adapter;
     }
 
     protected void onPreExecute() {
@@ -64,6 +77,8 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
 
         HttpURLConnection connection = null;
         BufferedReader reader = null;
+        System.out.println(id_box);
+        System.out.println(id_msg);
 
         try {
             String str_url = params[0] + "/" + id_box + "&" + id_msg;
@@ -72,7 +87,13 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
             connection.connect();
 
 
-            InputStream stream = connection.getInputStream();
+            InputStream stream;
+
+            try {
+                stream = connection.getInputStream();
+            } catch (FileNotFoundException e) {
+                stream = connection.getErrorStream();
+            }
 
             reader = new BufferedReader(new InputStreamReader(stream));
 
@@ -108,23 +129,30 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        System.out.println(result);
         try {
             JSONObject jsonObj = new JSONObject(result);
-            JSONArray data = jsonObj.getJSONArray("data");
-            for(int i=0; i<data.length(); i++) {
-                com.unamur.umatters.Comment com = createComFromJson(data.getJSONObject(i));
-                if (com!=null){
-                    replies.add(com);
+            if (jsonObj.getBoolean("success")) {
+                JSONArray data = jsonObj.getJSONArray("data");
+                for(int i=0; i<data.length(); i++) {
+                    com.unamur.umatters.Comment com = createComFromJson(data.getJSONObject(i));
+                    if (com!=null){
+                        replies.add(com);
+                        if (rAdapter != null) {
+                            rAdapter.notifyDataSetChanged();
+                        }
+                        if (cAdapter != null) {
+                            cAdapter.notifyDataSetChanged();
+                        }
+                    }
                 }
+            } else {
+                System.out.println("Pas de réponses pour le commentaire");
             }
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
             e.printStackTrace();
-        }
-
-        if (adapter != null) {
-            adapter.notifyChange();
         }
     }
 
@@ -150,6 +178,8 @@ public class GetAllRepliesOfCom extends AsyncTask<String, String, String> {
                 date = formatter.format(dateNF);
             } catch (java.text.ParseException e) {
                 e.printStackTrace();
+            } catch (JSONException e) {
+                System.out.println("No date");
             }
 
             JSONObject object_creator = json.getJSONObject("auteur");
