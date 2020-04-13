@@ -14,6 +14,8 @@ import com.unamur.umatters.API.GetAllBox;
 
 public class SubscriptionsBoxFragment extends Fragment {
 
+    private BoxListAdapter adapter;
+
     public SubscriptionsBoxFragment() {
         // Required empty public constructor
     }
@@ -23,14 +25,23 @@ public class SubscriptionsBoxFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_subscriptions_box, container, false);
 
         //test data (j'ai juste affiché l'ensemble des box que l'on a)
-        BoxListAdapter adapter = new BoxListAdapter();
+        adapter = new BoxListAdapter();
         RecyclerView rv = v.findViewById(R.id.subscription_box_list);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(adapter);
 
-        //TODO get all subscriptions box
+        getSubscriptionsBox();
 
         return v;
+    }
+
+    public void getSubscriptionsBox() {
+        CurrentUser user = CurrentUser.getCurrentUser();
+
+        for (String email : user.getSubscriptions()) {
+            GetAllBox getBox = new GetAllBox(adapter);
+            getBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + email);
+        }
     }
 
 }
