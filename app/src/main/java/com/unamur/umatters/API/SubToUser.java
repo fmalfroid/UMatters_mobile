@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.BoxListAdapterUsersProfile;
+import com.unamur.umatters.CurrentUser;
 import com.unamur.umatters.R;
 
 import org.json.JSONException;
@@ -126,7 +127,7 @@ public class SubToUser extends AsyncTask<String, String, String> {
 
                 //Delete succeed
                 if (success) {
-                    adapter.toggleSub();
+                    adapter.notifyDataSetChanged();
                 }
                 //Delete failed
                 else {

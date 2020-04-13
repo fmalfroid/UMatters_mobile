@@ -130,6 +130,16 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                         }
                     }
                     user.setInterest(interet);
+                    ArrayList<String> subscriptions = new ArrayList<>();
+                    if (!jsonObj.isNull("abonnement")) {
+                        JSONArray jArrayAbonnement = jsonObj.getJSONArray("abonnement");
+                        if (jArrayAbonnement != null) {
+                            for (int i = 0; i < jArrayAbonnement.length(); i++) {
+                                subscriptions.add(jArrayAbonnement.getString(i));
+                            }
+                        }
+                    }
+                    user.setSubscriptions(subscriptions);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

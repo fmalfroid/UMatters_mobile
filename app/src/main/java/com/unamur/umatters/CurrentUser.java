@@ -20,6 +20,7 @@ public class CurrentUser {
     private JSONObject notifications;
     private JSONObject sanctions;
     private ArrayList<String> interest;
+    private ArrayList<String> subscriptions;
 
     private CurrentUser() {}
 
@@ -30,7 +31,7 @@ public class CurrentUser {
         return currentUser;
     }
 
-    public CurrentUser(String email, String firstname, String lastname, String role, Bitmap image, String faculty, String password, int participation, ArrayList<String> box, JSONObject notifications, JSONObject sanctions, ArrayList<String> interest) {
+    public CurrentUser(String email, String firstname, String lastname, String role, Bitmap image, String faculty, String password, int participation, ArrayList<String> box, JSONObject notifications, JSONObject sanctions, ArrayList<String> interest, ArrayList<String> subscriptions) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -43,6 +44,7 @@ public class CurrentUser {
         this.notifications = notifications;
         this.sanctions = sanctions;
         this.interest = interest;
+        this.subscriptions = subscriptions;
     }
 
     public Bitmap getImage() {
@@ -101,6 +103,10 @@ public class CurrentUser {
         return interest;
     }
 
+    public ArrayList<String> getSubscriptions() {
+        return subscriptions;
+    }
+
     public void setBox(ArrayList<String> box) {
         this.box = box;
     }
@@ -139,5 +145,9 @@ public class CurrentUser {
 
     public void setInterest(ArrayList<String> interest) {
         this.interest = interest;
+    }
+
+    public void setSubscriptions(ArrayList<String> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 }

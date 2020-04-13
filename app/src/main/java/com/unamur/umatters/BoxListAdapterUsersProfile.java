@@ -44,8 +44,6 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
     private final ArrayList<Box> boxList = new ArrayList<>();
     private static User user_profile = new User();
 
-    private ToggleButton btn_subscription;
-
     @Override
     public int getItemCount() {
         return boxList.size()+1;
@@ -54,15 +52,6 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
     public void addData(Box box) {
         boxList.add(box);
         notifyDataSetChanged();
-    }
-
-    public void toggleSub(){
-        boolean current_value = btn_subscription.isChecked();
-        if (current_value){
-            btn_subscription.setChecked(false);
-        } else {
-            btn_subscription.setChecked(true);
-        }
     }
 
     public void toggleFavorite(String id_box, String email){
@@ -129,6 +118,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
         private TextView txt_name;
         private TextView txt_faculty;
         private TextView txt_level;
+        private ToggleButton btn_subscription;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
@@ -158,6 +148,11 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
             //Sub button
             //--init value
             //TODO verifier que l'utilisateur est abonné à l'utilisateur à qui appartient ce profil pour init le boutton subscription
+            if (user.getSubscriptions().contains(user_profile.getId())) {
+                btn_subscription.setChecked(true);
+            } else {
+                btn_subscription.setChecked(false);
+            }
             //--change value
             btn_subscription.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -165,13 +160,19 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
                     JSONObject subToUserJson = new JSONObject();
                     try {
-                        subToUserJson.put("abonner", user);
+                        subToUserJson.put("abonner", user.getEmail());
                         subToUserJson.put("user_ab", user_profile.getId());
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
                     SubToUser task = new SubToUser(context, BoxListAdapterUsersProfile.this);
                     task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson));
+
+                    if (user.getSubscriptions().contains(user_profile.getId())) {
+                        user.getSubscriptions().remove(user_profile.getId());
+                    } else {
+                        user.getSubscriptions().add(user_profile.getId());
+                    }
 
                 }
             });
