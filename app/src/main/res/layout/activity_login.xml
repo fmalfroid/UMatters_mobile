@@ -58,7 +58,9 @@
             android:ems="10"
             android:hint="@string/email_address"
             android:inputType="textEmailAddress"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:textSize="15sp"
+            />
 
         <EditText
             android:id="@+id/login_activity_password"
@@ -70,7 +72,9 @@
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:textSize="15sp"
+            />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/login_activity_rememberme"
@@ -83,7 +87,7 @@
             android:paddingTop="10dp"
             android:text="@string/remember_me"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="15sp"
             />
 
         <Button
@@ -96,9 +100,10 @@
             android:text="@string/register"
             android:textColor="@color/white"
             android:background="@drawable/button_white_border_selector"
-            android:minHeight="37dp"
+            android:minHeight="30dp"
             android:textAllCaps="false"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="start"
+            android:textSize="15sp"
             />
 
         <FrameLayout

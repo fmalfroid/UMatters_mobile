@@ -1,4 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- General -->
     <string name="app_name" translatable="false">UMatters</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="title_activity_tags_setup" translatable="false">TagsSetupActivity</string>
@@ -15,102 +18,84 @@
     <string name="title_activity_interest" translatable="false">InterestActivity</string>
     <string name="title_activity_register" translatable="false">RegisterActivity</string>
     <string name="title_activity_users_profile" translatable="false">UsersProfileActivity</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+    <string name="title_comment_activity" translatable="false">CommentActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="pref_previously_started">Previously started</string>
+    <!-- Nav drawer -->
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
+    <string name="navigation_drawer_close">Fermer le menu de navigation</string>
+    <string name="nav_header_desc">Entête de navigation</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="pref_previously_started">précédemment démarrée</string>
 
     <!-- Login activity -->
-    <string name="login">Login</string>
+    <string name="login">Connexion</string>
     <string name="unamur_logo">unamur logo</string>
-    <string name="umatters" translatable="false">UMatters</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="remember_me">Remember me</string>
-    <string name="register">Register</string>
-    <string name="email_address">UNamur email address</string>
-    <string name="login_error">Email or password incorrect</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="remember_me">Se souvenir de moi</string>
+    <string name="register">S\'inscrire</string>
+    <string name="email_address">Adresse mail UNamur</string>
+    <string name="login_error">Email ou mot de passe incorrecte</string>
 
     <!-- Register activity -->
-    <string name="title_email_adress">UNamur email address :</string>
-    <string name="title_password">Password :</string>
-    <string name="title_password_confirmation">Password confirmation :</string>
-    <string name="title_firstname">Firstname :</string>
-    <string name="title_lastname">Lastname :</string>
-    <string name="title_role">Role :</string>
+    <string name="title_email_adress">Adresse mail UNamur :</string>
+    <string name="title_password">Mot de passe :</string>
+    <string name="title_password_confirmation">Confirmation mot de passe :</string>
+    <string name="title_firstname">Prénom :</string>
+    <string name="title_lastname">Nom :</string>
+    <string name="title_role">Rôle :</string>
     <string-array name="roles">
-        <item>Student</item>
-        <item>Academic</item>
-        <item>Scientist</item>
+        <item>Etudiant</item>
+        <item>Académique</item>
+        <item>Scientifique</item>
         <item>ATG</item>
     </string-array>
-
-
-    <string name="tags_setup">Tags setup</string>
-    <string name="tags_setup_explanation">Please choose the tags that interest you the most.\nThis will personalize your user experience.</string>
-    <string name="name">Name</string>
-    <string name="date">Date</string>
-    <string name="hour">Hour</string>
-    <string name="question">Question</string>
-    <string name="nb_likes">nb likes</string>
-    <string name="text">Text</string>
-    <string name="show_more">Show more...</string>
-    <string name="hide">Hide</string>
-    <string-array name="tags_choices">
-        <item>General</item>
-        <item>Computer Science</item>
-        <item>Law</item>
-        <item>Medicine</item>
+    <string name="title_faculty">Faculté :</string>
+    <string-array name="faculty">
+        <item>Pas de faculté</item>
+        <item>Informatique</item>
+        <item>Droit</item>
+        <item>Médecine</item>
         <item>Sciences</item>
-        <item>Economics</item>
-        <item>Arts</item>
+        <item>Sciences économiques, sociales et de gestion</item>
+        <item>Philosophie et lettres</item>
+    </string-array>
+
+    <!-- Tag setup -->
+    <string name="tags_setup">Initialisation des tags</string>
+    <string name="tags_setup_explanation">Veuillez choisir les tags vous intéressant le plus.\nCela personnalisera votre expérience utilisateur.</string>
+
+    <!-- Box -->
+    <string name="name">Nom</string>
+    <string name="date">Date</string>
+    <string name="hour">Heure</string>
+    <string name="question">Question</string>
+    <string name="nb_likes">nb j\'aime</string>
+    <string name="text">Texte</string>
+    <string name="show_more">Afficher la suite...</string>
+    <string name="hide">Réduire</string>
+    <string-array name="tags_choices">
+        <item>Général</item>
+        <item>Informatique</item>
+        <item>Droit</item>
+        <item>Médecine</item>
+        <item>Sciences</item>
+        <item>Économie</item>
+        <item>Philosophie et lettres</item>
         <item>AGE</item>
     </string-array>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_profile">Profile</string>
-    <string name="menu_subscriptions">Subscriptions</string>
-    <string name="menu_tags">Tags</string>
-    <string name="menu_interets">Interests</string>
-    <string name="menu_notifications">Push notifications</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_login" translatable="false">LoginActivity</string>
-    <string name="fullname">Fullname</string>
-    <string name="level">Level</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="search">Search</string>
-    <string name="generalTag" translatable="false">#Général</string>
-    <string name="CSTag" translatable="false">#Informatique</string>
-    <string name="LawTag" translatable="false">#Droit</string>
-    <string name="medicineTag" translatable="false">#Médecine</string>
-    <string name="scienceTag" translatable="false">#Sciences</string>
-    <string name="EconomicsTag" translatable="false">#Economie</string>
-    <string name="artsTag" translatable="false">#Philo\u0026Lettres</string>
-    <string name="AGETag" translatable="false">#AGE</string>
-    <string name="populars">Popular</string>
+    <!-- Tags -->
+    <string name="generalTag">#Général</string>
+    <string name="CSTag">#Informatique</string>
+    <string name="LawTag">#Droit</string>
+    <string name="medicineTag">#Médecine</string>
+    <string name="scienceTag">#Sciences</string>
+    <string name="EconomicsTag">#Economie</string>
+    <string name="artsTag">#Philo\u0026Lettres</string>
+    <string name="AGETag">#AGE</string>
 
-    <string-array name="council_choices">
-        <item>Administration council</item>
-        <item>CS</item>
-        <item>Law</item>
-        <item>Medicine</item>
-        <item>Sciences</item>
-        <item>Economics</item>
-        <item>Arts</item>
-        <item>Political Chamber</item>
-    </string-array>
-
-    <string name="createBox">Create a box</string>
-    <string name="texte">Text</string>
-    <string name="typeBox">Box type</string>
-    <string name="textual">Textual</string>
-    <string name="yesNoPoll">Yes-no poll</string>
-    <string name="multipleChoicePoll">Multiple choice poll</string>
-    <string name="tags">Tags</string>
-    <string name="typeTag">Type tag :</string>
     <string-array name="typeTags">
         <item name="#general">#Général</item>
         <item name="#info">#Informatique</item>
@@ -121,101 +106,136 @@
         <item name="#arts">#Philo\u0026Lettres</item>
         <item name="#age">#AGE</item>
     </string-array>
-    <string name="otherTags">Other tags :</string>
-    <string name="tooManyChoices">Too many choices.</string>
-    <string name="choice">Choice</string>
-    <string name="new_choice">New choice</string>
-    <string name="tooManyOtherTags">Too many tags.</string>
 
-    <string name="modify_a_box">Modify a box</string>
-    <string name="delete_dialog_title">Delete the box?</string>
-    <string name="delete_dialog_text">Do you really want to delete this box?</string>
-    <string name="title">Title</string>
-    <string name="title_comment_activity" translatable="false">CommentActivity</string>
+    <!-- menu -->
+    <string name="menu_home">Accueil</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_subscriptions">Abonnements</string>
+    <string name="menu_tags">Tags</string>
+    <string name="menu_interets">Intérêts</string>
+    <string name="menu_notifications">Notifications push</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="fullname">Nom complet</string>
+    <string name="level">Niveau</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="search">Rechercher</string>
+    <string name="populars">Populaires</string>
+
+    <string-array name="council_choices">
+        <item>Conseil d\'administration</item>
+        <item>Informatique</item>
+        <item>Droit</item>
+        <item>Médecine</item>
+        <item>Sciences</item>
+        <item>Économie</item>
+        <item>Philosophie et lettres</item>
+        <item>Chambre politique</item>
+    </string-array>
+
+    <!-- Create a box -->
+    <string name="createBox">Créer une box</string>
+    <string name="description">Description</string>
+    <string name="title">Titre</string>
+    <string name="texte">Texte</string>
+    <string name="typeBox">Type de box</string>
+    <string name="textual">Textuelle</string>
+    <string name="yesNoPoll">Sondage oui-non</string>
+    <string name="multipleChoicePoll">Sondage à choix multiples</string>
+    <string name="tags">Tags</string>
+    <string name="typeTag">Tag de type :</string>
+    <string name="otherTags">Autres tags :</string>
+    <string name="tooManyChoices">Trop de choix.</string>
+    <string name="choice">Choix</string>
+    <string name="new_choice">Nouveau choix</string>
+    <string name="tooManyOtherTags">Trop de tags.</string>
+
+    <!-- Delete a box -->
+    <string name="delete_dialog_text">Voulez-vous vraiment supprimer cette box?</string>
+    <string name="delete_dialog_title">Supprimer la box?</string>
 
     <!-- Box menu -->
     <string name="box_menu_delete"><font fgcolor='#FF1400'>Delete</font></string>
-    <string name="box_menu_report"><font fgcolor='#FF1400'>Report</font></string>
-    <string name="box_menu_unsubscribe">Unsubscribe</string>
+    <string name="box_menu_report"><font fgcolor='#FF1400'>Signaler</font></string>
+    <string name="box_menu_unsubscribe">Se désabonner</string>
 
     <!-- Activity filter -->
-    <string name="filter">Filter</string>
-    <string name="sort">Sort</string>
-    <string name="unselect_all">Unselect all</string>
-    <string name="oldest">Older first</string>
-    <string name="latest">Latest first</string>
-    <string name="popularity">Popularity</string>
-    <string name="participation_level">Participation level</string>
-    <string name="category">Category</string>
-    <string name="roles">Roles :</string>
-    <string name="ATG" translatable="false">ATG</string>
-    <string name="students">Students</string>
-    <string name="academics">Academics</string>
-    <string name="scientists">Scientists</string>
-    <string name="typeTags">Type tags :</string>
-    <string name="my_tags">My tags</string>
-    <string name="boxTypes">Box types:</string>
+    <string name="filter">Filtrer</string>
+    <string name="sort">Trier</string>
+    <string name="unselect_all">Tout déselectionner</string>
+    <string name="oldest">Plus ancien d\'abord</string>
+    <string name="latest">Plus récent d\'abord</string>
+    <string name="popularity">Popularité</string>
+    <string name="participation_level">Niveau de participation</string>
+    <string name="category">Catégorie</string>
+    <string name="roles">Rôles :</string>
+    <string name="students">Étudiants</string>
+    <string name="academics">Académiques</string>
+    <string name="scientists">Scientifiques</string>
+    <string name="ATG">ATG</string>
+    <string name="typeTags">Tags de type :</string>
+    <string name="my_tags">Mes tags</string>
+    <string name="boxTypes">Types de box :</string>
 
     <!-- Activity archives -->
     <string name="archives">Archives</string>
-    <string name="archives_accepted">Accepted</string>
-    <string name="archives_pending">Pending</string>
-    <string name="archives_refused">Refused</string>
+    <string name="archives_accepted">Accepté</string>
+    <string name="archives_pending">En suspens</string>
+    <string name="archives_refused">Refusé</string>
 
     <!-- Profile -->
-    <string name="followers">Followers</string>
-    <string name="following">Following</string>
-    <string name="description">Description</string>
+    <string name="followers">Abonnés</string>
+    <string name="following">Abonnements</string>
 
     <!-- Activity subscriptions -->
-    <string name="unsubscribe">Unsubscribe</string>
-    <string name="subscribe">Subscribe</string>
-    <string name="my_subscriptions">My subscriptions</string>
-    <string name="subscriptions_box">Subscriptions box</string>
-    <string name="reply">Reply</string>
-    <string name="replies">" replies"</string>
-    <string name="no_sub">No subscription</string>
-
-    <!-- Activity Notifications -->
-    <string name="notifications" translatable="false">Notifications</string>
+    <string name="unsubscribe">Se désabonner</string>
+    <string name="subscribe">S\'abonner</string>
+    <string name="my_subscriptions">Mes abonnements</string>
+    <string name="subscriptions_box">Boîtes d\'abonnements</string>
+    <string name="replies">" réponses"</string>
+    <string name="reply">Répondre</string>
+    <string name="no_sub">Aucun abonnements</string>
 
     <!-- Activity comments -->
-    <string name="write_a_comment">Write a comment</string>
-    <string name="comment">Comment</string>
-    <string name="comments">Comments</string>
+    <string name="write_a_comment">Ecrire un commentaire</string>
+    <string name="comment">Commentaire</string>
+    <string name="comments">Commentaires</string>
 
     <!--Activity interests -->
-    <string name="interests">Interests</string>
+    <string name="interests">Intérêts</string>
+
+    <!-- Activity notifications -->
+    <string name="notifications">Notifications</string>
 
     <!-- Success message -->
-    <string name="success_add_box">Box successfully added.</string>
-    <string name="success_delete_box">Box successfully deleted.</string>
-    <string name="success_add_comment">Comment successfully added.</string>
-    <string name="success_register">Welcome to UMatters!</string>
+    <string name="success_add_box">Box ajoutée avec succès.</string>
+    <string name="success_delete_box">Box supprimée avec succès.</string>
+    <string name="success_add_comment">Commentaire ajouté avec succès.</string>
+    <string name="success_register">Bienvenue sur UMatters!</string>
 
     <!-- Error message -->
-    <string name="error_register">Error while registering to this app</string>
-    <string name="error_invalid_email">This email is not valid</string>
-    <string name="error_empty_email">Email is a required field</string>
-    <string name="error_empty_password">Password is a required field</string>
-    <string name="error_empty_confirm_password">Confirmation password is a required field</string>
-    <string name="error_difference_password_confirm_password">Your password and confirmation password are different</string>
-    <string name="error_min_length_password">Your password contains less than 6 characters</string>
-    <string name="error_empty_firstname">Firstname is a required field</string>
-    <string name="error_empty_lastname">Lastname is a required field</string>
-    <string name="error_email">Incorrect email address.</string>
-    <string name="error_password">Incorrect password.</string>
-    <string name="error_empty_field">Please fill every fields.</string>
-    <string name="error_add_box">Error while adding this box.</string>
-    <string name="error_delete_box">Error while deleting this box.</string>
-    <string name="error_box_empty_title">Title should not be empty.</string>
-    <string name="error_box_empty_description">Description should not be empty.</string>
-    <string name="error_at_least_2_multiple_choice">Multiple choice box must have at least 2 choices specified.</string>
-    <string name="error_box_choice_empty">Choice should not be empty.</string>
-    <string name="error_type_tag_empty">Type tag is mandatory.</string>
-    <string name="error_optional_tag_empty">Tag should not be empty.</string>
-    <string name="error_box_too_small_title">Title should not be smaller than 5 characters.</string>
-    <string name="error_box_too_small_description">Description should not be smaller than 10 characters.</string>
-    <string name="error_add_comment">Error while adding this comment.</string>
+    <string name="error_register">Erreur lors de l\'inscription à cette application</string>
+    <string name="error_invalid_email">Cette adresse email n\'est pas valide</string>
+    <string name="error_empty_email">Adresse email est un champ obligatoire</string>
+    <string name="error_empty_password">Mot de passe est un champ obligatoire</string>
+    <string name="error_empty_confirm_password">Confirmation mot de passe est un champ obligatoire</string>
+    <string name="error_difference_password_confirm_password">Mot de passe et confirmation du mot de passe sont différent</string>
+    <string name="error_min_length_password">Mot de passe contient moins de 6 caractères</string>
+    <string name="error_empty_firstname">Prénom est un champ obligatoire</string>
+    <string name="error_empty_lastname">Nom est un champ obligatoire</string>
+    <string name="error_email">Adresse email incorrecte.</string>
+    <string name="error_password">Mot de passe incorrecte.</string>
+    <string name="error_empty_field">S\'il vous plaît, remplissez tous les champs.</string>
+    <string name="error_add_box">Erreur lors de l\'ajout de la box.</string>
+    <string name="error_delete_box">Erreur lors de la suppression de la box.</string>
+    <string name="error_box_empty_title">Le titre ne doit pas être vide.</string>
+    <string name="error_box_empty_description">La description ne doit pas être vide.</string>
+    <string name="error_at_least_2_multiple_choice">Les box de type choix multiples doivent avoir au moins 2 choix spécifiés.</string>
+    <string name="error_box_choice_empty">Le choix ne doit pas être vide.</string>
+    <string name="error_type_tag_empty">Le tag de type est obligatoire.</string>
+    <string name="error_optional_tag_empty">Le tag ne doit pas etre vide.</string>
+    <string name="error_box_too_small_title">Le titre doit contenir au moins 5 caractères.</string>
+    <string name="error_box_too_small_description">La description doit contenir au moins 10 caractères.</string>
+    <string name="error_add_comment">Erreur lors de l\'ajout du commentaire.</string>
 
 </resources>

@@ -138,16 +138,16 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
             final CurrentUser user = CurrentUser.getCurrentUser();
 
-            //TODO: get user picture, faculty, nbr followers and nbr following
+            //TODO: get user picture, nbr followers and nbr following
 
             String firstname = user_profile.getFirstname();
             String lastname = user_profile.getLastname();
             String role = user_profile.getRole();
             int level = user_profile.getParticipation();
+            String faculte = user.getFaculty();
 
             //Sub button
             //--init value
-            //TODO verifier que l'utilisateur est abonné à l'utilisateur à qui appartient ce profil pour init le boutton subscription
             if (user.getSubscriptions().contains(user_profile.getId())) {
                 btn_subscription.setChecked(true);
             } else {
@@ -196,6 +196,8 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
             }
             String full_level = context.getResources().getString(R.string.level) + " " + level;
             txt_level.setText(full_level);
+
+            txt_faculty.setText(faculte);
         }
     }
 

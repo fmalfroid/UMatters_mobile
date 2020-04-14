@@ -76,6 +76,7 @@
                     android:inputType="textEmailAddress"
                     android:importantForAutofill="no"
                     android:gravity="center_horizontal"
+                    android:textSize="15sp"
                     />
 
                 <TextView
@@ -97,6 +98,7 @@
                     android:inputType="textPassword"
                     android:importantForAutofill="no"
                     android:gravity="center_horizontal"
+                    android:textSize="15sp"
                     />
 
                 <TextView
@@ -118,6 +120,7 @@
                     android:inputType="textPassword"
                     android:importantForAutofill="no"
                     android:gravity="center_horizontal"
+                    android:textSize="15sp"
                     />
 
                 <TextView
@@ -138,6 +141,7 @@
                     android:ems="10"
                     android:importantForAutofill="no"
                     android:gravity="center_horizontal"
+                    android:textSize="15sp"
                     />
 
                 <TextView
@@ -158,6 +162,7 @@
                     android:ems="10"
                     android:importantForAutofill="no"
                     android:gravity="center_horizontal"
+                    android:textSize="15sp"
                     />
 
                 <TextView
@@ -169,14 +174,38 @@
                     android:layout_marginTop="16dp"
                     />
 
-                <Spinner
+                <com.unamur.umatters.SpinnerWrapContent
                     android:id="@+id/spinner_role"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@android:style/Widget.Holo.Light.Spinner"
+                    android:gravity="end"
                     android:entries="@array/roles"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="15sp"
                     >
-                </Spinner>
+                </com.unamur.umatters.SpinnerWrapContent>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_faculty"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="16dp"
+                    />
+
+                <com.unamur.umatters.SpinnerWrapContent
+                    android:id="@+id/spinner_faculty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:gravity="end"
+                    android:entries="@array/faculty"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="15sp"
+                    >
+                </com.unamur.umatters.SpinnerWrapContent>
 
                 <Button
                     android:id="@+id/btn_register"

@@ -89,6 +89,7 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     String firstname = jsonObj.getString("firstname");
                     String lastname = jsonObj.getString("lastname");
                     String role = jsonObj.getString("role");
+                    String faculty = jsonObj.getString("faculte");
                     int participation = jsonObj.getInt("participation");
                     ArrayList<String> box = new ArrayList<>();
                     if (!jsonObj.isNull("box")) {
@@ -116,6 +117,7 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     user.setFirstname(firstname);
                     user.setLastname(lastname);
                     user.setRole(role);
+                    user.setFaculty(faculty);
                     user.setParticipation(participation);
                     user.setBox(box);
                     user.setNotifications(notifications);

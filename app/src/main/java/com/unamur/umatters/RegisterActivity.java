@@ -15,6 +15,10 @@ import com.unamur.umatters.API.Register;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private Button btn_register;
@@ -24,7 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edtxt_password_confirm;
     private EditText edtxt_firstname;
     private EditText edtxt_lastname;
-    private Spinner spinner_role;
+    private SpinnerWrapContent spn_role;
+    private SpinnerWrapContent spn_faculties;
 
     private String email;
     private String password;
@@ -32,11 +37,25 @@ public class RegisterActivity extends AppCompatActivity {
     private String firstname;
     private String lastname;
     private String role;
+    private String faculty;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        //Init of the spinner
+        spn_role = (SpinnerWrapContent) findViewById(R.id.spinner_role);
+        List<String> data_roles = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.roles)));
+        SpinnerWrapContentAdapter adapter_role = new SpinnerWrapContentAdapter(this, data_roles);
+        spn_role.setAdapter(adapter_role);
+
+        //Init of the spinner
+        spn_faculties = (SpinnerWrapContent) findViewById(R.id.spinner_faculty);
+        List<String> data_faculties = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.faculty)));
+        SpinnerWrapContentAdapter adapter_faculties = new SpinnerWrapContentAdapter(this, data_faculties);
+        spn_faculties.setAdapter(adapter_faculties);
 
         btn_register = findViewById(R.id.btn_register);
 
@@ -46,7 +65,6 @@ public class RegisterActivity extends AppCompatActivity {
         edtxt_password_confirm = findViewById(R.id.edtxt_password_confirmation);
         edtxt_firstname = findViewById(R.id.edtxt_firstname);
         edtxt_lastname = findViewById(R.id.edtxt_lastname);
-        spinner_role = findViewById(R.id.spinner_role);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,23 +73,15 @@ public class RegisterActivity extends AppCompatActivity {
                 boolean everything_ok = checkInput();
 
                 //Get selected role
-                role = spinner_role.getSelectedItem().toString();
-                switch (role){
-                    case "Student":
-                        role = "Etudiant";
-                        break;
-                    case "Academic":
-                        role = "Académique";
-                        break;
-                    case "Scientist":
-                        role = "Scientifique";
-                        break;
-                }
+                role = spn_role.getSelectedItem().toString();
+
+                //Get selected faculty
+                faculty = spn_faculties.getSelectedItem().toString();
 
                 //If everything ok
                 if (everything_ok){
 
-                    String register_infos = "" + "\nEmail : " + email + "\nPassword : " + password + "\nConfirmation password : " + password_confirmation + "\nFirstname : " + firstname + "\nLastname : " + lastname;
+                    String register_infos = "" + "\nEmail : " + email + "\nPassword : " + password + "\nConfirmation password : " + password_confirmation + "\nFirstname : " + firstname + "\nLastname : " + lastname + "\nRole : " + role + "\nFaculté : " + faculty;
                     Log.d("RegisterActivity", "Register infos: " + register_infos);
 
                     //register the user
@@ -82,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                         registerJson.put("lastname", lastname);
                         registerJson.put("password", password);
                         registerJson.put("role", role);
+                        registerJson.put("faculte", faculty);
                     } catch (JSONException e){
                         e.printStackTrace();
                     }

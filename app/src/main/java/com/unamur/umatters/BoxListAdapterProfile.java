@@ -162,12 +162,13 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         public void display(){
             CurrentUser user = CurrentUser.getCurrentUser();
 
-            //TODO: get user picture, faculty, nbr followers and nbr following
+            //TODO: get user picture, nbr followers and nbr following
 
             String firstname = user.getFirstname();
             String lastname = user.getLastname();
             String role = user.getRole();
             int level = user.getParticipation();
+            String faculte = user.getFaculty();
 
             //Set values
             String fullname = firstname + " " + lastname;
@@ -188,6 +189,8 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             }
             String full_level = context.getResources().getString(R.string.level) + " " + level;
             txt_level.setText(full_level);
+
+            txt_faculty.setText(faculte);
         }
     }
 

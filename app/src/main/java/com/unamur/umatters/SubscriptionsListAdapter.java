@@ -69,15 +69,15 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
             SubscriptionsPerson current_person = all_subscriptions_person.get(position);
 
-            //TODO set image and faculty
+            //TODO set image
             //image.setImageBitmap(current_person.getImage());
-            //faculty.setText(current_person.getFaculty());
 
             String full_name = current_person.getFirstname() + " " + current_person.getSurname();
             name.setText(full_name);
             subscription.setChecked(current_person.isSubscribed());
             String str_level = getContext().getResources().getString(R.string.level) + " " + current_person.getLevel();
             level.setText(str_level);
+            faculty.setText(current_person.getFaculty());
             switch (current_person.getRole()){
                 case "student":
                     role.setImageResource(R.drawable.ic_role_student);

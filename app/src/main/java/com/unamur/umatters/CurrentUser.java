@@ -150,4 +150,6 @@ public class CurrentUser {
     public void setSubscriptions(ArrayList<String> subscriptions) {
         this.subscriptions = subscriptions;
     }
+
+
 }

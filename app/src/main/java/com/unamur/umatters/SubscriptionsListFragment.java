@@ -28,7 +28,6 @@ public class SubscriptionsListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_subscriptions_list, container, false);
 
-        //TODO : get subscriptions info
         //test data
         ArrayList<SubscriptionsPerson> all_subscriptions_person = new ArrayList<>();
 

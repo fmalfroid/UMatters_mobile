@@ -136,10 +136,10 @@ public class GetAllSubscriptions extends AsyncTask<String, String, String> {
 
         try{
 
-            //TODO get picture and faculty
+            //TODO get picture
             picture = null;
-            faculty = "";
 
+            faculty = sub_json.getString("faculte");
             email = sub_json.getString("email");
             firstname = sub_json.getString("firstname");
             lastname = sub_json.getString("lastname");
