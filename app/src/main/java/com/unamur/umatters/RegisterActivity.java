@@ -89,9 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
                     String register_infos = "" + "\nEmail : " + email + "\nPassword : " + password + "\nConfirmation password : " + password_confirmation + "\nFirstname : " + firstname + "\nLastname : " + lastname + "\nRole : " + role + "\nFaculté : " + faculty;
                     Log.d("RegisterActivity", "Register infos: " + register_infos);
 
-                    Bitmap default_image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.umatters_default_image);
-                    String image = BitMapToString(default_image);
-
                     //register the user
                     JSONObject registerJson = new JSONObject();
                     try {
@@ -101,7 +98,6 @@ public class RegisterActivity extends AppCompatActivity {
                         registerJson.put("password", password);
                         registerJson.put("role", role);
                         registerJson.put("faculte", faculty);
-                        registerJson.put("image", image);
                     } catch (JSONException e){
                         e.printStackTrace();
                     }
@@ -112,14 +108,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp=Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
     }
 
     public boolean checkInput(){
