@@ -1,6 +1,10 @@
 package com.unamur.umatters.API;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Base64;
+import android.util.Log;
 
 import com.unamur.umatters.CurrentUser;
 
@@ -90,6 +94,8 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     String lastname = jsonObj.getString("lastname");
                     String role = jsonObj.getString("role");
                     String faculty = jsonObj.getString("faculte");
+                    String str_image = jsonObj.getString("image");
+                    Bitmap image = StringToBitMap(str_image);
                     int participation = jsonObj.getInt("participation");
                     ArrayList<String> box = new ArrayList<>();
                     if (!jsonObj.isNull("box")) {
@@ -118,6 +124,7 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     user.setLastname(lastname);
                     user.setRole(role);
                     user.setFaculty(faculty);
+                    user.setImage(image);
                     user.setParticipation(participation);
                     user.setBox(box);
                     user.setNotifications(notifications);
@@ -146,6 +153,17 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte=Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 }
