@@ -1,9 +1,7 @@
 package com.unamur.umatters;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,10 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.unamur.umatters.API.GetAllBox;
-import com.unamur.umatters.API.GetInterestById;
 
 public class InterestActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -51,21 +47,12 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
         });
     }
 
-    public void getAllInterest() {
-        adapter.removeAllData();
-        CurrentUser user = CurrentUser.getCurrentUser();
-        for (String id_box : user.getInterest()) {
-            GetInterestById getInterest = new GetInterestById(adapter, id_box);
-            getInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        getAllInterest();
-        //GetAllBox getInterest = new GetAllBox(adapter);
-        //getInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet/" + CurrentUser.getCurrentUser().getEmail());
+        adapter.removeAllData();
+        GetAllBox getInterest = new GetAllBox(adapter);
+        getInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet/" + CurrentUser.getCurrentUser().getEmail());
     }
 
     @Override

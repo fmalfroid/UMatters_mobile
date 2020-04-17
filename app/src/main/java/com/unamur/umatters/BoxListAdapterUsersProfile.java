@@ -310,11 +310,9 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                         e.printStackTrace();
                     }
 
-                    //TODO like a box on a user profile
-                    /*
                     LikeBoxProfile likeBoxProfile = new LikeBoxProfile(context, BoxListAdapterUsersProfile.this, box.getId(), email);
                     likeBoxProfile.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
-                    */
+
                 }
             });
             //Nombre de likes de la box
@@ -474,84 +472,6 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                 String str_votes_non = pct_no + " votes";
                 votes_oui.setText(str_votes_oui);
                 votes_non.setText(str_votes_non);
-
-                /*
-
-                //Calcule le pourcentage de Oui et de Non
-                pct_yes = (nb_yes/(nb_yes + nb_no))*100;
-                pct_no = (nb_no/(nb_yes + nb_no))*100;
-
-                LinearLayout ll = new LinearLayout(context);
-                ll.setGravity(Gravity.CENTER_HORIZONTAL);
-
-                //Initialisation des paramètres des vues (width, height, weight et margins)
-                TableRow.LayoutParams paramsllyes = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1);
-                paramsllyes.setMargins(0, 0, 2, 0);
-                TableRow.LayoutParams paramsllno = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 1);
-                paramsllno.setMargins(2, 0, 0, 0);
-                TableRow.LayoutParams paramsnbvoteyes = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 10);
-                paramsnbvoteyes.setMargins(0, 0, 5, 0);
-                TableRow.LayoutParams paramsnbvoteno = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 10);
-                paramsnbvoteno.setMargins(5, 0, 0, 0);
-                TableRow.LayoutParams paramstextyes = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, pct_yes);
-                paramstextyes.setMargins(0, 0, 0, 0);
-                TableRow.LayoutParams paramstextno = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, pct_no);
-                paramstextno.setMargins(0, 0, 0, 0);
-
-                //LinearLayout pour le choix "OUI"
-                LinearLayout llyes = new LinearLayout(context);
-                llyes.setGravity(Gravity.END);
-                llyes.setWeightSum(110);
-                llyes.setLayoutParams(paramsllyes);
-
-                //LinearLayout pour le choix "NON"
-                LinearLayout llno = new LinearLayout(context);
-                llno.setGravity(Gravity.START);
-                llno.setWeightSum(110);
-                llno.setLayoutParams(paramsllno);
-
-                //TextView pour le pourcentage de OUI
-                TextView nb_votes_yes = new TextView(context);
-                nb_votes_yes.setText(String.valueOf((int) pct_yes) + "%");
-                nb_votes_yes.setLayoutParams(paramsnbvoteyes);
-
-                //TextView pour le pourcentage de NON
-                TextView nb_votes_no = new TextView(context);
-                nb_votes_no.setText(String.valueOf((int) pct_no) + "%");
-                nb_votes_no.setLayoutParams(paramsnbvoteno);
-
-                //Barre du oui (la taille représente le pourcentage)
-                TextView textYes = new TextView(context);
-                textYes.setText(R.string.yes);
-                textYes.setTextColor(0xFF000000);
-                textYes.setBackgroundColor(0xFFAFAFAF);
-                textYes.setGravity(Gravity.CENTER);
-                textYes.setLayoutParams(paramstextyes);
-
-                //Barre du non (la taille représente le pourcentage)
-                TextView textNo = new TextView(context);
-                textNo.setText(R.string.no);
-                textNo.setTextColor(0xFF000000);
-                textNo.setBackgroundColor(0xFFAFAFAF);
-                textNo.setGravity(Gravity.CENTER);
-                textNo.setLayoutParams(paramstextno);
-
-                //Ajout des éléments à leur LinearLayout respectif
-                llyes.addView(nb_votes_yes);
-                llyes.addView(textYes);
-                llyes.invalidate();
-                llno.addView(textNo);
-                llno.addView(nb_votes_no);
-                llno.invalidate();
-
-                ll.addView(llyes);
-                ll.addView(llno);
-
-                //ajout du sondage à la box
-                poll.addView(ll);
-                poll.invalidate();
-
-                */
 
             }
 

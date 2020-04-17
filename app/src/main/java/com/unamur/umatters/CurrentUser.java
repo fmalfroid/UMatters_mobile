@@ -12,7 +12,7 @@ public class CurrentUser {
     private String firstname;
     private String lastname;
     private String role;
-    private Bitmap image;
+    private String image;
     private String faculty;
     private String password;
     private int participation;
@@ -31,7 +31,7 @@ public class CurrentUser {
         return currentUser;
     }
 
-    public CurrentUser(String email, String firstname, String lastname, String role, Bitmap image, String faculty, String password, int participation, ArrayList<String> box, JSONObject notifications, JSONObject sanctions, ArrayList<String> interest, ArrayList<String> subscriptions) {
+    public CurrentUser(String email, String firstname, String lastname, String role, String image, String faculty, String password, int participation, ArrayList<String> box, JSONObject notifications, JSONObject sanctions, ArrayList<String> interest, ArrayList<String> subscriptions) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -47,11 +47,11 @@ public class CurrentUser {
         this.subscriptions = subscriptions;
     }
 
-    public Bitmap getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

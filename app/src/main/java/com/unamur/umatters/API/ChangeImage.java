@@ -1,13 +1,12 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.BoxListAdapterProfile;
-import com.unamur.umatters.BoxListAdapterUsersProfile;
+import com.unamur.umatters.CurrentUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,28 +21,14 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LikeBoxProfile extends AsyncTask<String, String, String> {
+public class ChangeImage extends AsyncTask<String, String, String> {
 
-    private BoxListAdapterProfile boxListAdapterProfile;
-    private String id_box;
-    private String user_email;
-    private Context context;
-    private BoxListAdapterUsersProfile boxListAdapterUsersProfile;
+    private String image;
+    private BoxListAdapterProfile adapter;
 
-    public LikeBoxProfile(Context context, BoxListAdapterProfile boxListAdapterProfile, String id_box, String user_email){
-        this.context = context;
-        this.boxListAdapterProfile = boxListAdapterProfile;
-        this.id_box = id_box;
-        this.user_email = user_email;
-        this.boxListAdapterUsersProfile = null;
-    }
-
-    public LikeBoxProfile(Context context, BoxListAdapterUsersProfile boxListAdapterUsersProfile, String id_box, String user_email){
-        this.context = context;
-        this.boxListAdapterProfile = null;
-        this.id_box = id_box;
-        this.user_email = user_email;
-        this.boxListAdapterUsersProfile = boxListAdapterUsersProfile;
+    public ChangeImage(BoxListAdapterProfile adapter, String image){
+        this.adapter = adapter;
+        this.image = image;
     }
 
     @Override
@@ -97,7 +82,6 @@ public class LikeBoxProfile extends AsyncTask<String, String, String> {
             }
             JsonResponse = buffer.toString();
             //response data
-            Log.i("Response",JsonResponse);
             try {
                 //send to post execute
                 return JsonResponse;
@@ -127,31 +111,20 @@ public class LikeBoxProfile extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if (result == null) {
-            Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
-        } else {
-            try {
-                //Recuperation de la reponse de l'API sous forme de json
-                JSONObject jsonObj = new JSONObject(result);
-                boolean success = jsonObj.getBoolean("success");
-
-                //Delete succeed
-                if (success) {
-                    if (boxListAdapterProfile != null) {
-                        boxListAdapterProfile.toggleFavorite(id_box, user_email);
-                    }
-
-                    if (boxListAdapterUsersProfile != null) {
-                        boxListAdapterUsersProfile.toggleFavorite(id_box, user_email);
-                    }
-                }
-                //Delete failed
-                else {
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+        System.out.println(result);
+        JSONObject jsonObj = null;
+        try {
+            jsonObj = new JSONObject(result);
+            boolean success = jsonObj.getBoolean("success");
+            String message = jsonObj.getString("message");
+            if (success) {
+                System.out.println(result);
+                CurrentUser user = CurrentUser.getCurrentUser();
+                user.setImage(image);
+                adapter.notifyDataSetChanged();
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
     }
 }
