@@ -53,12 +53,12 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
         //Aucun abonnements
         if (all_subscriptions_person.isEmpty()){
-            msg_no_sub.setVisibility(View.VISIBLE);
+            //msg_no_sub.setVisibility(View.VISIBLE);
         }
         //Au moins un abonnements
         else {
 
-            msg_no_sub.setVisibility(View.GONE);
+            //msg_no_sub.setVisibility(View.GONE);
 
             ImageView image = (ImageView) rowView.findViewById(R.id.img);
             TextView name = (TextView) rowView.findViewById(R.id.txt_name);

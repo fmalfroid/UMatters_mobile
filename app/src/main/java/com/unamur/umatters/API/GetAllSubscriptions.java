@@ -3,6 +3,9 @@ package com.unamur.umatters.API;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.Choice;
@@ -35,13 +38,15 @@ import java.util.List;
 public class GetAllSubscriptions extends AsyncTask<String, String, String> {
 
     private SubscriptionsListAdapter adapter = null;
+    private TextView msg_no_sub;
 
     public GetAllSubscriptions(){
         //set context variables if required
     }
 
-    public GetAllSubscriptions(SubscriptionsListAdapter adapter) {
+    public GetAllSubscriptions(SubscriptionsListAdapter adapter, TextView textview) {
         this.adapter = adapter;
+        this.msg_no_sub = textview;
     }
 
     protected void onPreExecute() {
@@ -113,6 +118,11 @@ public class GetAllSubscriptions extends AsyncTask<String, String, String> {
                 if (sub!= null){
                     adapter.addData(sub);
                 }
+            }
+            if (data.length() > 0) {
+                msg_no_sub.setVisibility(View.GONE);
+            } else {
+                msg_no_sub.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
             e.printStackTrace();
