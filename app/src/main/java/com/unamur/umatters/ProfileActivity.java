@@ -79,12 +79,33 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
                     System.out.println("IMAGE SELECTED");
                     Bitmap image = BitmapFactory.decodeStream(inputStream);
-                    Bitmap resizedImage = Bitmap.createScaledBitmap(image, 150, 150, true);
+                    Bitmap resizedImage = resize(image, 150, 150);
                     adapter.changeImage(adapter.BitMapToString(resizedImage));
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private static Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
+        if (maxHeight > 0 && maxWidth > 0) {
+            int width = image.getWidth();
+            int height = image.getHeight();
+            float ratioBitmap = (float) width / (float) height;
+            float ratioMax = (float) maxWidth / (float) maxHeight;
+
+            int finalWidth = maxWidth;
+            int finalHeight = maxHeight;
+            if (ratioMax > ratioBitmap) {
+                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+            } else {
+                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+            }
+            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
+            return image;
+        } else {
+            return image;
         }
     }
 
