@@ -11,6 +11,7 @@ import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.BoxListAdapterUsersProfile;
 import com.unamur.umatters.CurrentUser;
 import com.unamur.umatters.R;
+import com.unamur.umatters.SubscriptionsListAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,11 +29,17 @@ import java.net.URL;
 public class SubToUser extends AsyncTask<String, String, String> {
 
     private Context context;
-    private BoxListAdapterUsersProfile adapter;
+    private BoxListAdapterUsersProfile adapter_user_profile;
+    private SubscriptionsListAdapter adapter_sub_list;
 
     public SubToUser(Context context, BoxListAdapterUsersProfile adapter){
         this.context = context;
-        this.adapter = adapter;
+        this.adapter_user_profile = adapter;
+    }
+
+    public SubToUser(Context context, SubscriptionsListAdapter adapter){
+        this.context = context;
+        this.adapter_sub_list = adapter;
     }
 
     @Override
@@ -120,14 +127,23 @@ public class SubToUser extends AsyncTask<String, String, String> {
             Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT).show();
         } else {
             try {
-                Log.d("SubToUser", result);
+
                 //Recuperation de la reponse de l'API sous forme de json
                 JSONObject jsonObj = new JSONObject(result);
                 boolean success = jsonObj.getBoolean("success");
 
                 //Delete succeed
                 if (success) {
-                    adapter.notifyDataSetChanged();
+
+                    //si l'adapter est celui du user profile
+                    if (adapter_user_profile!=null){
+                        adapter_user_profile.notifyDataSetChanged();
+                    }
+                    //si l'adapter est celui de la sub list
+                    if (adapter_sub_list!=null){
+                        adapter_sub_list.notifyDataSetChanged();
+                    }
+
                 }
                 //Delete failed
                 else {
