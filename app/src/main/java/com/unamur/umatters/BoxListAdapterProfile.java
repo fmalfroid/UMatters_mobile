@@ -82,6 +82,27 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }
 
+    //Pour sondage oui-non et sondage avec plusieurs choix possibles
+    public void toggleChoice(String id_box, String email, String choice_name){
+        for (Box box : boxList){
+            if (box.getId().equals(id_box)){
+                for (Choice choice: box.getChoices()) {
+                    if (choice.getName().equals(choice_name)){
+                        //Si le joueur avait voter ce choix, l'enlever
+                        if (choice.getUsers().contains(email)){
+                            choice.getUsers().remove(email);
+                        }
+                        //S'il n'avait pas voter ce choix, l'ajouter
+                        else {
+                            choice.getUsers().add(email);
+                        }
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     //changeChoice dans le cas d'un saondage choix multiples avec un seul choix possible. (radiobutton)
     public void changeChoice(String id_box, String email, String choice_name){
         for (Box box : boxList){
@@ -241,6 +262,8 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         private final ImageView btn_comment;
         private final ToggleButton btn_description;
         private final TextView description;
+        private ToggleButton btn_oui;
+        private ToggleButton btn_non;
 
         private Context context;
 
@@ -281,6 +304,8 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             line_non = itemView.findViewById(R.id.line_non);
             votes_oui = itemView.findViewById(R.id.votes_oui);
             votes_non = itemView.findViewById(R.id.votes_non);
+            btn_oui = itemView.findViewById(R.id.btn_oui);
+            btn_non = itemView.findViewById(R.id.btn_non);
 
         }
 
@@ -505,7 +530,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                     nb_votes.setText(String.valueOf(box.getChoices().get(i).getUsers().size()));
                     nb_votes.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
                     nb_votes.setGravity(Gravity.END);
-                    nb_votes.setPadding(0,19,0,21);
+                    nb_votes.setPadding(0,19,0,20);
                     ll_nbr_votes.addView(nb_votes);
 
                     //Gestion des votes
@@ -551,8 +576,9 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             }
 
             else if (box.getType().equals("oui_non")) {
-                int pct_yes;
-                int pct_no;
+
+                float pct_yes;
+                float pct_no;
 
                 float nb_yes;
                 float nb_no;
@@ -566,13 +592,15 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 }
 
                 //Calcule le pourcentage de Oui et de Non
-                pct_yes = (int)( (nb_yes/(nb_yes + nb_no))*100);
-                pct_no = (int)( (nb_no/(nb_yes + nb_no))*100);
+                pct_yes = (nb_yes/(nb_yes + nb_no))*100;
+                pct_no = (nb_no/(nb_yes + nb_no))*100;
 
                 ll_oui_non.setVisibility(View.VISIBLE);
 
-                String str_percent_oui = (pct_yes) + "%";
-                String str_percent_non = (pct_no) + "%";
+                float rounded_pct_yes = (float) (Math.round(pct_yes * 10.0) / 10.0);
+                float rounded_pct_no = (float) (Math.round(pct_no * 10.0) / 10.0);
+                String str_percent_oui = (rounded_pct_yes) + "%";
+                String str_percent_non = (rounded_pct_no) + "%";
                 percent_oui.setText(str_percent_oui);
                 percent_non.setText(str_percent_non);
 
@@ -581,10 +609,81 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
                 line_oui.setLayoutParams(layoutParams_oui);
                 line_non.setLayoutParams(layoutParams_non);
 
-                String str_votes_oui = pct_yes + " votes";
-                String str_votes_non = pct_no + " votes";
+                String str_votes_oui = (int) nb_yes + " votes";
+                String str_votes_non = (int) nb_no + " votes";
                 votes_oui.setText(str_votes_oui);
                 votes_non.setText(str_votes_non);
+
+                //Gestion des votes oui-non
+                //--init value
+                //User voted for this choice
+                final Choice vote_non = box.getChoices().get(0);
+                final Choice vote_oui = box.getChoices().get(1);
+                //Pas voter oui ni non
+                if ((!vote_non.getUsers().contains(user.getEmail()) && !vote_oui.getUsers().contains(user.getEmail()))){
+                    btn_oui.setChecked(false);
+                    btn_non.setChecked(false);
+                }
+                //voter juste non
+                else if (vote_non.getUsers().contains(user.getEmail())){
+                    btn_non.setChecked(true);
+                    btn_oui.setChecked(false);
+                }
+                //voter juste oui
+                else if (vote_oui.getUsers().contains(user.getEmail())){
+                    btn_oui.setChecked(true);
+                    btn_non.setChecked(false);
+                }
+
+                //--change values
+                final JSONObject voteJson = new JSONObject();
+                try {
+                    voteJson.put("email", user.getEmail());
+                    voteJson.put("id_box", box.getId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                btn_oui.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if (vote_non.getUsers().contains(user.getEmail())){
+                            toggleChoice(box.getId(), user.getEmail(), "Non");
+                        }
+                        toggleChoice(box.getId(), user.getEmail(), "Oui");
+
+                        try{
+                            voteJson.put("key", "Oui");
+                        } catch (JSONException e){
+                            e.printStackTrace();
+                        }
+
+                        //Vote oui (garde le non pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le non)
+                        Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
+                        VoteChoice task = new VoteChoice(context);
+                        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                    }
+                });
+                btn_non.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try{
+                            voteJson.put("key", "Non");
+                        } catch (JSONException e){
+                            e.printStackTrace();
+                        }
+
+                        if (vote_oui.getUsers().contains(user.getEmail())){
+                            toggleChoice(box.getId(), user.getEmail(), "Oui");
+                        }
+                        toggleChoice(box.getId(), user.getEmail(), "Non");
+
+                        //Vote non (garde le oui pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le oui)
+                        Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
+                        VoteChoice task = new VoteChoice(context);
+                        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                    }
+                });
 
             }
 

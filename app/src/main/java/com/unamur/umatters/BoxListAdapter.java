@@ -70,6 +70,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
     }
 
     //toggleChoice dans le cas d'un sondage choix multiple avec plusieurs choix possibles. (checkbox)
+    //utilisé aussi pour les sondages oui-non
     public void toggleChoice(String id_box, String email, String choice_name){
         for (Box box : boxList){
             if (box.getId().equals(id_box)){
@@ -445,7 +446,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     nb_votes.setText(String.valueOf(box.getChoices().get(i).getUsers().size()));
                     nb_votes.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
                     nb_votes.setGravity(Gravity.END);
-                    nb_votes.setPadding(0,19,0,21);
+                    nb_votes.setPadding(0,19,0,20);
                     ll_nbr_votes.addView(nb_votes);
 
 
@@ -522,6 +523,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             }
 
             else if (box.getType().equals("oui_non")) {
+
                 float pct_yes;
                 float pct_no;
 
