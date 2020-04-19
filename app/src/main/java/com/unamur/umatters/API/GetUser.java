@@ -2,7 +2,9 @@ package com.unamur.umatters.API;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
@@ -110,8 +112,11 @@ public class GetUser extends AsyncTask<String, String, String> {
             int participation = user.getInt("participation");
             int followers = user.getInt("followers");
             int following = user.getInt("following");
-            Bitmap image = null; //TODO recup l'image de l'utilisateur pour qui afficher son profil
-            String faculty = "";
+
+            String str_image = user.getString("image");
+            Bitmap image = StringToBitMap(str_image);
+
+            String faculty = user.getString("faculte");
 
             User userProfile = new User(email, firstname, lastname, role, image, faculty, participation);
             userProfile.setFollowers(followers);
@@ -123,6 +128,17 @@ public class GetUser extends AsyncTask<String, String, String> {
             e.printStackTrace();
         } catch (NullPointerException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 }

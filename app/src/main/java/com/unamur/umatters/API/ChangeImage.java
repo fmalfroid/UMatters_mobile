@@ -2,7 +2,10 @@ package com.unamur.umatters.API;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 
 import com.unamur.umatters.BoxListAdapterProfile;
@@ -120,11 +123,22 @@ public class ChangeImage extends AsyncTask<String, String, String> {
             if (success) {
                 System.out.println(result);
                 CurrentUser user = CurrentUser.getCurrentUser();
-                user.setImage(image);
+                user.setImage(StringToBitMap(image));
                 adapter.notifyDataSetChanged();
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 }

@@ -206,7 +206,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
             //TODO: get user picture
 
-            int participation = user_profile.getParticipation() +7;
+            int participation = user_profile.getParticipation();
 
             String firstname = user_profile.getFirstname();
             String lastname = user_profile.getLastname();
@@ -274,6 +274,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
             LinearLayout.LayoutParams lpb_params = (LinearLayout.LayoutParams) level_progress_bar.getLayoutParams();
             lpb_params.weight = level_progress;
             level_progress_bar.setLayoutParams(lpb_params);
+            img_picture.setImageBitmap(user_profile.getImage());
         }
     }
 

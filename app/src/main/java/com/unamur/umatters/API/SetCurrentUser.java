@@ -79,7 +79,6 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        System.out.println(result);
         CurrentUser user = CurrentUser.getCurrentUser();
         if (result == null) {
             System.out.println("An Error Occurred");
@@ -140,6 +139,9 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                         }
                     }
 
+                    String str_image = jsonObj.getString("image");
+                    Bitmap image = StringToBitMap(str_image);
+
                     user.setEmail(email);
                     user.setFirstname(firstname);
                     user.setLastname(lastname);
@@ -153,11 +155,23 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     user.setSubscriptions(subscriptions);
                     user.setFollowers(followers);
                     user.setFollowing(following);
+                    user.setImage(image);
 
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte=Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 }

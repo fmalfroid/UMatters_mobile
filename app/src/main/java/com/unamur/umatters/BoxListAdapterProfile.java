@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -35,6 +36,7 @@ import com.unamur.umatters.API.VoteChoice;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -151,6 +153,14 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         setImage.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/image", String.valueOf(jsonImage));
     }
 
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -258,6 +268,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             LinearLayout.LayoutParams lpb_params = (LinearLayout.LayoutParams) level_progress_bar.getLayoutParams();
             lpb_params.weight = level_progress;
             level_progress_bar.setLayoutParams(lpb_params);
+            img_picture.setImageBitmap(user.getImage());
 
         }
     }
