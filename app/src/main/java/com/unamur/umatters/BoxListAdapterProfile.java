@@ -1,5 +1,6 @@
 package com.unamur.umatters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -269,6 +270,16 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             lpb_params.weight = level_progress;
             level_progress_bar.setLayoutParams(lpb_params);
             img_picture.setImageBitmap(user.getImage());
+
+            img_picture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    ((Activity) context).startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+                }
+            });
 
         }
     }

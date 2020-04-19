@@ -1,7 +1,10 @@
 package com.unamur.umatters;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -25,9 +28,13 @@ import android.widget.Toast;
 import com.unamur.umatters.API.GetAllBox;
 import com.unamur.umatters.API.GetAllBoxProfile;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    BoxListAdapterProfile adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_profile);
 
         //Init of the recyclerView
-        BoxListAdapterProfile adapter = new BoxListAdapterProfile();
+        adapter = new BoxListAdapterProfile();
         final RecyclerView rv = findViewById(R.id.profle_box_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
@@ -59,6 +66,26 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         GetAllBoxProfile task = new GetAllBoxProfile(adapter);
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + CurrentUser.getCurrentUser().getEmail());
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            try {
+                if (data == null) {
+                    System.out.println("Error while selecting image");
+                } else {
+                    InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                    System.out.println("IMAGE SELECTED");
+                    Bitmap image = BitmapFactory.decodeStream(inputStream);
+                    Bitmap resizedImage = Bitmap.createScaledBitmap(image, 150, 150, true);
+                    adapter.changeImage(adapter.BitMapToString(resizedImage));
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
