@@ -13,6 +13,8 @@ public class User implements Serializable {
     private Bitmap image;
     private String faculty;
     private int participation;
+    private int followers;
+    private int following;
 
     public User() {
         this.id = "";
@@ -32,6 +34,22 @@ public class User implements Serializable {
         this.image = image;
         this.faculty = faculty;
         this.participation = participation;
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public int getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(int following) {
+        this.following = following;
     }
 
     public Bitmap getImage() {

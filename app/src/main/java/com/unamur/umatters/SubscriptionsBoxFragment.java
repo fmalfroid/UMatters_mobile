@@ -51,6 +51,10 @@ public class SubscriptionsBoxFragment extends Fragment {
             GetAllBox getBox = new GetAllBox(adapter);
             getBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + email);
         }
+
+        //GetAllBox getBox = new GetAllBox(adapter);
+        //getBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement/box/" + user.getEmail());
+
     }
 
 }

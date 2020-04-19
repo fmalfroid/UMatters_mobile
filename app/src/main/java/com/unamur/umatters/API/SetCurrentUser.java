@@ -95,6 +95,9 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     String role = jsonObj.getString("role");
                     String faculty = jsonObj.getString("faculte");
                     int participation = jsonObj.getInt("participation");
+                    int followers = jsonObj.getInt("followers");
+                    int following = jsonObj.getInt("following");
+
                     ArrayList<String> box = new ArrayList<>();
                     if (!jsonObj.isNull("box")) {
                         JSONArray jArrayBox = jsonObj.getJSONArray("box");
@@ -117,15 +120,6 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                         sanctions = new JSONObject();
                     }
 
-                    user.setEmail(email);
-                    user.setFirstname(firstname);
-                    user.setLastname(lastname);
-                    user.setRole(role);
-                    user.setFaculty(faculty);
-                    user.setParticipation(participation);
-                    user.setBox(box);
-                    user.setNotifications(notifications);
-                    user.setSanctions(sanctions);
                     ArrayList<String> interet = new ArrayList<>();
                     if (!jsonObj.isNull("interet")) {
                         JSONArray jArrayInteret = jsonObj.getJSONArray("interet");
@@ -135,7 +129,7 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                             }
                         }
                     }
-                    user.setInterest(interet);
+
                     ArrayList<String> subscriptions = new ArrayList<>();
                     if (!jsonObj.isNull("abonnement")) {
                         JSONArray jArrayAbonnement = jsonObj.getJSONArray("abonnement");
@@ -145,7 +139,21 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                             }
                         }
                     }
+
+                    user.setEmail(email);
+                    user.setFirstname(firstname);
+                    user.setLastname(lastname);
+                    user.setRole(role);
+                    user.setFaculty(faculty);
+                    user.setParticipation(participation);
+                    user.setBox(box);
+                    user.setNotifications(notifications);
+                    user.setSanctions(sanctions);
+                    user.setInterest(interet);
                     user.setSubscriptions(subscriptions);
+                    user.setFollowers(followers);
+                    user.setFollowing(following);
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -178,6 +178,9 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
         private TextView txt_name;
         private TextView txt_faculty;
         private TextView txt_level;
+        private TextView txt_followers;
+        private TextView txt_following;
+        private View level_progress_bar;
         private ToggleButton btn_subscription;
 
         public HeaderViewHolder(View itemView) {
@@ -189,6 +192,9 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
             txt_name = itemView.findViewById(R.id.txt_name);
             txt_faculty = itemView.findViewById(R.id.txt_faculty);
             txt_level = itemView.findViewById(R.id.txt_level);
+            txt_followers = itemView.findViewById(R.id.txt_followers);
+            txt_following = itemView.findViewById(R.id.txt_following);
+            level_progress_bar = itemView.findViewById(R.id.level_progress_bar);
             btn_subscription = itemView.findViewById(R.id.tgbtn_subscriptions);
 
             context = itemView.getContext();
@@ -198,12 +204,15 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
             final CurrentUser user = CurrentUser.getCurrentUser();
 
-            //TODO: get user picture, nbr followers and nbr following
+            //TODO: get user picture
+
+            int participation = user_profile.getParticipation() +7;
 
             String firstname = user_profile.getFirstname();
             String lastname = user_profile.getLastname();
             String role = user_profile.getRole();
-            int level = user_profile.getParticipation();
+            int level = participation/5;
+            int level_progress = participation % 5;
             String faculte = user.getFaculty();
 
             //Sub button
@@ -260,6 +269,11 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
             txt_level.setText(full_level);
 
             txt_faculty.setText(faculte);
+            txt_followers.setText(String.valueOf(user_profile.getFollowers()));
+            txt_following.setText(String.valueOf(user_profile.getFollowing()));
+            LinearLayout.LayoutParams lpb_params = (LinearLayout.LayoutParams) level_progress_bar.getLayoutParams();
+            lpb_params.weight = level_progress;
+            level_progress_bar.setLayoutParams(lpb_params);
         }
     }
 

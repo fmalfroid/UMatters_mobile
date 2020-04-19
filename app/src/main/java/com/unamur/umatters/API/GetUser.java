@@ -108,10 +108,14 @@ public class GetUser extends AsyncTask<String, String, String> {
             String lastname = user.getString("lastname");
             String role = user.getString("role");
             int participation = user.getInt("participation");
+            int followers = user.getInt("followers");
+            int following = user.getInt("following");
             Bitmap image = null; //TODO recup l'image de l'utilisateur pour qui afficher son profil
             String faculty = "";
 
             User userProfile = new User(email, firstname, lastname, role, image, faculty, participation);
+            userProfile.setFollowers(followers);
+            userProfile.setFollowing(following);
 
             adapter.setUser(userProfile);
 
