@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -16,8 +17,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.unamur.umatters.API.AddInterest;
@@ -65,6 +69,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
         notifyDataSetChanged();
     }
 
+    //toggleChoice dans le cas d'un sondage choix multiple avec plusieurs choix possibles. (checkbox)
     public void toggleChoice(String id_box, String email, String choice_name){
         for (Box box : boxList){
             if (box.getId().equals(id_box)){
@@ -77,6 +82,41 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                         //S'il n'avait pas voter ce choix, l'ajouter
                         else {
                             choice.getUsers().add(email);
+                        }
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    //changeChoice dans le cas d'un saondage choix multiples avec un seul choix possible. (radiobutton)
+    public void changeChoice(String id_box, String email, String choice_name){
+        for (Box box : boxList){
+            if (box.getId().equals(id_box)){
+                for (Choice choice: box.getChoices()) {
+
+                    //Get all other choice
+                    ArrayList<Choice> otherChoice = new ArrayList<>();
+                    for (Choice choice2: box.getChoices()) {
+                        if (!choice.equals(choice2)){
+                            otherChoice.add(choice2);
+                        }
+                    }
+
+                    //If current choice is the one clicked
+                    if (choice.getName().equals(choice_name)){
+
+                        //Si le joueur avait voter ce choix, l'enlever
+                        if (choice.getUsers().contains(email)){
+                            choice.getUsers().remove(email);
+                        }
+                        //S'il n'avait pas voter ce choix, l'ajouter et enlever le vote sur tout les autres
+                        else {
+                            choice.getUsers().add(email);
+                            for (Choice other_choice : otherChoice){
+                                other_choice.getUsers().remove(email);
+                            }
                         }
                     }
                 }
@@ -371,9 +411,46 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
             });
 
             if (box.getType().equals("choix_multiple")) {
-                //Pour tous les choix possibles du sondage
+
+                //Horizontal ll containing nbr votes on the left and radio group on the right
+                LinearLayout ll = new LinearLayout(context);
+                TableRow.LayoutParams params_ll = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0);
+                params_ll.gravity = Gravity.CENTER_HORIZONTAL;
+                ll.setLayoutParams(params_ll);
+                ll.setOrientation(LinearLayout.HORIZONTAL);
+
+                //Linear layout of nbr votes
+                LinearLayout ll_nbr_votes = new LinearLayout(context);
+                ll_nbr_votes.setOrientation(LinearLayout.VERTICAL);
+                ll.addView(ll_nbr_votes);
+
+                //Radio group of radio buttons
+                final RadioGroup radiogroup = new RadioGroup(context);
+                radiogroup.clearCheck();
+
+                //--Pour tous les choix possibles du sondage
                 for (int i=0; i<box.getChoices().size(); i++) {
 
+                    final int index = i;
+
+
+                    final RadioButton choice = new RadioButton(context);
+                    choice.setText(box.getChoices().get(i).getName());
+                    choice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
+
+                    radiogroup.addView(choice);
+                    radiogroup.invalidate();
+
+                    TextView nb_votes = new TextView(context);
+                    nb_votes.setText(String.valueOf(box.getChoices().get(i).getUsers().size()));
+                    nb_votes.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
+                    nb_votes.setGravity(Gravity.END);
+                    nb_votes.setPadding(0,19,0,21);
+                    ll_nbr_votes.addView(nb_votes);
+
+
+                    //CHECKBOX MULTIPLE CHOICES
+                    /*
                     LinearLayout ll = new LinearLayout(context);
                     ll.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
 
@@ -384,9 +461,11 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     nb_votes.setGravity(Gravity.END);
 
                     //Checkbox et Texte représentant le choix
-                    CheckBox choice = new CheckBox(context);
+                    RadioButton choice = new RadioButton(context);
                     choice.setText(box.getChoices().get(i).getName());
                     choice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
+
+                    radiogroup.addView(choice);
 
                     //Ajout du nombre de vote et de la checkbox à un LinearLayout
                     ll.addView(nb_votes);
@@ -396,9 +475,11 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     //Ajout du choix à la box
                     poll.addView(ll);
                     poll.invalidate();
+                    */
+
+
 
                     //Gestion des votes
-                    final int index = i;
                     //--init value
                     //User voted for this choice
                     if (box.getChoices().get(i).getUsers().contains(user.getEmail())){
@@ -422,15 +503,25 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                                 e.printStackTrace();
                             }
 
-                            toggleChoice(box.getId(), user.getEmail(), box.getChoices().get(index).getName());
+                            //toggleChoice(box.getId(), user.getEmail(), box.getChoices().get(index).getName());    checkbox (plusieurs choix)
+                            changeChoice(box.getId(), user.getEmail(), box.getChoices().get(index).getName());      //radiobutton (un seul choix)
 
                             Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                             VoteChoice task = new VoteChoice(context);
                             task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+
                         }
                     });
                 }
-            } else if (box.getType().equals("oui_non")) {
+
+                ll.addView(radiogroup);
+
+                poll.addView(ll);
+                poll.invalidate();
+
+            }
+
+            else if (box.getType().equals("oui_non")) {
                 float pct_yes;
                 float pct_no;
 
