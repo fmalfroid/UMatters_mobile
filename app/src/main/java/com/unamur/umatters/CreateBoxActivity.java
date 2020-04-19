@@ -123,7 +123,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                     //Get tags
                     JSONArray tag_array = new JSONArray();
                     String main_tag = typeTag.getSelectedItem().toString();
-                    tag_array.put(main_tag);
+                    //tag_array.put(main_tag);
 
                     //Get other tag
                     int nbr_tags = ll_other_tags.getChildCount();
@@ -214,7 +214,8 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                     try {
                         createBoxJson.put("titre", edtxt_title.getText().toString());
                         createBoxJson.put("description", edtxt_description.getText().toString());
-                        createBoxJson.put("tag", tag_array);
+                        createBoxJson.put("tag_principale", main_tag);
+                        createBoxJson.put("tag_secondaire", tag_array);
                         createBoxJson.put("type", type);
                         createBoxJson.put("createur", userJSON);
                         createBoxJson.put("choix", choicesJSON);

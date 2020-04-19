@@ -207,8 +207,11 @@ public class GetAllBox extends AsyncTask<String, String, String> {
 
             //Tags
             tags = new ArrayList<String>();
-            JSONArray jArrayTags = json.getJSONArray("tag");
-            if (jArrayTags != null) {
+            if (!json.isNull("tag_principale")) {
+                tags.add(json.getString("tag_principale"));
+            }
+            if (!json.isNull("tag_secondaire")) {
+                JSONArray jArrayTags = json.getJSONArray("tag_secondaire");
                 for (int i=0;i<jArrayTags.length();i++){
                     tags.add(jArrayTags.getString(i));
                 }
