@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unamur.umatters.API.GetAllBox;
@@ -184,6 +185,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        //setup user info
+        View headerView =  navigationView.getHeaderView(0);
+        ImageView image = (ImageView) headerView.findViewById(R.id.imageView);
+        TextView fullname = (TextView)headerView.findViewById(R.id.txt_fullname);
+        TextView level = (TextView)headerView.findViewById(R.id.txt_level);
+
+        CurrentUser user = CurrentUser.getCurrentUser();
+
+        //TODO set current user pic in nav drawer
+
+        String str_fullname = user.getFirstname() + " " + user.getLastname();
+        fullname.setText(str_fullname);
+
+        String str_level = getResources().getString(R.string.level) + " " + user.getParticipation();
+        level.setText(str_level);
     }
 
     private void initRecyclerView(BoxListAdapter adapter){

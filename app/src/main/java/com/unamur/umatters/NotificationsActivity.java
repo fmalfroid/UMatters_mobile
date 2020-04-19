@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class NotificationsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -148,5 +149,21 @@ public class NotificationsActivity extends AppCompatActivity implements Navigati
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        //setup user info
+        View headerView =  navigationView.getHeaderView(0);
+        ImageView image = (ImageView) headerView.findViewById(R.id.imageView);
+        TextView fullname = (TextView)headerView.findViewById(R.id.txt_fullname);
+        TextView level = (TextView)headerView.findViewById(R.id.txt_level);
+
+        CurrentUser user = CurrentUser.getCurrentUser();
+
+        //TODO set current user pic in nav drawer
+
+        String str_fullname = user.getFirstname() + " " + user.getLastname();
+        fullname.setText(str_fullname);
+
+        String str_level = getResources().getString(R.string.level) + " " + user.getParticipation();
+        level.setText(str_level);
     }
 }

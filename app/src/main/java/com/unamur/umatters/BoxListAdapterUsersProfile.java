@@ -230,8 +230,10 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
                     if (user.getSubscriptions().contains(user_profile.getId())) {
                         user.getSubscriptions().remove(user_profile.getId());
+                        Toast.makeText(context, R.string.unsubscribed, Toast.LENGTH_SHORT).show();
                     } else {
                         user.getSubscriptions().add(user_profile.getId());
+                        Toast.makeText(context, R.string.subscribed, Toast.LENGTH_SHORT).show();
                     }
 
                 }
