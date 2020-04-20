@@ -132,7 +132,11 @@ public class UsersProfileActivity extends AppCompatActivity implements Navigatio
             startActivity(runMain);
             finish();
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_profile) {
+
+            Intent runProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(runProfile);
+            finish();
 
         }
 
