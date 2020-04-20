@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.unamur.umatters.API.GetAllComOfBox;
 import com.unamur.umatters.API.GetAllRepliesOfCom;
@@ -187,6 +189,21 @@ public class RepliesListActivity extends AppCompatActivity implements Navigation
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        //setup user info
+        View headerView =  navigationView.getHeaderView(0);
+        ImageView image = (ImageView) headerView.findViewById(R.id.imageView);
+        TextView fullname = (TextView)headerView.findViewById(R.id.txt_fullname);
+        TextView level = (TextView)headerView.findViewById(R.id.txt_level);
+
+        CurrentUser user = CurrentUser.getCurrentUser();
+
+        String str_fullname = user.getFirstname() + " " + user.getLastname();
+        fullname.setText(str_fullname);
+        image.setImageBitmap(user.getImage());
+
+        String str_level = getResources().getString(R.string.level) + " " + (user.getParticipation()/5);
+        level.setText(str_level);
     }
 
     private void initFAB(){

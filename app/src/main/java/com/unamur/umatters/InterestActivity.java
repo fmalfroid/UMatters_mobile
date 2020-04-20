@@ -153,12 +153,11 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
 
         CurrentUser user = CurrentUser.getCurrentUser();
 
-        //TODO set current user pic in nav drawer
-
         String str_fullname = user.getFirstname() + " " + user.getLastname();
         fullname.setText(str_fullname);
+        image.setImageBitmap(user.getImage());
 
-        String str_level = getResources().getString(R.string.level) + " " + user.getParticipation();
+        String str_level = getResources().getString(R.string.level) + " " + (user.getParticipation()/5);
         level.setText(str_level);
     }
 }

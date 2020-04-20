@@ -29,10 +29,14 @@ import java.net.URL;
 
 public class Register extends AsyncTask<String, String, String> {
 
+    private String email;
+    private String image;
     private Context context = null;
 
-    public Register(Context context){
+    public Register(Context context, String email, String image){
         this.context = context;
+        this.email = email;
+        this.image = image;
     }
 
     @Override
@@ -131,6 +135,11 @@ public class Register extends AsyncTask<String, String, String> {
                 //Login succeed
                 if (success) {
                     Toast.makeText(context, R.string.success_register, Toast.LENGTH_SHORT).show();
+                    JSONObject defeultImgJson = new JSONObject();
+                    defeultImgJson.put("email", email);
+                    defeultImgJson.put("img", image);
+                    CallAPIPost setDefaultImage = new CallAPIPost();
+                    setDefaultImage.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/image", String.valueOf(defeultImgJson));
                 }
                 //Login failed
                 else {
