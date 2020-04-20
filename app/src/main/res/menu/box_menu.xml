@@ -2,7 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/btn_unsubscribe"
+        android:id="@+id/btn_menu_subscribe"
+        android:title="@string/box_menu_subscribe"/>
+
+    <item
+        android:id="@+id/btn_menu_unsubscribe"
         android:title="@string/box_menu_unsubscribe"/>
 
     <item

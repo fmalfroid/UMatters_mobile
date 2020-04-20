@@ -158,6 +158,7 @@
     <string name="box_menu_delete"><font fgcolor='#FF1400'>Delete</font></string>
     <string name="box_menu_report"><font fgcolor='#FF1400'>Signaler</font></string>
     <string name="box_menu_unsubscribe">Se désabonner</string>
+    <string name="box_menu_subscribe">S\'abonner</string>
 
     <!-- Activity filter -->
     <string name="filter">Filtrer</string>

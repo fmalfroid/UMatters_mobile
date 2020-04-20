@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.Toast;
 
@@ -31,6 +33,16 @@ public class SubToUser extends AsyncTask<String, String, String> {
     private Context context;
     private BoxListAdapterUsersProfile adapter_user_profile;
     private SubscriptionsListAdapter adapter_sub_list;
+    private Menu box_menu;
+    private MenuItem menu_to_remove;
+    private MenuItem menu_to_add;
+
+    public SubToUser(Context context, Menu box_menu, MenuItem menu_to_remove, MenuItem menu_to_add){
+        this.context = context;
+        this.box_menu = box_menu;
+        this.menu_to_remove = menu_to_remove;
+        this.menu_to_add = menu_to_add;
+    }
 
     public SubToUser(Context context, BoxListAdapterUsersProfile adapter){
         this.context = context;
@@ -132,20 +144,26 @@ public class SubToUser extends AsyncTask<String, String, String> {
                 JSONObject jsonObj = new JSONObject(result);
                 boolean success = jsonObj.getBoolean("success");
 
-                //Delete succeed
+                //Succeed
                 if (success) {
 
+                    //Si c'est le cas du menu de la box
+                    if (box_menu!=null){
+                        //box_menu.removeItem(menu_to_remove.getItemId());
+                        menu_to_remove.setVisible(false);
+                        menu_to_add.setVisible(true);
+                    }
                     //si l'adapter est celui du user profile
-                    if (adapter_user_profile!=null){
+                    if (adapter_user_profile!=null && adapter_sub_list==null){
                         adapter_user_profile.notifyDataSetChanged();
                     }
                     //si l'adapter est celui de la sub list
-                    if (adapter_sub_list!=null){
+                    if (adapter_user_profile==null && adapter_sub_list!=null) {
                         adapter_sub_list.notifyDataSetChanged();
                     }
 
                 }
-                //Delete failed
+                //Failed
                 else {
                 }
             } catch (JSONException e) {

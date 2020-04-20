@@ -108,6 +108,12 @@ public class UsersProfileActivity extends AppCompatActivity implements Navigatio
             startActivity(runMain);
             finish();
 
+        } else if (id == R.id.nav_profile) {
+
+            Intent runProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(runProfile);
+            finish();
+
         } else if (id == R.id.nav_tags) {
 
             Intent runMain = new Intent(getApplicationContext(), TagsActivity.class);

@@ -7,6 +7,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.unamur.umatters.API.AddInterestComment;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxComment;
 import com.unamur.umatters.API.LikeCom;
+import com.unamur.umatters.API.SubToUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -302,17 +304,67 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     PopupMenu popup = new PopupMenu(context, box_menu);
                     //inflating menu from xml resource
                     popup.inflate(R.menu.box_menu);
-                    //adding click listener
+
+                    final Menu menu = popup.getMenu();
+
+                    //init menu
+                    //--Subscribed to user
+                    if (user.getSubscriptions().contains(box.getCreator().getId())){
+                        menu.findItem(R.id.btn_menu_subscribe).setVisible(false);
+                        menu.findItem(R.id.btn_menu_unsubscribe).setVisible(true);
+                    }
+                    //Not subscribed to user
+                    else {
+                        menu.findItem(R.id.btn_menu_unsubscribe).setVisible(false);
+                        menu.findItem(R.id.btn_menu_subscribe).setVisible(true);
+                    }
+
+                    //--On menu item click
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
-                                case R.id.btn_unsubscribe:
-                                    //handle menu1 click
+                                case R.id.btn_menu_subscribe:
+
+                                    //s'abonner
+                                    JSONObject subToUserJson = new JSONObject();
+                                    try {
+                                        subToUserJson.put("abonner", email);
+                                        subToUserJson.put("user_ab", box.getCreator().getId());
+                                    }catch (JSONException e){
+                                        e.printStackTrace();
+                                    }
+
+                                    SubToUser task = new SubToUser(context, menu, menu.findItem(R.id.btn_menu_subscribe), menu.findItem(R.id.btn_menu_unsubscribe));
+                                    task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson));
+
+                                    user.getSubscriptions().add(box.getCreator().getId());
+
                                     return true;
+
+                                case R.id.btn_menu_unsubscribe:
+
+                                    //se désabonner
+
+                                    JSONObject subToUserJson2 = new JSONObject();
+                                    try {
+                                        subToUserJson2.put("abonner", email);
+                                        subToUserJson2.put("user_ab", box.getCreator().getId());
+                                    }catch (JSONException e){
+                                        e.printStackTrace();
+                                    }
+
+                                    SubToUser task2 = new SubToUser(context, menu, menu.findItem(R.id.btn_menu_unsubscribe), menu.findItem(R.id.btn_menu_subscribe));
+                                    task2.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson2));
+
+                                    user.getSubscriptions().remove(box.getCreator().getId());
+
+                                    return true;
+
                                 case R.id.btn_report:
                                     //handle menu2 click
                                     return true;
+
                                 default:
                                     return false;
                             }
