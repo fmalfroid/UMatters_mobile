@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -38,6 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -423,7 +425,51 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                         public boolean onMenuItemClick(MenuItem item) {
                             switch (item.getItemId()) {
                                 case R.id.btn_report:
-                                    //report
+
+                                    //open report dialog
+                                    final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                                    LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                                    View mView = inflater.inflate(R.layout.dialog_report_box, null);
+                                    mBuilder.setView(mView);
+                                    final AlertDialog dialog = mBuilder.create();
+
+                                    Button btn_cancel = mView.findViewById(R.id.btn_cancel);
+                                    Button btn_report = mView.findViewById(R.id.btn_report);
+                                    final EditText description = mView.findViewById(R.id.edtxt_description);
+
+                                    //init spinner
+                                    SpinnerWrapContent report_type = mView.findViewById(R.id.spinner_report_type);
+                                    List<String> data = new LinkedList<>(Arrays.asList(context.getResources().getStringArray(R.array.report_types)));
+                                    SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(context, data);
+                                    report_type.setAdapter(adapter);
+
+                                    //button cancel
+                                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    //button report
+                                    btn_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            if (description.length() < 10){
+                                                Toast.makeText(context, R.string.error_box_too_small_description, Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                //TODO report box
+
+                                                Toast.makeText(context, R.string.thanks_for_report, Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                            }
+
+                                        }
+                                    });
+
+                                    dialog.show();
+
                                     return true;
                                 default:
                                     return false;

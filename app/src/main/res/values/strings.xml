@@ -160,6 +160,20 @@
     <string name="box_menu_unsubscribe">Se désabonner</string>
     <string name="box_menu_subscribe">S\'abonner</string>
 
+    <!-- Report menu -->
+    <string name="report">Signalement</string>
+    <string name="report_type">Type :</string>
+    <string name="report_description">Description :</string>
+    <string name="cancel">Annuler</string>
+    <string name="thanks_for_report">Merci pour votre signalement !</string>
+    <string-array name="report_types">
+        <item>Spam</item>
+        <item>Insulte</item>
+        <item>Harcèlement</item>
+        <item>Contenu inapproprié</item>
+        <item>Autre</item>
+    </string-array>
+
     <!-- Activity filter -->
     <string name="filter">Filtrer</string>
     <string name="sort">Trier</string>
