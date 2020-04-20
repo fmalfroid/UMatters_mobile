@@ -141,7 +141,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }
 
-    public void changeImage(String image) {
+    public void changeImage(String image, Context context) {
         JSONObject jsonImage = new JSONObject();
         try {
             jsonImage.put("email", CurrentUser.getCurrentUser().getEmail());
@@ -150,7 +150,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             e.printStackTrace();
         }
 
-        ChangeImage setImage = new ChangeImage(BoxListAdapterProfile.this, image);
+        ChangeImage setImage = new ChangeImage(context,BoxListAdapterProfile.this, image);
         setImage.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/image", String.valueOf(jsonImage));
     }
 

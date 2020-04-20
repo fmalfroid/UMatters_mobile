@@ -7,9 +7,11 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.unamur.umatters.BoxListAdapterProfile;
 import com.unamur.umatters.CurrentUser;
+import com.unamur.umatters.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,10 +30,12 @@ public class ChangeImage extends AsyncTask<String, String, String> {
 
     private String image;
     private BoxListAdapterProfile adapter;
+    private Context context;
 
-    public ChangeImage(BoxListAdapterProfile adapter, String image){
+    public ChangeImage(Context context, BoxListAdapterProfile adapter, String image){
         this.adapter = adapter;
         this.image = image;
+        this.context = context;
     }
 
     @Override
@@ -125,6 +129,8 @@ public class ChangeImage extends AsyncTask<String, String, String> {
                 CurrentUser user = CurrentUser.getCurrentUser();
                 user.setImage(StringToBitMap(image));
                 adapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(context, "Image trop volumineuse", Toast.LENGTH_SHORT).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();

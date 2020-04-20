@@ -80,7 +80,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                     System.out.println("IMAGE SELECTED");
                     Bitmap image = BitmapFactory.decodeStream(inputStream);
                     Bitmap resizedImage = resize(image, 200, 200);
-                    adapter.changeImage(adapter.BitMapToString(resizedImage));
+                    adapter.changeImage(adapter.BitMapToString(resizedImage), ProfileActivity.this);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
