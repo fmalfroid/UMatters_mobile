@@ -265,7 +265,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
             txt_faculty.setText(faculte);
             txt_followers.setText(String.valueOf(user.getFollowers()));
-            txt_following.setText(String.valueOf(user.getFollowing()));
+            txt_following.setText(String.valueOf(user.getSubscriptions().size()));
             LinearLayout.LayoutParams lpb_params = (LinearLayout.LayoutParams) level_progress_bar.getLayoutParams();
             lpb_params.weight = level_progress;
             level_progress_bar.setLayoutParams(lpb_params);
