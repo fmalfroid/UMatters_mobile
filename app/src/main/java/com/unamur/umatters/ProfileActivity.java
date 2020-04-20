@@ -81,6 +81,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                     Bitmap image = BitmapFactory.decodeStream(inputStream);
                     Bitmap resizedImage = resize(image, 200, 200);
                     adapter.changeImage(adapter.BitMapToString(resizedImage), ProfileActivity.this);
+                    ImageView navDrawerImage = findViewById(R.id.imageView);
+                    navDrawerImage.setImageBitmap(resizedImage);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
