@@ -21,6 +21,7 @@ public class CurrentUser {
     private JSONObject sanctions;
     private ArrayList<String> interest;
     private ArrayList<String> subscriptions;
+    private ArrayList<String> tag_pref;
     private int followers;
     private int following;
 
@@ -47,6 +48,14 @@ public class CurrentUser {
         this.sanctions = sanctions;
         this.interest = interest;
         this.subscriptions = subscriptions;
+    }
+
+    public ArrayList<String> getTag_pref() {
+        return tag_pref;
+    }
+
+    public void setTag_pref(ArrayList<String> tag_pref) {
+        this.tag_pref = tag_pref;
     }
 
     public int getFollowers() {

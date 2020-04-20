@@ -1,5 +1,8 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -7,6 +10,8 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.unamur.umatters.CurrentUser;
+import com.unamur.umatters.MainActivity;
+import com.unamur.umatters.TagsSetupActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +28,11 @@ import java.util.ArrayList;
 
 public class SetCurrentUser extends AsyncTask<String, String, String> {
 
-    public SetCurrentUser(){ }
+    private Context context = null;
+
+    public SetCurrentUser(Context context){
+        this.context = context;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -139,6 +148,19 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                         }
                     }
 
+                    ArrayList<String> tag_pref;
+                    if (!jsonObj.isNull("tag_pref")) {
+                        tag_pref = new ArrayList<>();
+                        JSONArray jArrayPrefTags = jsonObj.getJSONArray("tag_pref");
+                        if (jArrayPrefTags != null) {
+                            for (int i = 0; i < jArrayPrefTags.length(); i++) {
+                                tag_pref.add(jArrayPrefTags.getString(i));
+                            }
+                        }
+                    } else {
+                        tag_pref = null;
+                    }
+
                     String str_image = jsonObj.getString("image");
                     Bitmap image = StringToBitMap(str_image);
 
@@ -156,6 +178,17 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                     user.setFollowers(followers);
                     user.setFollowing(following);
                     user.setImage(image);
+                    user.setTag_pref(tag_pref);
+
+                    if (tag_pref == null) {
+                        Intent runApp = new Intent(context, TagsSetupActivity.class);
+                        context.startActivity(runApp);
+                        ((Activity) context).finish();
+                    } else {
+                        Intent runApp = new Intent(context, MainActivity.class);
+                        context.startActivity(runApp);
+                        ((Activity) context).finish();
+                    }
 
                 }
             } catch (JSONException e) {

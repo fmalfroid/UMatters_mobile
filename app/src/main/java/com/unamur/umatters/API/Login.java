@@ -133,12 +133,8 @@ public class Login extends AsyncTask<String, String, String> {
                     CurrentUser user = CurrentUser.getCurrentUser();
                     String email = user.getEmail();
 
-                    SetCurrentUser setUser = new SetCurrentUser();
+                    SetCurrentUser setUser = new SetCurrentUser(context);
                     setUser.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/" + email);
-
-                    Intent runApp = new Intent(context, TagsSetupActivity.class);
-                    context.startActivity(runApp);
-                    ((Activity) context).finish();
                 }
                 //Login failed
                 else {
