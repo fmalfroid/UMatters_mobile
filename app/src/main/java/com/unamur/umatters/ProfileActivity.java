@@ -2,6 +2,7 @@ package com.unamur.umatters;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,20 +14,28 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.GetAllBox;
 import com.unamur.umatters.API.GetAllBoxProfile;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -65,6 +74,28 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
         GetAllBoxProfile task = new GetAllBoxProfile(adapter);
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + CurrentUser.getCurrentUser().getEmail());
+
+    }
+
+    public void clickedLevelInfo(View view){
+
+        //open info dialog
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileActivity.this);
+        LayoutInflater inflater = (LayoutInflater) ProfileActivity.this.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        View mView = inflater.inflate(R.layout.dialog_level_infos, null);
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+
+        Button btn_cancel = mView.findViewById(R.id.btn_cancel);
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
 
     }
 

@@ -224,6 +224,17 @@
     <!-- Activity notifications -->
     <string name="notifications">Notifications</string>
 
+    <!-- Level infos -->
+    <string name="participation_level_title">Niveau de participation</string>
+    <string name="increase">Augmente :</string>
+    <string name="connect_3_days_row">Connecté 3 jours d\'affilés.</string>
+    <string name="box_council">Créé un box qui remonte au conseil.</string>
+    <string name="box_like_council">Aimé une box qui remonte au conseil.</string>
+    <string name="box_comment_council">Commenté une box qui remonte au conseil.</string>
+    <string name="decrease">Diminue :</string>
+    <string name="disconnect_2_weeks_row">Déconnecté 2 semaines d\'affilées.</string>
+    <string name="sanction_zero">Reçu une sanction.</string>
+
     <!-- Success message -->
     <string name="success_add_box">Box ajoutée avec succès.</string>
     <string name="success_delete_box">Box supprimée avec succès.</string>
