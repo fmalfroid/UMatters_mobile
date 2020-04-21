@@ -1,5 +1,6 @@
 package com.unamur.umatters;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.widget.ArrayAdapter;
 
@@ -78,8 +79,7 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
             final SubscriptionsPerson current_person = all_subscriptions_person.get(position);
 
-            //TODO set image
-            //image.setImageBitmap(current_person.getImage());
+            image.setImageBitmap(current_person.getImage());
 
             String full_name = current_person.getFirstname() + " " + current_person.getSurname();
             name.setText(full_name);
@@ -134,6 +134,18 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
                 }
             });
+
+            rowView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent runUserProfile = new Intent(context, UsersProfileActivity.class);
+                    runUserProfile.putExtra("user_email", current_person.getEmail());
+                    context.startActivity(runUserProfile);
+
+                }
+            });
+
         }
 
         return rowView;

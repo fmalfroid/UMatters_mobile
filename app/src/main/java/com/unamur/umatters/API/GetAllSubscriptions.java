@@ -1,7 +1,9 @@
 package com.unamur.umatters.API;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -134,7 +136,7 @@ public class GetAllSubscriptions extends AsyncTask<String, String, String> {
     private SubscriptionsPerson createSubFromJson(JSONObject sub_json) {
         Log.d("Subscriptions : ", sub_json.toString());
 
-        Bitmap picture;
+        String picture;
         String email;
         String firstname;
         String lastname;
@@ -146,23 +148,33 @@ public class GetAllSubscriptions extends AsyncTask<String, String, String> {
 
         try{
 
-            //TODO get picture
-            picture = null;
-
             faculty = sub_json.getString("faculte");
             email = sub_json.getString("email");
             firstname = sub_json.getString("firstname");
             lastname = sub_json.getString("lastname");
             role = sub_json.getString("role");
             level = sub_json.getInt("participation");
+            picture = sub_json.getString("image");
+            Bitmap bitmap = StringToBitMap(picture);
 
-            sub = new SubscriptionsPerson(picture, email, firstname, lastname, faculty, true, role, level);
+            sub = new SubscriptionsPerson(bitmap, email, firstname, lastname, faculty, true, role, level);
 
         } catch (JSONException e){
             e.printStackTrace();
         }
 
         return sub;
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
 }

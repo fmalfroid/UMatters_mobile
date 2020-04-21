@@ -1,5 +1,6 @@
 package com.unamur.umatters;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,11 +33,8 @@ public class SubscriptionsListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_subscriptions_list, container, false);
         msg_no_sub = v.findViewById(R.id.txt_no_sub);
 
-        //test data
-        ArrayList<SubscriptionsPerson> all_subscriptions_person = new ArrayList<>();
-
         //Set adapter
-        SubscriptionsListAdapter adapter=new SubscriptionsListAdapter(getActivity(), all_subscriptions_person);
+        SubscriptionsListAdapter adapter=new SubscriptionsListAdapter(getActivity(), new ArrayList<SubscriptionsPerson>());
         subscriptions_list_view =(ListView) v.findViewById(R.id.subscriptions_list_view);
         subscriptions_list_view.setAdapter(adapter);
 
