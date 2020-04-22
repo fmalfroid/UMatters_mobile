@@ -35,6 +35,10 @@
                 android:title="@string/menu_notifications"
                 app:actionLayout="@layout/layout_menu_switch"
                 />
+
+            <item
+                android:id="@+id/nav_deconnexion"
+                android:title="@string/deconnexion"/>
         </menu>
     </item>
 

@@ -20,6 +20,9 @@
     <string name="title_activity_users_profile" translatable="false">UsersProfileActivity</string>
     <string name="title_activity_login" translatable="false">LoginActivity</string>
     <string name="title_comment_activity" translatable="false">CommentActivity</string>
+    <string name="preference_file_key" translatable="false">com.unamur.umatters.preference_file_key</string>
+    <string name="saved_email_key" translatable="false">com.unamur.umatters.SAVED_EMAIL_KEY</string>
+    <string name="saved_password_key" translatable="false">com.unamur.umatters.SAVED_PASSWORD_KEY</string>
 
     <!-- Nav drawer -->
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
@@ -265,5 +268,6 @@
     <string name="error_box_too_small_title">Le titre doit contenir au moins 5 caractères.</string>
     <string name="error_box_too_small_description">La description doit contenir au moins 10 caractères.</string>
     <string name="error_add_comment">Erreur lors de l\'ajout du commentaire.</string>
+    <string name="deconnexion">Déconnexion</string>
 
 </resources>

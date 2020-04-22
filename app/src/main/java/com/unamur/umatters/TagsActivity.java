@@ -1,6 +1,8 @@
 package com.unamur.umatters;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -167,6 +169,16 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
             startActivity(runMain);
             finish();
 
+        } else if (id == R.id.nav_deconnexion) {
+            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.saved_email_key), null);
+            editor.putString(getString(R.string.saved_password_key), null);
+            editor.commit();
+
+            Intent runMain = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(runMain);
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
