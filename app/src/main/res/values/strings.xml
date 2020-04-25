@@ -54,6 +54,10 @@
         <item>Scientifique</item>
         <item>ATG</item>
     </string-array>
+    <string name="role_student">Etudiant</string>
+    <string name="role_academic">Académique</string>
+    <string name="role_scientific">Scientifique</string>
+    <string name="role_atg">ATG</string>
     <string name="title_faculty">Faculté :</string>
     <string-array name="faculty">
         <item>Pas de faculté</item>
@@ -180,7 +184,7 @@
     <!-- Activity filter -->
     <string name="filter">Filtrer</string>
     <string name="sort">Trier</string>
-    <string name="unselect_all">Tout déselectionner</string>
+    <string name="reset">Tout réinitialiser</string>
     <string name="oldest">Plus ancien d\'abord</string>
     <string name="latest">Plus récent d\'abord</string>
     <string name="popularity">Popularité</string>
@@ -194,6 +198,9 @@
     <string name="typeTags">Tags de type :</string>
     <string name="my_tags">Mes tags</string>
     <string name="boxTypes">Types de box :</string>
+    <string name="type_textual">textuelle</string>
+    <string name="type_oui_non">oui_non</string>
+    <string name="type_choix_multiple">choix_multiple</string>
 
     <!-- Activity archives -->
     <string name="archives">Archives</string>

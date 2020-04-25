@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,7 +24,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unamur.umatters.API.FilterBox;
 import com.unamur.umatters.API.GetAllBox;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView btn_popular;
     private ImageView btn_archives;
     private BoxListAdapter adapter;
+
+    public static String filter_sort = "plus_recent";
+    public static ArrayList<String> filter_tag_list = null;
+    public static ArrayList<String> filter_type_list = null;
+    public static ArrayList<String> filter_role_list = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +97,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         adapter.removeAllData();
-        GetAllBox task = new GetAllBox(adapter);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box");
+
+        //get data
+        //call api
+        JSONObject filter_jobject = new JSONObject();
+        try  {
+            filter_jobject.put("tri", filter_sort);
+
+            if (filter_tag_list==null){
+                filter_jobject.put("tag", null);
+            } else {
+                JSONArray tag_array = new JSONArray();
+                for (String tag:filter_tag_list) {
+                    tag_array.put(tag);
+                }
+                filter_jobject.put("tag", tag_array);
+            }
+
+            if (filter_type_list==null){
+                filter_jobject.put("type", null);
+            } else {
+                JSONArray type_array = new JSONArray();
+                for (String type:filter_type_list) {
+                    type_array.put(type);
+                }
+                filter_jobject.put("type", type_array);
+            }
+
+            if (filter_role_list==null){
+                filter_jobject.put("role", null);
+            } else {
+                JSONArray role_array = new JSONArray();
+                for (String role:filter_role_list) {
+                    role_array.put(role);
+                }
+                filter_jobject.put("role", role_array);
+            }
+
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        FilterBox task = new FilterBox( MainActivity.this, adapter);
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/filtrer", String.valueOf(filter_jobject));
+
+        Log.d("MainActivity box ", filter_jobject.toString());
     }
 
     @Override

@@ -15,11 +15,41 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.unamur.umatters.API.FilterBox;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class FilterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private RadioGroup rdgrp_sort;
+    private CheckBox tag_general;
+    private CheckBox tag_info;
+    private CheckBox tag_medecine;
+    private CheckBox tag_eco;
+    private CheckBox tag_age;
+    private CheckBox tag_droit;
+    private CheckBox tag_sciences;
+    private CheckBox tag_philo;
+
+    private CheckBox type_textuelle;
+    private CheckBox type_oui_non;
+    private CheckBox type_choix_multiples;
+
+    private CheckBox role_student;
+    private CheckBox role_academic;
+    private CheckBox role_atg;
+    private CheckBox role_sc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +80,236 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
                 onBackPressed();
             }
         });
+
+        //Init radiobutton and checkbox
+        init();
+
+        //filter button
+        ImageView img_filter = findViewById(R.id.ok_btn);
+        img_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //get checked buttons
+                //--sort
+
+                String sort;
+                switch (rdgrp_sort.getCheckedRadioButtonId()){
+                    case R.id.rdbtn_oldest:
+                        sort = "plus_ancien";
+                        break;
+                    case R.id.rdbtn_popularity:
+                        sort = "plus_populaire";
+                        break;
+                    case R.id.rdbtn_participation_level:
+                        sort = "plus_haut_niveau";
+                        break;
+                    default:
+                        sort = "plus_recent";
+                }
+                //--tag
+                ArrayList<String> tag_list = new ArrayList<>();
+
+                ArrayList<CheckBox> tag_checkbox = new ArrayList<>();
+                tag_checkbox.add(tag_general);
+                tag_checkbox.add(tag_info);
+                tag_checkbox.add(tag_medecine);
+                tag_checkbox.add(tag_eco);
+                tag_checkbox.add(tag_age);
+                tag_checkbox.add(tag_droit);
+                tag_checkbox.add(tag_sciences);
+                tag_checkbox.add(tag_philo);
+                for (CheckBox checkbox : tag_checkbox) {
+                    if (checkbox.isChecked()){
+                        tag_list.add((String)checkbox.getTag());
+                    }
+                }
+
+                //--type
+                ArrayList<String> type_list = new ArrayList<>();
+
+                ArrayList<CheckBox> type_checkbox = new ArrayList<>();
+                type_checkbox.add(type_textuelle);
+                type_checkbox.add(type_oui_non);
+                type_checkbox.add(type_choix_multiples);
+                for (CheckBox checkbox : type_checkbox) {
+                    if (checkbox.isChecked()){
+                        type_list.add((String)checkbox.getTag());
+                    }
+                }
+
+                //--role
+                ArrayList<String> role_list = new ArrayList<>();
+
+                ArrayList<CheckBox> role_checkbox = new ArrayList<>();
+                role_checkbox.add(role_student);
+                role_checkbox.add(role_academic);
+                role_checkbox.add(role_atg);
+                role_checkbox.add(role_sc);
+                for (CheckBox checkbox : role_checkbox) {
+                    if (checkbox.isChecked()){
+                        role_list.add((String)checkbox.getTag());
+                    }
+                }
+
+                //change value in main activity
+                MainActivity.filter_sort = sort;
+                if (tag_list.isEmpty()){
+                    MainActivity.filter_tag_list = null;
+                } else {
+                    MainActivity.filter_tag_list = tag_list;
+                }
+                if (type_list.isEmpty()){
+                    MainActivity.filter_type_list = null;
+                } else {
+                    MainActivity.filter_type_list = type_list;
+                }
+                if (role_list.isEmpty()){
+                    MainActivity.filter_role_list = null;
+                } else {
+                    MainActivity.filter_role_list = role_list;
+                }
+
+                //Close activity
+                Intent runMain = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(runMain);
+                finish();
+            }
+        });
+
+
+        //Reset button
+        Button btn_reset = findViewById(R.id.btn_reset);
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sort
+                rdgrp_sort.check(R.id.rdbtn_lastest);
+                //tag
+                tag_general.setChecked(false);
+                tag_info.setChecked(false);
+                tag_medecine.setChecked(false);
+                tag_eco.setChecked(false);
+                tag_age.setChecked(false);
+                tag_droit.setChecked(false);
+                tag_sciences.setChecked(false);
+                tag_philo.setChecked(false);
+                //type
+                type_textuelle.setChecked(false);
+                type_oui_non.setChecked(false);
+                type_choix_multiples.setChecked(false);
+                //role
+                role_student.setChecked(false);
+                role_academic.setChecked(false);
+                role_atg.setChecked(false);
+                role_sc.setChecked(false);
+            }
+        });
+
+    }
+
+    public void init(){
+
+        rdgrp_sort = findViewById(R.id.rdgrp_sort);
+        tag_general = findViewById(R.id.tag_general);
+        tag_info = findViewById(R.id.tag_informatique);
+        tag_medecine = findViewById(R.id.tag_medecine);
+        tag_eco = findViewById(R.id.tag_economie);
+        tag_age = findViewById(R.id.tag_age);
+        tag_droit = findViewById(R.id.tag_droit);
+        tag_sciences = findViewById(R.id.tag_sciences);
+        tag_philo = findViewById(R.id.tag_philo);
+
+        type_textuelle = findViewById(R.id.type_textuelle);
+        type_oui_non = findViewById(R.id.type_oui_non);
+        type_choix_multiples = findViewById(R.id.type_choix_multiples);
+
+        role_student = findViewById(R.id.role_student);
+        role_academic = findViewById(R.id.role_academic);
+        role_atg = findViewById(R.id.role_atg);
+        role_sc = findViewById(R.id.role_sc);
+
+        //--init sort
+        switch (MainActivity.filter_sort){
+            case "plus_ancien":
+                rdgrp_sort.check(R.id.rdbtn_oldest);
+                break;
+            case "plus_populaire":
+                rdgrp_sort.check(R.id.rdbtn_popularity);
+                break;
+            case "plus_haut_niveau":
+                rdgrp_sort.check(R.id.rdbtn_participation_level);
+                break;
+            default :
+                rdgrp_sort.check(R.id.rdbtn_lastest);
+                break;
+        }
+        //--init checkbox tag
+        if (MainActivity.filter_tag_list!=null){
+            for (String tag: MainActivity.filter_tag_list) {
+                switch (tag){
+                    case "#Informatique":
+                        tag_info.setChecked(true);
+                        break;
+                    case "#Droit":
+                        tag_droit.setChecked(true);
+                        break;
+                    case "#Médecine":
+                        tag_medecine.setChecked(true);
+                        break;
+                    case "#Sciences":
+                        tag_sciences.setChecked(true);
+                        break;
+                    case "#Economie":
+                        tag_eco.setChecked(true);
+                        break;
+                    case "#Philo&Lettres":
+                        tag_philo.setChecked(true);
+                        break;
+                    case "#AGE":
+                        tag_age.setChecked(true);
+                        break;
+                    case "#Général":
+                        tag_general.setChecked(true);
+                        break;
+                }
+            }
+        }
+
+        //--init checkbox type
+        if (MainActivity.filter_type_list!=null) {
+            for (String type : MainActivity.filter_type_list) {
+                switch (type) {
+                    case "oui_non":
+                        type_oui_non.setChecked(true);
+                        break;
+                    case "choix_multiple":
+                        type_choix_multiples.setChecked(true);
+                        break;
+                    case "textuelle":
+                        type_textuelle.setChecked(true);
+                        break;
+                }
+            }
+        }
+        //--init checkbox role
+        if (MainActivity.filter_role_list!=null) {
+            for (String role : MainActivity.filter_role_list) {
+                switch (role) {
+                    case "Académique":
+                        role_academic.setChecked(true);
+                        break;
+                    case "Scientifique":
+                        role_sc.setChecked(true);
+                        break;
+                    case "ATG":
+                        role_atg.setChecked(true);
+                        break;
+                    case "Etudiant":
+                        role_student.setChecked(true);
+                        break;
+                }
+            }
+        }
     }
 
     @Override
