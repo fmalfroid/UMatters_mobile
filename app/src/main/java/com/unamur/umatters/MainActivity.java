@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ImageView btn_filter;
+    private FrameLayout btn_filter;
     private ImageView btn_popular;
     private ImageView btn_archives;
     private BoxListAdapter adapter;
@@ -72,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Filter button
         btn_filter = findViewById(R.id.btn_filter);
+        TextView activate_icon = findViewById(R.id.activate_icon);
+        //--setup activate state
+        if (filter_sort.equals("plus_recent") && filter_tag_list==null && filter_type_list==null && filter_role_list==null){
+            activate_icon.setVisibility(View.GONE);
+        } else{
+            activate_icon.setVisibility(View.VISIBLE);
+        }
         btn_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(runApp);
             }
         });
-
 
     }
 

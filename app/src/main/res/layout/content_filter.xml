@@ -305,48 +305,31 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="2"
+                        android:orientation="vertical"
                         android:layout_marginStart="27dp"
                         android:layout_marginBottom="10dp"
                         >
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <CheckBox
+                            android:id="@+id/type_textuelle"
+                            android:tag="@string/type_textual"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            >
-                            <CheckBox
-                                android:id="@+id/type_textuelle"
-                                android:tag="@string/type_textual"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/textual"
-                                />
-                            <CheckBox
-                                android:id="@+id/type_choix_multiples"
-                                android:tag="@string/type_choix_multiple"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/multipleChoicePoll"
-                                />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                            android:text="@string/textual"
+                            />
+                        <CheckBox
+                            android:id="@+id/type_oui_non"
+                            android:tag="@string/type_oui_non"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            >
-                            <CheckBox
-                                android:id="@+id/type_oui_non"
-                                android:tag="@string/type_oui_non"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/yesNoPoll"
-                                />
-                        </LinearLayout>
+                            android:text="@string/yesNoPoll"
+                            />
+                        <CheckBox
+                            android:id="@+id/type_choix_multiples"
+                            android:tag="@string/type_choix_multiple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/multipleChoicePoll"
+                            />
 
                     </LinearLayout>
 
