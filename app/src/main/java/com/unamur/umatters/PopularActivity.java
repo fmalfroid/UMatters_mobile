@@ -17,18 +17,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.unamur.umatters.API.GetPopular;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PopularActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class PopularActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemSelectedListener {
 
     private ImageView goBackBtn;
+    private BoxListAdapter boxListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +64,13 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
         List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.council_choices)));
         SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(this, data);
         council_choice.setAdapter(adapter);
+        council_choice.setOnItemSelectedListener(this);
 
         //Init of the recyclerView
+        boxListAdapter = new BoxListAdapter();
         final RecyclerView rv = findViewById(R.id.popular_box_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new BoxListAdapter());
+        rv.setAdapter(boxListAdapter);
 
         //Go back button
         goBackBtn = findViewById(R.id.pop_go_back);
@@ -71,6 +81,64 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
             }
         });
 
+    }
+
+
+    public void getPopularBox(String tag) {
+        JSONObject getPopularJson = new JSONObject();
+        JSONArray tagList = new JSONArray();
+        try {
+            tagList.put(tag);
+            getPopularJson.put("tri", "plus_populaire");
+            getPopularJson.put("tag", tagList);
+            getPopularJson.put("type", null);
+            getPopularJson.put("role", null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boxListAdapter.removeAllData();
+        GetPopular task = new GetPopular(boxListAdapter);
+        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/filtrer", String.valueOf(getPopularJson));
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        String tag = null;
+        switch (parent.getItemAtPosition(pos).toString()) {
+            case "Conseil d'administration":
+                tag = "#Général";
+                break;
+            case "Informatique":
+                tag = "#Informatique";
+                break;
+            case "Droit":
+                tag = "#Droit";
+                break;
+            case "Médecine":
+                tag = "#Médecine";
+                break;
+            case "Sciences":
+                tag = "#Sciences";
+                break;
+            case "Économie":
+                tag = "#Economie";
+                break;
+            case "Philosophie et lettres":
+                tag = "#Philo&Lettres";
+                break;
+            case "Chambre politique":
+                tag = "#AGE";
+                break;
+
+        }
+
+        getPopularBox(tag);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        return;
     }
 
     @Override
