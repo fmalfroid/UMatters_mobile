@@ -20,4 +20,10 @@
 
     <color name="transparent20">#20000000</color>
     <color name="transparent">#00000000</color>
+
+    <color name="pale_green">#5cd65c</color>
+    <color name="pale_orange">#66a3ff</color>
+    <color name="pale_red">#ff4d4d</color>
+
+    <color name="test">#90cc0000</color>
 </resources>

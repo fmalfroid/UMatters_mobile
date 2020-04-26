@@ -207,6 +207,7 @@
     <string name="archives_accepted">Accepté</string>
     <string name="archives_pending">En suspens</string>
     <string name="archives_refused">Refusé</string>
+    <string name="response">Réponse :</string>
 
     <!-- Profile -->
     <string name="followers">Abonnés</string>

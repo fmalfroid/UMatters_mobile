@@ -3,12 +3,9 @@ package com.unamur.umatters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,17 +14,29 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.unamur.umatters.API.GetArchives;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ArchivesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private String current_tab = "Accepté";
+    private SpinnerWrapContent spn_council_choice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +58,38 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
-        /*
-        //Init of the recyclerView
-        final RecyclerView rv = findViewById(R.id.archives_box_list);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new BoxListAdapter());
-        */
+        //go back
+        ImageView go_back = findViewById(R.id.pop_go_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        //Init of the spinner
+        spn_council_choice = (SpinnerWrapContent) findViewById(R.id.council_choice);
+        List<String> data = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.council_choices)));
+        SpinnerWrapContentAdapter spn_adapter = new SpinnerWrapContentAdapter(ArchivesActivity.this, data);
+        spn_council_choice.setAdapter(spn_adapter);
+        spn_council_choice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                getArchives(getTagFromSpinner(), current_tab);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
         //Init tabs
         initTabs();
+
+        //Init archives
+        getArchives( getTagFromSpinner(), current_tab);
     }
 
     @Override
@@ -194,6 +226,20 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+
+                switch (tab.getPosition()){
+                    case 0:
+                        current_tab = "Accepté";
+                        break;
+                    case 1:
+                        current_tab = "En attente";
+                        break;
+                    case 2:
+                        current_tab = "Refusé";
+                        break;
+                }
+
+                getArchives(getTagFromSpinner(), current_tab);
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -202,5 +248,67 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+    }
+
+    public String getTagFromSpinner(){
+        String selected_item = spn_council_choice.getSelectedItem().toString();
+        String tag;
+
+        switch (selected_item){
+            case "Informatique":
+                tag = "#Informatique";
+                break;
+            case "Droit":
+                tag = "#Droit";
+                break;
+            case "Médecine":
+                tag = "#Médecine";
+                break;
+            case "Sciences":
+                tag = "#Sciences";
+                break;
+            case "Économie":
+                tag = "#Economie";
+                break;
+            case "Philosophie et lettres":
+                tag = "#Philo&Lettres";
+                break;
+            case "Chambre politique":
+                tag = "#AGE";
+                break;
+            default:
+                tag = "#Général";
+                break;
+        }
+
+        return tag;
+    }
+
+    public void getArchives(String tag, String status){
+
+        JSONObject archives_jsonObj = new JSONObject();
+        try {
+            archives_jsonObj.put("tag", tag);
+            archives_jsonObj.put("status", status);
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        switch (status){
+            case "Accepté":
+                GetArchives task = new GetArchives(ArchivesActivity.this, ArchivesAcceptedFragment.adapter);
+                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                break;
+            case "En suspend":
+                GetArchives task2 = new GetArchives(ArchivesActivity.this, ArchivesPendingFragment.adapter);
+                task2.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                break;
+            case "Refusé":
+                GetArchives task3 = new GetArchives(ArchivesActivity.this, ArchivesRefusedFragment.adapter);
+                task3.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                break;
+        }
+
+        Log.d("ArchivesActivity", tag + " " + status);
     }
 }
