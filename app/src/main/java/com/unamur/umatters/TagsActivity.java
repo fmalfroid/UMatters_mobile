@@ -122,7 +122,6 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 //Save selected tags into BD
-                Toast.makeText(TagsActivity.this, selectedTags.toString(), Toast.LENGTH_SHORT).show();
 
                 SetPrefTags setTags = new SetPrefTags(TagsActivity.this, alSelectedTags);
                 setTags.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/tagpref", String.valueOf(tagJson));

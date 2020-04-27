@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         adapter.removeAllData();
 
+        filter_tag_list = CurrentUser.getCurrentUser().getTag_pref();
+
         //get data
         //call api
         JSONObject filter_jobject = new JSONObject();

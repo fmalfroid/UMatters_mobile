@@ -92,7 +92,6 @@ public class TagsSetupActivity extends AppCompatActivity {
                 }
 
                 //Save selected tags into BD
-                Toast.makeText(TagsSetupActivity.this, selectedTags.toString(), Toast.LENGTH_SHORT).show();
 
                 SetPrefTags setTags = new SetPrefTags(TagsSetupActivity.this, alSelectedTags);
                 setTags.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/tagpref", String.valueOf(tagJson));
