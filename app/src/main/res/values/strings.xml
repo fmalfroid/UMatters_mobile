@@ -23,6 +23,7 @@
     <string name="preference_file_key" translatable="false">com.unamur.umatters.preference_file_key</string>
     <string name="saved_email_key" translatable="false">com.unamur.umatters.SAVED_EMAIL_KEY</string>
     <string name="saved_password_key" translatable="false">com.unamur.umatters.SAVED_PASSWORD_KEY</string>
+    <string name="facebook_app_id">525719651445886</string>
 
     <!-- Nav drawer -->
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
@@ -252,6 +253,7 @@
     <string name="success_delete_box">Box supprimée avec succès.</string>
     <string name="success_add_comment">Commentaire ajouté avec succès.</string>
     <string name="success_register">Bienvenue sur UMatters!</string>
+    <string name="success_tag_change">Tags préférés changé avec succès</string>
 
     <!-- Error message -->
     <string name="error_register">Erreur lors de l\'inscription à cette application</string>
@@ -277,6 +279,7 @@
     <string name="error_box_too_small_title">Le titre doit contenir au moins 5 caractères.</string>
     <string name="error_box_too_small_description">La description doit contenir au moins 10 caractères.</string>
     <string name="error_add_comment">Erreur lors de l\'ajout du commentaire.</string>
+    <string name="error_tag_change">Erreur lors du changement de tag préférés.</string>
     <string name="deconnexion">Déconnexion</string>
     <string name="error_report">Erreur lors du signalement.</string>
 

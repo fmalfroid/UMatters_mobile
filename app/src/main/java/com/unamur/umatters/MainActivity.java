@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BoxListAdapter adapter;
 
     public static String filter_sort = "plus_recent";
-    public static ArrayList<String> filter_tag_list = null;
+    public static ArrayList<String> filter_tag_list = CurrentUser.getCurrentUser().getTag_pref();
     public static ArrayList<String> filter_type_list = null;
     public static ArrayList<String> filter_role_list = null;
 

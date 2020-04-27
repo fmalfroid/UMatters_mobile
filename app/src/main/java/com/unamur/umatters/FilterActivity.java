@@ -205,6 +205,45 @@ public class FilterActivity extends AppCompatActivity implements NavigationView.
             }
         });
 
+        //Pref tags button
+        Button btn_pref_tags = findViewById(R.id.btn_pref_tags);
+        btn_pref_tags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<String> pref_tags_list = CurrentUser.getCurrentUser().getTag_pref();
+                if (pref_tags_list!=null){
+                    for (String tag: pref_tags_list) {
+                        switch (tag){
+                            case "#Informatique":
+                                tag_info.setChecked(true);
+                                break;
+                            case "#Droit":
+                                tag_droit.setChecked(true);
+                                break;
+                            case "#Médecine":
+                                tag_medecine.setChecked(true);
+                                break;
+                            case "#Sciences":
+                                tag_sciences.setChecked(true);
+                                break;
+                            case "#Economie":
+                                tag_eco.setChecked(true);
+                                break;
+                            case "#Philo&Lettres":
+                                tag_philo.setChecked(true);
+                                break;
+                            case "#AGE":
+                                tag_age.setChecked(true);
+                                break;
+                            case "#Général":
+                                tag_general.setChecked(true);
+                                break;
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
     public void init(){

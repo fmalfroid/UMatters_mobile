@@ -176,17 +176,17 @@
                         />
 
                     <Button
+                        android:id="@+id/btn_pref_tags"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/my_tags"
                         android:background="@drawable/button_green_border_selector"
+                        android:minWidth="0dp"
+                        android:minHeight="30dp"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
-                        android:textSize="12sp"
+                        android:text="@string/my_tags"
                         android:textAllCaps="false"
-                        android:minHeight="30dp"
-                        android:minWidth="0dp"
-                        />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 

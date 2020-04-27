@@ -10,6 +10,12 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.unamur.umatters.API.SetPrefTags;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -56,17 +62,41 @@ public class TagsSetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Get the selected tags
-                ArrayList<String> selectedTags = new ArrayList<>();
-                selectedTags.add(spinner_choice_1.getSelectedItem().toString());
-                selectedTags.add(spinner_choice_2.getSelectedItem().toString());
-                selectedTags.add(spinner_choice_3.getSelectedItem().toString());
+
+                HashMap<String, String> tagHashMap = new HashMap<String, String>();
+                tagHashMap.put("Général", "#Général");
+                tagHashMap.put("Informatique", "#Informatique");
+                tagHashMap.put("Droit", "#Droit");
+                tagHashMap.put("Médecine", "#Médecine");
+                tagHashMap.put("Sciences", "#Sciences");
+                tagHashMap.put("Économie", "#Economie");
+                tagHashMap.put("Philosophie et lettres", "#Philo&Lettres");
+                tagHashMap.put("AGE", "#AGE");
+
+                JSONArray selectedTags = new JSONArray();
+                selectedTags.put(tagHashMap.get(spinner_choice_1.getSelectedItem().toString()));
+                selectedTags.put(tagHashMap.get(spinner_choice_2.getSelectedItem().toString()));
+                selectedTags.put(tagHashMap.get(spinner_choice_3.getSelectedItem().toString()));
+
+                ArrayList<String> alSelectedTags = new ArrayList<>();
+                alSelectedTags.add(tagHashMap.get(spinner_choice_1.getSelectedItem().toString()));
+                alSelectedTags.add(tagHashMap.get(spinner_choice_2.getSelectedItem().toString()));
+                alSelectedTags.add(tagHashMap.get(spinner_choice_3.getSelectedItem().toString()));
+
+                JSONObject tagJson = new JSONObject();
+                try {
+                    tagJson.put("email", CurrentUser.getCurrentUser().getEmail());
+                    tagJson.put("tag_pref", selectedTags);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 //Save selected tags into BD
-                //TODO : save tags in DB
                 Toast.makeText(TagsSetupActivity.this, selectedTags.toString(), Toast.LENGTH_SHORT).show();
-                //Run the main activity
-                Intent runMain = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(runMain);
-                finish();
+
+                SetPrefTags setTags = new SetPrefTags(TagsSetupActivity.this, alSelectedTags);
+                setTags.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/tagpref", String.valueOf(tagJson));
+
             }
         });
     }

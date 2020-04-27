@@ -1,9 +1,11 @@
 package com.unamur.umatters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxProfile;
@@ -59,6 +63,15 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
     public void addData(Box box) {
         boxList.add(box);
         notifyDataSetChanged();
+    }
+
+    public void showShareDialog(Context context, String id_box) {
+        ShareLinkContent content = new ShareLinkContent.Builder()
+            .setContentUrl(Uri.parse("http://mdl-std01.info.fundp.ac.be/box?id=" + id_box))
+            .build();
+
+        ShareDialog shareDialog = new ShareDialog((Activity) context);
+        shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
     }
 
     public void toggleFavorite(String id_box, String email){
@@ -298,6 +311,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
         private final TextView description;
         private ToggleButton btn_oui;
         private ToggleButton btn_non;
+        private Button btn_share;
 
         private Context context;
 
@@ -326,6 +340,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
             btn_comment = itemView.findViewById(R.id.box_cell_comment_btn);
             btn_description = itemView.findViewById(R.id.description_btn);
             description = itemView.findViewById(R.id.box_description);
+            btn_share = itemView.findViewById(R.id.btn_share);
 
             context = itemView.getContext();
 
@@ -408,6 +423,13 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                     Intent runApp = new Intent(context, CommentActivity.class);
                     runApp.putExtra("box", box);
                     context.startActivity(runApp);
+                }
+            });
+
+            btn_share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showShareDialog(context, box.getId());
                 }
             });
 
