@@ -46,6 +46,10 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archives);
 
+        ArchivesAcceptedFragment.adapter.clearArchivesList();
+        ArchivesPendingFragment.adapter.clearArchivesList();
+        ArchivesRefusedFragment.adapter.clearArchivesList();
+
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
