@@ -107,7 +107,9 @@ public class GetAllBox extends AsyncTask<String, String, String> {
             JSONObject jsonObj = new JSONObject(result);
             JSONArray data = jsonObj.getJSONArray("data");
             for(int i=0; i<data.length(); i++) {
-                adapter.addData(createBoxFromJson(data.getJSONObject(i)));
+                if (!data.isNull(i)) {
+                    adapter.addData(createBoxFromJson(data.getJSONObject(i)));
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
