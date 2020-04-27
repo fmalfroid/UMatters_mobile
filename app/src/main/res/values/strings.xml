@@ -169,8 +169,8 @@
 
     <!-- Report menu -->
     <string name="report">Signalement</string>
-    <string name="report_type">Type :</string>
-    <string name="report_description">Description :</string>
+    <string name="report_reason">Raison :</string>
+    <string name="report_comment">Commentaire :</string>
     <string name="cancel">Annuler</string>
     <string name="thanks_for_report">Merci pour votre signalement !</string>
     <string-array name="report_types">
@@ -221,7 +221,7 @@
     <string name="subscriptions_box">Boîtes d\'abonnements</string>
     <string name="replies">" réponses"</string>
     <string name="reply">Répondre</string>
-    <string name="no_sub">Aucun abonnements</string>
+    <string name="no_sub">Aucun abonnement</string>
     <string name="subscribed">Abonné(e)</string>
     <string name="unsubscribed">Désabonné(e)</string>
 
@@ -278,5 +278,6 @@
     <string name="error_box_too_small_description">La description doit contenir au moins 10 caractères.</string>
     <string name="error_add_comment">Erreur lors de l\'ajout du commentaire.</string>
     <string name="deconnexion">Déconnexion</string>
+    <string name="error_report">Erreur lors du signalement.</string>
 
 </resources>

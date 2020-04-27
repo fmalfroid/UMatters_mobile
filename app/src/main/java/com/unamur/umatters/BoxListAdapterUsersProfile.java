@@ -31,6 +31,7 @@ import android.widget.ToggleButton;
 import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxProfile;
+import com.unamur.umatters.API.Signalement;
 import com.unamur.umatters.API.SubToUser;
 import com.unamur.umatters.API.VoteChoice;
 
@@ -438,7 +439,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                                     final EditText description = mView.findViewById(R.id.edtxt_description);
 
                                     //init spinner
-                                    SpinnerWrapContent report_type = mView.findViewById(R.id.spinner_report_type);
+                                    final SpinnerWrapContent report_type = mView.findViewById(R.id.spinner_report_type);
                                     List<String> data = new LinkedList<>(Arrays.asList(context.getResources().getStringArray(R.array.report_types)));
                                     SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(context, data);
                                     report_type.setAdapter(adapter);
@@ -459,10 +460,24 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                                             if (description.length() < 10){
                                                 Toast.makeText(context, R.string.error_box_too_small_description, Toast.LENGTH_SHORT).show();
                                             } else {
-                                                //TODO report box
 
-                                                Toast.makeText(context, R.string.thanks_for_report, Toast.LENGTH_SHORT).show();
+                                                JSONObject signalementJson = new JSONObject();
+                                                try {
+
+                                                    signalementJson.put("id_box", box.getId());
+                                                    signalementJson.put("signale", box.getCreator().getId());
+                                                    signalementJson.put("signaleur", user.getEmail());
+                                                    signalementJson.put("type", report_type.getSelectedItem().toString());
+                                                    signalementJson.put("explication", description.getText().toString());
+
+                                                } catch (JSONException e){
+                                                    e.printStackTrace();
+                                                }
+                                                Signalement task = new Signalement(context);
+                                                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/signalements", String.valueOf(signalementJson));
+
                                                 dialog.dismiss();
+
                                             }
 
                                         }
