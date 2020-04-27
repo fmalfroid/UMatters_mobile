@@ -29,6 +29,15 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
 
+        //Go back button
+        ImageView img_arrowback = findViewById(R.id.pop_go_back);
+        img_arrowback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         //Init of the recyclerView
         final RecyclerView rv = findViewById(R.id.interests_list);
         rv.setLayoutManager(new LinearLayoutManager(this));
