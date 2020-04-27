@@ -7,7 +7,9 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
     tools:showIn="@layout/app_bar_archives"
-    tools:context=".PopularActivity">
+    tools:context=".PopularActivity"
+    android:background="@color/lightLightGrey"
+    >
 
     <RelativeLayout
         android:id="@+id/header"
@@ -68,6 +70,17 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
         app:tabBackground="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/txt_no_archives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_archives"
+        android:textColor="@color/darkDarkGrey"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
         />
 
     <android.support.v4.view.ViewPager

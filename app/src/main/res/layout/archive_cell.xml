@@ -293,11 +293,14 @@
             android:layout_marginEnd="5dp"
             >
 
-            <Button
+            <ToggleButton
                 android:id="@+id/button_favorite"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/ic_favorite_red"
+                android:background="@drawable/button_favorite"
+                android:clickable="false"
+                android:textOn=""
+                android:textOff=""
                 />
 
             <TextView

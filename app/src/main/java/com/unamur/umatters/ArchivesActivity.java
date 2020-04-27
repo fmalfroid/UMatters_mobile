@@ -3,6 +3,7 @@ package com.unamur.umatters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.util.LocaleData;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -37,6 +38,8 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
 
     private String current_tab = "Accepté";
     private SpinnerWrapContent spn_council_choice;
+
+    public static TextView msg_no_archives;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +91,8 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
         //Init tabs
         initTabs();
 
-        //Init archives
-        getArchives( getTagFromSpinner(), current_tab);
+        //init msg no archive visibility
+        msg_no_archives = findViewById(R.id.txt_no_archives);
     }
 
     @Override
@@ -232,7 +235,7 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
                         current_tab = "Accepté";
                         break;
                     case 1:
-                        current_tab = "En attente";
+                        current_tab = "En suspend";
                         break;
                     case 2:
                         current_tab = "Refusé";
@@ -298,14 +301,23 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
             case "Accepté":
                 GetArchives task = new GetArchives(ArchivesActivity.this, ArchivesAcceptedFragment.adapter);
                 task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                ArchivesPendingFragment.adapter.clearArchivesList();
+                ArchivesRefusedFragment.adapter.clearArchivesList();
+
                 break;
             case "En suspend":
                 GetArchives task2 = new GetArchives(ArchivesActivity.this, ArchivesPendingFragment.adapter);
                 task2.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                ArchivesAcceptedFragment.adapter.clearArchivesList();
+                ArchivesRefusedFragment.adapter.clearArchivesList();
+
                 break;
             case "Refusé":
                 GetArchives task3 = new GetArchives(ArchivesActivity.this, ArchivesRefusedFragment.adapter);
                 task3.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                ArchivesAcceptedFragment.adapter.clearArchivesList();
+                ArchivesPendingFragment.adapter.clearArchivesList();
+
                 break;
         }
 

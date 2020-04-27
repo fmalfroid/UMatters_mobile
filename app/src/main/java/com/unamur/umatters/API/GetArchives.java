@@ -3,13 +3,18 @@ package com.unamur.umatters.API;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.unamur.umatters.Archive;
+import com.unamur.umatters.ArchivesAcceptedFragment;
 import com.unamur.umatters.ArchivesListAdapter;
+import com.unamur.umatters.ArchivesPendingFragment;
+import com.unamur.umatters.ArchivesRefusedFragment;
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.Choice;
+import com.unamur.umatters.Response;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,9 +35,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.unamur.umatters.ArchivesActivity.msg_no_archives;
 
 public class GetArchives extends AsyncTask<String, String, String> {
 
@@ -146,6 +155,14 @@ public class GetArchives extends AsyncTask<String, String, String> {
                         Archive archive = getArchiveFromJson(archive_json);
                         adapter.addData(archive);
                     }
+                    if (data.length()==0){
+                        adapter.clearArchivesList();
+                        msg_no_archives.setVisibility(View.VISIBLE);
+                    } else {
+                        msg_no_archives.setVisibility(View.GONE);
+                    }
+
+                    Log.d("adapter", String.valueOf(adapter.getItemCount()));
                 }
                 //Delete failed
                 else {
@@ -164,27 +181,38 @@ public class GetArchives extends AsyncTask<String, String, String> {
             //Box
             Box box = createBoxFromJson(json);
 
-            //Response
+            //Reponse
             JSONArray all_response = json.getJSONArray("reponse");
             //--get all response
-            ArrayList<String> list_response = new ArrayList<>();
-            ArrayList<String> list_response_dates = new ArrayList<>();
+            ArrayList<Response> list_response = new ArrayList<>();
             for (int i=0; i<all_response.length(); i++) {
+
+                Response response = new Response();
 
                 JSONObject response_jobj = all_response.getJSONObject(i);
 
-                String reponse = response_jobj.getString("reponse");
-                String reponse_date = response_jobj.getString("date_reponse");
+                String reponse_status = response_jobj.getString("status");
+                String reponse_txt = response_jobj.getString("reponse");
+                String reponse_date = "";
+                try{
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+                    Date dateNF = dateFormat.parse(response_jobj.getString("date_reponse"));
+                    DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                    reponse_date = formatter.format(dateNF);
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
 
-                list_response.add(reponse);
-                list_response_dates.add(reponse_date);
+                response.setDate(reponse_date);
+                response.setStatus(reponse_status);
+                response.setTexte(reponse_txt);
 
+                list_response.add(response);
             }
 
             //set info into archive
             archive.setBox(box);
-            archive.setList_response(list_response);
-            archive.setList_response_date(list_response_dates);
+            archive.setResponses(list_response);
 
         } catch (JSONException e){
             e.printStackTrace();

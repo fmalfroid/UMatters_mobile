@@ -63,6 +63,11 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
         notifyDataSetChanged();
     }
 
+    public void clearArchivesList(){
+        archivesList.clear();
+        notifyDataSetChanged();
+    }
+
     public void setArchivesListStatus(String status){
         list_status = status;
     }
@@ -94,7 +99,7 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
         private final TextView text;
         private final TextView nb_likes;
         private final LinearLayout poll;
-        private final Button btn_favorite;
+        private final ToggleButton btn_favorite;
         private final ToggleButton btn_description;
         private final TextView description;
 
@@ -108,6 +113,8 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
         private TextView votes_non;
         private ToggleButton btn_oui;
         private ToggleButton btn_non;
+
+        private ArrayList<View> all_response_views = new ArrayList<>();
 
 
         public ArchivesViewHolder(final View itemView) {
@@ -145,12 +152,20 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
 
         public void display(final Archive archive) {
 
+            CurrentUser user = CurrentUser.getCurrentUser();
+
             Box box = archive.getBox();
 
             //Remove all views because it launch this function when the box is too far in the scroll so it duplicates
             tagList.removeAllViews();
             poll.removeAllViews();
             ll_oui_non.setVisibility(View.GONE);
+
+            for (View v: all_response_views) {
+                ((ViewGroup)v.getParent()).removeView(v);
+            }
+            all_response_views.clear();
+
 
             List<String> typesTags = Arrays.asList(
                     "#Général",
@@ -162,7 +177,10 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
                     "#Philo&Lettres",
                     "#AGE"
             );
-
+            //init favorite button
+            if (box.getLikes().contains(user.getEmail())){
+                btn_favorite.setChecked(true);
+            }
             //Nombre de likes de la box
             nb_likes.setText(String.valueOf(archive.getBox().getLikes().size()));
 
@@ -242,6 +260,7 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
                 for (int i=0; i<box.getChoices().size(); i++) {
 
                     final RadioButton choice = new RadioButton(context);
+                    choice.setClickable(false);
                     choice.setText(box.getChoices().get(i).getName());
                     choice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 0));
 
@@ -254,6 +273,12 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
                     nb_votes.setGravity(Gravity.END);
                     nb_votes.setPadding(0,19,0,20);
                     ll_nbr_votes.addView(nb_votes);
+
+                    //init user choice
+                    Choice box_choice = box.getChoices().get(i);
+                    if (box_choice.getUsers().contains(user.getEmail())){
+                        choice.setChecked(true);
+                    }
 
                 }
 
@@ -302,16 +327,32 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
                 String str_votes_non = (int) nb_no + " votes";
                 votes_oui.setText(str_votes_oui);
                 votes_non.setText(str_votes_non);
+
+                btn_oui.setClickable(false);
+                btn_non.setClickable(false);
+
+                for (Choice choice : box.getChoices()){
+                    String str_choice = choice.getName();
+                    if (choice.getUsers().contains(user.getEmail())){
+                        if (str_choice.equals("Oui")){
+                            btn_oui.setChecked(true);
+                        }
+                        if (str_choice.equals("Non")){
+                            btn_non.setChecked(true);
+                        }
+                    }
+                }
+
             }
 
             //REPONSE
             //--for every response
-            for (int i=0; i<archive.getList_response().size(); i++) {
+            for (int i=0; i<archive.getResponses().size(); i++) {
 
-                Log.d("archives",archive.getList_response().get(i));
-
-                String response = archive.getList_response().get(i);
-                String response_date = archive.getList_response_date().get(i);
+                Response response = archive.getResponses().get(i);
+                String response_status = response.getStatus();
+                String response_date = response.getDate();
+                String response_txt = response.getTexte();
 
                 //separator
                 View separator = new View(context);
@@ -319,26 +360,30 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
                 separator.setBackgroundColor(Color.parseColor("#AFAFAF"));
                 main_layout.addView(separator);
 
+                all_response_views.add(separator);
+
                 //response layout
                 LinearLayout ll_response= new LinearLayout(context);
                 ll_response.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 ll_response.setOrientation(LinearLayout.HORIZONTAL);
 
+                all_response_views.add(ll_response);
+
                 //--response status
-                View response_status = new View(context);
-                response_status.setLayoutParams(new ViewGroup.LayoutParams(25, ViewGroup.LayoutParams.MATCH_PARENT));
-                switch (list_status){
+                View view_response_status = new View(context);
+                view_response_status.setLayoutParams(new ViewGroup.LayoutParams(25, ViewGroup.LayoutParams.MATCH_PARENT));
+                switch (response_status){
                     case "Accepté":
-                        response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_green));
+                        view_response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_green));
                         break;
                     case "En suspend":
-                        response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_orange));
+                        view_response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_orange));
                         break;
                     case "Refusé":
-                        response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_red));
+                        view_response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_red));
                         break;
                 }
-                ll_response.addView(response_status);
+                ll_response.addView(view_response_status);
 
                 //--response
                 LinearLayout ll_vertical = new LinearLayout(context);
@@ -374,7 +419,7 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
                 txt_response.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 txt_response.setTextColor(ContextCompat.getColor(context,R.color.black));
                 txt_response.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                txt_response.setText(response);
+                txt_response.setText(response_txt);
 
                 ll_vertical.addView(txt_response);
 

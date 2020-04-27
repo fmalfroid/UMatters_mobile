@@ -324,12 +324,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+            <Button
+                android:id="@+id/btn_share"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/share"
+                />
+
             <ImageView
                 android:id="@+id/box_cell_comment_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:src="@drawable/ic_comment" />
+                android:src="@drawable/ic_comment"
+                android:layout_marginStart="17dp"
+                />
 
 
         </LinearLayout>

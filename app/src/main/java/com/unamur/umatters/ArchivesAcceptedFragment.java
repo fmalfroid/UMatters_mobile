@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class ArchivesAcceptedFragment extends Fragment {
 
-    public static ArchivesListAdapter adapter;
+    public static ArchivesListAdapter adapter = new ArchivesListAdapter();
 
     public ArchivesAcceptedFragment() {
         // Required empty public constructor
@@ -31,7 +32,6 @@ public class ArchivesAcceptedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_archives_accepted, container, false);
 
         //init recyclerview
-        adapter = new ArchivesListAdapter();
         final RecyclerView rv = v.findViewById(R.id.archives_box_list);
         //Init the layout and the adapter of the recycler view
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -40,6 +40,7 @@ public class ArchivesAcceptedFragment extends Fragment {
         adapter.setArchivesListStatus("Accepté");
 
         //test data
+        /*
         List list_choice = new ArrayList();
         ArrayList<String> likes = new ArrayList<>();
         likes.add("email");
@@ -57,6 +58,7 @@ public class ArchivesAcceptedFragment extends Fragment {
         Archive test = new Archive(box,list_response, list_response_date);
 
         adapter.addData(test);
+        */
 
         return v;
     }

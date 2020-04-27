@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class ArchivesRefusedFragment extends Fragment {
 
-    public static ArchivesListAdapter adapter;
+    public static ArchivesListAdapter adapter = new ArchivesListAdapter();
 
     public ArchivesRefusedFragment() {
         // Required empty public constructor
@@ -31,7 +32,6 @@ public class ArchivesRefusedFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_archives_refused, container, false);
 
         //init recyclerview
-        adapter = new ArchivesListAdapter();
         final RecyclerView rv = v.findViewById(R.id.archives_box_list);
         //Init the layout and the adapter of the recycler view
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -39,6 +39,7 @@ public class ArchivesRefusedFragment extends Fragment {
         //init list status
         adapter.setArchivesListStatus("Refusé");
 
+        /*
         //test data
         List list_choice_2 = new ArrayList();
         ArrayList<String> likes_2 = new ArrayList<>();
@@ -65,6 +66,7 @@ public class ArchivesRefusedFragment extends Fragment {
         Archive test2 = new Archive(box_2,list_response_2, list_response_date_2);
 
         adapter.addData(test2);
+        */
 
         return v;
     }

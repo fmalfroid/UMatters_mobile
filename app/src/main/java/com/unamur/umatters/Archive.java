@@ -5,19 +5,16 @@ import java.util.ArrayList;
 public class Archive {
 
     private Box box;
-    private ArrayList<String> list_response;
-    private ArrayList<String> list_response_date;
+    private ArrayList<Response> responses;
 
-    public Archive(){
+    public Archive() {
         this.box = null;
-        this.list_response = null;
-        this.list_response_date = null;
+        this.responses = null;
     }
 
-    public Archive(Box box, ArrayList<String> list_response, ArrayList<String> list_response_date) {
+    public Archive(Box box, ArrayList<Response> responses) {
         this.box = box;
-        this.list_response = list_response;
-        this.list_response_date = list_response_date;
+        this.responses = responses;
     }
 
     public Box getBox() {
@@ -28,19 +25,11 @@ public class Archive {
         this.box = box;
     }
 
-    public ArrayList<String> getList_response() {
-        return list_response;
+    public ArrayList<Response> getResponses() {
+        return responses;
     }
 
-    public void setList_response(ArrayList<String> list_response) {
-        this.list_response = list_response;
-    }
-
-    public ArrayList<String> getList_response_date() {
-        return list_response_date;
-    }
-
-    public void setList_response_date(ArrayList<String> list_response_date) {
-        this.list_response_date = list_response_date;
+    public void setResponses(ArrayList<Response> responses) {
+        this.responses = responses;
     }
 }
