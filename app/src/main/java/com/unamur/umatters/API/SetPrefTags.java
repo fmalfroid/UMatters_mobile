@@ -129,6 +129,7 @@ public class SetPrefTags extends AsyncTask<String, String, String> {
                     Toast.makeText(context, R.string.success_tag_change, Toast.LENGTH_SHORT).show();
                     CurrentUser user = CurrentUser.getCurrentUser();
                     user.setTag_pref(tags);
+                    MainActivity.filter_tag_list = CurrentUser.getCurrentUser().getTag_pref();
                     Intent runMain = new Intent(context, MainActivity.class);
                     context.startActivity(runMain);
                     ((Activity) context).finish();
