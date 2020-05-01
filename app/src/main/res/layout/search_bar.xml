@@ -13,14 +13,16 @@
     <include layout="@layout/layout_filter_icon" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/search_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/search"
-        android:inputType="textPersonName"
-        android:textSize="14sp" />
+        android:inputType="text"
+        android:textSize="14sp"
+        android:singleLine="true"
+        android:imeOptions="actionDone"/>
 
 
     <ImageView

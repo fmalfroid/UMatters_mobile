@@ -36,14 +36,16 @@ public class FilterBox extends AsyncTask<String, String, String> {
 
     private Context context;
     private BoxListAdapter adapter = null;
+    private String search_text = null;
 
     public FilterBox(){
         //set context variables if required
     }
 
-    public FilterBox(Context context, BoxListAdapter adapter) {
+    public FilterBox(Context context, BoxListAdapter adapter, String search_text) {
         this.context = context;
         this.adapter = adapter;
+        this.search_text  = search_text;
     }
 
     @Override
@@ -131,7 +133,10 @@ public class FilterBox extends AsyncTask<String, String, String> {
             JSONObject jsonObj = new JSONObject(result);
             JSONArray data = jsonObj.getJSONArray("data");
             for(int i=0; i<data.length(); i++) {
-                adapter.addData(createBoxFromJson(data.getJSONObject(i)));
+                Box box = createBoxFromJson(data.getJSONObject(i));
+                if (box != null) {
+                    adapter.addData(box);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -184,6 +189,22 @@ public class FilterBox extends AsyncTask<String, String, String> {
         }
 
         return new User();
+    }
+
+    private boolean checkSearch(String name, List<String> tags, String search_text) {
+        boolean search_text_found = false;
+
+        if (name.toLowerCase().contains(search_text.toLowerCase())) {
+            search_text_found = true;
+        }
+
+        for (int i=0; i<tags.size(); i++) {
+            if (tags.get(i).toLowerCase().contains(search_text.toLowerCase())) {
+                search_text_found = true;
+            }
+        }
+
+        return search_text_found;
     }
 
     private Box createBoxFromJson(JSONObject json) {
@@ -246,6 +267,14 @@ public class FilterBox extends AsyncTask<String, String, String> {
             type = json.getString("type");
 
             description = json.getString("description");
+
+            if (search_text != null) {
+                if (checkSearch(creator.getName(), tags, search_text)) {
+                    return new Box(id, choices,creator, date, likes, tags, title, type, description);
+                } else {
+                    return null;
+                }
+            }
 
             return new Box(id, choices,creator, date, likes, tags, title, type, description);
 

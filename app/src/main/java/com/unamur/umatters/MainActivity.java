@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +21,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FrameLayout btn_filter;
     private ImageView btn_popular;
     private ImageView btn_archives;
+    private EditText search_input;
     private BoxListAdapter adapter;
 
     public static String filter_sort = "plus_recent";
@@ -98,13 +103,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        //Search input
+        search_input = findViewById(R.id.search_text);
+        search_input.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    searchAndFilter(search_input.getText().toString());
+                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.removeAllData();
 
+        searchAndFilter(search_input.getText().toString());
+    }
+
+    public void searchAndFilter(String search_text) {
+        adapter.removeAllData();
         //get data
         //call api
         JSONObject filter_jobject = new JSONObject();
@@ -145,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             e.printStackTrace();
         }
 
-        FilterBox task = new FilterBox( MainActivity.this, adapter);
+        FilterBox task = new FilterBox( MainActivity.this, adapter, search_text);
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/filtrer", String.valueOf(filter_jobject));
 
         Log.d("MainActivity box ", filter_jobject.toString());
