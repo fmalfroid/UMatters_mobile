@@ -191,7 +191,7 @@ public class FilterBox extends AsyncTask<String, String, String> {
         return new User();
     }
 
-    private boolean checkSearch(String name, List<String> tags, String search_text) {
+    private boolean checkSearch(String name, List<String> tags, String title, String search_text) {
         boolean search_text_found = false;
 
         if (name.toLowerCase().contains(search_text.toLowerCase())) {
@@ -202,6 +202,10 @@ public class FilterBox extends AsyncTask<String, String, String> {
             if (tags.get(i).toLowerCase().contains(search_text.toLowerCase())) {
                 search_text_found = true;
             }
+        }
+
+        if (title.toLowerCase().contains(search_text.toLowerCase())) {
+            search_text_found = true;
         }
 
         return search_text_found;
@@ -269,7 +273,7 @@ public class FilterBox extends AsyncTask<String, String, String> {
             description = json.getString("description");
 
             if (search_text != null) {
-                if (checkSearch(creator.getName(), tags, search_text)) {
+                if (checkSearch(creator.getName(), tags, title, search_text)) {
                     return new Box(id, choices,creator, date, likes, tags, title, type, description);
                 } else {
                     return null;
