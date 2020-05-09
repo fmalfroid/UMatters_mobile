@@ -1,13 +1,17 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.Choice;
+import com.unamur.umatters.R;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -137,6 +141,13 @@ public class FilterBox extends AsyncTask<String, String, String> {
                 if (box != null) {
                     adapter.addData(box);
                 }
+            }
+
+            TextView txt_no_sub = ((Activity) context).findViewById(R.id.txt_no_box);
+            if (data.length()>0) {
+                txt_no_sub.setVisibility(View.GONE);
+            } else {
+                txt_no_sub.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
             e.printStackTrace();

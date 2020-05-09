@@ -64,7 +64,7 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
     protected void onResume() {
         super.onResume();
         adapter.removeAllData();
-        GetAllBox getInterest = new GetAllBox(adapter);
+        GetAllBox getInterest = new GetAllBox(adapter, InterestActivity.this);
         getInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet/" + CurrentUser.getCurrentUser().getEmail());
     }
 

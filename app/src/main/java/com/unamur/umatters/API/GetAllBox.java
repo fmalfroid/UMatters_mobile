@@ -1,10 +1,16 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.Choice;
+import com.unamur.umatters.R;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +35,7 @@ import java.util.List;
 public class GetAllBox extends AsyncTask<String, String, String> {
 
     private BoxListAdapter adapter = null;
+    private Context context = null;
 
 
     //public Box testbox1 = new Box("1", (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Patrick Heymans", "Académique"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple", "");
@@ -42,6 +49,11 @@ public class GetAllBox extends AsyncTask<String, String, String> {
 
     public GetAllBox(BoxListAdapter adapter) {
         this.adapter = adapter;
+    }
+
+    public GetAllBox(BoxListAdapter adapter, Context context) {
+        this.adapter = adapter;
+        this.context = context;
     }
 
     protected void onPreExecute() {
@@ -106,9 +118,19 @@ public class GetAllBox extends AsyncTask<String, String, String> {
         try {
             JSONObject jsonObj = new JSONObject(result);
             JSONArray data = jsonObj.getJSONArray("data");
+            boolean all_null = true;
             for(int i=0; i<data.length(); i++) {
                 if (!data.isNull(i)) {
+                    all_null = false;
                     adapter.addData(createBoxFromJson(data.getJSONObject(i)));
+                }
+            }
+            if (context != null) {
+                TextView txt_no_sub = ((Activity) context).findViewById(R.id.txt_no_box);
+                if (data.length()>0 && !all_null) {
+                    txt_no_sub.setVisibility(View.GONE);
+                } else {
+                    txt_no_sub.setVisibility(View.VISIBLE);
                 }
             }
         } catch (JSONException e) {

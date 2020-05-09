@@ -145,6 +145,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
     public void setUser(User user){
         user_profile = user;
+        notifyDataSetChanged();
     }
 
     @Override

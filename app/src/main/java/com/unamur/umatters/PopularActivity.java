@@ -98,7 +98,7 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
         }
 
         boxListAdapter.removeAllData();
-        GetPopular task = new GetPopular(boxListAdapter);
+        GetPopular task = new GetPopular(boxListAdapter, PopularActivity.this);
         task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/filtrer", String.valueOf(getPopularJson));
     }
 

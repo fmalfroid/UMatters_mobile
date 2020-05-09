@@ -83,7 +83,7 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
             String full_name = current_person.getFirstname() + " " + current_person.getSurname();
             name.setText(full_name);
-            String str_level = getContext().getResources().getString(R.string.level) + " " + current_person.getLevel();
+            String str_level = getContext().getResources().getString(R.string.level) + " " + (current_person.getLevel() / 5);
             level.setText(str_level);
             faculty.setText(current_person.getFaculty());
             switch (current_person.getRole()){

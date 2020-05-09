@@ -1,10 +1,16 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.Choice;
+import com.unamur.umatters.R;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,9 +38,11 @@ import java.util.List;
 public class GetPopular extends AsyncTask<String, String, String> {
 
     private BoxListAdapter adapter = null;
+    private Context context = null;
 
-    public GetPopular(BoxListAdapter adapter) {
+    public GetPopular(BoxListAdapter adapter, Context context) {
         this.adapter = adapter;
+        this.context = context;
     }
 
     @Override
@@ -123,6 +131,12 @@ public class GetPopular extends AsyncTask<String, String, String> {
             JSONArray data = jsonObj.getJSONArray("data");
             for(int i=0; (i<data.length()) && (i<10); i++) {
                 adapter.addData(createBoxFromJson(data.getJSONObject(i)));
+            }
+            TextView txt_no_sub = ((Activity) context).findViewById(R.id.txt_no_box);
+            if (data.length()>0) {
+                txt_no_sub.setVisibility(View.GONE);
+            } else {
+                txt_no_sub.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
             e.printStackTrace();

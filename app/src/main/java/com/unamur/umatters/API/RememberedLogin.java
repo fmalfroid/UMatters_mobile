@@ -145,6 +145,9 @@ public class RememberedLogin extends AsyncTask<String, String, String> {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                Intent runApp = new Intent(context, LoginActivity.class);
+                context.startActivity(runApp);
+                ((Activity) context).finish();
             }
         }
     }
