@@ -162,6 +162,12 @@
     <!-- Delete a box -->
     <string name="delete_dialog_text">Voulez-vous vraiment supprimer cette box?</string>
     <string name="delete_dialog_title">Supprimer la box?</string>
+    
+    <!-- user settings menu -->
+    <string name="change_password">Modifier le mot de passe</string>
+    <string name="actual_password">Mot de passe actuel :</string>
+    <string name="new_password">Nouveau mot de passe :</string>
+    <string name="confirm_new_password">Confirmer nouveau mot de passe :</string>
 
     <!-- Box menu -->
     <string name="box_menu_delete"><font fgcolor='#FF1400'>Delete</font></string>

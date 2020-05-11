@@ -230,7 +230,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
             String role = user_profile.getRole();
             int level = participation/5;
             int level_progress = participation % 5;
-            String faculte = user.getFaculty();
+            String faculte = user_profile.getFaculty();
 
             //Sub button
             //--init value

@@ -21,17 +21,20 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.unamur.umatters.API.ChangeImage;
+import com.unamur.umatters.API.ChangePwd;
 import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxProfile;
@@ -216,6 +219,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
         private Context context;
 
+        private ImageView img_settings;
         private ImageView img_picture;
         private ImageView img_role;
         private TextView txt_name;
@@ -229,6 +233,7 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             super(itemView);
 
             //get elements
+            img_settings = itemView.findViewById(R.id.img_settings);
             img_picture = itemView.findViewById(R.id.img_picture);
             img_role = itemView.findViewById(R.id.img_role);
             txt_name = itemView.findViewById(R.id.txt_name);
@@ -244,7 +249,84 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         public void display(){
             CurrentUser user = CurrentUser.getCurrentUser();
 
-            //TODO: get user picture
+            img_settings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, img_settings);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.user_settings);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.btn_menu_change_password:
+
+                                    final CurrentUser currentUser = CurrentUser.getCurrentUser();
+
+                                    //open delete dialog
+                                    final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                                    LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                                    View mView = inflater.inflate(R.layout.dialog_user_settings, null);
+                                    mBuilder.setView(mView);
+                                    final AlertDialog dialog = mBuilder.create();
+
+                                    Button btn_cancel = mView.findViewById(R.id.btn_cancel);
+                                    Button btn_ok = mView.findViewById(R.id.btn_ok);
+
+                                    final EditText actual_password = mView.findViewById(R.id.edtxt_actual_password);
+                                    final EditText new_password= mView.findViewById(R.id.edtxt_new_password);
+                                    final EditText confirm_new_password = mView.findViewById(R.id.edtxt_confirm_new_password);
+
+                                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    btn_ok.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            if (new_password.getText().toString().equals(confirm_new_password.getText().toString())){
+
+                                                JSONObject change_mdp_json = new JSONObject();
+
+                                                try {
+
+                                                    change_mdp_json.put("email", currentUser.getEmail());
+                                                    change_mdp_json.put("oldpassword", actual_password.getText().toString());
+                                                    change_mdp_json.put("newpassword", new_password.getText().toString());
+
+                                                    ChangePwd change_pwd = new ChangePwd(context, dialog);
+                                                    change_pwd.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/updatepassword", String.valueOf(change_mdp_json));
+
+
+                                                } catch (JSONException e){
+                                                    e.printStackTrace();
+                                                }
+
+                                            } else {
+                                                Toast.makeText(context, "Le nouveau mot de passe et sa confirmation sont différents !", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+                                    });
+
+                                    dialog.show();
+
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+                }
+            });
 
             int participation = user.getParticipation();
 
