@@ -162,7 +162,34 @@
     <!-- Delete a box -->
     <string name="delete_dialog_text">Voulez-vous vraiment supprimer cette box?</string>
     <string name="delete_dialog_title">Supprimer la box?</string>
-    
+
+    <!-- aide -->
+    <string name="help">Aide</string>
+
+    <string name="explanation_box">Les box vous permettent de partager vos idées et de débattre sur celles-ci avec les autres étudiants.</string>
+    <string name="box_types">Types de box :</string>
+    <string name="box_textual">Textuelle :</string>
+    <string name="box_textual_explanation">Simple box de texte.</string>
+    <string name="box_sondage_oui_non">Sondage oui-non :</string>
+    <string name="box_oui_non_explanation">sondage comportant 2 réponses possibles, oui ou non.</string>
+    <string name="box_choix_multiples">Sondage choix multiples :</string>
+    <string name="box_choix_multiples_explanation">Sondage vous permettant de choisir un choix parmi une liste de choix.</string>
+
+    <string name="tags_préférés">Tags préférés :</string>
+    <string name="tags_de_type">Tags de type :</string>
+    <string name="tags_facultatifs">Tags facultatifs :</string>
+    <string name="explanation_tags_préférés">Les tags préférés sont des tags vous permettant de personnaliser votre expérience utilisateur étant donné qu\'ils sont choisis par défaut dans les filtres lors de l\'ouverture de l\'application.</string>
+    <string name="explanation_tags_de_type">Les tags de type sont des tags identifiant le conseil visé lors de la création de la box. Ils apparaissent en orange sur celles-ci.</string>
+    <string name="explanation_tags_facultatifs">Les tags facultatifs sont des tags permettant de spécifir le contenu d\'une box. Ils sont utiles lors d\'une recherche sur un sujet précis. Ces tags sont affichés en bleu.</string>
+
+    <string name="explanation_populars">Les populaires reprennent les 10 box les plus aimées pour le conseil choisi. Ces box seront discutées lors des réunions de ce conseil.</string>
+
+    <string name="explanation_archives">Les archives vous permettent de visualiser les précédentes réponses données aux box discutées lors des réunions du conseil choisi. Une archive peut avoir été acceptée, refusée ou mise en suspens par ce conseil.</string>
+
+    <string name="explanation_subscriptions">La page des abonnements reprends 2 onglets. Le premier affiche les box postées par les personnes auxquelles vous êtes abonnés. Le deuxième affiche la liste des personnes auxquelles vous êtes abonnés.</string>
+
+    <string name="explanation_interests">Pour vous intéresser à une box il suffit de cliquer sur la cloche jaune en dessous de celle-ci. La page "Mes intérêts" vous permettra ensuite de revenir sur toutes les box auxquelles vous vous êtes intéressés. De plus, vous serez notifié lorsque l\'une de ces box sera archivées.</string>
+
     <!-- user settings menu -->
     <string name="change_password">Modifier le mot de passe</string>
     <string name="actual_password">Mot de passe actuel :</string>
@@ -290,5 +317,6 @@
     <string name="error_tag_change">Erreur lors du changement de tag préférés.</string>
     <string name="deconnexion">Déconnexion</string>
     <string name="error_report">Erreur lors du signalement.</string>
+    <string name="error_empty_new_password">Le champ nouveau mot de passe est vide.</string>
 
 </resources>

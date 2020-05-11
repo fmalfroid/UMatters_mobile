@@ -302,21 +302,31 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
 
                                             if (new_password.getText().toString().equals(confirm_new_password.getText().toString())){
 
-                                                JSONObject change_mdp_json = new JSONObject();
-
-                                                try {
-
-                                                    change_mdp_json.put("email", currentUser.getEmail());
-                                                    change_mdp_json.put("oldpassword", actual_password.getText().toString());
-                                                    change_mdp_json.put("newpassword", new_password.getText().toString());
-
-                                                    ChangePwd change_pwd = new ChangePwd(context, dialog);
-                                                    change_pwd.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/updatepassword", String.valueOf(change_mdp_json));
-
-
-                                                } catch (JSONException e){
-                                                    e.printStackTrace();
+                                                if (new_password.getText().toString().trim().length()==0){
+                                                    Toast.makeText(context, R.string.error_empty_new_password, Toast.LENGTH_SHORT).show();
                                                 }
+                                                else if (new_password.getText().toString().length() < 6){
+                                                    Toast.makeText(context, R.string.error_min_length_password, Toast.LENGTH_SHORT).show();
+
+                                                } else {
+
+                                                    JSONObject change_mdp_json = new JSONObject();
+
+                                                    try {
+
+                                                        change_mdp_json.put("email", currentUser.getEmail());
+                                                        change_mdp_json.put("oldpassword", actual_password.getText().toString());
+                                                        change_mdp_json.put("newpassword", new_password.getText().toString());
+
+                                                        ChangePwd change_pwd = new ChangePwd(context, dialog);
+                                                        change_pwd.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/updatepassword", String.valueOf(change_mdp_json));
+
+
+                                                    } catch (JSONException e){
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+
 
                                             } else {
                                                 Toast.makeText(context, "Le nouveau mot de passe et sa confirmation sont différents !", Toast.LENGTH_SHORT).show();

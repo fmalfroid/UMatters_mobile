@@ -9,16 +9,21 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class NotificationsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -108,7 +113,117 @@ public class NotificationsActivity extends AppCompatActivity implements Navigati
             return true;
         }
 
+        if (id==R.id.action_help){
+            openHelpDialog(NotificationsActivity.this);
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    public void openHelpDialog(Context context){
+
+        //open info dialog
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        View mView = inflater.inflate(R.layout.dialog_help, null);
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+
+        Button btn_cancel = mView.findViewById(R.id.btn_cancel);
+
+        ToggleButton box = mView.findViewById(R.id.btn_box);
+        ToggleButton tags = mView.findViewById(R.id.btn_tags);
+        ToggleButton populars = mView.findViewById(R.id.btn_populars);
+        ToggleButton archives = mView.findViewById(R.id.btn_archives);
+        ToggleButton subscriptions = mView.findViewById(R.id.btn_subscriptions);
+        ToggleButton interests = mView.findViewById(R.id.btn_interests);
+
+        final LinearLayout layout_box = mView.findViewById(R.id.layout_box);
+        final LinearLayout layout_tags = mView.findViewById(R.id.layout_tags);
+        final LinearLayout layout_populars = mView.findViewById(R.id.layout_populars);
+        final LinearLayout layout_archives = mView.findViewById(R.id.layout_archives);
+        final LinearLayout layout_subscriptions = mView.findViewById(R.id.layout_subscriptions);
+        final LinearLayout layout_interests = mView.findViewById(R.id.layout_interests);
+
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layout_box.getVisibility()==View.VISIBLE){
+                    layout_box.setVisibility(View.GONE);
+                } else {
+                    layout_box.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        tags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layout_tags.getVisibility()==View.VISIBLE){
+                    layout_tags.setVisibility(View.GONE);
+                } else {
+                    layout_tags.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        populars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layout_populars.getVisibility()==View.VISIBLE){
+                    layout_populars.setVisibility(View.GONE);
+                } else {
+                    layout_populars.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        archives.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layout_archives.getVisibility()==View.VISIBLE){
+                    layout_archives.setVisibility(View.GONE);
+                } else {
+                    layout_archives.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        subscriptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layout_subscriptions.getVisibility()==View.VISIBLE){
+                    layout_subscriptions.setVisibility(View.GONE);
+                } else {
+                    layout_subscriptions.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        interests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layout_interests.getVisibility()==View.VISIBLE){
+                    layout_interests.setVisibility(View.GONE);
+                } else {
+                    layout_interests.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        dialog.show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

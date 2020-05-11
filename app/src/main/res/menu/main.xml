@@ -7,4 +7,11 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_notifications"
         />
+
+    <item
+        android:id="@+id/action_help"
+        android:title="Aide"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_help"
+        />
 </menu>
