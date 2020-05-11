@@ -6,12 +6,14 @@ public class Notif {
     private String hour;
     private String date;
     private User LinkUser;
+    private boolean seen;
 
-    public Notif(String text, String hour, String date, User linkUser) {
+    public Notif(String text, String hour, String date, User linkUser, boolean seen) {
         this.text = text;
         this.hour = hour;
         this.date = date;
-        LinkUser = linkUser;
+        this.LinkUser = linkUser;
+        this.seen = seen;
     }
 
     public String getText() {

@@ -135,7 +135,8 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                             DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                             String date = dateFormatter.format(dateNF);
                             String time = timeFormatter.format(dateNF);
-                            Notif notification = new Notif(text, time, date, null);
+                            boolean seen = notif.getBoolean("vu");
+                            Notif notification = new Notif(text, time, date, null, seen);
                             notifications.add(notification);
                         }
                     }
