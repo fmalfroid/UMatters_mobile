@@ -510,6 +510,9 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                         Intent runUserProfile = new Intent(context, UsersProfileActivity.class);
                         runUserProfile.putExtra("user_email", box.getCreator().getId());
                         context.startActivity(runUserProfile);
+                    } else {
+                        Intent runProfile = new Intent(context, ProfileActivity.class);
+                        context.startActivity(runProfile);
                     }
 
                 }

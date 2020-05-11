@@ -152,9 +152,9 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
 
         public void display(final Archive archive) {
 
-            CurrentUser user = CurrentUser.getCurrentUser();
+            final CurrentUser user = CurrentUser.getCurrentUser();
 
-            Box box = archive.getBox();
+            final Box box = archive.getBox();
 
             //Remove all views because it launch this function when the box is too far in the scroll so it duplicates
             tagList.removeAllViews();
@@ -201,6 +201,21 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
 
             //Nom de l'utilisateur ayant créé la box
             name.setText(box.getName());
+
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!box.getCreator().getId().equals(user.getEmail())) {
+                        Intent runUserProfile = new Intent(context, UsersProfileActivity.class);
+                        runUserProfile.putExtra("user_email", box.getCreator().getId());
+                        context.startActivity(runUserProfile);
+                    } else {
+                        Intent runProfile = new Intent(context, ProfileActivity.class);
+                        context.startActivity(runProfile);
+                    }
+
+                }
+            });
 
             //Date à laquelle la box a été crée
             date.setText(box.getDate());
