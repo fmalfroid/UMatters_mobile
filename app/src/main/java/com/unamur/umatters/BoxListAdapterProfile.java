@@ -78,6 +78,16 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
+    public void setMessageNoBox(Context context) {
+        TextView txt_no_sub = ((Activity) context).findViewById(R.id.txt_no_box);
+        System.out.println(boxList.size());
+        if (boxList.size()>0) {
+            txt_no_sub.setVisibility(View.GONE);
+        } else {
+            txt_no_sub.setVisibility(View.VISIBLE);
+        }
+    }
+
     public void showShareDialog(Context context, String id_box) {
         ShareLinkContent content = new ShareLinkContent.Builder()
             .setContentUrl(Uri.parse("http://mdl-std01.info.fundp.ac.be/box?id=" + id_box))

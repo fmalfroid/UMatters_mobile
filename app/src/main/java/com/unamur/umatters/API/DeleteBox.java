@@ -131,6 +131,8 @@ public class DeleteBox extends AsyncTask<String, String, String> {
                 if (success) {
                     Toast.makeText(context, R.string.success_delete_box, Toast.LENGTH_SHORT).show();
                     boxListAdapterProfile.deleteBox(id_box);
+
+                    boxListAdapterProfile.setMessageNoBox(context);
                 }
                 //Delete failed
                 else {

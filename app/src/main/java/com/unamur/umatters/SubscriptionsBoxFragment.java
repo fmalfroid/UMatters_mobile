@@ -1,5 +1,6 @@
 package com.unamur.umatters;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,8 @@ public class SubscriptionsBoxFragment extends Fragment {
 
     private BoxListAdapter adapter;
     private TextView msg_no_sub;
+    private TextView msg_no_box;
+    private Context context;
 
     public SubscriptionsBoxFragment() {
         // Required empty public constructor
@@ -26,6 +29,9 @@ public class SubscriptionsBoxFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_subscriptions_box, container, false);
         msg_no_sub = v.findViewById(R.id.txt_no_sub);
+        msg_no_box = v.findViewById(R.id.txt_no_box);
+
+        context = v.getContext();
 
         //test data (j'ai juste affiché l'ensemble des box que l'on a)
         adapter = new BoxListAdapter();
@@ -45,10 +51,11 @@ public class SubscriptionsBoxFragment extends Fragment {
             msg_no_sub.setVisibility(View.GONE);
         } else {
             msg_no_sub.setVisibility(View.VISIBLE);
+            msg_no_box.setVisibility(View.GONE);
         }
 
         for (String email : user.getSubscriptions()) {
-            GetAllBox getBox = new GetAllBox(adapter);
+            GetAllBox getBox = new GetAllBox(adapter, context);
             getBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + email);
         }
 
