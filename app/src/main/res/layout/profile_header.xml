@@ -263,4 +263,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/txt_no_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="15dp"
+        android:text="@string/no_box"
+        android:textAlignment="center"
+        android:textColor="@color/darkDarkGrey"
+        android:background="@color/lightLightGrey"
+        android:textSize="18sp" />
+
 </LinearLayout>

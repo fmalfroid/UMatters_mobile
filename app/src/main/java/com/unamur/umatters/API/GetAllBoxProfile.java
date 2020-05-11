@@ -1,12 +1,18 @@
 package com.unamur.umatters.API;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import com.unamur.umatters.Box;
 import com.unamur.umatters.BoxListAdapter;
 import com.unamur.umatters.BoxListAdapterProfile;
 import com.unamur.umatters.Choice;
 import com.unamur.umatters.CurrentUser;
+import com.unamur.umatters.R;
 import com.unamur.umatters.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +37,7 @@ import java.util.List;
 public class GetAllBoxProfile extends AsyncTask<String, String, String> {
 
     private BoxListAdapterProfile adapter = null;
+    private Context context = null;
 
 
     //public Box testbox1 = new Box("1", (List<Choice>) Arrays.asList(new Choice("3e étage", new ArrayList<String>()), new Choice("4e étage", new ArrayList<String>())), new User("1", "Patrick Heymans", "Académique"), "28-02-2020", new ArrayList<String>(), (List<String>) Arrays.asList("#Info", "#Matériel"), "Où ajouter une machine à café?", "choix_multiple", "");
@@ -42,8 +49,9 @@ public class GetAllBoxProfile extends AsyncTask<String, String, String> {
         //set context variables if required
     }
 
-    public GetAllBoxProfile(BoxListAdapterProfile adapter) {
+    public GetAllBoxProfile(BoxListAdapterProfile adapter, Context context) {
         this.adapter = adapter;
+        this.context = context;
     }
 
     protected void onPreExecute() {
@@ -113,6 +121,12 @@ public class GetAllBoxProfile extends AsyncTask<String, String, String> {
                 //Get all box created by the current user
                 Box box = createBoxFromJson(data.getJSONObject(i));
                 adapter.addData(box);
+            }
+            TextView txt_no_sub = ((Activity) context).findViewById(R.id.txt_no_box);
+            if (data.length()>0) {
+                txt_no_sub.setVisibility(View.GONE);
+            } else {
+                txt_no_sub.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
             e.printStackTrace();

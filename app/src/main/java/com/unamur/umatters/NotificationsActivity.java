@@ -61,12 +61,22 @@ public class NotificationsActivity extends AppCompatActivity implements Navigati
         rv.setAdapter(adapter);
 
         //test data
-        Notif notif1 = new Notif("Le conseil d'administration de la faculté de droit c'est réuni. De nouvelles réponses sont disponibles.", "20:00", "28-02-2020", null);
-        Notif notif2 = new Notif("Patrick Heymans a répondu à votre commentaire.", "20:00", "28-02-2020", null);
+        //Notif notif1 = new Notif("Le conseil d'administration de la faculté de droit c'est réuni. De nouvelles réponses sont disponibles.", "20:00", "28-02-2020", null);
+        //Notif notif2 = new Notif("Patrick Heymans a répondu à votre commentaire.", "20:00", "28-02-2020", null);
 
         //test data
-        adapter.addData(notif1);
-        adapter.addData(notif2);
+        for (Notif notif : CurrentUser.getCurrentUser().getNotifications()) {
+            adapter.addData(notif);
+        }
+        //adapter.addData(notif1);
+        //adapter.addData(notif2);
+
+        TextView txt_no_notif = findViewById(R.id.txt_no_notif);
+        if (CurrentUser.getCurrentUser().getNotifications().size()>0) {
+            txt_no_notif.setVisibility(View.GONE);
+        } else {
+            txt_no_notif.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

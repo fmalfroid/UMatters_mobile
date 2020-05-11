@@ -17,7 +17,7 @@ public class CurrentUser {
     private String password;
     private int participation;
     private ArrayList<String> box;
-    private JSONObject notifications;
+    private ArrayList<Notif> notifications;
     private JSONObject sanctions;
     private ArrayList<String> interest;
     private ArrayList<String> subscriptions;
@@ -34,7 +34,7 @@ public class CurrentUser {
         return currentUser;
     }
 
-    public CurrentUser(String email, String firstname, String lastname, String role, Bitmap image, String faculty, String password, int participation, ArrayList<String> box, JSONObject notifications, JSONObject sanctions, ArrayList<String> interest, ArrayList<String> subscriptions) {
+    public CurrentUser(String email, String firstname, String lastname, String role, Bitmap image, String faculty, String password, int participation, ArrayList<String> box, ArrayList<Notif> notifications, JSONObject sanctions, ArrayList<String> interest, ArrayList<String> subscriptions) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -106,7 +106,7 @@ public class CurrentUser {
         return participation;
     }
 
-    public JSONObject getNotifications() {
+    public ArrayList<Notif> getNotifications() {
         return notifications;
     }
 
@@ -150,7 +150,7 @@ public class CurrentUser {
         this.lastname = lastname;
     }
 
-    public void setNotifications(JSONObject notif) {
+    public void setNotifications(ArrayList<Notif> notif) {
         this.notifications = notif;
     }
 

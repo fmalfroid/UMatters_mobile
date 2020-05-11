@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.unamur.umatters.CurrentUser;
 import com.unamur.umatters.MainActivity;
+import com.unamur.umatters.Notif;
 import com.unamur.umatters.TagsSetupActivity;
 
 import org.json.JSONArray;
@@ -24,7 +25,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SetCurrentUser extends AsyncTask<String, String, String> {
 
@@ -115,12 +120,26 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
                             }
                         }
                     }
-                    JSONObject notifications;
-                    if (!jsonObj.isNull("notif")) {
-                        notifications = jsonObj.getJSONObject("notif");
-                    } else {
-                        notifications = new JSONObject();
+
+                    //Date
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+
+                    ArrayList<Notif> notifications = new ArrayList<>();
+                    if (!jsonObj.isNull("notifs")) {
+                        JSONArray jArrayNotif = jsonObj.getJSONArray("notifs");
+                        for (int i=0; i<jArrayNotif.length(); i++) {
+                            JSONObject notif = jArrayNotif.getJSONObject(i);
+                            String text = notif.getString("info");
+                            Date dateNF = dateFormat.parse(notif.getString("date"));
+                            DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+                            DateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                            String date = dateFormatter.format(dateNF);
+                            String time = timeFormatter.format(dateNF);
+                            Notif notification = new Notif(text, time, date, null);
+                            notifications.add(notification);
+                        }
                     }
+
                     JSONObject sanctions;
                     if (!jsonObj.isNull("sanctions")) {
                         sanctions = jsonObj.getJSONObject("sanctions");
@@ -192,6 +211,8 @@ public class SetCurrentUser extends AsyncTask<String, String, String> {
 
                 }
             } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }

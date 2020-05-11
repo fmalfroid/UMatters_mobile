@@ -243,6 +243,7 @@
 
     <!-- Activity notifications -->
     <string name="notifications">Notifications</string>
+    <string name="no_notif">Aucune notification</string>
 
     <!-- Level infos -->
     <string name="participation_level_title">Niveau de participation</string>
