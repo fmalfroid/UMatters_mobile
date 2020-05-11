@@ -373,7 +373,11 @@ public class BoxListAdapterProfile extends RecyclerView.Adapter<RecyclerView.Vie
             LinearLayout.LayoutParams lpb_params = (LinearLayout.LayoutParams) level_progress_bar.getLayoutParams();
             lpb_params.weight = level_progress;
             level_progress_bar.setLayoutParams(lpb_params);
-            img_picture.setImageBitmap(user.getImage());
+            if (user.getImage() == null) {
+                img_picture.setImageDrawable(context.getResources().getDrawable(R.drawable.umatters_default_image));
+            } else {
+                img_picture.setImageBitmap(user.getImage());
+            }
 
             img_picture.setOnClickListener(new View.OnClickListener() {
                 @Override
