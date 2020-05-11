@@ -2,6 +2,7 @@ package com.unamur.umatters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -201,6 +202,15 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }
             });
 
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent runUserProfile = new Intent(context, UsersProfileActivity.class);
+                    runUserProfile.putExtra("user_email", comment.getCreator().getId());
+                    context.startActivity(runUserProfile);
+                }
+            });
+
         }
     }
 
@@ -289,6 +299,15 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                     LikeReply likeReply = new LikeReply(context, RepliesListAdapter.this, comment.getId(),current_box.getId(), email);
                     likeReply.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/like", String.valueOf(likeComJson));
+                }
+            });
+
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent runUserProfile = new Intent(context, UsersProfileActivity.class);
+                    runUserProfile.putExtra("user_email", comment.getCreator().getId());
+                    context.startActivity(runUserProfile);
                 }
             });
 

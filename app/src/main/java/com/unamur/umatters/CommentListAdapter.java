@@ -609,6 +609,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     context.startActivity(runApp);
                 }
             });
+
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent runUserProfile = new Intent(context, UsersProfileActivity.class);
+                    runUserProfile.putExtra("user_email", comment.getCreator().getId());
+                    context.startActivity(runUserProfile);
+                }
+            });
         }
     }
 
