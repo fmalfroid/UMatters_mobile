@@ -3,6 +3,7 @@ package com.unamur.umatters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
@@ -27,6 +29,7 @@ import com.unamur.umatters.API.AddInterestComment;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxComment;
 import com.unamur.umatters.API.LikeCom;
+import com.unamur.umatters.API.Signalement;
 import com.unamur.umatters.API.SubToUser;
 
 import org.json.JSONException;
@@ -34,6 +37,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -507,6 +511,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private ToggleButton btn_favorite;
         private Button btn_reply;
         private LinearLayout ll_replies;
+        private TextView comment_menu;
 
         private Context context;
 
@@ -523,6 +528,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             btn_favorite = itemView.findViewById(R.id.button_favorite);
             btn_reply = itemView.findViewById(R.id.reply_button);
             ll_replies = itemView.findViewById(R.id.ll_replies);
+            comment_menu = itemView.findViewById(R.id.comment_menu);
 
             context = itemView.getContext();
 
@@ -618,6 +624,92 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     context.startActivity(runUserProfile);
                 }
             });
+
+            comment_menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //creating a popup menu
+                    final PopupMenu popup = new PopupMenu(context, comment_menu);
+                    popup.inflate(R.menu.comment_menu);
+
+                    final Menu menu = popup.getMenu();
+
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.btn_report:
+
+                                    //open report dialog
+                                    final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                                    LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+                                    View mView = inflater.inflate(R.layout.dialog_report_box, null);
+                                    mBuilder.setView(mView);
+                                    final AlertDialog dialog = mBuilder.create();
+
+                                    Button btn_cancel = mView.findViewById(R.id.btn_cancel);
+                                    Button btn_report = mView.findViewById(R.id.btn_report);
+                                    final EditText description = mView.findViewById(R.id.edtxt_description);
+
+                                    //init spinner
+                                    final SpinnerWrapContent report_type = mView.findViewById(R.id.spinner_report_type);
+                                    List<String> data = new LinkedList<>(Arrays.asList(context.getResources().getStringArray(R.array.report_types)));
+                                    SpinnerWrapContentAdapter adapter = new SpinnerWrapContentAdapter(context, data);
+                                    report_type.setAdapter(adapter);
+
+                                    //button cancel
+                                    btn_cancel.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    //button report
+                                    btn_report.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            if (description.length() < 10){
+                                                Toast.makeText(context, R.string.error_box_too_small_description, Toast.LENGTH_SHORT).show();
+                                            } else {
+
+                                                JSONObject signalementJson = new JSONObject();
+                                                try {
+
+                                                    signalementJson.put("id_box", current_box.getId());
+                                                    signalementJson.put("id_message", comment.getId());
+                                                    signalementJson.put("signale", comment.getCreator().getId());
+                                                    signalementJson.put("signaleur", user.getEmail());
+                                                    signalementJson.put("type", report_type.getSelectedItem().toString());
+                                                    signalementJson.put("explication", description.getText().toString());
+
+                                                } catch (JSONException e){
+                                                    e.printStackTrace();
+                                                }
+                                                Signalement task = new Signalement(context);
+                                                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/signalements", String.valueOf(signalementJson));
+
+                                                dialog.dismiss();
+                                            }
+
+                                        }
+                                    });
+
+                                    dialog.show();
+
+                                    return true;
+
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+
+                    popup.show();
+                }
+            });
+
         }
     }
 

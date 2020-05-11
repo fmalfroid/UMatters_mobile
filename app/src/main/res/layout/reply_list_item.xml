@@ -51,6 +51,16 @@
                 android:text="@string/date"
                 android:textSize="12sp" />
 
+            <TextView
+                android:id="@+id/comment_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:text="&#8942;"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textAppearance="?android:textAppearanceLarge" />
+
         </LinearLayout>
 
         <View
