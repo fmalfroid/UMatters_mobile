@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.Register;
 
 import org.json.JSONException;
@@ -105,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Register register = new Register(RegisterActivity.this, email, image);
-                    register.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/register", String.valueOf(registerJson));
+                    register.execute(APIKeys.getUrl() + "users/register", String.valueOf(registerJson));
                     //return to login activity
                     finish();
                 }

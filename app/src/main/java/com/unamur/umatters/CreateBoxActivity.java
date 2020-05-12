@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.AddBox;
 import com.unamur.umatters.API.Login;
 
@@ -231,7 +232,7 @@ public class CreateBoxActivity extends AppCompatActivity implements NavigationVi
                     System.out.println(createBoxJson);
 
                     AddBox addBox = new AddBox(CreateBoxActivity.this);
-                    addBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box", String.valueOf(createBoxJson));
+                    addBox.execute(APIKeys.getUrl() + "box", String.valueOf(createBoxJson));
 
                 }
             }

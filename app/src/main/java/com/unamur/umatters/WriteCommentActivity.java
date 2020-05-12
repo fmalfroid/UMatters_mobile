@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.AddComment;
 
 import org.json.JSONException;
@@ -95,7 +96,7 @@ public class WriteCommentActivity extends AppCompatActivity implements Navigatio
 
                 Log.d("WriteCommentActivity :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/messages with :" + jsonObj.toString());
                 AddComment task = new AddComment(WriteCommentActivity.this);
-                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages", String.valueOf(jsonObj));
+                task.execute(APIKeys.getUrl() + "messages", String.valueOf(jsonObj));
             }
         });
 

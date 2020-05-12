@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.SetPrefTags;
 
 import org.json.JSONArray;
@@ -129,7 +130,7 @@ public class TagsActivity extends AppCompatActivity implements NavigationView.On
                 //Save selected tags into BD
 
                 SetPrefTags setTags = new SetPrefTags(TagsActivity.this, alSelectedTags);
-                setTags.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/tagpref", String.valueOf(tagJson));
+                setTags.execute(APIKeys.getUrl() + "users/tagpref", String.valueOf(tagJson));
             }
         });
     }

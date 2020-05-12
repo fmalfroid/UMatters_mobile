@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetAllComOfBox;
 
 public class CommentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,7 +69,7 @@ public class CommentActivity extends AppCompatActivity implements NavigationView
         adapter.removeAllData();
         Log.d("Comment activity :", "GET http://mdl-std01.info.fundp.ac.be/api/v1/messages/" + currentBox.getId());
         GetAllComOfBox task = new GetAllComOfBox(adapter, currentBox.getId());
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages");
+        task.execute(APIKeys.getUrl() + "messages");
     }
 
     public void initRecyclerView(){

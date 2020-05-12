@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetAllSubscriptions;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class SubscriptionsListFragment extends Fragment {
 
         Log.d("SubListFragment :", "GET http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement/"+ email);
         GetAllSubscriptions task = new GetAllSubscriptions(adapter, msg_no_sub);
-        String url = "http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement/" + email;
+        String url = APIKeys.getUrl() + "users/abonnement/" + email;
         task.execute(url);
 
         return v;

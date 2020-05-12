@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.ReplyComment;
 
 import org.json.JSONException;
@@ -90,7 +91,7 @@ public class ReplyActivity extends AppCompatActivity implements NavigationView.O
                 }
 
                 ReplyComment task = new ReplyComment(ReplyActivity.this);
-                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/repondre", String.valueOf(jsonObj));
+                task.execute(APIKeys.getUrl() + "messages/repondre", String.valueOf(jsonObj));
             }
         });
 

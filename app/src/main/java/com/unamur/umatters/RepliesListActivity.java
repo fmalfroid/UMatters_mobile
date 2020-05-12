@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetAllComOfBox;
 import com.unamur.umatters.API.GetAllRepliesOfCom;
 
@@ -66,7 +67,7 @@ public class RepliesListActivity extends AppCompatActivity implements Navigation
         super.onResume();
         currentComment.getReplies().clear();
         GetAllRepliesOfCom task = new GetAllRepliesOfCom(currentComment.getReplies(), currentBox.getId(), currentComment.getId(), adapter);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/repondre");
+        task.execute(APIKeys.getUrl() + "messages/repondre");
     }
 
     public void initRecyclerView(){

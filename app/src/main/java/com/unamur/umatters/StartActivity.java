@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.Login;
 import com.unamur.umatters.API.RememberedLogin;
 
@@ -73,6 +74,6 @@ public class StartActivity extends Activity {
         user.setPassword(password);
 
         RememberedLogin login = new RememberedLogin(StartActivity.this);
-        login.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/connect", String.valueOf(loginJson));
+        login.execute(APIKeys.getUrl() + "users/connect", String.valueOf(loginJson));
     }
 }

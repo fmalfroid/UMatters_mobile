@@ -156,7 +156,7 @@ public class GetAllComOfBox extends AsyncTask<String, String, String> {
             ArrayList<Comment> replies = new ArrayList<>();
 
             GetAllRepliesOfCom getReplies = new GetAllRepliesOfCom(replies, id_box, id_message, adapter);
-            getReplies.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/repondre");
+            getReplies.execute(APIKeys.getUrl() +  "messages/repondre");
 
             //create comment object
             comment = new Comment(id_message, creator, date, content, likes, replies);

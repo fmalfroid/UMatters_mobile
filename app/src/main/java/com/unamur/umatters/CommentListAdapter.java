@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.AddInterest;
 import com.unamur.umatters.API.AddInterestComment;
 import com.unamur.umatters.API.LikeBox;
@@ -263,7 +264,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     LikeBoxComment likeBox = new LikeBoxComment(context, CommentListAdapter.this, box.getId(), email);
-                    likeBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
+                    likeBox.execute(APIKeys.getUrl() + "box/like", String.valueOf(likeBoxJson));
                 }
             });
             //Nombre de likes du com
@@ -296,7 +297,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     AddInterestComment addInterest = new AddInterestComment(context, CommentListAdapter.this, box.getId(), email);
-                    addInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet", String.valueOf(interestBoxJson));
+                    addInterest.execute(APIKeys.getUrl() + "users/box/interet", String.valueOf(interestBoxJson));
                 }
             });
             //box menu
@@ -340,7 +341,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                     }
 
                                     SubToUser task = new SubToUser(context, menu, menu.findItem(R.id.btn_menu_subscribe), menu.findItem(R.id.btn_menu_unsubscribe));
-                                    task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson));
+                                    task.execute(APIKeys.getUrl() + "users/abonnement", String.valueOf(subToUserJson));
 
                                     user.getSubscriptions().add(box.getCreator().getId());
 
@@ -359,7 +360,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                     }
 
                                     SubToUser task2 = new SubToUser(context, menu, menu.findItem(R.id.btn_menu_unsubscribe), menu.findItem(R.id.btn_menu_subscribe));
-                                    task2.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson2));
+                                    task2.execute(APIKeys.getUrl() + "users/abonnement", String.valueOf(subToUserJson2));
 
                                     user.getSubscriptions().remove(box.getCreator().getId());
 
@@ -592,7 +593,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     LikeCom likeCom = new LikeCom(context, CommentListAdapter.this, comment.getId(),current_box.getId(), email);
-                    likeCom.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/like", String.valueOf(likeComJson));
+                    likeCom.execute(APIKeys.getUrl() + "messages/like", String.valueOf(likeComJson));
                 }
             });
 
@@ -688,7 +689,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                                     e.printStackTrace();
                                                 }
                                                 Signalement task = new Signalement(context);
-                                                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/signalements", String.valueOf(signalementJson));
+                                                task.execute(APIKeys.getUrl() + "signalements", String.valueOf(signalementJson));
 
                                                 dialog.dismiss();
                                             }

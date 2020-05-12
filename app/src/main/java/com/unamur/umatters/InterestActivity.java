@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetAllBox;
 
 public class InterestActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,7 +71,7 @@ public class InterestActivity extends AppCompatActivity implements NavigationVie
         super.onResume();
         adapter.removeAllData();
         GetAllBox getInterest = new GetAllBox(adapter, InterestActivity.this);
-        getInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet/" + CurrentUser.getCurrentUser().getEmail());
+        getInterest.execute(APIKeys.getUrl() + "users/box/interet/" + CurrentUser.getCurrentUser().getEmail());
     }
 
     @Override

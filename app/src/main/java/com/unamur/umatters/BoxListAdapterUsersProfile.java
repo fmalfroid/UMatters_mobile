@@ -32,6 +32,7 @@ import android.widget.ToggleButton;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.LikeBox;
 import com.unamur.umatters.API.LikeBoxProfile;
@@ -67,7 +68,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
     public void showShareDialog(Context context, String id_box) {
         ShareLinkContent content = new ShareLinkContent.Builder()
-            .setContentUrl(Uri.parse("http://mdl-std01.info.fundp.ac.be/box?id=" + id_box))
+            .setContentUrl(Uri.parse(APIKeys.getWebUrl() + "box?id=" + id_box))
             .build();
 
         ShareDialog shareDialog = new ShareDialog((Activity) context);
@@ -252,7 +253,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                         e.printStackTrace();
                     }
                     SubToUser task = new SubToUser(context, BoxListAdapterUsersProfile.this);
-                    task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson));
+                    task.execute(APIKeys.getUrl() + "users/abonnement", String.valueOf(subToUserJson));
 
                     if (user.getSubscriptions().contains(user_profile.getId())) {
                         user.getSubscriptions().remove(user_profile.getId());
@@ -415,7 +416,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                     }
 
                     LikeBoxProfile likeBoxProfile = new LikeBoxProfile(context, BoxListAdapterUsersProfile.this, box.getId(), email);
-                    likeBoxProfile.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
+                    likeBoxProfile.execute(APIKeys.getUrl() + "box/like", String.valueOf(likeBoxJson));
 
                 }
             });
@@ -501,7 +502,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                                                     e.printStackTrace();
                                                 }
                                                 Signalement task = new Signalement(context);
-                                                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/signalements", String.valueOf(signalementJson));
+                                                task.execute(APIKeys.getUrl() + "signalements", String.valueOf(signalementJson));
 
                                                 dialog.dismiss();
 
@@ -647,7 +648,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
 
                             Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                             VoteChoice task = new VoteChoice(context);
-                            task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                            task.execute(APIKeys.getUrl() + "box/voter", String.valueOf(voteJson));
 
                         }
                     });
@@ -747,7 +748,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                         //Vote oui (garde le non pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le non)
                         Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                         VoteChoice task = new VoteChoice(context);
-                        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                        task.execute(APIKeys.getUrl() + "box/voter", String.valueOf(voteJson));
                     }
                 });
                 btn_non.setOnClickListener(new View.OnClickListener() {
@@ -767,7 +768,7 @@ public class BoxListAdapterUsersProfile extends RecyclerView.Adapter<RecyclerVie
                         //Vote non (garde le oui pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le oui)
                         Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                         VoteChoice task = new VoteChoice(context);
-                        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                        task.execute(APIKeys.getUrl() + "box/voter", String.valueOf(voteJson));
                     }
                 });
 

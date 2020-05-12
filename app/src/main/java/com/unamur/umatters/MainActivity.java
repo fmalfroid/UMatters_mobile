@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.ChangePwd;
 import com.unamur.umatters.API.FilterBox;
 import com.unamur.umatters.API.GetAllBox;
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         FilterBox task = new FilterBox( MainActivity.this, adapter, search_text);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/filtrer", String.valueOf(filter_jobject));
+        task.execute(APIKeys.getUrl() + "box/filtrer", String.valueOf(filter_jobject));
 
         Log.d("MainActivity box ", filter_jobject.toString());
     }

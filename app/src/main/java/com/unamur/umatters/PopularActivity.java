@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetPopular;
 
 import org.json.JSONArray;
@@ -104,7 +105,7 @@ public class PopularActivity extends AppCompatActivity implements NavigationView
 
         boxListAdapter.removeAllData();
         GetPopular task = new GetPopular(boxListAdapter, PopularActivity.this);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/filtrer", String.valueOf(getPopularJson));
+        task.execute(APIKeys.getUrl() + "box/filtrer", String.valueOf(getPopularJson));
     }
 
     @Override

@@ -139,7 +139,7 @@ public class Register extends AsyncTask<String, String, String> {
                     defeultImgJson.put("email", email);
                     defeultImgJson.put("img", image);
                     CallAPIPost setDefaultImage = new CallAPIPost();
-                    setDefaultImage.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/image", String.valueOf(defeultImgJson));
+                    setDefaultImage.execute(APIKeys.getUrl() + "users/image", String.valueOf(defeultImgJson));
                 }
                 //Login failed
                 else {

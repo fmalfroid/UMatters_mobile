@@ -12,6 +12,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.Login;
 
 import org.json.JSONException;
@@ -79,6 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         user.setPassword(password);
 
         Login login = new Login(LoginActivity.this);
-        login.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/connect", String.valueOf(loginJson));
+        login.execute(APIKeys.getUrl() + "users/connect", String.valueOf(loginJson));
     }
 }

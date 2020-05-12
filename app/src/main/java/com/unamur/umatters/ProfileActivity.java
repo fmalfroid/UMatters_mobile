@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.GetAllBox;
 import com.unamur.umatters.API.GetAllBoxProfile;
@@ -76,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         });
 
         GetAllBoxProfile task = new GetAllBoxProfile(adapter, ProfileActivity.this);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + CurrentUser.getCurrentUser().getEmail());
+        task.execute(APIKeys.getUrl() + "box/user/" + CurrentUser.getCurrentUser().getEmail());
 
     }
 

@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetArchives;
 
 import org.json.JSONException;
@@ -419,21 +420,21 @@ public class ArchivesActivity extends AppCompatActivity implements NavigationVie
         switch (status){
             case "Accepté":
                 GetArchives task = new GetArchives(ArchivesActivity.this, ArchivesAcceptedFragment.adapter);
-                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                task.execute(APIKeys.getUrl() + "archives/filtrer", String.valueOf(archives_jsonObj));
                 ArchivesPendingFragment.adapter.clearArchivesList();
                 ArchivesRefusedFragment.adapter.clearArchivesList();
 
                 break;
             case "En suspend":
                 GetArchives task2 = new GetArchives(ArchivesActivity.this, ArchivesPendingFragment.adapter);
-                task2.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                task2.execute(APIKeys.getUrl() + "archives/filtrer", String.valueOf(archives_jsonObj));
                 ArchivesAcceptedFragment.adapter.clearArchivesList();
                 ArchivesRefusedFragment.adapter.clearArchivesList();
 
                 break;
             case "Refusé":
                 GetArchives task3 = new GetArchives(ArchivesActivity.this, ArchivesRefusedFragment.adapter);
-                task3.execute("http://mdl-std01.info.fundp.ac.be/api/v1/archives/filtrer", String.valueOf(archives_jsonObj));
+                task3.execute(APIKeys.getUrl() + "archives/filtrer", String.valueOf(archives_jsonObj));
                 ArchivesAcceptedFragment.adapter.clearArchivesList();
                 ArchivesPendingFragment.adapter.clearArchivesList();
 

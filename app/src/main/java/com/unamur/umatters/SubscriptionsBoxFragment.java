@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetAllBox;
 
 
@@ -56,7 +57,7 @@ public class SubscriptionsBoxFragment extends Fragment {
 
         for (String email : user.getSubscriptions()) {
             GetAllBox getBox = new GetAllBox(adapter, context);
-            getBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + email);
+            getBox.execute(APIKeys.getUrl() + "box/user/" + email);
         }
 
     }

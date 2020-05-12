@@ -135,7 +135,7 @@ public class RememberedLogin extends AsyncTask<String, String, String> {
                     String email = user.getEmail();
 
                     SetCurrentUser setUser = new SetCurrentUser(context);
-                    setUser.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/" + email);
+                    setUser.execute(APIKeys.getUrl() + "users/" + email);
                 }
                 //Login failed
                 else {

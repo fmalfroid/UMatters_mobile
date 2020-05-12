@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.GetUser;
 import com.unamur.umatters.API.GetUserAllBox;
 
@@ -60,11 +61,11 @@ public class UsersProfileActivity extends AppCompatActivity implements Navigatio
 
         //Get user info
         GetUser task = new GetUser(UsersProfileActivity.this, adapter);
-        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/" + user_email);
+        task.execute(APIKeys.getUrl() + "users/" + user_email);
 
         //Get all box from user
         GetUserAllBox task2 = new GetUserAllBox(UsersProfileActivity.this, adapter);
-        task2.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/user/" + user_email);
+        task2.execute(APIKeys.getUrl() + "box/user/" + user_email);
     }
 
     @Override

@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.LikeReply;
 import com.unamur.umatters.API.Signalement;
 
@@ -211,7 +213,7 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     LikeReply likeReply = new LikeReply(context, RepliesListAdapter.this, comment.getId(),current_box.getId(), email);
-                    likeReply.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/like", String.valueOf(likeComJson));
+                    likeReply.execute(APIKeys.getUrl() + "messages/like", String.valueOf(likeComJson));
                 }
             });
 
@@ -287,7 +289,7 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                                     e.printStackTrace();
                                                 }
                                                 Signalement task = new Signalement(context);
-                                                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/signalements", String.valueOf(signalementJson));
+                                                task.execute(APIKeys.getUrl() + "signalements", String.valueOf(signalementJson));
 
                                                 dialog.dismiss();
                                             }
@@ -398,7 +400,7 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     LikeReply likeReply = new LikeReply(context, RepliesListAdapter.this, comment.getId(),current_box.getId(), email);
-                    likeReply.execute("http://mdl-std01.info.fundp.ac.be/api/v1/messages/like", String.valueOf(likeComJson));
+                    likeReply.execute(APIKeys.getUrl() + "messages/like", String.valueOf(likeComJson));
                 }
             });
 
@@ -474,7 +476,7 @@ public class RepliesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                                                     e.printStackTrace();
                                                 }
                                                 Signalement task = new Signalement(context);
-                                                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/signalements", String.valueOf(signalementJson));
+                                                task.execute(APIKeys.getUrl() + "signalements", String.valueOf(signalementJson));
 
                                                 dialog.dismiss();
                                             }

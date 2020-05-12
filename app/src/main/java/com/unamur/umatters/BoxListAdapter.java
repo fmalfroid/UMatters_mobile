@@ -32,6 +32,7 @@ import android.widget.ToggleButton;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.AddInterest;
 import com.unamur.umatters.API.DeleteBox;
 import com.unamur.umatters.API.LikeBox;
@@ -70,7 +71,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
     public void showShareDialog(Context context, String id_box) {
         ShareLinkContent content = new ShareLinkContent.Builder()
-            .setContentUrl(Uri.parse("http://mdl-std01.info.fundp.ac.be/box?id=" + id_box))
+            .setContentUrl(Uri.parse(APIKeys.getWebUrl() + "box?id=" + id_box))
             .build();
 
         ShareDialog shareDialog = new ShareDialog((Activity) context);
@@ -288,7 +289,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     }
 
                     LikeBox likeBox = new LikeBox(context, BoxListAdapter.this, box.getId(), email);
-                    likeBox.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/like", String.valueOf(likeBoxJson));
+                    likeBox.execute(APIKeys.getUrl() + "box/like", String.valueOf(likeBoxJson));
                 }
             });
             //Nombre de likes de la box
@@ -321,7 +322,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                     }
 
                     AddInterest addInterest = new AddInterest(context, BoxListAdapter.this, box.getId(), email);
-                    addInterest.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/box/interet", String.valueOf(interestBoxJson));
+                    addInterest.execute(APIKeys.getUrl() + "users/box/interet", String.valueOf(interestBoxJson));
                 }
             });
 
@@ -388,7 +389,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                                     }
 
                                     SubToUser task = new SubToUser(context, menu, menu.findItem(R.id.btn_menu_subscribe), menu.findItem(R.id.btn_menu_unsubscribe));
-                                    task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson));
+                                    task.execute(APIKeys.getUrl() + "users/abonnement", String.valueOf(subToUserJson));
 
                                     user.getSubscriptions().add(box.getCreator().getId());
 
@@ -407,7 +408,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                                     }
 
                                     SubToUser task2 = new SubToUser(context, menu, menu.findItem(R.id.btn_menu_unsubscribe), menu.findItem(R.id.btn_menu_subscribe));
-                                    task2.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson2));
+                                    task2.execute(APIKeys.getUrl() + "users/abonnement", String.valueOf(subToUserJson2));
 
                                     user.getSubscriptions().remove(box.getCreator().getId());
 
@@ -462,7 +463,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                                                     e.printStackTrace();
                                                 }
                                                 Signalement task = new Signalement(context);
-                                                task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/signalements", String.valueOf(signalementJson));
+                                                task.execute(APIKeys.getUrl() + "signalements", String.valueOf(signalementJson));
 
                                                 dialog.dismiss();
                                             }
@@ -651,7 +652,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
 
                             Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                             VoteChoice task = new VoteChoice(context);
-                            task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                            task.execute(APIKeys.getUrl() + "box/voter", String.valueOf(voteJson));
 
                         }
                     });
@@ -750,7 +751,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                         //Vote oui (garde le non pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le non)
                         Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                         VoteChoice task = new VoteChoice(context);
-                        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                        task.execute(APIKeys.getUrl() + "box/voter", String.valueOf(voteJson));
                     }
                 });
                 btn_non.setOnClickListener(new View.OnClickListener() {
@@ -770,7 +771,7 @@ public class BoxListAdapter extends RecyclerView.Adapter<BoxListAdapter.BoxViewH
                         //Vote non (garde le oui pour l'instant car l'api est mal faite, faudra attendre un changement dans l'api pour enlever le oui)
                         Log.d("BoxListAdapter :", "POST http://mdl-std01.info.fundp.ac.be/api/v1/box/voter with json : " + voteJson.toString());
                         VoteChoice task = new VoteChoice(context);
-                        task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/box/voter", String.valueOf(voteJson));
+                        task.execute(APIKeys.getUrl() + "box/voter", String.valueOf(voteJson));
                     }
                 });
 

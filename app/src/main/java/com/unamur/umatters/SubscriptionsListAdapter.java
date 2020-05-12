@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.unamur.umatters.API.APIKeys;
 import com.unamur.umatters.API.SubToUser;
 
 import org.json.JSONException;
@@ -79,7 +80,11 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
 
             final SubscriptionsPerson current_person = all_subscriptions_person.get(position);
 
-            image.setImageBitmap(current_person.getImage());
+            if (current_person.getImage() == null) {
+                image.setImageDrawable(context.getResources().getDrawable(R.drawable.umatters_default_image));
+            } else {
+                image.setImageBitmap(current_person.getImage());
+            }
 
             String full_name = current_person.getFirstname() + " " + current_person.getSurname();
             name.setText(full_name);
@@ -119,7 +124,7 @@ public class SubscriptionsListAdapter extends ArrayAdapter<String> {
                     }
 
                     SubToUser task = new SubToUser(context, SubscriptionsListAdapter.this);
-                    task.execute("http://mdl-std01.info.fundp.ac.be/api/v1/users/abonnement", String.valueOf(subToUserJson));
+                    task.execute(APIKeys.getUrl() + "users/abonnement", String.valueOf(subToUserJson));
 
                     //Adapter
                     if (user.getSubscriptions().contains(current_person.getEmail())) {
