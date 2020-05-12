@@ -121,7 +121,7 @@ public class VoteChoice extends AsyncTask<String, String, String> {
 
                 //Delete succeed
                 if (success) {
-                    Toast.makeText(context, "success vote", Toast.LENGTH_SHORT).show();
+                    System.out.println("Succès du vote");
                 }
                 //Delete failed
                 else {
