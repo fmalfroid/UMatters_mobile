@@ -394,6 +394,9 @@ public class ArchivesListAdapter extends RecyclerView.Adapter<ArchivesListAdapte
                     case "En suspend":
                         view_response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_orange));
                         break;
+                    case "En suspens":
+                        view_response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_orange));
+                        break;
                     case "Refusé":
                         view_response_status.setBackgroundColor(ContextCompat.getColor(context, R.color.pale_red));
                         break;
